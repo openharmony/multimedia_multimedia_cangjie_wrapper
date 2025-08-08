@@ -25,11 +25,11 @@ ohos_cj_library("ohos.multimedia_media") {
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "cangjie_api:ohos.labels",
-    "hiviewdfx_cangjie_api:ohos.hilog",
-    "multimedia_cangjie_api:ohos.image",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
+    "multimedia_cangjie_wrapper:ohos.image",
   ]
 
   external_deps = [
@@ -42,6 +42,6 @@ ohos_cj_library("ohos.multimedia_media") {
   ]
 
   subsystem_name = "multimedia"
-  part_name = "multimedia_cangjie_api"
+  part_name = "multimedia_cangjie_wrapper"
   lib_name = "multimedia_media"
 }

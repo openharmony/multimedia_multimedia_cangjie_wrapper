@@ -32,7 +32,7 @@ This subsystem offers various media services covering audio, videos, and cameras
 The structure of the repository directory is as follows:
 
 ```
-foundation/multimedia/multimedia_cangjie_api
+foundation/multimedia/multimedia_cangjie_wrapper
 ├── ohos             # Cangjie Multimedia code
 ├── kit              # Cangjie kit code
 ├── figures          # architecture pictures
@@ -57,4 +57,4 @@ Load the kernel and related drivers before installing the repository. For detail
 
 ## Repositories Involved
 
-multimedia_cangjie_api
+multimedia_cangjie_wrapper

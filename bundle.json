@@ -1,16 +1,16 @@
 {
-    "name": "@ohos/multimedia_cangjie_api",
+    "name": "@ohos/multimedia_cangjie_wrapper",
     "description": "Image standard provides atomic capabilities",
     "version": "6.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
-      "destPath": "foundation/multimedia/multimedia_cangjie_api"
+      "destPath": "foundation/multimedia/multimedia_cangjie_wrapper"
     },
     "dirs": {},
     "scripts": {},
     "component": {
-      "name": "multimedia_cangjie_api",
+      "name": "multimedia_cangjie_wrapper",
       "subsystem": "multimedia",
       "syscap": [
         "SystemCapability.Multimedia.Image.Core",
@@ -31,30 +31,30 @@
       "hisysevent_config": [  ],
       "deps": {
         "components": [
-          "cangjie_api",
-          "hiviewdfx_cangjie_api",
-          "global_cangjie_api",
-          "graphic_cangjie_api",
-          "arkui_cangjie_api",
+          "cangjie_ark_interop",
+          "hiviewdfx_cangjie_wrapper",
+          "global_cangjie_wrapper",
+          "graphic_cangjie_wrapper",
+          "arkui_cangjie_wrapper",
           "player_framework"
         ]
       },
       "build": {
         "sub_component": [
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia:ohos.multimedia",
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/image:ohos.image",
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/media:ohos.multimedia_media",
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/camera:ohos.multimedia.camera",
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/fetchdata:ohos.multimedia.fetchdata",
-          "//foundation/multimedia/multimedia_cangjie_api/ohos/file/photo_access_helper:ohos.multimedia.photo_accesshelper",
-          "//foundation/multimedia/multimedia_cangjie_api/kit/ImageKit:kit.ImageKit",
-          "//foundation/multimedia/multimedia_cangjie_api/kit/MediaKit:kit.MediaKit",
-          "//foundation/multimedia/multimedia_cangjie_api/kit/CameraKit:kit.CameraKit",
-          "//foundation/multimedia/multimedia_cangjie_api/kit/MediaLibraryKit:kit.MediaLibraryKit"
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.image",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia_media",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/fetchdata:ohos.multimedia.fetchdata",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.multimedia.photo_accesshelper",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:kit.ImageKit",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:kit.CameraKit",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:kit.MediaLibraryKit"
         ],
         "inner_kits": [
           {
-            "name": "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/image:ohos.image"
+            "name": "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.image"
           }
         ],
         "test": []
