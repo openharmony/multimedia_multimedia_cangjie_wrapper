@@ -1,0 +1,63 @@
+{
+    "name": "@ohos/multimedia_cangjie_api",
+    "description": "Image standard provides atomic capabilities",
+    "version": "6.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "foundation/multimedia/multimedia_cangjie_api"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "multimedia_cangjie_api",
+      "subsystem": "multimedia",
+      "syscap": [
+        "SystemCapability.Multimedia.Image.Core",
+        "SystemCapability.Multimedia.Image.ImageSource",
+        "SystemCapability.Multimedia.Image.ImagePacker",
+        "SystemCapability.Multimedia.Image.ImageReceiver",
+        "SystemCapability.Multimedia.Image.ImageCreator",
+        "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        "SystemCapability.Multimedia.Media.AVImageGenerator",
+        "SystemCapability.Multimedia.Media.Core",
+        "SystemCapability.Multimedia.Camera.Core"
+      ],
+      "features": [
+      ],
+      "adapted_system_type": [ "standard" ],
+      "rom": "10000KB",
+      "ram": "10000KB",
+      "hisysevent_config": [  ],
+      "deps": {
+        "components": [
+          "cangjie_api",
+          "hiviewdfx_cangjie_api",
+          "global_cangjie_api",
+          "graphic_cangjie_api",
+          "arkui_cangjie_api",
+          "player_framework"
+        ]
+      },
+      "build": {
+        "sub_component": [
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia:ohos.multimedia",
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/image:ohos.image",
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/media:ohos.multimedia_media",
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/camera:ohos.multimedia.camera",
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/fetchdata:ohos.multimedia.fetchdata",
+          "//foundation/multimedia/multimedia_cangjie_api/ohos/file/photo_access_helper:ohos.multimedia.photo_accesshelper",
+          "//foundation/multimedia/multimedia_cangjie_api/kit/ImageKit:kit.ImageKit",
+          "//foundation/multimedia/multimedia_cangjie_api/kit/MediaKit:kit.MediaKit",
+          "//foundation/multimedia/multimedia_cangjie_api/kit/CameraKit:kit.CameraKit",
+          "//foundation/multimedia/multimedia_cangjie_api/kit/MediaLibraryKit:kit.MediaLibraryKit"
+        ],
+        "inner_kits": [
+          {
+            "name": "//foundation/multimedia/multimedia_cangjie_api/ohos/multimedia/image:ohos.image"
+          }
+        ],
+        "test": []
+      }
+    }
+  }
