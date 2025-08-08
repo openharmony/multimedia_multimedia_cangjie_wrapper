@@ -20,6 +20,6 @@ ohos_cj_library("kit.CameraKit") {
 
   kit = true
   subsystem_name = "multimedia"
-  part_name = "multimedia_cangjie_api"
+  part_name = "multimedia_cangjie_wrapper"
   lib_name = "CameraKit"
 }

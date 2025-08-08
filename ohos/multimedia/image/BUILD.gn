@@ -28,17 +28,17 @@ ohos_cj_library("ohos.image") {
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "cangjie_api:ohos.labels",
-    "global_cangjie_api:ohos.resource_manager",
-    "graphic_cangjie_api:ohos.color_manager",
-    "hiviewdfx_cangjie_api:ohos.hilog",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "global_cangjie_wrapper:ohos.resource_manager",
+    "graphic_cangjie_wrapper:ohos.color_manager",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   external_deps = [ "image_framework:cj_image_ffi" ]
 
   subsystem_name = "multimedia"
-  part_name = "multimedia_cangjie_api"
+  part_name = "multimedia_cangjie_wrapper"
   lib_name = "image"
 }

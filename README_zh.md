@@ -32,7 +32,7 @@
 仓目录结构如下：
 
 ```
-foundation/multimedia/multimedia_cangjie_api
+foundation/multimedia/multimedia_cangjie_wrapper
 ├── ohos             # 仓颉媒体子系统接口实现
 ├── kit              # 仓颉kit化代码
 ├── figures          # 存放readme中的架构图
@@ -57,4 +57,4 @@ foundation/multimedia/multimedia_cangjie_api
 
 ## 相关仓
 
-multimedia_cangjie_api
+multimedia_cangjie_wrapper

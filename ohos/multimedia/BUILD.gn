@@ -17,6 +17,6 @@ ohos_cj_library("ohos.multimedia") {
   sources = [ "multimedia.cj" ]
 
   subsystem_name = "multimedia"
-  part_name = "multimedia_cangjie_api"
+  part_name = "multimedia_cangjie_wrapper"
   lib_name = "multimedia"
 }
