@@ -1,10 +1,10 @@
-# 媒体子系统
+# 媒体仓颉
 
 ## 简介
 
-媒体子系统为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
+媒体仓颉为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
 
-媒体子系统包含了音视频、相机相关媒体业务，提供以下常用功能：
+媒体仓颉包含了音视频、相机相关媒体业务，提供以下常用功能：
 
 -   音频播放和录制。
 -   视频播放和录制。
@@ -12,9 +12,9 @@
 
 ## 系统架构
 
-**图 1**  OpenHarmony媒体子系统架构图
+**图 1**  OpenHarmony媒体仓颉架构图
 
-![](figures/OpenHarmony媒体架构图.png)
+![](figures/multimedia_cangjie_wrapper_architecture.png)
 
 - **Media**: 为应用提供播放、录制等接口，通过跨进程调用或直接调用方式，调用媒体引擎Gstreamer、Histreamer或其它引擎。
   - mini设备上，Media部件调用Histreamer支持音频播放等功能。
@@ -33,7 +33,7 @@
 
 ```
 foundation/multimedia/multimedia_cangjie_wrapper
-├── ohos             # 仓颉媒体子系统接口实现
+├── ohos             # 仓颉媒体接口实现
 ├── kit              # 仓颉kit化代码
 ├── figures          # 存放readme中的架构图
 ```
