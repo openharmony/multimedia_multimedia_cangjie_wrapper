@@ -1,8 +1,8 @@
-# 媒体仓颉
+# OS媒体软件仓颉接口
 
 ## 简介
 
-媒体仓颉为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
+OS媒体软件仓颉接口是在 OpenHarmony 上基于媒体子系统能力之上封装的仓颉API。媒体子系统为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
 
 媒体仓颉包含了音视频、相机相关媒体业务，提供以下常用功能：
 
@@ -57,4 +57,8 @@ foundation/multimedia/multimedia_cangjie_wrapper
 
 ## 相关仓
 
-multimedia_cangjie_wrapper
+[multimedia\_camera\_framework](https://gitee.com/openharmony/multimedia_camera_framework/blob/master/README.md)
+
+[multimedia\_audio\_framework](https://gitee.com/openharmony/multimedia_audio_framework/blob/master/README.md)
+
+[multimedia\_media\_library](https://gitee.com/openharmony/multimedia_media_library/blob/master/README.md)
