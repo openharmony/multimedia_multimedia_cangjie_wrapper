@@ -27,7 +27,7 @@
       ],
       "adapted_system_type": [ "standard" ],
       "rom": "1300KB",
-      "ram": "3900KB",
+      "ram": "1212KB",
       "hisysevent_config": [  ],
       "deps": {
         "components": [
