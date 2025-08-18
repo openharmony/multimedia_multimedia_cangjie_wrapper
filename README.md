@@ -1,8 +1,8 @@
-# Multimedia
+# multimedia_cangjie_wrapper
 
 ## Introduction
 
-The multimedia subsystem provides a set of simple and easy-to-use APIs for you to access the system and media resources.
+The multimedia_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the multimedia Subsystem. The multimedia subsystem provides a set of simple and easy-to-use APIs for you to access the system and media resources.
 
 This subsystem offers various media services covering audio, videos, and cameras, which provide the following capabilities:
 
@@ -14,7 +14,7 @@ This subsystem offers various media services covering audio, videos, and cameras
 
 **Figure 1** Architecture of the multimedia subsystem
 
-![](figures/multimedia-architecture.png)
+![](figures/multimedia_cangjie_wrapper_architecture_en.png)
 
 - **Media**: provides playback and recording APIs for applications, and invokes the Gstreamer, Histreamer, or other engines through cross-process calling or direct calling.
   - For the mini system, the media component invokes Histreamer to support audio playback.
@@ -57,4 +57,8 @@ Load the kernel and related drivers before installing the repository. For detail
 
 ## Repositories Involved
 
-multimedia_cangjie_wrapper
+[multimedia\_camera\_framework](https://gitee.com/openharmony/multimedia_camera_framework/blob/master/README.md)
+
+[multimedia\_audio\_framework](https://gitee.com/openharmony/multimedia_audio_framework/blob/master/README.md)
+
+[multimedia\_media\_library](https://gitee.com/openharmony/multimedia_media_library/blob/master/README.md)
