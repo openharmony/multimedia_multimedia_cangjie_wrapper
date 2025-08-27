@@ -45,7 +45,7 @@
           "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image",
           "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
           "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/fetchdata:ohos.multimedia.fetchdata",
+          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
           "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:kit.MediaLibraryKit",
           "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:kit.ImageKit",
           "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
