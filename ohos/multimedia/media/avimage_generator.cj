@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package ohos.multimedia_media
+package ohos.multimedia.media
 
 import ohos.ffi.*
-import ohos.base.*
-import ohos.image.PixelMap
+import ohos.business_exception.*
+import ohos.multimedia.image.PixelMap
 import ohos.labels.*
 
 foreign {
@@ -32,6 +32,12 @@ foreign {
     func FfiAVImageGeneratorRelease(id: Int64): Int32
 }
 
+/**
+* Creates an AVImageGenerator instance. The API can be used to obtain a video thumbnail.
+*
+* @throws { BusinessException } 5400101 - No memory.
+* @relation function createAVImageGenerator(): Promise<AVImageGenerator>
+*/
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -42,11 +48,17 @@ public func createAVImageGenerator(): AVImageGenerator {
         FfiCreateAVImageGenerator()
     }
     if (id == 0) {
-        throw BusinessException(MEDIA_MEMORY_ERROR, "Create AVImageGenerator failed.")
+        throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
     }
     return AVImageGenerator(id)
 }
 
+/**
+* Provides APIs to obtain a thumbnail from a video. Before calling any API of AVImageGenerator,
+* you must use createAVImageGenerator to create an AVImageGenerator instance.
+*
+* @relation interface AVImageGenerator
+*/
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -61,6 +73,11 @@ public class AVImageGenerator <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Media file descriptor, which specifies the data source.
+     *
+     * @relation fdSrc ?: AVFileDescriptor
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -69,7 +86,7 @@ public class AVImageGenerator <: RemoteDataLite {
     public mut prop fdSrc: AVFileDescriptor {
         get() {
             unsafe {
-                var fdSrc_ = CAVFileDescriptor(0, 0, 0)
+                var fdSrc_ = CAVFileDescriptor(0, 0, -1)
                 let errCode = FfiAVImageGeneratorGetFdSrc(getID(), inout fdSrc_)
                 throwIfNotSuccess(errCode, "AVImageGenerator", "get fdSrc")
                 let result = fdSrc_.toCJObject()
@@ -85,20 +102,36 @@ public class AVImageGenerator <: RemoteDataLite {
         }
     }
 
+    /**
+     * Obtains a video thumbnail. This API uses a promise to return the result.
+     *
+     * @param { Int64 } timeUs - Time of the video for which a thumbnail is to be obtained, in μs.
+     * @param { AVImageQueryOptions } options - Relationship between the time passed in and the video frame.
+     * @param { PixelMapParams } param - Format parameters of the thumbnail to be obtained.
+     * @returns { PixelMap } Promise used to return the video thumbnail.
+     * @throws { BusinessException } 5400101 - No memory.
+     * @relation fetchFrameByTime(timeUs: number, options: AVImageQueryOptions, param: PixelMapParams): Promise<image.PixelMap>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    public func fetchFrameByTime(timeUs: Int64, option: AVImageQueryOptions, param: PixelMapParams): PixelMap {
+    public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param: PixelMapParams): PixelMap {
         let cParam = CPixelMapParams(param)
-        let ret = unsafe { FfiFetchFrameByTime(getID(), timeUs, option.getValue(), cParam) }
-        if (ret == 0) {
-            throw BusinessException(MEDIA_MEMORY_ERROR, "Create AVImageGenerator failed.")
+        let ret = unsafe { FfiFetchFrameByTime(getID(), timeUs, options.getValue(), cParam) }
+        if (ret <= 0) {
+            throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
         }
         return PixelMap(ret)
     }
 
+    /**
+     * Releases this AVImageGenerator instance. 
+     * 
+     * @throws { BusinessException } 5400102 - Operation not allowed.
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,

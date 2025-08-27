@@ -13,12 +13,11 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.ffi.*
-import ohos.base.*
 import std.collection.*
-import ohos.image.*
+import ohos.multimedia.image.*
 
 foreign {
     // PhotoAccessHelper
@@ -56,8 +55,6 @@ foreign {
     func FfiPhotoAssetCommitModify(id: Int64, errCode: CPointer<Int32>): Unit
 
     func FfiPhotoAssetGetThumbnail(id: Int64, cSize: CSize, errCode: CPointer<Int32>): Int64
-
-    func FfiPhotoAccessHelperStartPhotoPicker(id: Int64, option: CPhotoSelectOptions, errCode: CPointer<Int32>): CPhotoSelectResult
 
     // FetchResult
     func FfiFetchResultGetCount(id: Int64, errCode: CPointer<Int32>): Int32
@@ -185,11 +182,11 @@ struct PhotoAssetMember {
 
     func toMemberType(): MemberType {
         match (memberType) {
-            case 0 => INT64(intValue)
+            case 0 => Int64Value(intValue)
             case 1 =>
                 let str = stringValue.toString()
-                STRING(str)
-            case 2 => BOOL(boolValue)
+                StringValue(str)
+            case 2 => BoolValue(boolValue)
             case _ => throw IllegalArgumentException("Invalid member type")
         }
     }
@@ -326,7 +323,7 @@ struct FfiBundleInfo {
 struct CChangeData {
     // free at C
     CChangeData(
-        let `type`: Int32,
+        let notifyType: Int32,
         let uris: CArrString,
         let extraUris: CArrString
     ) {}
@@ -334,7 +331,7 @@ struct CChangeData {
     func toChangeData(): ChangeData {
         unsafe {
             ChangeData(
-                NotifyType.parse(`type`),
+                NotifyType.parse(notifyType),
                 uris.toStringArray(),
                 extraUris.toStringArray()
             )
@@ -370,93 +367,5 @@ struct HashMapArray {
             unsafe { map.add(keyValue.read(i).key.toString(), keyValue.read(i).value.toString()) }
         }
         return map
-    }
-}
-
-@C
-struct CPhotoSelectResult {
-    CPhotoSelectResult(
-        let photoUris: CArrString,
-        let isOriginalPhoto: Bool
-    ) {}
-
-    func toPhotoSelectResult(): PhotoSelectResult {
-        PhotoSelectResult(photoUris.toStringArray(), isOriginalPhoto)
-    }
-
-    func free(): Unit {
-        photoUris.free()
-    }
-}
-
-@C
-struct CTextContextInfo {
-    CTextContextInfo(var text: CString) {}
-
-    func free(): Unit {
-        unsafe { LibC.free(text) }
-    }
-}
-
-@C
-struct CRecommendationOptions {
-    CRecommendationOptions(
-        var recommendationType: Int32,
-        var textContextInfo: CTextContextInfo
-    ) {}
-
-    func free(): Unit {
-        unsafe { textContextInfo.free() }
-    }
-}
-
-@C
-struct CPhotoSelectOptions {
-    var MIMEType: Int32
-    var maxSelectNumber: Int32
-    var isPhotoTakingSupported: Bool
-    var isSearchSupported: Bool
-    var recommendationOptions: CRecommendationOptions = CRecommendationOptions(-1,
-        CTextContextInfo(CString(CPointer<UInt8>())))
-    var preselectedUris: CArrString = CArrString(CPointer<CString>(), 0)
-    var isPreviewForSingleSelectionSupported: Bool
-    var isEditSupported: Bool
-    var isOriginalSupported: Bool
-    var subWindowName: CString = CString(CPointer<UInt8>())
-
-    init(option: PhotoSelectOptions) {
-        this.MIMEType = option.MIMEType.value
-        this.maxSelectNumber = option.maxSelectNumber
-        this.isPhotoTakingSupported = option.isPhotoTakingSupported
-        this.isSearchSupported = option.isSearchSupported
-        this.isPreviewForSingleSelectionSupported = option.isPreviewForSingleSelectionSupported
-        this.isEditSupported = option.isEditSupported
-        this.isOriginalSupported = option.isOriginalSupported
-        if (let Some(v) <- option.recommendationOptions.recommendationType) {
-            this.recommendationOptions.recommendationType = v.value
-        }
-        try {
-            if (let Some(v) <- option.recommendationOptions.textContextInfo) {
-                this.recommendationOptions.textContextInfo.text = unsafe { LibC.mallocCString(v.text) }
-            }
-            this.preselectedUris = unsafe { toArrayCString(option.preselectedUris) }
-            if (let Some(v) <- option.subWindowName) {
-                this.subWindowName = unsafe { LibC.mallocCString(v) }
-            }
-        } catch (e: Exception) {
-            unsafe {
-                LibC.free(recommendationOptions.textContextInfo.text)
-                preselectedUris.free()
-                LibC.free(subWindowName)
-            }
-        }
-    }
-
-    func free() {
-        unsafe {
-            preselectedUris.free()
-            LibC.free(subWindowName)
-            recommendationOptions.free()
-        }
     }
 }

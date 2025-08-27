@@ -13,17 +13,19 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
-import ohos.ability.*
-import ohos.ability.*
+import ohos.app.ability.ui_ability.*
 
+/**
+ * Defines the interface of media change request.
+ *
+ * @relation interface MediaChangeRequest {}
+ */
 @!APILevel[
     21,
-    atomicservice: true,
     stagemodelonly: true,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
@@ -32,13 +34,10 @@ public interface MediaChangeRequest {}
 /**
  * Defines the class of media asset change request.
  *
- * @implements MediaChangeRequest
- * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
- * @atomicservice
+ * @relation class MediaAssetChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
     21,
-    atomicservice: true,
     stagemodelonly: true,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
@@ -51,9 +50,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Constructor used to initialize an asset change request.
+     *
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessException } 14000011 - System inner fail
+     * @relation constructor(asset: PhotoAsset)
+     */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -68,22 +74,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Create image asset change request.
+     * Creates an image asset change request.
      *
-     * @param { Context } context - Hap context information
-     * @param { string } fileUri - File uri
-     * @returns { MediaAssetChangeRequest } - Returns a MediaAssetChangeRequest instance
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 13900002 - No such file
+     * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @static
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation static createImageAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -99,6 +99,15 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
         return MediaAssetChangeRequest(id)
     }
 
+    /**
+     * Creates a video asset change request.
+     *
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
+     * @throws { BusinessException } 14000011 - System inner fail
+     * @relation static createVideoAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -117,20 +126,12 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Create asset change request.
+     * Create an asset change request based on the file type and filename extension.
      *
-     * @param { Context } context - Hap context information
-     * @param { string } displayName - Asset name
-     * @param { PhotoCreateOptions } [options] - Optional photo create option
-     * @returns { MediaAssetChangeRequest } - Returns a MediaAssetChangeRequest instance
-     * @throws { BusinessException } 202 - Called by non-system application
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 14000001 - Invalid display name
      * @throws { BusinessException } 14000011 - System inner fail
-     * @static
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
+     * @relation static createAssetRequest(context: Context, photoType: PhotoType, extension: string, options?: CreateOptions): MediaAssetChangeRequest
      */
     @!APILevel[
         21,
@@ -138,18 +139,14 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createAssetRequest(context: UIAbilityContext, photoType: PhotoType, extension: String,
-        options!: CreateOptions = CreateOptions()): MediaAssetChangeRequest {
+        options!: CreateOptions = CreateOptions(title: "", subtype: Default)): MediaAssetChangeRequest {
         var id = -1
         unsafe {
             try (
                 cextension = LibC.mallocCString(extension).asResource(),
-                ctitle = LibC.mallocCString(options.title ?? "").asResource()
+                ctitle = LibC.mallocCString(options.title).asResource()
             ) {
-                let subType: Int32 = if (let Some(v) <- options.subtype) {
-                    v.value
-                } else {
-                    -1
-                }
+                let subType: Int32 = options.subtype.value
                 let ret = FfiMediaAssetChangeRequestImplCreateAssetRequest(context.getID(), photoType.value,
                     cextension.value, ctitle.value, subType)
                 checkRet(ret.code, "createAssetRequest")
@@ -160,22 +157,17 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Delete assets.
+     * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @param { Context } context - Hap context information
-     * @param { Array<PhotoAsset> } assets - Assets to delete
-     * @returns { Promise<void> } - Returns void
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @static
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation static deleteAssets(context: Context, assets: Array<PhotoAsset>): Promise<void>
      */
     @!APILevel[
         21,
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -188,23 +180,18 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Delete assets.
+     * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @param { Context } context - Hap context information
-     * @param { Array<string> } uriList - Uris of assets to delete
-     * @returns { Promise<void> } - Returns void
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 14000002 - Invalid asset uri
+     * @throws { BusinessException } 14000002 - The uri format is incorrect or does not exist.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @static
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation static deleteAssets(context: Context, uriList: Array<string>): Promise<void>
      */
     @!APILevel[
         21,
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -216,45 +203,39 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Get the asset.
+     * Obtains the asset in this asset change request.
      *
-     * @returns { PhotoAsset } - Returns the asset
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation getAsset(): PhotoAsset
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getAsset(): ?PhotoAsset {
+    public func getAsset(): PhotoAsset {
         var errCode = 0i32
         let id = unsafe { FfiMediaAssetChangeRequestImplGetAsset(getID(), inout errCode) }
         checkRet(errCode, "getAsset")
         return if (id == 0) {
-            None
+            throw IllegalArgumentException("PhotoAsset id is invalid.")
         } else {
             PhotoAsset(id)
         }
     }
 
     /**
-     * Set title of the asset.
+     * Sets the media asset title.
      *
-     * @param { string } title - the new title of the asset
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation setTitle(title: string): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -266,20 +247,18 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Get write cache handler.
+     * Obtains the handler used for writing a file to cache.
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @returns { Promise<number> } Returns the write cache handler
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation getWriteCacheHandler(): Promise<number>
      */
     @!APILevel[
         21,
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -291,21 +270,17 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Add resource of the asset using file uri.
+     * Adds a resource using fileUri.
      *
-     * @param { ResourceType } type - Resource type
-     * @param { string } fileUri - File uri
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 13900002 - No such file
+     * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation addResource(type: ResourceType, fileUri: string): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -319,20 +294,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Add resource of the asset using ArrayBuffer.
+     * Adds a resource using ArrayBuffer data.
      *
-     * @param { ResourceType } type - Resource type
-     * @param { ArrayBuffer } data - Data buffer to add
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation addResource(type: ResourceType, data: ArrayBuffer): void
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -344,11 +315,11 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Save the photo asset captured by camera.
+     * Saves the photo taken by the camera.
      *
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation saveCameraPhoto(): void
      */
     @!APILevel[
         21,
@@ -361,11 +332,11 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Discard the photo asset captured by camera.
+     * Discards the photo taken by the camera.
      *
      * @throws { BusinessException } 14000011 - Internal system error
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation discardCameraPhoto(): void
      */
     @!APILevel[
         21,

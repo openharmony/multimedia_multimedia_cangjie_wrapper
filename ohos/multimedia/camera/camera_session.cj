@@ -16,7 +16,8 @@
 package ohos.multimedia.camera
 
 import ohos.labels.*
-import ohos.base.*
+import ohos.business_exception.*
+import ohos.callback_invoke.*
 import ohos.ffi.*
 import std.collection.*
 import std.sync.*
@@ -24,21 +25,20 @@ import std.sync.*
 /**
  * Session object.
  *
- * @interface Session
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation interface Session
  */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
-sealed interface Session {
+public interface Session {
     /**
      * Begin capture session config.
      *
      * @throws { BusinessException } 7400105 - Session config locked.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation beginConfig(): void
      */
     @!APILevel[
         21,
@@ -57,7 +57,7 @@ sealed interface Session {
      *
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation commitConfig(): Promise<void>
      */
     @!APILevel[
         21,
@@ -76,8 +76,8 @@ sealed interface Session {
      * This method is valid between Session.beginConfig() and Session.commitConfig().
      *
      * @param { CameraInput } cameraInput - Target camera input to add.
-     * @returns { boolean } You can add the input into the session.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @returns { Bool } You can add the input into the session.
+     * @relation canAddInput(cameraInput: CameraInput): boolean
      */
     @!APILevel[
         21,
@@ -101,9 +101,8 @@ sealed interface Session {
      * @param { CameraInput } cameraInput - Target camera input to add.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
-     * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation addInput(cameraInput: CameraInput): void
      */
     @!APILevel[
         21,
@@ -124,9 +123,8 @@ sealed interface Session {
      * @param { CameraInput } cameraInput - Target camera input to remove.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
-     * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation removeInput(cameraInput: CameraInput): void
      */
     @!APILevel[
         21,
@@ -148,8 +146,8 @@ sealed interface Session {
      * This method is valid after Session.addInput(cameraInput) and before Session.commitConfig().
      *
      * @param { CameraOutput } cameraOutput - Target camera output to add.
-     * @returns { boolean } You can add the output into the session.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @returns { Bool } You can add the output into the session.
+     * @relation canAddOutput(cameraOutput: CameraOutput): boolean
      */
     @!APILevel[
         21,
@@ -173,9 +171,8 @@ sealed interface Session {
      * @param { CameraOutput } cameraOutput - Target camera output to add.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
-     * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation addOutput(cameraOutput: CameraOutput): void
      */
     @!APILevel[
         21,
@@ -197,9 +194,8 @@ sealed interface Session {
      * @param { CameraOutput } cameraOutput - Target camera output to remove.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
-     * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation removeOutput(cameraOutput: CameraOutput): void
      */
     @!APILevel[
         21,
@@ -220,7 +216,7 @@ sealed interface Session {
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation start(): Promise<void>
      */
     @!APILevel[
         21,
@@ -238,7 +234,7 @@ sealed interface Session {
      * Stops capture session.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation stop(): Promise<void>
      */
     @!APILevel[
         21,
@@ -256,7 +252,7 @@ sealed interface Session {
      * Release capture session instance.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation release(): Promise<void>
      */
     @!APILevel[
         21,
@@ -277,7 +273,6 @@ func getCameraOutputId(cameraOutput: CameraOutput): Int64 {
 
 func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
     match (cameraOutput) {
-        case v: MetadataOutput => return 0
         case v: PhotoOutput => return 1
         case v: PreviewOutput => return 2
         case v: VideoOutput => return 3
@@ -288,8 +283,7 @@ func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
 /**
  * Photo session object.
  *
- * @interface PhotoSession
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation interface PhotoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, ColorManagement, AutoDeviceSwitch, Macro
  */
 @!APILevel[
     21,
@@ -324,14 +318,14 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation canPreconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): boolean
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PRECONFIG_RATIO_4_3): Bool {
+    public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_4_3): Bool {
         return canPreconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
     }
 
@@ -343,7 +337,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation preconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): void
      */
     @!APILevel[
         21,
@@ -352,131 +346,149 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
     ]
     public func preconfig(
         preconfigType: PreconfigType,
-        preconfigRatio!: PreconfigRatio = PreconfigRatio.PRECONFIG_RATIO_4_3
+        preconfigRatio!: PreconfigRatio = PreconfigRatio.PreconfigRatio_4_3
     ): Unit {
         preconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
     }
 
     /**
-     * Subscribes to error events.
+     * Registers a listener for error events from a normal video session to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        onError0(errorCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        onError0(errorCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        offError0(errorCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        offError0(errorCallbackManager, eventType, callback)
     }
 
     /**
-     * Subscribes to focus state change events.
+     * Registers a listener for camera focus state changes to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @since 11
+     * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        onFocus0(focusStateChangeCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+        onFocus0(focusStateChangeCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from focus state change events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        offFocus0(focusStateChangeCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+        offFocus0(focusStateChangeCallbackManager, eventType, callback)
     }
 
     /**
-     * Subscribes to smooth zoom info events.
+     * Registers a listener for state changes in the camera's smooth zoom to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        onSmoothZoom0(smoothZoomCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        onSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from zoom info events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        offSmoothZoom0(smoothZoomCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        offSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes all callbacks from the event specified by the param.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @param { CameraEvents } eventType - Event type.
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @relation off(type: 'error', callback?: ErrorCallback): void
+     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
+     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType): Unit {
-        let errCode = match (`type`) {
-            case CameraCallbackType.CameraError => errorCallbackManager.unregisterAll()
-            case CameraCallbackType.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
-            case CameraCallbackType.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func off(eventType: CameraEvents): Unit {
+        let errCode = match (eventType) {
+            case CameraEvents.CameraError => errorCallbackManager.unregisterAll()
+            case CameraEvents.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
+            case CameraEvents.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         successOrThrow(errCode)
     }
 }
 
+/**
+ * Video session object.
+ *
+ * @relation interface VideoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, AutoDeviceSwitch, Macro
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -510,14 +522,14 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation canPreconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): boolean
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PRECONFIG_RATIO_16_9): Bool {
+    public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_16_9): Bool {
         return canPreconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
     }
 
@@ -529,7 +541,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation preconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): void
      */
     @!APILevel[
         21,
@@ -538,249 +550,152 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
     ]
     public func preconfig(
         preconfigType: PreconfigType,
-        preconfigRatio!: PreconfigRatio = PreconfigRatio.PRECONFIG_RATIO_16_9
+        preconfigRatio!: PreconfigRatio = PreconfigRatio.PreconfigRatio_16_9
     ): Unit {
         preconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
     }
 
     /**
-     * Subscribes to error events.
+     * Registers a listener for error events in normal photo sessions to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        onError0(errorCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        onError0(errorCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        offError0(errorCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        offError0(errorCallbackManager, eventType, callback)
     }
 
     /**
-     * Subscribes to focus state change events.
+     * Registers a listener for error events in normal photo sessions to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @since 11
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        onFocus0(focusStateChangeCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+        onFocus0(focusStateChangeCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from focus state change events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        offFocus0(focusStateChangeCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+        offFocus0(focusStateChangeCallbackManager, eventType, callback)
     }
 
     /**
-     * Subscribes to smooth zoom info events.
+     * Registers a listener for state changes in the camera's smooth zoom to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        onSmoothZoom0(smoothZoomCallbackManager, `type`, callback)
+    public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        onSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes from zoom info events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        offSmoothZoom0(smoothZoomCallbackManager, `type`, callback)
+    public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        offSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
     }
 
     /**
      * Unsubscribes all callbacks from the event specified by the param.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @param { CameraEvents } eventType - Event type.
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'error', callback?: ErrorCallback): void
+     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
+     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType): Unit {
-        let errCode = match (`type`) {
-            case CameraCallbackType.CameraError => errorCallbackManager.unregisterAll()
-            case CameraCallbackType.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
-            case CameraCallbackType.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
-        }
-        successOrThrow(errCode)
-    }
-}
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Multimedia.Camera.Core"
-]
-public class SecureSession <: RemoteDataLite & Session & Flash & AutoExposure & Focus & Zoom {
-    let errorCallbackManager: CallbackManager
-    let focusStateChangeCallbackManager: CallbackManager
-
-    init(id: Int64) {
-        super(id)
-
-        errorCallbackManager = CallbackManager(getID(), FfiCameraOnError, FfiCameraOffError, FfiCameraOffAllError)
-        focusStateChangeCallbackManager = CallbackManager(getID(), FfiCameraOnFocusStateChange,
-            FfiCameraOffFocusStateChange, FfiCameraOffAllFocusStateChange)
-    }
-
-    ~init() {
-        releaseFFIData(myDataId)
-    }
-
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func addSecureOutput(previewOutput: PreviewOutput): Unit {
-        var errCode: Int32 = 0
-        unsafe {
-            FfiCameraSessionAddSecureOutput((this as RemoteDataLite).getOrThrow().getID(), previewOutput.getID(),
-                inout errCode)
-        }
-
-        successOrThrow(errCode)
-    }
-
-    /**
-     * Subscribes to error events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        onError0(errorCallbackManager, `type`, callback)
-    }
-
-    /**
-     * Unsubscribes from error events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        offError0(errorCallbackManager, `type`, callback)
-    }
-
-    /**
-     * Subscribes to focus state change events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @since 11
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        onFocus0(focusStateChangeCallbackManager, `type`, callback)
-    }
-
-    /**
-     * Unsubscribes from focus state change events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-        offFocus0(focusStateChangeCallbackManager, `type`, callback)
-    }
-
-    /**
-     * Unsubscribes all callbacks from the event specified by the param.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(`type`: CameraCallbackType): Unit {
-        let errCode = match (`type`) {
-            case CameraCallbackType.CameraError => errorCallbackManager.unregisterAll()
-            case CameraCallbackType.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "SecureSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func off(eventType: CameraEvents): Unit {
+        let errCode = match (eventType) {
+            case CameraEvents.CameraError => errorCallbackManager.unregisterAll()
+            case CameraEvents.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
+            case CameraEvents.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         successOrThrow(errCode)
     }
@@ -880,7 +795,7 @@ class CallbackManager {
                     CAMERA_LOG.info("WARNING: CallbackManager.unregister: failed to unregister")
                 }
 
-                break;
+                break
             }
         }
         return errCode
@@ -911,66 +826,71 @@ class CallbackManager {
     }
 }
 
-func onError0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-    if (`type` != CameraCallbackType.CameraError) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func onError0(manager: CallbackManager, event: CameraEvents, callback: Callback0Argument): Unit {
+    if (event != CameraEvents.CameraError) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let ffiCallback = Callback1Param<Int32, Unit> {
-        code: Int32 => callback.invoke(BusinessException(code, getErrorMsg(code)))
+        value: Int32 =>
+        if (value == SUCCESS_CODE) {
+            callback.invoke(None)
+        } else {
+            callback.invoke(BusinessException(value, getErrorMsg(value)))
+        }
     }
 
     let errCode = manager.register(callback, ffiCallback.getID())
     successOrThrow(errCode)
 }
 
-func offError0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-    if (`type` != CameraCallbackType.CameraError) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func offError0(manager: CallbackManager, event: CameraEvents, callback: Callback0Argument): Unit {
+    if (event != CameraEvents.CameraError) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let errCode = manager.unregister(callback)
     successOrThrow(errCode)
 }
 
-func onFocus0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-    if (`type` != CameraCallbackType.FocusStateChange) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func onFocus0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+    if (event != CameraEvents.FocusStateChange) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let ffiCallback = Callback1Param<Int32, Unit> {
-        code: Int32 => callback.invoke(FocusState.parse(code))
+        code: Int32 => callback.invoke(None, FocusState.parse(code))
     }
 
     let errCode = manager.register(callback, ffiCallback.getID())
     successOrThrow(errCode)
 }
 
-func offFocus0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<FocusState>): Unit {
-    if (`type` != CameraCallbackType.FocusStateChange) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func offFocus0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
+    if (event != CameraEvents.FocusStateChange) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let errCode = manager.unregister(callback)
     successOrThrow(errCode)
 }
 
-func onSmoothZoom0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-    if (`type` != CameraCallbackType.SmoothZoomInfoAvailable) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func onSmoothZoom0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+    if (event != CameraEvents.SmoothZoomInfoAvailable) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let ffiCallback = Callback1Param<Int32, Unit> {
-        duration: Int32 => callback.invoke(SmoothZoomInfo(duration))
+        duration: Int32 => callback.invoke(None, SmoothZoomInfo(duration))
     }
 
     let errCode = manager.register(callback, ffiCallback.getID())
     successOrThrow(errCode)
 }
 
-func offSmoothZoom0(manager: CallbackManager, `type`: CameraCallbackType, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-    if (`type` != CameraCallbackType.SmoothZoomInfoAvailable) {
-        throw BusinessException(ERR_PARAMETER_ERROR, "PhotoSession off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+func offSmoothZoom0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
+    if (event != CameraEvents.SmoothZoomInfoAvailable) {
+        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
     }
 
     let errCode = manager.unregister(callback)

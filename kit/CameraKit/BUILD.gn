@@ -13,13 +13,13 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("kit.CameraKit") {
+ohos_cangjie_shared_library("kit.CameraKit") {
   sources = ["index.cj"]
 
-  cj_deps = ["../../ohos/multimedia/camera:ohos.multimedia.camera"]
+  cj_deps = [
+    "../../ohos/multimedia/camera:ohos.multimedia.camera",
+  ]
 
-  kit = true
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
-  lib_name = "CameraKit"
 }

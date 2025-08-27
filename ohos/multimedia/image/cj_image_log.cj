@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import ohos.hilog.*
-import ohos.base.*
 
 const LOG_CORE: UInt32 = 3
 const LOG_TAG_DOMAIN_ID_IMAGE: UInt32 = 0xD002B05

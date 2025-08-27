@@ -13,21 +13,7 @@
  * limitations under the License.
  */
 
-package ohos.multimedia_media
-
-import ohos.image.PixelMap
-import ohos.ffi.*
-import ohos.base.*
-import std.collection.*
-
-@C
-struct CValueType {
-    CValueType(
-        let number: Int32,
-        let dou: Float64,
-        let str: CString
-    ) {}
-}
+package ohos.multimedia.media
 
 @C
 protected struct CAVFileDescriptor {
@@ -39,14 +25,14 @@ protected struct CAVFileDescriptor {
         this(fileDescriptor.fd, fileDescriptor.offset, fileDescriptor.length)
     }
 
-    init(fd: Int32, offset: ?Int64, length: ?Int64) {
+    init(fd: Int32, offset: Int64, length: Int64) {
         fd_ = fd
-        offset_ = offset ?? 0
-        length_ = length ?? 0
+        offset_ = offset
+        length_ = length
     }
 
     protected func toCJObject(): AVFileDescriptor {
-        return AVFileDescriptor(fd_, offset_, length_)
+        return AVFileDescriptor(fd_, offset: offset_, length: length_)
     }
 }
 
