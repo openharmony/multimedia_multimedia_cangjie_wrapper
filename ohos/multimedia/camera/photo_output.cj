@@ -16,7 +16,8 @@
 package ohos.multimedia.camera
 
 import ohos.labels.*
-import ohos.base.*
+import ohos.business_exception.*
+import ohos.callback_invoke.*
 import ohos.ffi.*
 import std.collection.*
 import std.sync.*
@@ -24,8 +25,7 @@ import std.sync.*
 /**
  * Photo output object.
  *
- * @interface PhotoOutput
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation interface PhotoOutput extends CameraOutput
  */
 @!APILevel[
     21,
@@ -56,6 +56,11 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Release output instance.
+     *
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -71,7 +76,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @throws { BusinessException } 7400104 - Session not running.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation capture(): Promise<void>
      */
     @!APILevel[
         21,
@@ -90,7 +95,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400104 - Session not running.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation capture(setting: PhotoCaptureSetting): Promise<void>
      */
     @!APILevel[
         21,
@@ -98,7 +103,13 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func capture(setting: PhotoCaptureSetting): Unit {
-        let errCode = unsafe { FfiCameraPhotoOutputCaptureWithSetting(getID(), CPhotoCaptureSetting(setting)) }
+        let (cLocation, isLocationNone) = if (let Some(v) <- setting.location) {
+            (CLocation(v), false)
+        } else {
+            (CLocation(0.0, 0.0, 0.0), true)
+        }
+        var cSetting = CPhotoCaptureSetting(setting.quality.getValue(), setting.rotation.getValue(), cLocation, setting.mirror)
+        let errCode = unsafe { FfiCameraPhotoOutputCaptureWithSettingV2(getID(), inout cSetting, isLocationNone) }
         successOrThrow(errCode)
     }
 
@@ -107,7 +118,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Bool } TRUE if the moving photo is supported.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation isMovingPhotoSupported(): boolean
      */
     @!APILevel[
         21,
@@ -129,7 +140,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 201 - permission denied.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation enableMovingPhoto(enabled: boolean): void
      */
     @!APILevel[
         21,
@@ -143,10 +154,11 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Check whether to support mirror photo.
+     * Determine whether video mirror is supported.
      *
      * @returns { Bool } Is the mirror supported.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation isMirrorSupported(): boolean
      */
     @!APILevel[
         21,
@@ -160,6 +172,17 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         return result
     }
 
+    /**
+     * Whether to enable moving photo mirroring.
+     *
+     * Prior to invoking this interface, it is necessary to determine whether the moving
+     * photo function is supported through the isMovingPhotoSupported API and whether the
+     * photo mirroring function is supported through the isMirrorSupported API.
+     *
+     * @param { Bool } enabled - enable moving photo mirror if TRUE.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation enableMirror(enabled: boolean): void
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -174,8 +197,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * Get supported moving photo video codec types.
      *
      * @returns { Array<VideoCodecType> } An array of supported video codec types for moving photo.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType>
      */
     @!APILevel[
         21,
@@ -183,7 +205,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType> {
-        return [VideoCodecType.AVC, VideoCodecType.HEVC]
+        return [VideoCodecType.Avc, VideoCodecType.Hevc]
     }
 
     /**
@@ -191,7 +213,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { VideoCodecType } codecType - Codec type for moving photo.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation setMovingPhotoVideoCodecType(codecType: VideoCodecType): void
      */
     @!APILevel[
         21,
@@ -208,7 +230,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Profile } The current preconfig type.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation getActiveProfile(): Profile
      */
     @!APILevel[
         21,
@@ -229,7 +251,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @returns { ImageRotation } The photo rotation angle.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation getPhotoRotation(deviceDegree: int): ImageRotation
      */
     @!APILevel[
         21,
@@ -244,22 +266,27 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Subscribes capture start event callback.
+     * Registers a listener for the start of the photo taking to get the CaptureStartInfo by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     * 
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'captureStartWithInfo', callback: AsyncCallback<CaptureStartInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<CaptureStartInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureStartWithInfo => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureStartWithInfo => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(captureStartWithInfoMutex) {
             let callbackList = captureStartWithInfoList
@@ -268,7 +295,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {value: CCaptureStartInfo => callback.invoke(value.toCaptureStartInfo())}
+                let wrapper = {value: CCaptureStartInfo => callback.invoke(None, value.toCaptureStartInfo())}
                 let lambdaData = Callback1Param<CCaptureStartInfo, Unit>(wrapper)
                 let errCode = FfiCameraPhotoOutputOnCaptureStartWithInfo(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -280,20 +307,21 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     /**
      * Subscribes frame shutter event callback.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'frameShutter', callback: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<FrameShutterInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameShutter => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.FrameShutter => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(frameShutterMutex) {
             let callbackList = frameShutterList
@@ -302,7 +330,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {value: CFrameShutterInfo => callback.invoke(value.toFrameShutterInfo())}
+                let wrapper = {value: CFrameShutterInfo => callback.invoke(None, value.toFrameShutterInfo())}
                 let lambdaData = Callback1Param<CFrameShutterInfo, Unit>(wrapper)
                 let errCode = FfiCameraPhotoOutputOnFrameShutter(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -312,22 +340,27 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Subscribes capture end event callback.
+     * Registers a listener for the end of the photo shoot to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'captureEnd', callback: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<CaptureEndInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureEnd => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureEnd => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(captureEndMutex) {
             let callbackList = captureEndList
@@ -336,7 +369,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {value: CCaptureEndInfo => callback.invoke(value.toCaptureEndInfo())}
+                let wrapper = {value: CCaptureEndInfo => callback.invoke(None, value.toCaptureEndInfo())}
                 let lambdaData = Callback1Param<CCaptureEndInfo, Unit>(wrapper)
                 let errCode = FfiCameraPhotoOutputOnCaptureEnd(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -346,22 +379,27 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Subscribes frame shutter end event callback.
+     * Registers a listener for the end of photo exposure capture to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'frameShutterEnd', callback: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameShutterEnd => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.FrameShutterEnd => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(frameShutterEndMutex) {
             let callbackList = frameShutterEndList
@@ -370,7 +408,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {value: Int32 => callback.invoke(FrameShutterEndInfo(value))}
+                let wrapper = {value: Int32 => callback.invoke(None, FrameShutterEndInfo(value))}
                 let lambdaData = Callback1Param<Int32, Unit>(wrapper)
                 let errCode = FfiCameraPhotoOutputOnFrameShutterEnd(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -380,23 +418,33 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Subscribes capture ready event callback. After receiving the callback, can proceed to the next capture
+     * Registers a listener for the next available shot or errors in the photo output to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'captureReady', callback: AsyncCallback<void>): void
+     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback0Argument): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureReady => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureReady => onCaptureReady(callback)
+            case CameraEvents.CameraError => onError(callback)
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
+    }
+
+    func onCaptureReady(callback: Callback0Argument): Unit {
         synchronized(captureReadyMutex) {
             let callbackList = captureReadyList
             if (findCallbackObject(callbackList, callback)) {
@@ -404,7 +452,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {=> callback.invoke()}
+                let wrapper = {=> callback.invoke(None)}
                 let lambdaData = Callback0Param(wrapper)
                 let errCode = FfiCameraPhotoOutputOnCaptureReady(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -413,58 +461,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         }
     }
 
-    /**
-     * Subscribes estimated capture duration event callback.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in milliseconds).
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<Int32>): Unit {
-        match (`type`) {
-            case CameraCallbackType.EstimatedCaptureDuration => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
-        }
-        synchronized(estimatedCaptureDurationMutex) {
-            let callbackList = estimatedCaptureDurationList
-            if (findCallbackObject(callbackList, callback)) {
-                CAMERA_LOG.error("PhotoOutput on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = {value: Int32 => callback.invoke(value)}
-                let lambdaData = Callback1Param<Int32, Unit>(wrapper)
-                let errCode = FfiCameraPhotoOutputOnEstimatedCaptureDuration(getID(), lambdaData.getID())
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-        }
-    }
-
-    /**
-     * Subscribes to error events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the photo output errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
-        }
+    func onError(callback: Callback0Argument): Unit {
         synchronized(errorMutex) {
             let callbackList = errorList
             if (findCallbackObject(callbackList, callback)) {
@@ -472,7 +469,13 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
                 return
             }
             unsafe {
-                let wrapper = {value: Int32 => callback.invoke(BusinessException(value, getErrorMsg(value)))}
+                let wrapper = { value: Int32 =>
+                    if (value == SUCCESS_CODE) {
+                        callback.invoke(None)
+                    } else {
+                        callback.invoke(BusinessException(value, getErrorMsg(value)))
+                    }
+                }
                 let lambdaData = Callback1Param<Int32, Unit>(wrapper)
                 let errCode = FfiCameraPhotoOutputOnError(getID(), lambdaData.getID())
                 successOrThrow(errCode)
@@ -482,178 +485,218 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Unsubscribes from capture start event callback.
+     * Registers a listener for the estimated time to take a picture to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
+     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in milliseconds).
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'estimatedCaptureDuration', callback: AsyncCallback<double>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<CaptureStartInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureStartWithInfo => off(IdClassInfo(this.getID(), "PhotoOutput"),
+    public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
+        match (eventType) {
+            case CameraEvents.EstimatedCaptureDuration => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+        }
+        synchronized(estimatedCaptureDurationMutex) {
+            let callbackList = estimatedCaptureDurationList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("PhotoOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {value: Int32 => callback.invoke(None, Float64(value))}
+                let lambdaData = Callback1Param<Int32, Unit>(wrapper)
+                let errCode = FfiCameraPhotoOutputOnEstimatedCaptureDuration(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
+    /**
+     * Unsubscribes from capture start event callback.
+     *
+     * @param { CameraEvents } eventType - Event type.
+     * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'captureStartWithInfo', callback?: AsyncCallback<CaptureStartInfo>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureStartWithInfo => off(IdClassInfo(this.getID(), "PhotoOutput"),
                 captureStartWithInfoList, captureStartWithInfoMutex, callback,
                 FfiCameraPhotoOutputOffCaptureStartWithInfo)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
      * Unsubscribes from frame shutter event callback.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'frameShutter', callback?: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<FrameShutterInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameShutter => off(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterList,
+    public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.FrameShutter => off(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterList,
                 frameShutterMutex, callback, FfiCameraPhotoOutputOffFrameShutter)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
      * Unsubscribes from capture end event callback.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'captureEnd', callback?: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<CaptureEndInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureEnd => off(IdClassInfo(this.getID(), "PhotoOutput"), captureEndList,
+    public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureEnd => off(IdClassInfo(this.getID(), "PhotoOutput"), captureEndList,
                 captureEndMutex, callback, FfiCameraPhotoOutputOffCaptureEnd)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
      * Unsubscribes from frame shutter end event callback.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end information.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'frameShutterEnd', callback?: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameShutterEnd => off(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterEndList,
+    public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.FrameShutterEnd => off(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterEndList,
                 frameShutterEndMutex, callback, FfiCameraPhotoOutputOffFrameShutterEnd)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
-     * Unsubscribes from capture ready event callback.
+     * Unsubscribes from capture ready event callback or from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'captureReady', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback0Argument): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureReady => off(IdClassInfo(this.getID(), "PhotoOutput"), captureReadyList,
+    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureReady => off(IdClassInfo(this.getID(), "PhotoOutput"), captureReadyList,
                 captureReadyMutex, callback, FfiCameraPhotoOutputOffCaptureReady)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case CameraEvents.CameraError => off(IdClassInfo(this.getID(), "PhotoOutput"), errorList, errorMutex,
+                callback, FfiCameraPhotoOutputOffError)
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
      * Unsubscribes from estimated capture duration event callback.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in milliseconds).
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @param { CameraEvents } eventType - Event type.
+     * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration (in milliseconds).
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'estimatedCaptureDuration', callback?: AsyncCallback<double>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<Int32>): Unit {
-        match (`type`) {
-            case CameraCallbackType.EstimatedCaptureDuration => off(IdClassInfo(this.getID(), "PhotoOutput"),
+    public func off(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
+        match (eventType) {
+            case CameraEvents.EstimatedCaptureDuration => off(IdClassInfo(this.getID(), "PhotoOutput"),
                 estimatedCaptureDurationList, estimatedCaptureDurationMutex, callback,
                 FfiCameraPhotoOutputOffEstimatedCaptureDuration)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
-     * Unsubscribes from error events.
+     * Unsubscribes all callbacks from the event specified by the param.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the photo output errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @param { CameraEvents } eventType - Event type.
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'captureStartWithInfo', callback?: AsyncCallback<CaptureStartInfo>): void
+     * @relation off(type: 'frameShutter', callback?: AsyncCallback<FrameShutterInfo>): void
+     * @relation off(type: 'captureEnd', callback?: AsyncCallback<CaptureEndInfo>): void
+     * @relation off(type: 'frameShutterEnd', callback?: AsyncCallback<FrameShutterEndInfo>): void
+     * @relation off(type: 'captureReady', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'estimatedCaptureDuration', callback?: AsyncCallback<double>): void
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => off(IdClassInfo(this.getID(), "PhotoOutput"), errorList, errorMutex,
-                callback, FfiCameraPhotoOutputOffError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
-        }
-    }
-
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(`type`: CameraCallbackType): Unit {
-        match (`type`) {
-            case CameraCallbackType.CaptureStartWithInfo => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
+    public func off(eventType: CameraEvents): Unit {
+        match (eventType) {
+            case CameraEvents.CaptureStartWithInfo => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
                 captureStartWithInfoList, captureStartWithInfoMutex, FfiCameraPhotoOutputOffAllCaptureStartWithInfo)
-            case CameraCallbackType.FrameShutter => offAll(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterList,
+            case CameraEvents.FrameShutter => offAll(IdClassInfo(this.getID(), "PhotoOutput"), frameShutterList,
                 frameShutterMutex, FfiCameraPhotoOutputOffAllFrameShutter)
-            case CameraCallbackType.CaptureEnd => offAll(IdClassInfo(this.getID(), "PhotoOutput"), captureEndList,
+            case CameraEvents.CaptureEnd => offAll(IdClassInfo(this.getID(), "PhotoOutput"), captureEndList,
                 captureEndMutex, FfiCameraPhotoOutputOffAllCaptureEnd)
-            case CameraCallbackType.FrameShutterEnd => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
+            case CameraEvents.FrameShutterEnd => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
                 frameShutterEndList, frameShutterEndMutex, FfiCameraPhotoOutputOffAllFrameShutterEnd)
-            case CameraCallbackType.CaptureReady => offAll(IdClassInfo(this.getID(), "PhotoOutput"), captureReadyList,
+            case CameraEvents.CaptureReady => offAll(IdClassInfo(this.getID(), "PhotoOutput"), captureReadyList,
                 captureReadyMutex, FfiCameraPhotoOutputOffAllCaptureReady)
-            case CameraCallbackType.EstimatedCaptureDuration => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
+            case CameraEvents.EstimatedCaptureDuration => offAll(IdClassInfo(this.getID(), "PhotoOutput"),
                 estimatedCaptureDurationList, estimatedCaptureDurationMutex,
                 FfiCameraPhotoOutputOffAllEstimatedCaptureDuration)
-            case CameraCallbackType.CameraError => offAll(IdClassInfo(this.getID(), "PhotoOutput"), errorList,
+            case CameraEvents.CameraError => offAll(IdClassInfo(this.getID(), "PhotoOutput"), errorList,
                 errorMutex, FfiCameraPhotoOutputOffAllError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PhotoOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 }

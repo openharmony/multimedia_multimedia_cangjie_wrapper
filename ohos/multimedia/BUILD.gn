@@ -13,10 +13,9 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.multimedia") {
+ohos_cangjie_shared_library("ohos.multimedia") {
   sources = [ "multimedia.cj" ]
 
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
-  lib_name = "multimedia"
 }

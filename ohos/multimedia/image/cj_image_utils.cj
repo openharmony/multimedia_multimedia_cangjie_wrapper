@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import std.collection.HashMap
-import ohos.base.*
-import ohos.ffi.*
+import ohos.business_exception.BusinessException
 
 let ERRCODE_MAP = HashMap<UInt32, String>(
     [
@@ -90,37 +89,26 @@ let ERRCODE_MAP = HashMap<UInt32, String>(
     ]
 )
 
-func checkRet(errCode: UInt32, message: String, handle!: () -> Unit = {=>}): Unit {
-    if (errCode != 0) {
-        let msg = if (let Some(errMsg) <- ERRCODE_MAP.get(errCode)) {
-            message + " " + errMsg
-        } else {
-            message + " Unrecognized error code"
-        }
-        handle()
-        throw BusinessException(Int32(errCode), msg)
-    }
-}
-
-//This function is used in API20 and later versions so that error code 401 is not used.
-func checkRetFor20(errCode: UInt32, message!: ?String = None): Unit {
+func checkAndThrow(errCode: UInt32, handle!: () -> Unit = {=>}): Unit {
     let newErrCode = convertErrCode(errCode)
     if (newErrCode != 0) {
         let msg = if (let Some(errMsg) <- ERRCODE_MAP.get(newErrCode)) {
-            message ?? "" + errMsg
+            errMsg
         } else {
-            message ?? "" + "Unrecognized error code"
+            "Unrecognized error code"
         }
+        handle()
         throw BusinessException(Int32(newErrCode), msg)
     }
 }
 
-const OLD_INVALID_PARAMETER: UInt32 = 401
-const NEW_INVALID_PARAMETER: UInt32 = 62980115
+const INIT_ABNORMAL_ERROR: Int32 = 62980104
+const DISCARDED_ERROR: UInt32 = 401
+const ERR_PARAMETER_ERROR: Int32 = 62980115
 
 func convertErrCode(errCode: UInt32): UInt32 {
-    if (errCode == OLD_INVALID_PARAMETER) {
-        return NEW_INVALID_PARAMETER
+    if (errCode == DISCARDED_ERROR) {
+        return UInt32(ERR_PARAMETER_ERROR)
     }
     return errCode
 }

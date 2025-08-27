@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import ohos.labels.*
-import ohos.color_manager.*
 import ohos.ffi.*
-import ohos.base.*
+import ohos.business_exception.*
+import ohos.callback_invoke.*
 
 foreign {
     func FfiOHOSReceiverGetSize(id: Int64, retVal: CPointer<CSize>): UInt32
@@ -41,7 +41,11 @@ foreign {
 }
 
 /**
- * @brief createImageReceiver(width: number, height: number, format: number, capacity: number): ImageReceiver
+ * Creates an ImageReceiver instance.
+ *
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+ * @relation function createImageReceiver(size: Size, format: ImageFormat, capacity: int): ImageReceiver
  */
 @!APILevel[
     21,
@@ -49,19 +53,33 @@ foreign {
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver {
-    let id = unsafe { FfiOHOSCreateImageReceiver(size.width, size.height, format.getValue(), capacity) }
+    if (format != ImageFormat.Jpeg) {
+        throw BusinessException(ERR_PARAMETER_ERROR, "Parameter error.")
+    }
+    let id = unsafe { FfiOHOSCreateImageReceiver(size.width, size.height, format.value, capacity) }
     if (id < 0) {
-        throw Exception("ERROR: [createImageReceiver] ret ${id}")
+        throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
     }
     return ImageReceiver(id)
 }
 
+/**
+ * Image receiver object.
+ *
+ * @relation interface ImageReceiver
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public class ImageReceiver <: RemoteDataLite {
+    /**
+     * Image size.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly size: Size
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -72,12 +90,18 @@ public class ImageReceiver <: RemoteDataLite {
             unsafe {
                 var cSize = CSize(0, 0)
                 let res = FfiOHOSReceiverGetSize(getID(), inout cSize)
-                checkRet(res, "ERROR: [ImageReceiver][size]")
+                checkAndThrow(res)
                 return Size(cSize)
             }
         }
     }
 
+    /**
+     * Image capacity.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly capacity: int
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -88,12 +112,18 @@ public class ImageReceiver <: RemoteDataLite {
             unsafe {
                 var ret: Int32 = 0
                 let result = FfiOHOSReceiverGetCapacity(getID(), inout ret)
-                checkRet(result, "ERROR: [ImageReceiver][capacity]")
+                checkAndThrow(result)
                 return ret
             }
         }
     }
 
+    /**
+     * Image format.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly format: ImageFormat
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -104,7 +134,7 @@ public class ImageReceiver <: RemoteDataLite {
             unsafe {
                 var value: Int32 = 0
                 let result = FfiOHOSReceiverGetFormat(getID(), inout value)
-                checkRet(result, "ERROR: [ImageReceiver][format]")
+                checkAndThrow(result)
                 return ImageFormat.parse(value)
             }
         }
@@ -119,6 +149,12 @@ public class ImageReceiver <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Get an id which indicates a surface and can be used to set to Camera or other component can receive a surface.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getReceivingSurfaceId(): Promise<string>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -129,7 +165,7 @@ public class ImageReceiver <: RemoteDataLite {
             FfiOHOSGetReceivingSurfaceId(getID())
         }
         if (retData.isNull()) {
-            throw BusinessException(62980102, "[getReceivingSurfaceId] get id failed!")
+            throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
         }
         let ret = retData.toString()
         IMAGE_LOG.info("[getReceivingSurfaceId] id: " + ret)
@@ -137,20 +173,79 @@ public class ImageReceiver <: RemoteDataLite {
         return ret
     }
 
-    func readNextImage(): Image {
-        let retImageID = unsafe {
-            FfiOHOSReadNextImage(getID())
+    /**
+     * Get lasted image from receiver.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readLatestImage(): Promise<Image>
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    ]
+    public func readLatestImage(): Image {
+        let res = unsafe { FfiOHOSReadLatestImage(getID()) }
+        if (res < 0) {
+            throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
         }
-        return Image(retImageID)
+        return Image(res)
     }
 
-    func readLatestImage(): Image {
-        let retImageID = unsafe {
-            FfiOHOSReadLatestImage(getID())
+    /**
+     * Get next image from receiver.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readNextImage(): Promise<Image>
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    ]
+    public func readNextImage(): Image {
+        let res = unsafe { FfiOHOSReadNextImage(getID()) }
+        if (res < 0) {
+            throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
         }
-        return Image(retImageID)
+        return Image(res)
     }
 
+    /**
+     * Subscribe callback when receiving an image.
+     *
+     * @relation on(type: 'imageArrival', callback: AsyncCallback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    ]
+    public func on(eventType: ReceiveType, callback: Callback0Argument): Unit {
+        let wrapper = { => callback.invoke(None) }
+        let lambda = Callback0Param(wrapper)
+        try (ctype = unsafe { LibC.mallocCString(eventType.toString()).asResource() }) {
+            unsafe { FfiImageReceiverImplOn(getID(), ctype.value, lambda.getID()) }
+        }
+    }
+
+    /**
+     * Remove callback subscriptions when releasing buffer.
+     *
+     * @relation off(type: 'imageArrival', callback?: AsyncCallback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    ]
+    public func off(eventType: ReceiveType): Unit {}
+
+    /**
+     * Release image receiver instance.
+     *
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -159,5 +254,35 @@ public class ImageReceiver <: RemoteDataLite {
     public func release(): Unit {
         unsafe { FfiOHOSReceiverRelease(getID()) }
         releaseFFIData(getID())
+    }
+}
+
+/**
+ * Enum of callback.
+ *
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+]
+public enum ReceiveType {
+    /**
+     * imageArrival.
+     *
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    ]
+    ImageArrival
+    | ...
+
+    protected func toString(): String {
+        match (this) {
+            case ImageArrival => "imageArrival"
+            case _ => throw IllegalArgumentException("The type is not supported yet.")
+        }
     }
 }

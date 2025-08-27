@@ -15,8 +15,6 @@
 
 package ohos.multimedia.camera
 
-import std.collection.*
-import ohos.base.*
 import ohos.ffi.*
 
 foreign {
@@ -56,11 +54,11 @@ foreign {
 
     func FfiCameraManagerIsTorchSupported(): Bool
 
-    func FfiCameraManagerIsTorchModeSupported(torchMode: Int32): Bool
+    func FfiCameraManagerIsTorchModeSupported(mode: Int32): Bool
 
     func FfiCameraManagerGetTorchMode(): Int32
 
-    func FfiCameraManagerSetTorchMode(torchMode: Int32): Int32
+    func FfiCameraManagerSetTorchMode(mode: Int32): Int32
 
     func FfiCameraManagerOnCameraStatusChanged(id: Int64, callbackId: Int64): Int32
 
@@ -102,7 +100,7 @@ foreign {
     // PhotoOutput
     func FfiCameraPhotoOutputCapture(id: Int64): Int32
 
-    func FfiCameraPhotoOutputCaptureWithSetting(id: Int64, setting: CPhotoCaptureSetting): Int32
+    func FfiCameraPhotoOutputCaptureWithSettingV2(id: Int64, setting: CPointer<CPhotoCaptureSetting>, isLocationNone: Bool): Int32
 
     func FfiCameraPhotoOutputIsMovingPhotoSupported(id: Int64, errCode: CPointer<Int32>): Bool
 
@@ -470,18 +468,18 @@ struct CFrameRateRange {
 struct CLocation {
     CLocation(
         let latitude: Float64,
-        let longtitude: Float64,
+        let longitude: Float64,
         let altitude: Float64
     ) {}
 
     init(location: Location) {
         this.latitude = location.latitude
-        this.longtitude = location.longtitude
+        this.longitude = location.longitude
         this.altitude = location.altitude
     }
 
     func toLocation(): Location {
-        return Location(latitude, longtitude, altitude)
+        return Location(latitude, longitude, altitude)
     }
 }
 
@@ -493,13 +491,6 @@ struct CPhotoCaptureSetting {
         let location: CLocation,
         let mirror: Bool
     ) {}
-
-    init(setting: PhotoCaptureSetting) {
-        this.quality = setting.quality.getValue()
-        this.rotation = setting.rotation.getValue()
-        this.location = CLocation(setting.location)
-        this.mirror = setting.mirror
-    }
 }
 
 @C
@@ -537,7 +528,7 @@ struct CTorchStatusInfo {
     ) {}
 
     func toTorchStatusInfo(): TorchStatusInfo {
-        return TorchStatusInfo(isTorchAvailable, isTorchActive, torchLevel)
+        return TorchStatusInfo(isTorchAvailable, isTorchActive, Float64(torchLevel))
     }
 }
 
@@ -557,7 +548,7 @@ struct CCaptureStartInfo {
     ) {}
 
     func toCaptureStartInfo() {
-        return CaptureStartInfo(captureId, time)
+        return CaptureStartInfo(captureId, Int64(time))
     }
 }
 
@@ -569,7 +560,7 @@ struct CFrameShutterInfo {
     ) {}
 
     func toFrameShutterInfo() {
-        return FrameShutterInfo(captureId, timestamp)
+        return FrameShutterInfo(captureId, Int64(timestamp))
     }
 }
 
@@ -602,14 +593,10 @@ struct CRect {
 @C
 struct CMetadataObject {
     CMetadataObject(
-        let `type`: Int32,
+        let objType: Int32,
         let timestamp: Int32,
         let boundingBox: CRect
     ) {}
-
-    func toMetadataObject(): MetadataObject {
-        return MetadataObject(MetadataObjectType.parse(`type`), timestamp, boundingBox.toRect())
-    }
 }
 
 @C
@@ -618,12 +605,4 @@ struct CArrCMetadataObject {
         let head: CPointer<CMetadataObject>,
         let size: Int64
     ) {}
-
-    func toArray(): Array<MetadataObject> {
-        unsafe {
-            cArr2cjArr<CMetadataObject, MetadataObject>(size, head) {
-                item => item.toMetadataObject()
-            }
-        }
-    }
 }

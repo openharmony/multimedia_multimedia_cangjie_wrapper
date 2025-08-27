@@ -13,23 +13,19 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.multimedia_media") {
+ohos_cangjie_shared_library("ohos.multimedia.media") {
   sources = [
     "avimage_generator.cj",
     "media_common.cj",
-    "media_ffi.cj"
-   ]
-
-  cj_deps = [
-    "../../file/photo_access_helper:ohos.multimedia.photo_accesshelper",
+    "media_ffi.cj",
   ]
 
   cj_external_deps = [
-    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
-    "multimedia_cangjie_wrapper:ohos.image",
+    "multimedia_cangjie_wrapper:ohos.multimedia.image"
   ]
 
   external_deps = [
@@ -43,5 +39,4 @@ ohos_cj_library("ohos.multimedia_media") {
 
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
-  lib_name = "multimedia_media"
 }
