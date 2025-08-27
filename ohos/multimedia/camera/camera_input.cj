@@ -16,7 +16,8 @@
 package ohos.multimedia.camera
 
 import ohos.labels.*
-import ohos.base.*
+import ohos.business_exception.*
+import ohos.callback_invoke.*
 import ohos.ffi.*
 import std.collection.*
 import std.sync.*
@@ -24,8 +25,7 @@ import std.sync.*
 /**
  * Camera input object.
  *
- * @interface CameraInput
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation interface CameraInput
  */
 @!APILevel[
     21,
@@ -47,10 +47,11 @@ public class CameraInput <: RemoteDataLite {
     /**
      * Open camera.
      *
+     * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400107 - Can not use camera cause of conflict.
      * @throws { BusinessException } 7400108 - Camera disabled cause of security reason.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation open(): Promise<void>
      */
     @!APILevel[
         21,
@@ -67,12 +68,13 @@ public class CameraInput <: RemoteDataLite {
     /**
      * Open camera.
      *
-     * @param { Bool } isSecureEnabled - Enable secure camera.
+     * @param { Bool } isSecureEnabled - Setting true enables the camera to be opened in a safe way,
+     * setting false does the opposite. Failure of an interface call returns an error code of type CameraErrorCode.
      * @returns { UInt64 } Return the result.
      * @throws { BusinessException } 7400107 - Can not use camera cause of conflict.
      * @throws { BusinessException } 7400108 - Camera disabled cause of security reason.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation open(isSecureEnabled: boolean): Promise<bigint>
      */
     @!APILevel[
         21,
@@ -92,7 +94,7 @@ public class CameraInput <: RemoteDataLite {
      * Close camera.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation close(): Promise<void>
      */
     @!APILevel[
         21,
@@ -107,23 +109,28 @@ public class CameraInput <: RemoteDataLite {
     }
 
     /**
-     * Subscribes to error events.
+     * Registers a listener for CameraInput error events to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'error', camera: CameraDevice, callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, camera: CameraDevice, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "CameraInput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.CameraError => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(errorMutex) {
             let callbackList = errorList
@@ -132,8 +139,13 @@ public class CameraInput <: RemoteDataLite {
                 return
             }
             let wrapper = {
-                value: CErrorCallback => callback.invoke(
-                    BusinessException(value.errorType, getErrorMsg(value.errorType)))
+                value: CErrorCallback =>
+                let code = value.errorType
+                if (code == SUCCESS_CODE) {
+                    callback.invoke(None)
+                } else {
+                    callback.invoke(BusinessException(code, getErrorMsg(code)))
+                }
             }
             let lambdaData = Callback1Param<CErrorCallback, Unit>(wrapper)
             let errCode = unsafe { FfiCameraInputOnError(getID(), lambdaData.getID()) }
@@ -145,21 +157,22 @@ public class CameraInput <: RemoteDataLite {
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, camera: CameraDevice, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "CameraInput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func off(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.CameraError => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(errorMutex) {
             let callbackList = errorList
@@ -186,20 +199,21 @@ public class CameraInput <: RemoteDataLite {
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, camera: CameraDevice): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "CameraInput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func off(eventType: CameraEvents, camera: CameraDevice): Unit {
+        match (eventType) {
+            case CameraEvents.CameraError => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
         synchronized(errorMutex) {
             let callbackList = errorList

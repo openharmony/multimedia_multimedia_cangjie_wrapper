@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import ohos.labels.*
-import ohos.color_manager.*
 import ohos.ffi.*
-import ohos.base.*
 
 foreign {
     func FfiOHOSImageGetClipRect(id: Int64, retVal: CPointer<CRegion>): UInt32
@@ -34,12 +32,23 @@ foreign {
     func FfiImageImageImplGetTimestamp(id: Int64): Int64
 }
 
+/**
+ * Provides basic image operations, including obtaining image information, and reading and writing image data.
+ *
+ * @relation interface Image
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Image <: RemoteDataLite {
+    /**
+     * Gets the image area to crop, default is size.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation clipRect: Region
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -50,12 +59,18 @@ public class Image <: RemoteDataLite {
             unsafe {
                 var cRegion = CRegion(CSize(0, 0), 0, 0)
                 let result = FfiOHOSImageGetClipRect(getID(), inout cRegion)
-                checkRet(result, "ERROR: [Image][clipRect]")
+                checkAndThrow(result)
                 return Region(cRegion)
             }
         }
     }
 
+    /**
+     * Image size.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly size: Size
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -66,12 +81,18 @@ public class Image <: RemoteDataLite {
             unsafe {
                 var cSize = CSize(0, 0)
                 let result = FfiOHOSImageGetSize(getID(), inout cSize)
-                checkRet(result, "ERROR: [Image][size]")
+                checkAndThrow(result)
                 return Size(cSize)
             }
         }
     }
 
+    /**
+     * Image format.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly format: int
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -82,7 +103,7 @@ public class Image <: RemoteDataLite {
             unsafe {
                 var ret: Int32 = 0
                 let result = FfiOHOSImageGetFormat(getID(), inout ret)
-                checkRet(result, "ERROR: [Image][format]")
+                checkAndThrow(result)
                 return ret
             }
         }
@@ -97,6 +118,12 @@ public class Image <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Get component buffer from image.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getComponent(componentType: ComponentType): Promise<Component>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -106,7 +133,7 @@ public class Image <: RemoteDataLite {
         unsafe {
             try (retPtr = safeMalloc<CRetComponent>().asResource()) {
                 let errCode = FfiOHOSGetComponent(getID(), componentType.getValue(), retPtr.value)
-                checkRet(errCode, "[Image] get component failed")
+                checkAndThrow(errCode)
                 let cComponent = retPtr.value.read()
                 try {
                     return Component(cComponent)
@@ -115,9 +142,14 @@ public class Image <: RemoteDataLite {
                 }
             }
         }
-        throw Exception("Unreachable Code.")
+        throw IllegalStateException("Unreachable Code.")
     }
 
+    /**
+     * Release current image to receive another.
+     *
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,

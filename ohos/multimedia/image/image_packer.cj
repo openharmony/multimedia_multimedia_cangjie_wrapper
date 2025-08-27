@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import ohos.labels.*
-import ohos.color_manager.*
 import ohos.ffi.*
-import ohos.base.*
 
 foreign {
     func FFiOHOSImagePackerConstructor(): Int64
@@ -57,6 +55,11 @@ foreign {
         option: CPackingOptionV2): UInt32
 }
 
+/**
+ * ImagePacker instance.
+ *
+ * @relation interface ImagePacker
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -71,6 +74,13 @@ public class ImagePacker <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Supported image formats.
+     *
+     * @throws { BusinessException } 62980098 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly supportedFormats: Array<string>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -79,36 +89,38 @@ public class ImagePacker <: RemoteDataLite {
     public prop supportedFormats: Array<String> {
         get() {
             let cValue = unsafe { FfiOHOSImagePackerGetSupportedFormats(getID()) }
-            checkRet(UInt32(cValue.code), "[ImagePacker] supportedFormats:")
+            checkAndThrow(UInt32(cValue.code))
             let arr = cValue.getDataAndFree()
             return arr
         }
     }
 
     /**
-     * Compresses or packs an image and uses a promise to return the result.
+     * Compresses or packs an image.
      *
      * @param { ImageSource } source Image to be processed.
      * @param { PackingOption } option Option for image packing.
      * @returns { Array<UInt8> } Return the compressed or packed data.
-     * @throws { BusinessException } 62980115 - If the parameter is invalid.
-     * @throws { BusinessException } 62980096 - The Operation failed.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
-     * @throws { BusinessException } 62980106 - The image is too large.
-     * @throws { BusinessException } 62980113 - Unknown image format.
-     * @throws { BusinessException } 62980119 - If encoder occur error during encoding.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
+     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - If the parameter is invalid.
+     * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToData(source: ImageSource, options: PackingOption): Promise<ArrayBuffer>;
+     * @relation packToData(source: ImageSource, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
-    public func packToData(source: ImageSource, option: PackingOption): Array<UInt8> {
-        let cOption = CPackingOptionV2(option)
+    public func packToData(source: ImageSource, options: PackingOption): Array<UInt8> {
+        let cOption = CPackingOptionV2(options)
         let cValue = unsafe { FfiImageImagePackerImplPackToDataImageSource(this.getID(), source.getID(), cOption) }
         cOption.free()
         try {
@@ -119,29 +131,31 @@ public class ImagePacker <: RemoteDataLite {
     }
 
     /**
-     * Compresses or packs an image and uses a promise to return the result.
+     * Compresses or packs an image.
      *
      * @param { PixelMap } source PixelMap to be processed.
      * @param { PackingOption } option Option for image packing.
      * @returns { Array<UInt8> } Return the compressed or packed data.
-     * @throws { BusinessException } 62980115 - If the parameter is invalid.
-     * @throws { BusinessException } 62980096 - The Operation failed.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
-     * @throws { BusinessException } 62980106 - The image is too large.
-     * @throws { BusinessException } 62980113 - Unknown image format.
-     * @throws { BusinessException } 62980119 - If encoder occur error during encoding.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
+     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - If the parameter is invalid.
+     * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToData(source: PixelMap, options: PackingOption): Promise<ArrayBuffer>;
+     * @relation packToData(source: PixelMap, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
-    public func packToData(source: PixelMap, option: PackingOption): Array<UInt8> {
-        let cOption = CPackingOptionV2(option)
+    public func packToData(source: PixelMap, options: PackingOption): Array<UInt8> {
+        let cOption = CPackingOptionV2(options)
         let cValue = unsafe { FfiImageImagePackerImplPackToDataPixelMap(this.getID(), source.getID(), cOption) }
         cOption.free()
         try {
@@ -152,7 +166,7 @@ public class ImagePacker <: RemoteDataLite {
     }
 
     func parsePackingRes(cValue: RetDataCArrUI8): Array<UInt8> {
-        checkRetFor20(UInt32(cValue.code))
+        checkAndThrow(UInt32(cValue.code))
         let cArray = cValue.data
         if (cArray.head.isNull()) {
             return []
@@ -165,63 +179,74 @@ public class ImagePacker <: RemoteDataLite {
     }
 
     /**
-     * Compresses or packs an image into a file and uses a callback to return the result.
+     * Compresses or packs an image into a file.
      *
-     * @param { PixelMap } source PixelMap to be processed.
-     * @param { IntNative } fd ID of a file descriptor.
+     * @param { ImageSource } source Image to be processed.
+     * @param { Int32 } fd ID of a file descriptor.
      * @param { PackingOption } options Options for image packing.
-     * @throws { BusinessException } 62980096 - The Operation failed.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
-     * @throws { BusinessException } 62980106 - The image is too large.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
      * @throws { BusinessException } 62980113 - Unknown image format.
-     * @throws { BusinessException } 62980115 - If the parameter is invalid.
-     * @throws { BusinessException } 62980119 - If encoder occur error during encoding.
+     * The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - Invalid input parameter.
+     * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToFile(source: PixelMap, fd: number, options: PackingOption): Promise<void>;
+     * @relation packToFile(source: ImageSource, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
-    public func packToFile(source: PixelMap, fd: Int32, option: PackingOption): Unit {
-        let cOption = CPackingOptionV2(option)
-        let ret = unsafe { FfiOHOSImagePackerPackPixelMapToFileV2(this.getID(), source.getID(), fd, cOption) }
+    public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): Unit {
+        let cOption = CPackingOptionV2(options)
+        let ret = unsafe { FfiOHOSImagePackerImageSourcePackToFileV2(this.getID(), source.getID(), fd, cOption) }
         cOption.free()
-        checkRet(ret, "[ImagePacker] packToFile:")
+        checkAndThrow(ret)
     }
 
     /**
-     * Compresses or packs an image into a file and uses a promise to return the result.
+     * Compresses or packs an image into a file and uses a callback to return the result.
      *
-     * @param { ImageSource } source Image to be processed.
-     * @param { IntNative } fd ID of a file descriptor.
+     * @param { PixelMap } source PixelMap to be processed.
+     * @param { Int32 } fd ID of a file descriptor.
      * @param { PackingOption } options Options for image packing.
-     * @throws { BusinessException } 62980096 - The Operation failed.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
-     * @throws { BusinessException } 62980106 - The image is too large.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
      * @throws { BusinessException } 62980113 - Unknown image format.
-     * @throws { BusinessException } 62980115 - If the parameter is invalid.
-     * @throws { BusinessException } 62980119 - If encoder occur error during encoding.
+     * The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - Invalid input parameter.
+     * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToFile(source: ImageSource, fd: number, options: PackingOption): Promise<void>;
+     * @relation packToFile(source: PixelMap, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
-    public func packToFile(source: ImageSource, fd: Int32, option: PackingOption): Unit {
-        let cOption = CPackingOptionV2(option)
-        let ret = unsafe { FfiOHOSImagePackerImageSourcePackToFileV2(this.getID(), source.getID(), fd, cOption) }
+    public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Unit {
+        let cOption = CPackingOptionV2(options)
+        let ret = unsafe { FfiOHOSImagePackerPackPixelMapToFileV2(this.getID(), source.getID(), fd, cOption) }
         cOption.free()
-        checkRet(ret, "[ImagePacker] packToFile:")
+        checkAndThrow(ret)
     }
 
+    /**
+     * Releases an ImagePacker instance
+     *
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -233,6 +258,11 @@ public class ImagePacker <: RemoteDataLite {
     }
 }
 
+/**
+ * Creates an ImagePacker instance.
+ *
+ * @relation function createImagePacker(): ImagePacker
+ */
 @!APILevel[
     21,
     stagemodelonly: true,

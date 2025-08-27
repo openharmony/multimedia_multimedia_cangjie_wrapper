@@ -13,30 +13,49 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
-import ohos.bundle_manager.{BundleManager, BundleInfo, BundleFlag}
+import ohos.business_exception.*
+import ohos.callback_invoke.*
+import ohos.bundle.bundle_manager.{BundleManager, BundleInfo, BundleFlag}
 import ohos.hilog.*
 import std.sync.*
 import std.collection.*
-import ohos.ability.*
+import ohos.app.ability.ui_ability.*
 import ohos.resource_manager.ResourceManager
+import ohos.data.data_share_predicates.*
+
+const INVALID_ARGUMENT_ERROR: Int32 = 13900020
+/**
+ * Returns an instance of PhotoAccessHelper
+ *
+ * @throws { BusinessException } 13900020 - Invalid argument
+ * @relation function getPhotoAccessHelper(context: Context): PhotoAccessHelper
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
+    unsafe {
+        let ret = FfiPhotoAccessHelperGetPhotoAccessHelper(context.getID())
+        if (ret == -1) {
+            checkRet(INVALID_ARGUMENT_ERROR, "getPhotoAccessHelper")
+        }
+        PhotoAccessHelper(ret, context)
+    }
+}
 
 /**
  * Helper functions to access photos and albums.
  *
- * @interface PhotoAccessHelper
- * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
- * @crossplatform
- * @atomicservice
+ * @relation interface PhotoAccessHelper
  */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
@@ -57,12 +76,11 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Release PhotoAccessHelper instance
      *
-     * @returns { Promise<void> } Returns void
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation release(): Promise<void>;
      */
     @!APILevel[
         21,
@@ -81,53 +99,42 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Fetch photo assets
      *
-     * @permission ohos.permission.READ_IMAGEVIDEO
-     * @param { FetchOptions } options - Retrieval options.
-     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 13900012 - Permission denied
+     * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
+        permission: "ohos.READ_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getAssets(options: FetchOptions): FetchResult<PhotoAsset> {
+    public func getAssets(options: FetchOptions): PhotoAssetResult {
         var errCode = 0i32
         unsafe {
             let cOptions = options.toCFetchOptions()
             let ret = FfiPhotoAccessHelperGetAssets(getID(), cOptions, inout errCode)
             cOptions.free()
             checkRet(errCode, "getAssets")
-            FetchResult<PhotoAsset>(ret)
+            PhotoAssetResult(ret)
         }
     }
 
     /**
      * Fetch a group of burst assets
      *
-     * @permission ohos.permission.READ_IMAGEVIDEO
-     * @param { string } burstKey - Burst asset uuid
-     * @param { FetchOptions } options - Retrieval options.
-     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - Internal system error
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation getBurstAssets(burstKey: string, options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
         21,
+        permission: "ohos.READ_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getBurstAssets(burstKey: String, options: FetchOptions): FetchResult<PhotoAsset> {
+    public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetResult {
         unsafe {
             var errCode = 0i32
             try (cBurstKey = LibC.mallocCString(burstKey).asResource()) {
@@ -135,59 +142,49 @@ public class PhotoAccessHelper <: RemoteDataLite {
                 let ret = FfiPhotoAccessHelperGetBurstAssets(getID(), cBurstKey.value, cOptions, inout errCode)
                 cOptions.free()
                 checkRet(errCode, "getBurstAssets")
-                return FetchResult<PhotoAsset>(ret)
+                return PhotoAssetResult(ret)
             }
             throw Exception("Unreachable code.")
         }
     }
 
     /**
-     * Fetch albums.
+     * Obtains albums based on the specified options and album type.
+     * Before the operation, ensure that the albums to obtain exist.
      *
-     * @permission ohos.permission.READ_IMAGEVIDEO
-     * @param { AlbumType } type - Album type.
-     * @param { AlbumSubtype } subtype - Album subtype.
-     * @param { FetchOptions } [options] - options to fetch albums
-     * @returns { Promise<FetchResult<Album>> } - Returns the fetch result
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 13900012 - Permission denied
+     * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation getAlbums(type: AlbumType, subtype: AlbumSubtype, options?: FetchOptions): Promise<FetchResult<Album>>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
+        permission: "ohos.READ_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getAlbums(`type`: AlbumType, subtype: AlbumSubtype, options!: FetchOptions = FetchOptions()): FetchResult<Album> {
-        if (options.fetchColumns.size == 0) {
-            options.fetchColumns = ["uri", "album_name"]
-        }
+    public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
+        options!: FetchOptions = FetchOptions(["uri", "album_name"], DataSharePredicates())): AlbumResult {
         var errCode = 0i32
         unsafe {
             let cOptions = options.toCFetchOptions()
-            let ret = FfiPhotoAccessHelperGetAlbums(getID(), `type`.value, subtype.value, cOptions, inout errCode)
+            let ret = FfiPhotoAccessHelperGetAlbums(getID(), albumType.value, subtype.value, cOptions, inout errCode)
             cOptions.free()
             checkRet(errCode, "getAlbums")
-            FetchResult<Album>(ret)
+            AlbumResult(ret)
         }
     }
 
     /**
-     * Register change notify for the specified uri.
+     * Registers listening for the specified URI. This API uses a callback to return the result.
      *
-     * @param { string } uri - PhotoAsset's uri, album's uri or DefaultChangeUri
-     * @param { boolean } forChildUris - Monitor the child uris.
-     * @param { Callback<ChangeData> } callback - Returns the changed data
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation registerChange(uri: string, forChildUris: boolean, callback: Callback<ChangeData>): void;
      */
     @!APILevel[
         21,
@@ -207,7 +204,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
                     let wrapper = {
                         value: CChangeData =>
                         let changeData = value.toChangeData()
-                        callback.invoke(changeData)
+                        callback.invoke(None, changeData)
                     }
                     let lambdaData = Callback1Param<CChangeData, Unit>(wrapper)
                     var errCode = 0i32
@@ -221,15 +218,14 @@ public class PhotoAccessHelper <: RemoteDataLite {
     }
 
     /**
-     * Unregister change notify for the specified uri.
+     * Unregisters listening for the specified URI. Multiple callbacks can be registered for a URI for listening.
+     * You can use this API to unregister the listening of the specified callbacks or all callbacks.
      *
-     * @param { string } uri - PhotoAsset's uri, album's uri or DefaultChangeUri
-     * @param { Callback<ChangeData> } [callback] - The callback function to unregister.
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation unRegisterChange(uri: string, callback?: Callback<ChangeData>): void;
      */
     @!APILevel[
         21,
@@ -266,18 +262,17 @@ public class PhotoAccessHelper <: RemoteDataLite {
     }
 
     func getSelfBundleInfo(): FfiBundleInfo {
-        let bundleFlags = BundleFlag.GET_BUNDLE_INFO_WITH_ABILITY.getValue() | // for appName
-            BundleFlag.GET_BUNDLE_INFO_WITH_HAP_MODULE.getValue() | // for appName
-                BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE
-            .getValue() | // for appId
-                BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION.getValue() // for appInfo
+        let bundleFlags = BundleFlag.GET_BUNDLE_INFO_WITH_ABILITY | // for appName
+            BundleFlag.GET_BUNDLE_INFO_WITH_HAP_MODULE | // for appName
+                BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE_INFO| // for appId
+                BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION // for appInfo
         let bundleInfo = BundleManager.getBundleInfoForSelf(bundleFlags)
         let bundleName = bundleInfo.name
         let appId = bundleInfo.signatureInfo.appId
         let labelId = bundleInfo.appInfo.labelId
         let stgContext = getStageContext(context)
         let resourceMgrObject = ResourceManager.getResourceManager(stgContext)
-        let appName = resourceMgrObject.getString(labelId)
+        let appName = resourceMgrObject.getString(UInt32(labelId))
 
         FfiBundleInfo(bundleName, appName, appId)
     }
@@ -285,18 +280,13 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Create a save dialog to save photos
      *
-     * @param { Array<string> } srcFileUris - List of the file uris to be saved
-     * @param { Array<PhotoCreationConfig> } photoCreationConfigs - List of the photo asset creation configs
-     * @returns { Promise<Array<string>> } - Returns the media library file uri list to application which has been authorized
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - Internal system error
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation showAssetsCreationDialog(srcFileUris: Array<string>, photoCreationConfigs: Array<PhotoCreationConfig>): Promise<Array<string>>;
      */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -309,7 +299,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
                 let wrapper = {
                     value: RetDataCArrString =>
                     let data = value.data.toStringArray()
-                    callback.invoke(data)
+                    callback.invoke(None, data)
                 }
                 let lambdaData = Callback1Param<RetDataCArrString, Unit>(wrapper)
                 var errCode = 0i32
@@ -326,21 +316,17 @@ public class PhotoAccessHelper <: RemoteDataLite {
     }
 
     /**
-     * Apply the change request of asset or album.
+     * Applies media changes.
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @param { MediaChangeRequest } mediaChangeRequest - The change request to be applied
-     * @returns { Promise<void> } Returns void
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation applyChanges(mediaChangeRequest: MediaChangeRequest): Promise<void>;
      */
     @!APILevel[
         21,
-        atomicservice: true,
+        permission: "ohos.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

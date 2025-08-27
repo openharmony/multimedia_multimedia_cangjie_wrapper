@@ -13,45 +13,32 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
-import ohos.multimedia.fetchdata.*
 
 /**
- * Defines the album.
+ * Defines the abstract interface of albums.
  *
- * @interface Album
- * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
- * @crossplatform
+ * @relation interface AbsAlum
  */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
-public class Album <: RemoteDataLite {
+public open class AbsAlbum <: RemoteDataLite{
     protected init(id: Int64) {
         super(id)
     }
-
-    ~init() {
-        releaseFFIData(myDataId)
-    }
-
     /**
      * Album type
      *
-     * @type { AlbumType }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly albumType: AlbumType
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -67,13 +54,10 @@ public class Album <: RemoteDataLite {
     /**
      * Album subtype
      *
-     * @type { AlbumSubtype }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly albumSubtype: AlbumSubtype
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -89,13 +73,10 @@ public class Album <: RemoteDataLite {
     /**
      * Album name.
      *
-     * @type { string }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation albumName: string
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -120,13 +101,10 @@ public class Album <: RemoteDataLite {
     /**
      * Album uri.
      *
-     * @type { string }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly albumUri: string
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -140,12 +118,27 @@ public class Album <: RemoteDataLite {
             }
         }
     }
+    
+    /**
+     * Number of assets in the album
+     *
+     * @relation readonly count: number
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public prop count: Int32 {
+        get() {
+            unsafe { FfiPhotoAlbumGetCount(getID()) }
+        }
+    }
 
     /**
      * Cover uri for the album
      *
-     * @type { string }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation readonly coverUri: string
      */
     @!APILevel[
         21,
@@ -164,36 +157,63 @@ public class Album <: RemoteDataLite {
     }
 
     /**
-     * Number of assets in the album
+     * Fetch assets in an album.
      *
-     * @type { number }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessException } 201 - Permission denied
+     * @throws { BusinessException } 13900020 - Invalid argument
+     * @throws { BusinessException } 14000011 - System inner fail
+     * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>
      */
     @!APILevel[
         21,
-        crossplatform: true,
+        permission: "ohos.READ_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public prop count: Int32 {
-        get() {
-            unsafe { FfiPhotoAlbumGetCount(getID()) }
+    public func getAssets(options: FetchOptions): PhotoAssetResult {
+        var errCode = 0i32
+        unsafe {
+            let cOptions = options.toCFetchOptions()
+            let id = FfiPhotoAlbumGetAssets(getID(), cOptions, inout errCode)
+            cOptions.free()
+            checkRet(errCode, "getAssets")
+            PhotoAssetResult(id)
         }
+    }
+
+    private let impl_: AbsAlbumImpl = AbsAlbumImpl()
+}
+
+class AbsAlbumImpl {}
+
+/**
+ * Defines the album.
+ *
+ * @relation interface Album extends AbsAlbum
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public class Album <: AbsAlbum {
+    protected init(id: Int64) {
+        super(id)
+    }
+
+    ~init() {
+        releaseFFIData(myDataId)
     }
 
     /**
      * Number of image assets in the album
      *
-     * @type { ?number }
-     * @readonly
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
-     * @since 12
+     * @relation readonly imageCount: number
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -206,17 +226,13 @@ public class Album <: RemoteDataLite {
     /**
      * Number of video assets in the album
      *
-     * @type { ?number }
-     * @readonly
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly videoCount: number
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]
+    ]  
     public prop videoCount: Int32 {
         get() {
             unsafe { FfiPhotoAlbumGetVideoCount(getID()) }
@@ -224,50 +240,18 @@ public class Album <: RemoteDataLite {
     }
 
     /**
-     * Fetch assets in an album.
-     *
-     * @permission ohos.permission.READ_IMAGEVIDEO
-     * @param { FetchOptions } options - Fetch options.
-     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 13900012 - Permission denied
-     * @throws { BusinessException } 13900020 - Invalid argument
-     * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
-     */
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]
-    public func getAssets(options: FetchOptions): FetchResult<PhotoAsset> {
-        var errCode = 0i32
-        unsafe {
-            let cOptions = options.toCFetchOptions()
-            let id = FfiPhotoAlbumGetAssets(getID(), cOptions, inout errCode)
-            cOptions.free()
-            checkRet(errCode, "getAssets")
-            FetchResult<PhotoAsset>(id)
-        }
-    }
-
-    /**
      * Modify metadata for the album
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @returns { Promise<void> } Returns void
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @throws { BusinessException } 13900012 - Permission denied
+     * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation commitModify(): Promise<void>
      */
     @!APILevel[
         21,
+        permission: "ohos.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -277,23 +261,5 @@ public class Album <: RemoteDataLite {
             FfiPhotoAlbumCommitModify(getID(), inout errCode)
             checkRet(errCode, "commitModify")
         }
-    }
-}
-
-@!APILevel[
-    21,
-    crossplatform: true,
-    stagemodelonly: true,
-    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-]
-extend Album <: FetchData<Album> {
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]
-    public static func create(id: Int64): Album {
-        Album(id)
     }
 }
