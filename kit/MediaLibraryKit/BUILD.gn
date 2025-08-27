@@ -13,13 +13,16 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("kit.MediaLibraryKit") {
+ohos_cangjie_shared_library("kit.MediaLibraryKit") {
   sources = ["index.cj"]
 
-  cj_deps = ["../../ohos/file/photo_access_helper:ohos.multimedia.photo_accesshelper"]
+  cj_deps = [
+    "../../ohos/file/photo_access_helper:ohos.file.photo_access_helper",
+  ]
 
-  kit = true
-  lib_name = "MediaLibraryKit"
+  cj_external_deps = [
+    "ability_cangjie_wrapper:ohos.app.ability.ui_ability"
+  ]
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
 }

@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
-import ohos.color_manager.*
+import ohos.graphics.color_space_manager.*
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
+import ohos.business_exception.BusinessException
 
 const BASE_MEDIA_ERR: Int32 = 62980096
 const ARG_SIZE_ONE: UIntNative = 1
@@ -100,8 +100,11 @@ foreign {
  *
  * @param {Array<UInt8> } colors The image color buffer.
  * @param { InitializationOptions } options Initialization options for pixelmap.
- * @returns { PixelMap } A Promise instance used to return the PixelMap object.
- * @brief createPixelMap(colors: ArrayBuffer, options: InitializationOptions): Promise<PixelMap>
+ * @returns { PixelMap } Return the PixelMap object.
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+ * 2.Incorrect parameter types. 3.Parameter verification failed.
+ * @relation function createPixelMapSync(colors: ArrayBuffer, options: InitializationOptions): PixelMap
  */
 @!APILevel[
     21,
@@ -110,14 +113,14 @@ foreign {
 ]
 public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions): PixelMap {
     if (colors.size == 0) {
-        throw BusinessException(BASE_MEDIA_ERR, "[PixelMap] createPixelMap: create failed!")
+        throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
     }
     unsafe {
         let arrPtr = acquireArrayRawData(colors)
         let id = FfiOHOSCreatePixelMapV2(arrPtr.pointer, UInt32(colors.size), options.toExternal())
         releaseArrayRawData(arrPtr)
-        if (id == -1) {
-            throw BusinessException(BASE_MEDIA_ERR, "[PixelMap] createPixelMap: create failed!")
+        if (id <= 0) {
+            throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
         }
         return PixelMap(id)
     }
@@ -125,6 +128,8 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
 
 /**
  * PixelMap instance.
+ *
+ * @relation interface PixelMap
  */
 @!APILevel[
     21,
@@ -144,9 +149,8 @@ public class PixelMap <: RemoteDataLite {
     /**
      * Whether the image pixel map can be edited.
      *
-     * @type { Bool }
-     *
-     * @brief readonly isEditable: boolean
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly isEditable: boolean
      */
     @!APILevel[
         21,
@@ -158,18 +162,17 @@ public class PixelMap <: RemoteDataLite {
             unsafe {
                 var errCode: UInt32 = 0
                 let res = FfiOHOSGetIsEditable(getID(), inout errCode)
-                checkRet(errCode, "[PixelMap] isEditable:")
+                checkAndThrow(errCode)
                 return res
             }
         }
     }
 
     /**
-     * Whether the image pixel map can be edited.
+     * Is it stride Alignment.
      *
-     * @type { Bool }
-     *
-     * @brief readonly isEditable: boolean
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly isStrideAlignment: boolean
      */
     @!APILevel[
         21,
@@ -181,12 +184,18 @@ public class PixelMap <: RemoteDataLite {
             unsafe {
                 var errCode: UInt32 = 0
                 let res = FfiOHOSGetIsStrideAlignment(getID(), inout errCode)
-                checkRet(errCode, "[PixelMap] isStrideAlignment:")
+                checkAndThrow(errCode)
                 return res
             }
         }
     }
 
+    /**
+     * Releases this PixelMap object.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -195,18 +204,18 @@ public class PixelMap <: RemoteDataLite {
     public func release(): Unit {
         unsafe {
             let ret = FfiOHOSPixelMapRelease(getID())
-            checkRet(ret, "[PixelMap] Release:")
+            checkAndThrow(ret)
             releaseFFIData(getID())
         }
         IMAGE_LOG.info("[PixelMap] ffi release success")
     }
 
     /**
-     * Reads image pixel map data and writes the data to an ArrayBuffer. This method uses
-     * a promise to return the result.
+     * Reads image pixel map data and writes the data to an ArrayBuffer.
      *
      * @param { Array<UInt8> } dst A buffer to which the image pixel map data will be written.
-     * @brief readPixelsToBuffer(dst: ArrayBuffer): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readPixelsToBuffer(dst: ArrayBuffer): Promise<void>
      */
     @!APILevel[
         21,
@@ -218,16 +227,16 @@ public class PixelMap <: RemoteDataLite {
             var arrPtr = acquireArrayRawData(dst)
             let ret = FfiOHOSReadPixelsToBuffer(getID(), UInt64(dst.size), arrPtr.pointer)
             releaseArrayRawData(arrPtr)
-            checkRet(ret, "[PixelMap] readPixelsToBuffer:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Reads image data in an ArrayBuffer and writes the data to a PixelMap object. This method
-     * uses a promise to return the result.
+     * Reads image data in an ArrayBuffer and writes the data to a PixelMap object. 
      *
      * @param { Array<UInt8> } src A buffer from which the image data will be read.
-     * @brief writeBufferToPixels(src: ArrayBuffer): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation writeBufferToPixels(src: ArrayBuffer): Promise<void>
      */
     @!APILevel[
         21,
@@ -239,16 +248,16 @@ public class PixelMap <: RemoteDataLite {
             let arrPtr = acquireArrayRawData(src)
             let ret = FfiOHOSWriteBufferToPixels(getID(), arrPtr.pointer, UInt64(src.size))
             releaseArrayRawData(arrPtr)
-            checkRet(ret, "[PixelMap] writeBufferToPixels:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Obtains pixel map information about this image. This method uses a promise to return the information.
+     * Obtains pixel map information about this image. 
      *
-     * @returns { ImageInfo } An instance used to return the image pixel map information. If the operation fails,
-     *  an error message is returned.
-     * @brief getImageInfo(): Promise<ImageInfo>
+     * @returns { ImageInfo } An instance used to return the image pixel map information.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getImageInfo(): Promise<ImageInfo>
      */
     @!APILevel[
         21,
@@ -259,7 +268,7 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let cimage = FfiOHOSGetImageInfoV2(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] getImageInfo:")
+            checkAndThrow(errCode)
             try {
                 return cimage.toImageInfo()
             } finally {
@@ -272,7 +281,8 @@ public class PixelMap <: RemoteDataLite {
      * Obtains the number of bytes in each line of the image pixel map.
      *
      * @returns { UInt32 } Number of bytes in each line.
-     * @brief getBytesNumberPerRow(): number
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getBytesNumberPerRow(): number
      */
     @!APILevel[
         21,
@@ -283,7 +293,7 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let res = FfiOHOSGetBytesNumberPerRow(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] getBytesNumberPerRow:")
+            checkAndThrow(errCode)
             return res
         }
     }
@@ -292,7 +302,8 @@ public class PixelMap <: RemoteDataLite {
      * Obtains the total number of bytes of the image pixel map.
      *
      * @returns { UInt32 } Total number of bytes.
-     * @brief getPixelBytesNumber(): number
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getPixelBytesNumber(): number
      */
     @!APILevel[
         21,
@@ -303,7 +314,7 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let res = FfiOHOSGetPixelBytesNumber(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] getPixelBytesNumber:")
+            checkAndThrow(errCode)
             return res
         }
     }
@@ -312,7 +323,8 @@ public class PixelMap <: RemoteDataLite {
      * Obtains the density of the image pixel map.
      *
      * @returns { Int32 } The number of density.
-     * @brief getDensity():number
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getDensity():number
      */
     @!APILevel[
         21,
@@ -323,16 +335,17 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let res = FfiOHOSGetDensity(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] getDensity:")
+            checkAndThrow(errCode)
             return res
         }
     }
 
     /**
-     * Set the transparent rate of pixel map. This method return the operation result.
+     * Set the transparent rate of pixel map.
      *
      * @param { Float32 } rate The value of transparent rate.
-     * @brief opacity(rate: number): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation opacity(rate: number): Promise<void>
      */
     @!APILevel[
         21,
@@ -342,16 +355,17 @@ public class PixelMap <: RemoteDataLite {
     public func opacity(rate: Float32): Unit {
         unsafe {
             let ret = FfiOHOSOpacity(getID(), rate)
-            checkRet(ret, "[PixelMap] opacity:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Image zoom in width and height. This method return the operation result.
+     * Image zoom in width and height.
      *
      * @param { Float32 } x The zoom value of width.
      * @param { Float32 } y The zoom value of height.
-     * @brief scale(x: number, y: number): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation scale(x: number, y: number): Promise<void>
      */
     @!APILevel[
         21,
@@ -361,16 +375,17 @@ public class PixelMap <: RemoteDataLite {
     public func scale(x: Float32, y: Float32): Unit {
         unsafe {
             let ret = FfiOHOSScale(getID(), x, y)
-            checkRet(ret, "[PixelMap] scale:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Image position transformation. This method return the operation result.
+     * Image position transformation.
      *
      * @param { Float32 } x The position value of width.
      * @param { Float32 } y The position value of height.
-     * @brief translate(x: number, y: number): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation translate(x: number, y: number): Promise<void>
      */
     @!APILevel[
         21,
@@ -380,15 +395,16 @@ public class PixelMap <: RemoteDataLite {
     public func translate(x: Float32, y: Float32): Unit {
         unsafe {
             let ret = FfiOHOSTranslate(getID(), x, y)
-            checkRet(ret, "[PixelMap] translate:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Image rotation. This method return the operation result.
+     * Image rotation.
      *
      * @param { Float32 } angle The rotation angle.
-     * @brief rotate(angle: number): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation rotate(angle: number): Promise<void>
      */
     @!APILevel[
         21,
@@ -398,16 +414,17 @@ public class PixelMap <: RemoteDataLite {
     public func rotate(angle: Float32): Unit {
         unsafe {
             let ret = FfiOHOSRotate(getID(), angle)
-            checkRet(ret, "[PixelMap] translate:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Image flipping. This method return the operation result.
+     * Image flipping. 
      *
      * @param { Bool } horizontal Is flip in horizontal.
      * @param { Bool } vertical Is flip in vertical.
-     * @brief flip(horizontal: boolean, vertical: boolean): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation flip(horizontal: boolean, vertical: boolean): Promise<void>
      */
     @!APILevel[
         21,
@@ -417,15 +434,16 @@ public class PixelMap <: RemoteDataLite {
     public func flip(horizontal: Bool, vertical: Bool): Unit {
         unsafe {
             let ret = FfiOHOSFlip(getID(), horizontal, vertical)
-            checkRet(ret, "[PixelMap] flip:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Crop the image. This method return the operation result.
+     * Crop the image.
      *
      * @param { Region } region The region to crop.
-     * @brief crop(region: Region): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation crop(region: Region): Promise<void>
      */
     @!APILevel[
         21,
@@ -435,16 +453,16 @@ public class PixelMap <: RemoteDataLite {
     public func crop(region: Region): Unit {
         unsafe {
             let ret = FfiOHOSCrop(getID(), region.toExternal())
-            checkRet(ret, "[PixelMap] crop: ")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Writes image pixel map data to the specified area. This method uses a promise to return
-     * the operation result.
+     * Writes image pixel map data to the specified area. 
      *
      * @param { PositionArea } area Area to which the image pixel map data will be written.
-     * @brief writePixels(area: PositionArea): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation writePixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
         21,
@@ -456,11 +474,11 @@ public class PixelMap <: RemoteDataLite {
             let arrPtr = acquireArrayRawData(area.pixels)
             let ret = FfiOHOSWritePixels(
                 getID(),
-                CPositionArea(UIntNative(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
+                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
                     arrPtr.pointer)
             )
             releaseArrayRawData(arrPtr)
-            checkRet(ret, "[PixelMap] writePixels:")
+            checkAndThrow(ret)
         }
     }
 
@@ -468,7 +486,8 @@ public class PixelMap <: RemoteDataLite {
      * Reads image pixel map data in an area. This method return the data read.
      *
      * @param { PositionArea } area Area from which the image pixel map data will be read.
-     * readPixels(area: PositionArea): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readPixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
         21,
@@ -480,20 +499,20 @@ public class PixelMap <: RemoteDataLite {
             let arrPtr = acquireArrayRawData(area.pixels)
             let ret = FfiOHOSReadPixels(
                 getID(),
-                CPositionArea(UIntNative(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
+                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
                     arrPtr.pointer)
             )
             releaseArrayRawData(arrPtr)
-            checkRet(ret, "[PixelMap] readPixels:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Obtains new pixel map with alpha information. This method uses a promise to return the information.
+     * Obtains new pixel map with alpha information. 
      *
-     * @returns { PixelMap } An instance used to return the new image pixel map. If the operation fails,
-     *  an error message is returned.
-     * @brief createAlphaPixelmap(): PixelMap
+     * @returns { PixelMap } An instance used to return the new image pixel map.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation createAlphaPixelmapSync(): PixelMap
      */
     @!APILevel[
         21,
@@ -504,7 +523,7 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let id = FfiOHOSCreateAlphaPixelMap(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] createAlphaPixelmap:")
+            checkAndThrow(errCode)
             return PixelMap(id)
         }
     }
@@ -513,9 +532,10 @@ public class PixelMap <: RemoteDataLite {
      * Set color space of pixel map.
      *
      * @param { ColorSpaceManager } colorSpace The color space for pixel map.
-     * @throws { BusinessException } 62980111 - If the operation invalid.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
-     * @brief setColorSpace(colorSpace: colorSpaceManager.ColorSpaceManager): void
+     * @relation setColorSpace(colorSpace: colorSpaceManager.ColorSpaceManager): void
      */
     @!APILevel[
         21,
@@ -525,7 +545,7 @@ public class PixelMap <: RemoteDataLite {
     public func setColorSpace(colorSpace: ColorSpaceManager): Unit {
         unsafe {
             let ret = FfiOHOSPixelMapSetColorSpace(getID(), colorSpace.getID())
-            checkRet(ret, "[PixelMap] setColorSpace:")
+            checkAndThrow(ret)
         }
     }
 
@@ -534,8 +554,9 @@ public class PixelMap <: RemoteDataLite {
      *
      * @throws { BusinessException } 62980101 - If the image data abnormal.
      * @throws { BusinessException } 62980103 - If the image data unsupport.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
-     * @brief getColorSpace(): colorSpaceManager.ColorSpaceManager
+     * @relation getColorSpace(): colorSpaceManager.ColorSpaceManager
      */
     @!APILevel[
         21,
@@ -546,7 +567,7 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let colorSpaceId = FfiOHOSPixelMapGetColorSpace(getID(), inout errCode)
-            checkRet(errCode, "[PixelMap] getColorSpace:")
+            checkAndThrow(errCode)
             return ColorSpaceManager(colorSpaceId)
         }
     }
@@ -555,11 +576,10 @@ public class PixelMap <: RemoteDataLite {
      * Apply color space of pixel map, the pixels will be changed by input color space.
      *
      * @param { ColorSpaceManager } targetColorSpace - The color space for pixel map.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980108 - Failed to convert the color space.
      * @throws { BusinessException } 62980115 - Invalid image parameter.
-     * @brief applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager): Promise<void>
+     * @relation applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager): Promise<void>
      */
     @!APILevel[
         21,
@@ -569,7 +589,7 @@ public class PixelMap <: RemoteDataLite {
     public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit {
         unsafe {
             let ret = FfiOHOSPixelMapApplyColorSpace(getID(), targetColorSpace.getID())
-            checkRet(ret, "[PixelMap] applyColorSpace:")
+            checkAndThrow(ret)
         }
     }
 }

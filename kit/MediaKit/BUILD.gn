@@ -13,13 +13,13 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("kit.MediaKit") {
+ohos_cangjie_shared_library("kit.MediaKit") {
   sources = ["index.cj"]
 
-  cj_deps = ["../../ohos/multimedia/media:ohos.multimedia_media"]
+  cj_deps = [
+    "../../ohos/multimedia/media:ohos.multimedia.media",
+  ]
 
-  kit = true
-  lib_name = "MediaKit"
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
 }

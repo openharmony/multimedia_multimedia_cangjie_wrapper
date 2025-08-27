@@ -16,7 +16,8 @@
 package ohos.multimedia.camera
 
 import ohos.labels.*
-import ohos.base.*
+import ohos.business_exception.*
+import ohos.callback_invoke.*
 import ohos.ffi.*
 import std.collection.*
 import std.sync.*
@@ -24,8 +25,7 @@ import std.sync.*
 /**
  * Preview output object.
  *
- * @interface PreviewOutput
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation interface PreviewOutput extends CameraOutput
  */
 @!APILevel[
     21,
@@ -48,6 +48,11 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * Release output instance.
+     *
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -62,7 +67,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * Get supported frame rates which can be set during session running.
      *
      * @returns { Array<FrameRateRange> } The array of supported frame rate range.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation getSupportedFrameRates(): Array<FrameRateRange>
      */
     @!APILevel[
         21,
@@ -81,13 +87,13 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Set a frame rate range.
+     * The supported frame rate range can be queried via the getSupportedFrameRates interface before setting.
      *
      * @param { Int32 } minFps - Minimum frame rate per second.
      * @param { Int32 } maxFps - Maximum frame rate per second.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400110 - Unresolved conflicts with current configurations.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation setFrameRate(minFps: int, maxFps: int): void
      */
     @!APILevel[
         21,
@@ -100,10 +106,11 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Get active frame rate range which has been set before.
+     * Queryable after setting the frame rate for the preview stream using the setFrameRate interface.
      *
      * @returns { FrameRateRange } The active frame rate range.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation getActiveFrameRate(): FrameRateRange
      */
     @!APILevel[
         21,
@@ -122,7 +129,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Profile } The current preconfig type.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation getActiveProfile(): Profile
      */
     @!APILevel[
         21,
@@ -143,7 +150,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @returns { ImageRotation } The preview rotation angle.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation getPreviewRotation(displayRotation: int): ImageRotation
      */
     @!APILevel[
         21,
@@ -164,7 +171,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { Bool } isDisplayLocked - TRUE means the display is locked, if not set, the default is FALSE.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @relation setPreviewRotation(previewRotation: ImageRotation, isDisplayLocked?: boolean): void
      */
     @!APILevel[
         21,
@@ -181,72 +188,74 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
     /**
      * Subscribes frame start event callback.
      * Subscribes frame end event callback.
+     * Subscribes to error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'frameStart', callback: AsyncCallback<void>): void
+     * @relation on(type: 'frameEnd', callback: AsyncCallback<void>): void
+     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(`type`: CameraCallbackType, callback: Callback0Argument): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameStart => synchronized(frameStartMutex) {
-                let callbackList = frameStartCallbackList
-                if (findCallbackObject(callbackList, callback)) {
-                    CAMERA_LOG.error("PreviewOutput on failed: ${paramError("callback object", "different")}")
-                    return
-                }
-                let wrapper = {=> callback.invoke()}
-                let lambdaData = Callback0Param(wrapper)
-                let errCode = unsafe { FfiCameraPreviewOutputOnFrameStart(getID(), lambdaData.getID()) }
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-            case CameraCallbackType.FrameEnd => synchronized(frameEndMutex) {
-                let callbackList = frameEndCallbackList
-                if (findCallbackObject(callbackList, callback)) {
-                    CAMERA_LOG.error("PreviewOutput on failed: ${paramError("callback object", "different")}")
-                    return
-                }
-                let wrapper = {=> callback.invoke()}
-                let lambdaData = Callback0Param(wrapper)
-                let errCode = unsafe { FfiCameraPreviewOutputOnFrameEnd(getID(), lambdaData.getID()) }
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PreviewOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.FrameStart => onFrameStart(callback)
+            case CameraEvents.FrameEnd => onFrameEnd(callback)
+            case CameraEvents.CameraError => onError(callback)
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
-    /**
-     * Subscribes to error events.
-     *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the preview output errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func on(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PreviewOutput on failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+    func onFrameStart(callback: Callback0Argument): Unit {
+        synchronized(frameStartMutex) {
+            let callbackList = frameStartCallbackList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("PreviewOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            let wrapper = {=> callback.invoke(None)}
+            let lambdaData = Callback0Param(wrapper)
+            let errCode = unsafe { FfiCameraPreviewOutputOnFrameStart(getID(), lambdaData.getID()) }
+            successOrThrow(errCode)
+            callbackList.add((callback, lambdaData.getID()))
         }
+    }
+
+    func onFrameEnd(callback: Callback0Argument): Unit {
+        synchronized(frameEndMutex) {
+            let callbackList = frameEndCallbackList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("PreviewOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            let wrapper = {=> callback.invoke(None)}
+            let lambdaData = Callback0Param(wrapper)
+            let errCode = unsafe { FfiCameraPreviewOutputOnFrameEnd(getID(), lambdaData.getID()) }
+            successOrThrow(errCode)
+            callbackList.add((callback, lambdaData.getID()))
+        }
+    }
+
+    func onError(callback: Callback0Argument): Unit {
         synchronized(errorMutex) {
             let callbackList = errorCallbackList
             if (findCallbackObject(callbackList, callback)) {
                 CAMERA_LOG.error("PreviewOutput on failed: ${paramError("callback object", "different")}")
                 return
             }
-            let wrapper = {value: Int32 => callback.invoke(BusinessException(value, getErrorMsg(value)))}
+            let wrapper = { value: Int32 =>
+                if (value == SUCCESS_CODE) {
+                    callback.invoke(None)
+                } else {
+                    callback.invoke(BusinessException(value, getErrorMsg(value)))
+                }
+            }
             let lambdaData = Callback1Param<Int32, Unit>(wrapper)
             let errCode = unsafe { FfiCameraPreviewOutputOnError(getID(), lambdaData.getID()) }
             successOrThrow(errCode)
@@ -257,63 +266,57 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
     /**
      * Unsubscribes from frame start event callback.
      * Unsubscribes from frame end event callback.
+     * Unsubscribes from error events.
      *
-     * @param { CameraCallbackType } type - Event type.
+     * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback0Argument): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameStart => off(IdClassInfo(this.getID(), "PreviewOutput"), frameStartCallbackList,
+    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
+        match (eventType) {
+            case CameraEvents.FrameStart => off(IdClassInfo(this.getID(), "PreviewOutput"), frameStartCallbackList,
                 frameStartMutex, callback, FfiCameraPreviewOutputOffFrameStart)
-            case CameraCallbackType.FrameEnd => off(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
+            case CameraEvents.FrameEnd => off(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
                 frameEndMutex, callback, FfiCameraPreviewOutputOffFrameEnd)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PreviewOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case CameraEvents.CameraError => off(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
+                errorMutex, callback, FfiCameraPreviewOutputOffError)
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 
     /**
-     * Unsubscribes from error events.
+     * Unsubscribes all callbacks from the event specified by the param.
      *
-     * @param { CameraCallbackType } type - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the preview output errors.
-     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @param { CameraEvents } eventType - Event type.
+     * @throws { BusinessException } 401 - The parameter check failed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
+     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(`type`: CameraCallbackType, callback: Callback1Argument<BusinessException>): Unit {
-        match (`type`) {
-            case CameraCallbackType.CameraError => off(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
-                errorMutex, callback, FfiCameraPreviewOutputOffError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PreviewOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
-        }
-    }
-
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(`type`: CameraCallbackType): Unit {
-        match (`type`) {
-            case CameraCallbackType.FrameStart => offAll(IdClassInfo(this.getID(), "PreviewOutput"),
+    public func off(eventType: CameraEvents): Unit {
+        match (eventType) {
+            case CameraEvents.FrameStart => offAll(IdClassInfo(this.getID(), "PreviewOutput"),
                 frameStartCallbackList, frameStartMutex, FfiCameraPreviewOutputOffAllFrameStart)
-            case CameraCallbackType.FrameEnd => offAll(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
+            case CameraEvents.FrameEnd => offAll(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
                 frameEndMutex, FfiCameraPreviewOutputOffAllFrameEnd)
-            case CameraCallbackType.CameraError => offAll(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
+            case CameraEvents.CameraError => offAll(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
                 errorMutex, FfiCameraPreviewOutputOffAllError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR,
-                "PreviewOutput off failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }
 }

@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-package ohos.multimedia_media
+package ohos.multimedia.media
 
 import ohos.ffi.*
 import ohos.hilog.HilogChannel
-import ohos.base.*
-import std.deriving.*
-import std.collection.*
-import ohos.image.PixelMap
+import ohos.business_exception.*
 import ohos.labels.APILevel
+
+import std.deriving.Derive
+import std.collection.*
 
 const LOG_CORE: UInt32 = 3
 const LOG_DOMAIN_PLAYER: UInt32 = 0xD002B2B
@@ -50,24 +50,6 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
     ]
 )
 
-/**
- * Provides the container definition for media description key-value pairs.
- *
- * @typedef MediaDescription
- * @syscap SystemCapability.Multimedia.Media.Core
- * @crossplatform
- * @atomicservice
- */
-public type MediaDescription = HashMap<String, ValueType>
-
-/**
- * Provides player statistic info.
- *
- * @typedef PlaybackInfo
- * @syscap SystemCapability.Multimedia.Media.Core
- */
-public type PlaybackInfo = HashMap<PlaybackInfoKey, ValueType>
-
 func getErrorMsg(code: Int32): String {
     if (let Some(v) <- getUniversalErrorMsg(code)) {
         return v
@@ -88,252 +70,128 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
  * Media file descriptor. The caller needs to ensure that the fd is valid and
  * the offset and length are correct.
  *
- * @typedef AVFileDescriptor
- * @syscap SystemCapability.Multimedia.Media.Core
- * @crossplatform
- * @atomicservice
+ * @relation interface AVFileDescriptor
  */
-@!APILevel[
-    21,
-    atomicservice: true,
-    crossplatform: true,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Multimedia.Media.Core"
-]
-public class AVFileDescriptor {
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    public AVFileDescriptor(
-        /**
-         * The file descriptor of audio or video source from file system. The caller
-         * is responsible to close the file descriptor.
-         * @type { Int32 }
-         * @syscap SystemCapability.Multimedia.Media.Core
-         * @crossplatform
-         * @atomicservice
-         */
-        @!APILevel[
-            21,
-            atomicservice: true,
-            crossplatform: true,
-            stagemodelonly: true,
-            syscap: "SystemCapability.Multimedia.Media.Core"
-        ]
-        public var fd: Int32,
-        /**
-         * The offset into the file where the data to be read, in bytes. By default,
-         * the offset is zero.
-         * @type { ?Int64 }
-         * @syscap SystemCapability.Multimedia.Media.Core
-         * @crossplatform
-         * @atomicservice
-         */
-        @!APILevel[
-            21,
-            atomicservice: true,
-            crossplatform: true,
-            stagemodelonly: true,
-            syscap: "SystemCapability.Multimedia.Media.Core"
-        ]
-        public var offset: ?Int64,
-        /**
-         * The length in bytes of the data to be read. By default, the length is the
-         * rest of bytes in the file from the offset.
-         * @type { ?Int64 }
-         * @syscap SystemCapability.Multimedia.Media.Core
-         * @crossplatform
-         * @atomicservice
-         */
-        @!APILevel[
-            21,
-            atomicservice: true,
-            crossplatform: true,
-            stagemodelonly: true,
-            syscap: "SystemCapability.Multimedia.Media.Core"
-        ]
-        public var length: ?Int64
-    ) {}
-
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    public init(fd: Int32) {
-        this.fd = fd
-        this.offset = None
-        this.length = None
-    }
-}
-
-/**
- * Enumerates statistics info keys for player.
- *
- * @enum { string }
- * @syscap SystemCapability.Multimedia.Media.Core
- */
-@Derive[Equatable]
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Media.Core"
 ]
-public enum PlaybackInfoKey <: ToString & Hashable {
+public class AVFileDescriptor {
     /**
-     * IP address of current network stream.
-     * @syscap SystemCapability.Multimedia.Media.Core
+     * The file descriptor of audio or video source from file system. The caller
+     * is responsible to close the file descriptor.
+     *
+     * @relation fd: number
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
-    SERVER_IP_ADDRESS
-    |
-        /**
-         * Average download rate during playing except for suspend downloading.
-         * @syscap SystemCapability.Multimedia.Media.Core
-         */
-        @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    AVG_DOWNLOAD_RATE
-    |
-        /**
-         * Current download rate of the last second except for suspend downloading.
-         * @syscap SystemCapability.Multimedia.Media.Core
-         */
-        @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    DOWNLOAD_RATE
-    |
-        /**
-         * Boolean value, true for current is downloading, false for suspend downloading.
-         * @syscap SystemCapability.Multimedia.Media.Core
-         */
-        @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    IS_DOWNLOADING
-    |
-        /**
-         * Cached duration in milliseconds.
-         * @syscap SystemCapability.Multimedia.Media.Core
-         */
-        @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Media.Core"
-    ]
-    BUFFER_DURATION
-    | ...
+    public var fd: Int32
 
-    static func parse(val: Int32): PlaybackInfoKey {
-        match (val) {
-            case 0 => SERVER_IP_ADDRESS
-            case 1 => AVG_DOWNLOAD_RATE
-            case 2 => DOWNLOAD_RATE
-            case 3 => IS_DOWNLOADING
-            case 4 => BUFFER_DURATION
-            case _ => throw IllegalArgumentException("Unknown value")
-        }
-    }
-
+    /**
+     * The offset into the file where the data to be read, in bytes. By default,
+     * the offset is zero.
+     *
+     * @relation offset?: number
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
-    public func toString(): String {
-        match (this) {
-            case SERVER_IP_ADDRESS => "server_ip_address"
-            case AVG_DOWNLOAD_RATE => "average_download_rate"
-            case DOWNLOAD_RATE => "download_rate"
-            case IS_DOWNLOADING => "is_downloading"
-            case BUFFER_DURATION => "buffer_duration"
-            case _ => throw IllegalArgumentException("The type is not supported.")
-        }
-    }
+    public var offset: Int64
 
+    /**
+     * The length in bytes of the data to be read. By default, the length is the
+     * rest of bytes in the file from the offset.
+     *
+     * @relation length?: number
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
-    public func hashCode(): Int64 {
-        return this.toString().hashCode()
+    public var length: Int64
+
+    /**
+     * AVFileDescriptor constructor.
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Media.Core"
+    ]
+    public init(
+        fd: Int32,
+        offset!: Int64 = 0,
+        length!: Int64 = -1
+    ) {
+        this.fd = fd
+        this.offset = offset
+        this.length = length
     }
 }
 
-@!APILevel[
-    21,
-    stagemodelonly: true
-]
-public enum ValueType {
-    @!APILevel[
-        21,
-        stagemodelonly: true
-    ]
-    INT(Int32)
-    | @!APILevel[
-        21,
-        stagemodelonly: true
-    ]
-    INT64(Int64)
-    | @!APILevel[
-        21,
-        stagemodelonly: true
-    ]
-    DOUBLE(Float64)
-    | @!APILevel[
-        21,
-        stagemodelonly: true
-    ]
-    STRING(String)
-    | ...
-}
-
+/**
+ * Defines the format parameters of the video thumbnail to be obtained.
+ *
+ * @relation interface PixelMapParams
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public class PixelMapParams {
+    /**
+     * Width of the thumbnail. The value must be greater than 0 and less than or equal to the width of the original
+     * video. Otherwise, the returned thumbnail will not be scaled.
+     *
+     * @relation width?: number
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    public PixelMapParams(
-        @!APILevel[
-            21,
-            stagemodelonly: true,
-            syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
-        ]
-        public var width: Int32,
-        @!APILevel[
-            21,
-            stagemodelonly: true,
-            syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
-        ]
-        public var height: Int32
-    ) {}
+    public var width: Int32
+
+    /**
+     * Height of the thumbnail. The value must be greater than 0 and less than or equal to the height of the original
+     * video. Otherwise, the returned thumbnail will not be scaled.
+     *
+     * @relation height?: number
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+    ]
+    public var height: Int32
+
+    /**
+     * PixelMapParams constructor.
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+    ]
+    public init(width!: Int32 = -1, height!: Int32 = -1) {
+        this.width = width
+        this.height = height
+    }
 }
 
+/**
+ * Enumerates the relationship between the video frame and the time at which the video thumbnail is obtained.
+ *
+ * @relation enum AVImageQueryOptions
+ */
 @Derive[ToString, Equatable]
 @!APILevel[
     21,
@@ -341,38 +199,64 @@ public class PixelMapParams {
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public enum AVImageQueryOptions {
+    /**
+     * The key frame at or next to the specified time is selected.
+     *
+     * @relation AV_IMAGE_QUERY_NEXT_SYNC = 0
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    AV_IMAGE_QUERY_NEXT_SYNC
-    | @!APILevel[
+    AvImageQueryNextSync
+    |
+
+    /**
+     * The key frame at or prior to the specified time is selected.
+     *
+     * @relation AV_IMAGE_QUERY_PREVIOUS_SYNC = 1
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    AV_IMAGE_QUERY_PREVIOUS_SYNC
-    | @!APILevel[
+    AvImageQueryPreviousSync
+    |
+
+    /**
+     * The key frame closest to the specified time is selected.
+     *
+     * @relation AV_IMAGE_QUERY_CLOSEST_SYNC = 2
+     */    
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    AV_IMAGE_QUERY_CLOSEST_SYNC
-    | @!APILevel[
+    AvImageQueryClosestSync
+    |
+
+    /**
+     * The frame (not necessarily a key frame) closest to the specified time is selected.
+     *
+     * @relation AV_IMAGE_QUERY_CLOSEST = 3
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
-    AV_IMAGE_QUERY_CLOSEST
+    AvImageQueryClosest
     | ...
 
     func getValue(): Int32 {
         match (this) {
-            case AV_IMAGE_QUERY_NEXT_SYNC => 0
-            case AV_IMAGE_QUERY_PREVIOUS_SYNC => 1
-            case AV_IMAGE_QUERY_CLOSEST_SYNC => 2
-            case AV_IMAGE_QUERY_CLOSEST => 3
+            case AvImageQueryNextSync => 0
+            case AvImageQueryPreviousSync => 1
+            case AvImageQueryClosestSync => 2
+            case AvImageQueryClosest => 3
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }

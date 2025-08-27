@@ -13,17 +13,15 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
 
 /**
  * Defines the class of media album change request.
  *
- * @implements MediaChangeRequest
- * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @relation class MediaAlbumChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
     21,
@@ -44,6 +42,14 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
+    /**
+     * The constructor to create a MediaAlbumChangeRequest instance.
+     *
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessException } 14000011 - System inner fail
+     * @relation constructor(album: Album)
+     */
     public init(album: Album) {
         super(
             unsafe {
@@ -55,38 +61,36 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Get the album.
+     * Obtains the album in the current album change request.
      *
-     * @returns { Album } - Returns the album
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation getAlbum(): Album
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getAlbum(): ?Album {
+    public func getAlbum(): Album {
         var errCode = 0i32
         let id = unsafe { FfiMediaAlbumChangeRequestImplGetAlbum(getID(), inout errCode) }
         checkRet(errCode, "getAlbum")
         return if (id == 0) {
-            None
+            throw IllegalArgumentException("Album id is invalid.")
         } else {
             Album(id)
         }
     }
 
     /**
-     * Set name of the album.
+     * Sets the album name.
      *
-     * @param { string } name - the new name to set
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation setAlbumName(name: string): void
      */
     @!APILevel[
         21,
@@ -101,14 +105,13 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Add assets into the album.
+     * Add assets to the album.
      *
-     * @param { Array<PhotoAsset> } assets - the assets to add
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation addAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
         21,
@@ -124,14 +127,13 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Remove assets from the album.
+     * Removes assets from the album.
      *
-     * @param { Array<PhotoAsset> } assets - the assets to be removed
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation removeAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
         21,

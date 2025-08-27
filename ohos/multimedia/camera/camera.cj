@@ -15,10 +15,8 @@
 
 package ohos.multimedia.camera
 
-import ohos.ability.*
-import ohos.base.*
-import ohos.ffi.*
-import ohos.labels.*
+import ohos.app.ability.ui_ability.UIAbilityContext
+import ohos.labels.APILevel
 
 /**
  * Creates a CameraManager instance.
@@ -27,13 +25,13 @@ import ohos.labels.*
  * @returns { CameraManager } CameraManager instance.
  * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
  * @throws { BusinessException } 7400201 - Camera service fatal error.
- * @syscap SystemCapability.Multimedia.Camera.Core
+ * @relation function getCameraManager(context: Context): CameraManager
  */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
-public func getCameraManager(context: UIAbilityContext): CameraManager { /*cjlint-ignore !G.FUNC.02 */
+public func getCameraManager(context: UIAbilityContext): CameraManager {
     return CameraManager()
 }

@@ -13,37 +13,37 @@
 
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.multimedia.photo_accesshelper") {
+ohos_cangjie_shared_library("ohos.file.photo_access_helper") {
   sources = [
-    "src/album.cj",
-    "src/fetch_result.cj",
-    "src/media_album_change_request.cj",
-    "src/media_asset_change_request.cj",
-    "src/photo_accesshelper.cj",
-    "src/photo_accesshelper_ffi.cj",
-    "src/photo_accesshelper_utils.cj",
-    "src/photo_asset.cj",
+    "album.cj",
+    "fetch_result.cj",
+    "media_album_change_request.cj",
+    "media_asset_change_request.cj",
+    "photo_accesshelper.cj",
+    "photo_accesshelper_ffi.cj",
+    "photo_accesshelper_utils.cj",
+    "photo_asset.cj"
   ]
 
   cj_deps = [
-    "../../multimedia/image:ohos.image",
-    "../../multimedia/fetchdata:ohos.multimedia.fetchdata",
+    "../../multimedia/image:ohos.multimedia.image"
   ]
 
   cj_external_deps = [
-    "ability_cangjie_wrapper:ohos.ability",
-    "arkui_cangjie_wrapper:ohos.base",
-    "bundlemanager_cangjie_wrapper:ohos.bundle_manager",
-    "distributeddatamgr_cangjie_wrapper:ohos.data_share_predicates",
+    "ability_cangjie_wrapper:ohos.app.ability.ui_ability",
+    "cangjie_ark_interop:ohos.business_exception",
+    "cangjie_ark_interop:ohos.callback_invoke",
+    "bundlemanager_cangjie_wrapper:ohos.bundle.bundle_manager",
+    "distributeddatamgr_cangjie_wrapper:ohos.data.data_share_predicates",
     "cangjie_ark_interop:ohos.ffi",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
     "global_cangjie_wrapper:ohos.resource_manager",
     "cangjie_ark_interop:ohos.labels",
+    "cangjie_ark_interop:ohos.business_exception",
   ]
 
   external_deps = [ "media_library:cj_photoaccesshelper_ffi" ]
 
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"
-  lib_name = "multimedia.photo_accesshelper"
 }

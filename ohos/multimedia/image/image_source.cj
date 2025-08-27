@@ -13,13 +13,12 @@
  * limitations under the License.
  */
 
-package ohos.image
+package ohos.multimedia.image
 
 import ohos.ffi.*
 import ohos.resource_manager.RawFileDescriptor
 import ohos.labels.*
-import ohos.color_manager.*
-import ohos.base.*
+import ohos.business_exception.BusinessException
 
 foreign {
     func FfiOHOSCreateImageSourceByPath(uri: CString, errCode: CPointer<UInt32>): Int64
@@ -81,7 +80,8 @@ foreign {
  * Creates an ImageSource instance based on the URI.
  *
  * @param { String } uri - Image source URI.
- * @brief createImageSource(uri: string): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(uri: string): ImageSource
  */
 @!APILevel[
     21,
@@ -92,13 +92,13 @@ public func createImageSource(uri: String): ImageSource {
     unsafe {
         if (uri.isEmpty()) {
             IMAGE_LOG.error("The uri cannot be empty.")
-            throw BusinessException(62980115, "[ImageSource] createImageSource: Invalid image parameter.")
+            throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
         }
         let curi = LibC.mallocCString(uri)
         var errCode: UInt32 = 0
         let id = FfiOHOSCreateImageSourceByPath(curi, inout errCode)
         LibC.free(curi)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -108,7 +108,8 @@ public func createImageSource(uri: String): ImageSource {
  *
  * @param { String } uri - Image source URI.
  * @param { SourceOptions } options - The config of Image source.
- * @brief createImageSource(uri: string, options: SourceOptions): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(uri: string, options: SourceOptions): ImageSource
  */
 @!APILevel[
     21,
@@ -119,13 +120,13 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
     unsafe {
         if (uri.isEmpty()) {
             IMAGE_LOG.error("The uri cannot be empty.")
-            throw BusinessException(62980115, "[ImageSource] createImageSource: Invalid image parameter.")
+            throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
         }
         let curi = LibC.mallocCString(uri)
         var errCode: UInt32 = 0
         let id = FfiOHOSCreateImageSourceByPathWithOption(curi, options.toExternal(), inout errCode)
         LibC.free(curi)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -134,7 +135,8 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  * Creates an ImageSource instance based on the file descriptor.
  *
  * @param { Int32 } fd - ID of a file descriptor.
- * @brief createImageSource(fd: number): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(fd: int): ImageSource
  */
 @!APILevel[
     21,
@@ -145,7 +147,7 @@ public func createImageSource(fd: Int32): ImageSource {
     unsafe {
         var errCode: UInt32 = 0
         let id = FfiOHOSCreateImageSourceByFd(fd, inout errCode)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -155,7 +157,8 @@ public func createImageSource(fd: Int32): ImageSource {
  *
  * @param { Int32 } fd - ID of a file descriptor.
  * @param { SourceOptions } options - The config of Image source.
- * @brief createImageSource(fd: number, options: SourceOptions): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(fd: int, options: SourceOptions): ImageSource
  */
 @!APILevel[
     21,
@@ -166,7 +169,7 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
     unsafe {
         var errCode: UInt32 = 0
         let id = FfiOHOSCreateImageSourceByFdWithOption(fd, options.toExternal(), inout errCode)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -175,7 +178,8 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * Creates an ImageSource instance based on the buffer.
  *
  * @param { Array<UInt8> } buf - The buffer of the image.
- * @brief createImageSource(buf: ArrayBuffer): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(buf: ArrayBuffer): ImageSource
  */
 @!APILevel[
     21,
@@ -186,13 +190,13 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
     unsafe {
         if (buf.isEmpty()) {
             IMAGE_LOG.error("The array cannot be empty.")
-            throw BusinessException(62980115, "[ImageSource] createImageSource: Invalid image parameter.")
+            throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
         }
         var errCode: UInt32 = 0
         let arrPtr = acquireArrayRawData(buf)
         let id = FfiOHOSCreateImageSourceByBuffer(arrPtr.pointer, UInt32(buf.size), inout errCode)
         releaseArrayRawData(arrPtr)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -202,7 +206,8 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  *
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @param { SourceOptions } options - The config of Image source.
- * @brief createImageSource(buf: ArrayBuffer, options: SourceOptions): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(buf: ArrayBuffer, options: SourceOptions): ImageSource
  */
 @!APILevel[
     21,
@@ -213,14 +218,14 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
     unsafe {
         if (buf.isEmpty()) {
             IMAGE_LOG.error("The array cannot be empty.")
-            throw BusinessException(62980115, "[ImageSource] createImageSource: Invalid image parameter.")
+            throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
         }
         var errCode: UInt32 = 0
         let arrPtr = acquireArrayRawData(buf)
         let id = FfiOHOSCreateImageSourceByBufferWithOption(arrPtr.pointer, UInt32(buf.size), options.toExternal(),
             inout errCode)
         releaseArrayRawData(arrPtr)
-        checkRet(errCode, "[ImageSource] createImageSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
@@ -230,7 +235,8 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
  *
  * @param { resourceManager.RawFileDescriptor } rawfile - The raw file descriptor of the image.
  * @param { SourceOptions } options - The config of Image source.
- * @brief function createImageSource(rawfile: resourceManager.RawFileDescriptor, options?: SourceOptions): ImageSource
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @relation function createImageSource(rawfile: resourceManager.RawFileDescriptor, options?: SourceOptions): ImageSource
  */
 @!APILevel[
     21,
@@ -242,39 +248,15 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
         var errCode: UInt32 = 0
         let id = FfiOHOSCreateImageSourceByRawFile(Int32(rawfile.fd), Int32(rawfile.offset), Int32(rawfile.length),
             options.toExternal(), inout errCode)
-        checkRet(errCode, "[ImageSource] createImageSource:")
-        return ImageSource(id)
-    }
-}
-
-/**
- * Creates an ImageSource instance based on the buffer in incremental.
- *
- * @param { Array<UInt8> } buf - Image buffer array.
- * @param { SourceOptions } options - The config of Image source.
- * @brief function CreateIncrementalSource(buf: ArrayBuffer, options?: SourceOptions): ImageSource
- */
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
-]
-public func createIncrementalSource(buf: Array<UInt8>, options!: SourceOptions = SourceOptions(0)): ImageSource {
-    if (buf.size > 0xFFFF_FFFF) {
-        throw IllegalArgumentException("[ImageSource] CreateIncrementalSource: buf too large")
-    }
-    unsafe {
-        var errCode: UInt32 = 0
-        let arrPtr = acquireArrayRawData(buf)
-        let id = FfiOHOSCreateIncrementalSource(arrPtr.pointer, UInt32(buf.size), options.toExternal(), inout errCode)
-        releaseArrayRawData(arrPtr)
-        checkRet(errCode, "[ImageSource] CreateIncrementalSource:")
+        checkAndThrow(errCode)
         return ImageSource(id)
     }
 }
 
 /**
  * ImageSource instance.
+ *
+ * @relation interface ImageSource
  */
 @!APILevel[
     21,
@@ -282,11 +264,12 @@ public func createIncrementalSource(buf: Array<UInt8>, options!: SourceOptions =
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class ImageSource <: RemoteDataLite {
-
     /**
      * Supported image formats.
      *
-     * @brief readonly supportedFormats: Array<string>
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation readonly supportedFormats: Array<string>
      */
     @!APILevel[
         21,
@@ -298,7 +281,7 @@ public class ImageSource <: RemoteDataLite {
             unsafe {
                 var errCode: UInt32 = 0
                 let cArr = FfiOHOSGetSupportedFormats(getID(), inout errCode)
-                checkRet(errCode, "[ImageSource] supportedFormats:")
+                checkAndThrow(errCode)
                 let cp = cArr.head
                 let size = cArr.size
                 let arr = Array<String>(size, repeat: "")
@@ -321,17 +304,22 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the count of frame in an image. This method uses a promise to return the number.
+     * Obtains the count of frame in an image.
      *
      * @returns { UInt32> } An instance used to return the number.
-     * @throws { BusinessException } 62980096 - If the operation failed.
-     * @throws { BusinessException } 62980110 - If the image source data error.
-     * @throws { BusinessException } 62980111 - If the image source data incomplete.
-     * @throws { BusinessException } 62980113 - If the image format unknown.
-     * @throws { BusinessException } 62980116 - If the image decode failed.
-     * @throws { BusinessException } 62980118 - If the image plugin create failed.
-     * @throws { BusinessException } 62980122 - If the image decode head abnormal.
-     * @brief getFrameCount(): Promise<number>
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980112 - The image format does not match.
+     * @throws { BusinessException } 62980113 - Unknown image format.
+     * The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980122 - Failed to decode the image header.
+     * @throws { BusinessException } 62980137 - Invalid media operation.
+     * @relation getFrameCount(): Promise<int>
      */
     @!APILevel[
         21,
@@ -340,17 +328,18 @@ public class ImageSource <: RemoteDataLite {
     ]
     public func getFrameCount(): UInt32 {
         let cvalue = unsafe { FfiOHOSGetFrameCount(getID()) }
-        checkRet(cvalue.code, "[ImageSource] getFrameCount:")
+        checkAndThrow(cvalue.code)
         return cvalue.data
     }
 
     /**
-     * Get image information from image source.
+     * Get image information from image source synchronously.
      *
-     * @param { Int32 } index Sequence number of an image. If this parameter is not specified,
+     * @param { UInt32 } index Sequence number of an image. If this parameter is not specified,
      *  the default value 0 is used.
      * @returns { ImageInfo } An instance used to return the image information.
-     * @brief getImageInfo(index?: number): Promise<ImageInfo>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation getImageInfoSync(index?: int): ImageInfo
      */
     @!APILevel[
         21,
@@ -361,7 +350,7 @@ public class ImageSource <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let cimage = FfiOHOSImageSourceGetImageInfoV2(getID(), index, inout errCode)
-            checkRet(errCode, "[ImageSource] getImageInfo:")
+            checkAndThrow(errCode)
             try {
                 return cimage.toImageInfo()
             } finally {
@@ -371,13 +360,23 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the value of a property in an image with the specified index. This method return the property value in a
-     * string.
+     * Obtains the value of a property in an image with the specified index. This method return the property value in a string.
      *
-     * @param { string } key Name of the property whose value is to be obtained.
-     * @param { GetImagePropertyOptions } options Index of the image.
-     * @returns { String } return the property value. If the operation fails, the default value is returned.
-     * @brief getImageProperty(key: string, options?: GetImagePropertyOptions): Promise<string>
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980103 - The image data is not supported.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980110 - The image source data is incorrect.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980112 - The image format does not match.
+     * @throws { BusinessException } 62980113 - Unknown image format.
+     * The image data provided is not in a recognized or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980122 - Failed to decode the image header.
+     * @throws { BusinessException } 62980123 - The image does not support EXIF decoding.
+     * @throws { BusinessException } 62980135 - The EXIF value is invalid.
+     * @relation getImageProperty(key: PropertyKey, options?: ImagePropertyOptions): Promise<string>
      */
     @!APILevel[
         21,
@@ -393,7 +392,7 @@ public class ImageSource <: RemoteDataLite {
             ) {
                 var errCode: UInt32 = 0
                 let result = FfiOHOSGetImageProperty(getID(), ckey.value, options.index, cvalue.value, inout errCode)
-                checkRet(errCode, "[ImageSource] getImageProperty:", handle: {=> LibC.free(result)})
+                checkAndThrow(errCode, handle: {=> LibC.free(result)})
                 res = result.toString()
                 LibC.free(result)
             }
@@ -402,12 +401,15 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Modify the value of a property in an image with the specified key. This method uses a
-     * promise to return the property value in a string.
+     * Modify the value of a property in an image with the specified key. 
      *
-     * @param { String } key Name of the property whose value is to be modified.
-     * @param { String } value The value to be set to property.
-     * @brief modifyImageProperty(key: string, value: string): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessException } 62980123 - The image does not support EXIF decoding.
+     * @throws { BusinessException } 62980133 - The EXIF data is out of range.
+     * @throws { BusinessException } 62980135 - The EXIF value is invalid.
+     * @throws { BusinessException } 62980146 - The EXIF data failed to be written to the file.
+     * @relation modifyImageProperty(key: PropertyKey, value: string): Promise<void>
      */
     @!APILevel[
         21,
@@ -421,7 +423,7 @@ public class ImageSource <: RemoteDataLite {
                 cvalue = LibC.mallocCString(value).asResource()
             ) {
                 let ret = FfiOHOSModifyImageProperty(getID(), ckey.value, cvalue.value)
-                checkRet(ret, "[ImageSource] modifyImageProperty:")
+                checkAndThrow(ret)
             }
         }
     }
@@ -433,7 +435,8 @@ public class ImageSource <: RemoteDataLite {
      * @param { Bool } isFinished If is it finished.
      * @param { UInt32 } value The offset of data.
      * @param { UInt32 } length The length fo buf.
-     * @brief updateData(buf: ArrayBuffer, isFinished: boolean, value: number, length: number): Promise<void>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation updateData(buf: ArrayBuffer, isFinished: boolean, value: int, length: int): Promise<void>
      */
     @!APILevel[
         21,
@@ -446,17 +449,17 @@ public class ImageSource <: RemoteDataLite {
             let ret = FfiOHOSUpdateData(getID(),
                 UpdateDataInfo(arrPtr.pointer, UIntNative(buf.size), offset, length, isFinished))
             releaseArrayRawData(arrPtr)
-            checkRet(ret, "[ImageSource] updateData:")
+            checkAndThrow(ret)
         }
     }
 
     /**
-     * Creates a PixelMap object based on image decoding parameters. This method uses a promise to
-     * return the object.
+     * Create a PixelMap object based on image decoding parameters synchronously.
      *
      * @param { DecodingOptions } options Image decoding parameters.
      * @returns { PixelMap } An instance used to return the PixelMap object.
-     * @brief createPixelMap(options?: DecodingOptions): Promise<PixelMap>
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation createPixelMapSync(options?: DecodingOptions): PixelMap
      */
     @!APILevel[
         21,
@@ -466,23 +469,33 @@ public class ImageSource <: RemoteDataLite {
     public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
         unsafe {
             let cValue: RetDataI64U32 = FfiOHOSImageSourceCreatePixelMapV2(getID(), options.index, options.getValue())
-            checkRet(cValue.code, "[ImageSource] createPixelMap:")
+            checkAndThrow(cValue.code)
             return PixelMap(cValue.data)
         }
     }
 
     /**
-     * Creates a PixelMap array based on image decoding parameters. This method uses a promise to
-     * return the array.
+     * Creates a PixelMap array based on image decoding parameters.
      *
      * @param { DecodingOptions } options Image decoding parameters.
      * @returns { Array<PixelMap> } An instance used to return the PixelMap array.
-     * @throws { BusinessException } 62980096 - If the operation failed.
-     * @throws { BusinessException } 62980103 - If the image data unsupport.
-     * @throws { BusinessException } 62980110 - If the image source data error.
-     * @throws { BusinessException } 62980111 - If the image source data incomplete.
-     * @throws { BusinessException } 62980118 - If the image plugin create failed.
-     * @brief createPixelMapList(options?: DecodingOptions): Promise<Array<PixelMap>>
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980099 - The shared memory data is abnormal.
+     * @throws { BusinessException } 62980101 - The image data is abnormal.
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980103 - The image data is not supported.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
+     * @throws { BusinessException } 62980109 - Failed to crop the image.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980137 - Invalid media operation.
+     * @throws { BusinessException } 62980173 - The DMA memory does not exist.
+     * @throws { BusinessException } 62980174 - The DMA memory data is abnormal.
+     * @relation createPixelMapList(options?: DecodingOptions): Promise<Array<PixelMap>>
      */
     @!APILevel[
         21,
@@ -493,7 +506,7 @@ public class ImageSource <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let cArr = FfiOHOSImageSourceCreatePixelMapListV2(getID(), options.index, options.getValue(), inout errCode)
-            checkRet(errCode, "[ImageSource] createPixelMapList:")
+            checkAndThrow(errCode)
             let data = cArr.head
             let size = cArr.size
             let pmArr = Array<PixelMap>(size, {i => PixelMap(data.read(i))})
@@ -503,17 +516,21 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the array of delay time in an image. This method uses a promise to return the array.
+     * Obtains the array of delay time in an image. 
      *
      * @returns { Array<UInt32> } An instance used to return the array.
-     * @throws { BusinessException } 62980096 - If the operation failed.
-     * @throws { BusinessException } 62980110 - If the image source data error.
-     * @throws { BusinessException } 62980111 - If the image source data incomplete.
-     * @throws { BusinessException } 62980113 - If the image format unknown.
-     * @throws { BusinessException } 62980116 - If the image decode failed.
-     * @throws { BusinessException } 62980118 - If the image plugin create failed.
-     * @throws { BusinessException } 62980122 - If the image decode head abnormal.
-     * @brief getDelayTimeList(): Promise<Array<number>>;
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980110 - The image source data is incorrect.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980122 - Failed to decode the image header.
+     * @throws { BusinessException } 62980149 - Invalid MIME type for the image source.
+     * @relation getDelayTimeList(): Promise<Array<int>>
      */
     @!APILevel[
         21,
@@ -524,7 +541,7 @@ public class ImageSource <: RemoteDataLite {
         unsafe {
             var errCode: UInt32 = 0
             let cArr = FfiOHOSImageSourceGetDelayTime(getID(), inout errCode)
-            checkRet(errCode, "[ImageSource] getDelayTimeList:")
+            checkAndThrow(errCode)
             let data = cArr.head
             let arr = Array<Int32>(cArr.size, {i => data.read(i)})
             LibC.free(data)
@@ -532,6 +549,12 @@ public class ImageSource <: RemoteDataLite {
         }
     }
 
+    /**
+     * Releases an ImageSource instance.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @relation release(): Promise<void>
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -540,7 +563,7 @@ public class ImageSource <: RemoteDataLite {
     public func release(): Unit {
         unsafe {
             let ret = FfiOHOSRelease(getID())
-            checkRet(ret, "[ImageSource] Release:")
+            checkAndThrow(ret)
             releaseFFIData(getID())
         }
     }

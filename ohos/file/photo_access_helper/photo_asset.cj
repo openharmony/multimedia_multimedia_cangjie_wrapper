@@ -13,26 +13,19 @@
  * limitations under the License.
  */
 
-package ohos.multimedia.photo_accesshelper
+package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
-import ohos.base.*
-import ohos.multimedia.fetchdata.*
-import ohos.image.*
+import ohos.multimedia.image.*
 
 /**
- * Defines the photo asset
+ * Provides APIs for encapsulating file asset attributes.
  *
- * @interface PhotoAsset
- * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
- * @crossplatform
- * @atomicservice
+ * @relation interface PhotoAsset
  */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
@@ -40,16 +33,10 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * uri of the asset.
      *
-     * @type { string }
-     * @readonly
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
-     * @atomicservice
+     * @relation readonly uri: string
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -67,13 +54,10 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Photo type, image or video
      *
-     * @type { PhotoType }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly photoType: PhotoType
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -89,13 +73,10 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Display name (with a file name extension) of the asset.
      *
-     * @type { string }
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @relation readonly displayName: string
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -119,20 +100,16 @@ public class PhotoAsset <: RemoteDataLite {
     }
 
     /**
-     * Returns the value of the specified member.
+     * Obtains a PhotoAsset member parameter.
      *
-     * @param { string } member - Photo asset member. for example : get(PhotoKeys.SIZE.toString())
-     * @returns { MemberType } Returns the value of the specified photo asset member
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @throws { BusinessException } 14000014 - Member is not a valid PhotoKey
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @crossplatform
+     * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
+     * @relation get(member: string): MemberType
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -151,28 +128,25 @@ public class PhotoAsset <: RemoteDataLite {
     }
 
     /**
-     * Set a new value to the specified member
+     * Sets a PhotoAsset member parameter.
      *
-     * @param { string } member - Photo asset member
-     * @param { string } data - The new value of the member.
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @throws { BusinessException } 14000014 - Member is not a valid PhotoKey
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @example : set(PhotoKeys.TITLE.toString(), "newTitle"), call commitModify after set
+     * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
+     * @relation set(member: string, value: string): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func set(member: String, data: String): Unit {
+    public func set(member: String, value: String): Unit {
         var errCode = 0i32
         unsafe {
             try (
                 cmember = LibC.mallocCString(member).asResource(),
-                cdata = LibC.mallocCString(data).asResource()
+                cdata = LibC.mallocCString(value).asResource()
             ) {
                 FfiPhotoAssetUserFileMgrSet(getID(), cmember.value, cdata.value, inout errCode)
                 checkRet(errCode, "set")
@@ -181,23 +155,19 @@ public class PhotoAsset <: RemoteDataLite {
     }
 
     /**
-     * Modify metadata of the asset
+     * Commits the modification on the file metadata to the database.
      *
-     * @permission ohos.permission.WRITE_IMAGEVIDEO
-     * @returns { void } Returns void
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @throws { BusinessException } 13900012 - Permission denied
+     * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000001 - Invalid display name
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @atomicservice
+     * @relation commitModify(): Promise<void>
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -208,43 +178,28 @@ public class PhotoAsset <: RemoteDataLite {
     }
 
     /**
-     * Get thumbnail of the asset
+     * Obtains the file thumbnail of the given size.
      *
-     * @permission ohos.permission.READ_IMAGEVIDEO
-     * @param { PixelMap } Returns the thumbnail's pixelMap.
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @relation getThumbnail(size?: image.Size): Promise<image.PixelMap>
      */
     @!APILevel[
         21,
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public func getThumbnail(size!: ?Size = None): PixelMap {
+    public func getThumbnail(size!: ?Size = Size(256, 256)): PixelMap {
         var errCode = 0i32
-        let tSize = size ?? Size(-1, -1)
+        let tSize = size ?? Size(256, 256)
         unsafe {
             let ret = FfiPhotoAssetGetThumbnail(getID(), tSize.toExternal(), inout errCode)
             checkRet(errCode, "getThumbnail")
             return PixelMap(ret)
         }
-    }
-}
-
-extend PhotoAsset <: FetchData<PhotoAsset> {
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]
-    public static func create(id: Int64): PhotoAsset {
-        PhotoAsset(id)
     }
 }
