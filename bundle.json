@@ -1,6 +1,6 @@
 {
     "name": "@ohos/multimedia_cangjie_wrapper",
-    "description": "Image standard provides atomic capabilities",
+    "description": "OS媒体软件仓颉接口是在OpenHarmony上基于媒体子系统能力之上封装的仓颉API。",
     "version": "6.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
@@ -37,7 +37,11 @@
           "distributeddatamgr_cangjie_wrapper",
           "global_cangjie_wrapper",
           "graphic_cangjie_wrapper",
-          "hiviewdfx_cangjie_wrapper"
+          "hiviewdfx_cangjie_wrapper",
+          "media_library",
+          "camera_framework",
+          "image_framework",
+          "player_framework"
         ]
       },
       "build": {
