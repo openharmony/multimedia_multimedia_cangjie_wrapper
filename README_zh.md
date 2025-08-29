@@ -2,9 +2,7 @@
 
 ## 简介
 
-OS媒体软件仓颉接口是在 OpenHarmony 上基于媒体子系统能力之上封装的仓颉API。媒体子系统为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
-
-媒体仓颉包含了图片，相机，相册，视频相关媒体业务。
+OS媒体软件仓颉接口是在OpenHarmony上基于媒体子系统能力之上封装的仓颉API。媒体子系统为开发者提供一套简单且易于理解的接口，使得开发者能够方便地接入系统并使用系统的媒体资源。OS媒体软件仓颉接口包含了图片，相机，相册，视频相关媒体业务。当前开放的OS媒体软件仓颉接口仅支持standard设备。
 
 ## 系统架构
 
@@ -12,20 +10,29 @@ OS媒体软件仓颉接口是在 OpenHarmony 上基于媒体子系统能力之�
 
 ![](figures/multimedia_cangjie_wrapper_architecture.png)
 
+OS媒体软件仓颉接口由四个部件组成：
+
+- 相机管理部件提供相机操作接口，支持预览、拍照、录像。
+- 图片处理部件支持常见图片格式的编解码。
+- 媒体服务部件为应用提供获取视频缩略图的功能。
+- 相册管理部件支持本地和分布式媒体数据创建，访问，修改相册。
+
 ## 目录
 
 仓目录结构如下：
 
 ```
 foundation/multimedia/multimedia_cangjie_wrapper
-├── ohos             # 仓颉媒体接口实现
-├── kit              # 仓颉kit化代码
-├── figures          # 存放readme中的架构图
+├── figures             # 存放README中的架构图
+├── kit                 # 仓颉媒体kit化接口
+│   ├── CameraKit
+│   ├── ImageKit
+│   ├── MediaKit
+│   └── MediaLibraryKit
+└── ohos                # 仓颉媒体接口实现
+    ├── file
+    └── multimedia
 ```
-
-## 约束
-
-部分音视频格式的硬件编码、解码功能依赖设备的支持。当前开放的OS媒体软件仓颉接口仅支持standard设备。
 
 ## 使用说明
 
@@ -55,11 +62,29 @@ Media相关API请参见[ohos.multimedia.media（媒体服务）](https://gitcode
 
 MediaLibrary相关API请参见[ohos.file.photo_access_helper（相册管理模块）](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/MediaLibraryKit/cj-apis-multimedia-photo_accesshelper.md)，相关指导请参见[相册开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/media/medialibrary/cj-photoAccessHelper-systemAlbum-guidelines.md)。
 
+## 约束
+
+部分音视频格式的硬件编码、解码功能依赖设备的支持。
+
 ## 参与贡献
 
 欢迎广大开发者贡献代码、文档等，具体的贡献流程和方式请参见[参与贡献](https://gitcode.com/openharmony/docs/blob/master/zh-cn/contribute/%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE.md)。
 
 ## 相关仓
+
+[ability\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+
+[bundlemanager\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/bundlemanager_bundlemanager_cangjie_wrapper)
+
+[cangjie\_ark\_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+
+[distributeddatamgr\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/distributeddatamgr_distributeddatamgr_cangjie_wrapper)
+
+[global\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
+
+[graphic\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/graphic_graphic_cangjie_wrapper)
+
+[hiviewdfx\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
 
 [multimedia\_camera\_framework](https://gitee.com/openharmony/multimedia_camera_framework/blob/master/README.md)
 
