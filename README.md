@@ -2,9 +2,7 @@
 
 ## Introduction
 
-The multimedia_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the multimedia Subsystem. The multimedia subsystem provides a set of simple and easy-to-use APIs for you to access the system and media resources.
-
-Media Cangjie includes pictures, cameras, albums, and video-related media businesses.
+The Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the media subsystem. The media subsystem provides developers with a simple and easy-to-understand interface, allowing them to easily access the system and use the system's media resources. The Cangjie interface of the OS media software includes pictures, cameras, albums, and video-related media services. The currently open OS media software Cangjie interface only supports standard devices.
 
 ## System Architecture
 
@@ -12,20 +10,29 @@ Media Cangjie includes pictures, cameras, albums, and video-related media busine
 
 ![](figures/multimedia_cangjie_wrapper_architecture_en.png)
 
+The Cangjie interface of the OS media software consists of four components:
+
+- The camera management component provides a camera operation interface that supports previewing, taking photos, and recording.
+- The image processing component supports the encoding and decoding of common image formats.
+- Media Services provides apps with the ability to get video thumbnails.
+- The album management widget supports local and distributed media data creation, access, and modification of albums.
+
 ## Directory Structure
 
 The structure of the repository directory is as follows:
 
 ```
 foundation/multimedia/multimedia_cangjie_wrapper
-├── ohos             # Cangjie Multimedia code
-├── kit              # Cangjie kit code
-├── figures          # architecture pictures
+├── figures             # architecture pictures
+├── kit                 # Cangjie Multimedia Kit interface
+│   ├── CameraKit
+│   ├── ImageKit
+│   ├── MediaKit
+│   └── MediaLibraryKit
+└── ohos                # Cangjie Multimedia code
+    ├── file
+    └── multimedia
 ```
-
-## Constraints
-
-Hardware-based decoding and encoding functions of audio and video data are device-specific.The currently open distributed soft bus Cangjie interface only supports standard devices.
 
 ## Usage Guidelines
 
@@ -55,11 +62,29 @@ See Media APIs[ohos.multimedia.media (Media Service)](https://gitcode.com/openha
 
 See MediaLibrary APIs[ohos.multimedia.photo_accesshelper (Photo Album Management Module)](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/MediaLibraryKit/cj-apis-multimedia-photo_accesshelper.md).
 
+## Constraints
+
+Hardware-based decoding and encoding functions of audio and video data are device-specific.
+
 ## Code Contribution
 
 Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
 
 ## Repositories Involved
+
+[ability\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+
+[bundlemanager\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/bundlemanager_bundlemanager_cangjie_wrapper)
+
+[cangjie\_ark\_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+
+[distributeddatamgr\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/distributeddatamgr_distributeddatamgr_cangjie_wrapper)
+
+[global\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
+
+[graphic\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/graphic_graphic_cangjie_wrapper)
+
+[hiviewdfx\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
 
 [multimedia\_camera\_framework](https://gitee.com/openharmony/multimedia_camera_framework/blob/master/README.md)
 
