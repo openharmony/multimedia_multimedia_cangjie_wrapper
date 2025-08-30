@@ -6,16 +6,21 @@ The Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the capabi
 
 ## System Architecture
 
-**Figure 1** Architecture of the multimedia subsystem
+**Figure 1** OS media software Cangjie architecture diagram
 
-![](figures/multimedia_cangjie_wrapper_architecture_en.png)
+![OS media software Cangjie architecture diagram](figures/multimedia_cangjie_wrapper_architecture_en.png)
 
-The Cangjie interface of the OS media software consists of four components:
+As shown in the architecture diagram:
 
-- The camera management component provides a camera operation interface that supports previewing, taking photos, and recording.
-- The image processing component supports the encoding and decoding of common image formats.
-- Media Services provides apps with the ability to get video thumbnails.
-- The album management widget supports local and distributed media data creation, access, and modification of albums.
+- Preview, take photos and videos: Provide a camera operation interface to support preview, take photos and record videos.
+- Image Codec: Supports the encoding and decoding of common image formats.
+- Get Video Thumbnails: Provide apps with the ability to get video thumbnails.
+- Create, access, and modify albums: Supports local and distributed media data creation, access, and modification of albums.
+- Cangjie OS Media Software FFI Interface Definition: Responsible for defining the C interoperability Cangjie interface, which is used to realize the Cangjie OS media software capabilities.
+- Camera Management: Responsible for providing basic camera functions, and providing C-interface to Cangjie for interoperability.
+- Image Processing: Responsible for providing basic image functions, and providing the package C interface to Cangjie for interoperability.
+- Media Services: Responsible for providing basic media functions, encapsulating C interfaces for Cangjie for interoperability.
+- Album Management: Responsible for providing the basic functions of the album, and providing the package C interface to Cangjie for interoperability.
 
 ## Directory Structure
 
