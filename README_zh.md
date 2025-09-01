@@ -34,9 +34,10 @@ foundation/multimedia/multimedia_cangjie_wrapper
 │   ├── ImageKit
 │   ├── MediaKit
 │   └── MediaLibraryKit
-└── ohos                # 仓颉媒体接口实现
-    ├── file
-    └── multimedia
+├── ohos                # 仓颉媒体接口实现
+│   ├── file
+│   └── multimedia
+└── test                # 仓颉测试用例
 ```
 
 ## 使用说明
