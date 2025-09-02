@@ -34,9 +34,10 @@ foundation/multimedia/multimedia_cangjie_wrapper
 │   ├── ImageKit
 │   ├── MediaKit
 │   └── MediaLibraryKit
-└── ohos                # Cangjie Multimedia code
-    ├── file
-    └── multimedia
+├── ohos                # Cangjie Multimedia code
+│   ├── file
+│   └── multimedia
+└── test                # Cangjie test cases
 ```
 
 ## Usage Guidelines
