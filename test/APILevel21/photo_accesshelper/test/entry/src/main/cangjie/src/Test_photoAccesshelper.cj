@@ -577,13 +577,13 @@ class Test_photoAccesshelper {
         let photoAsset = fetchResult.getFirstObject()
         let assetChangeRequest = MediaAssetChangeRequest(photoAsset)
         let asset = assetChangeRequest.getAsset()
-        @Expect(asset.displayName, "987654321.jpg")
-        let newTitle = "newTitle"
+        let oldName = asset.displayName
+        let newTitle = "newTitle_" + oldName
         assetChangeRequest.setTitle(newTitle)
         assetChangeRequest.saveCameraPhoto()
         assetChangeRequest.discardCameraPhoto()
         photoAccessHelper.applyChanges(assetChangeRequest)
-        @Expect(asset.displayName, "newTitle.jpg")
+        @Expect(asset.displayName, newTitle + ".jpg")
     }
 
     // 根据路径创建图片
