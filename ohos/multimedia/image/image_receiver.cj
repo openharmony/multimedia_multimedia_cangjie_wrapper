@@ -221,10 +221,10 @@ public class ImageReceiver <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
-    public func on(eventType: ReceiveType, callback: Callback0Argument): Unit {
+    public func onImageArrival(callback: Callback0Argument): Unit {
         let wrapper = { => callback.invoke(None) }
         let lambda = Callback0Param(wrapper)
-        try (ctype = unsafe { LibC.mallocCString(eventType.toString()).asResource() }) {
+        try (ctype = unsafe { LibC.mallocCString("imageArrival").asResource() }) {
             unsafe { FfiImageReceiverImplOn(getID(), ctype.value, lambda.getID()) }
         }
     }
@@ -239,7 +239,7 @@ public class ImageReceiver <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
-    public func off(eventType: ReceiveType): Unit {}
+    public func offImageArrival(): Unit {}
 
     /**
      * Release image receiver instance.
@@ -254,35 +254,5 @@ public class ImageReceiver <: RemoteDataLite {
     public func release(): Unit {
         unsafe { FfiOHOSReceiverRelease(getID()) }
         releaseFFIData(getID())
-    }
-}
-
-/**
- * Enum of callback.
- *
- */
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
-]
-public enum ReceiveType {
-    /**
-     * imageArrival.
-     *
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
-    ]
-    ImageArrival
-    | ...
-
-    protected func toString(): String {
-        match (this) {
-            case ImageArrival => "imageArrival"
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
-        }
     }
 }
