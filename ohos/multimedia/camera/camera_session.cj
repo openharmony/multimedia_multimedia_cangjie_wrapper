@@ -358,8 +358,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
@@ -367,15 +366,14 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        onError0(errorCallbackManager, eventType, callback)
+    public func onError(callback: Callback0Argument): Unit {
+        onError0(errorCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
+     * @param { ?Callback0Argument } callback - Callback used to get the capture session errors.
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
@@ -383,8 +381,12 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        offError0(errorCallbackManager, eventType, callback)
+    public func offError(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- callback) {
+            offError0(errorCallbackManager, v)
+        } else {
+            errorCallbackManager.unregisterAll()
+        }
     }
 
     /**
@@ -394,7 +396,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
@@ -403,15 +404,14 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-        onFocus0(focusStateChangeCallbackManager, eventType, callback)
+    public func onFocusStateChange(callback: Callback1Argument<FocusState>): Unit {
+        onFocus0(focusStateChangeCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from focus state change events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
+     * @param { ?Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
     @!APILevel[
@@ -419,8 +419,12 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-        offFocus0(focusStateChangeCallbackManager, eventType, callback)
+    public func offFocusStateChange(callback!: ?Callback1Argument<FocusState> = None): Unit {
+        if (let Some(v) <- callback) {
+            offFocus0(focusStateChangeCallbackManager, v)
+        } else {
+            focusStateChangeCallbackManager.unregisterAll()
+        }
     }
 
     /**
@@ -430,7 +434,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
@@ -439,15 +442,14 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        onSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
+    public func onSmoothZoomInfoAvailable(callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        onSmoothZoom0(smoothZoomCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from zoom info events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { ?Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
@@ -455,32 +457,12 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        offSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
-    }
-
-    /**
-     * Unsubscribes all callbacks from the event specified by the param.
-     *
-     * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(eventType: CameraEvents): Unit {
-        let errCode = match (eventType) {
-            case CameraEvents.CameraError => errorCallbackManager.unregisterAll()
-            case CameraEvents.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
-            case CameraEvents.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offSmoothZoomInfoAvailable(callback!: ?Callback1Argument<SmoothZoomInfo> = None): Unit {
+        if (let Some(v) <- callback) {
+            offSmoothZoom0(smoothZoomCallbackManager, v)
+        } else {
+            smoothZoomCallbackManager.unregisterAll()
         }
-        successOrThrow(errCode)
     }
 }
 
@@ -562,9 +544,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'error', callback: ErrorCallback): void
      */
@@ -573,16 +553,14 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        onError0(errorCallbackManager, eventType, callback)
+    public func onError(callback: Callback0Argument): Unit {
+        onError0(errorCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { ?Callback0Argument } callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
@@ -591,8 +569,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        offError0(errorCallbackManager, eventType, callback)
+    public func offError(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- callback) {
+            offError0(errorCallbackManager, v)
+        } else {
+            errorCallbackManager.unregisterAll()
+        }
     }
 
     /**
@@ -602,9 +584,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
@@ -613,16 +593,14 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-        onFocus0(focusStateChangeCallbackManager, eventType, callback)
+    public func onFocusStateChange(callback: Callback1Argument<FocusState>): Unit {
+        onFocus0(focusStateChangeCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from focus state change events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { ?Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
@@ -631,8 +609,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-        offFocus0(focusStateChangeCallbackManager, eventType, callback)
+    public func offFocusStateChange(callback!: ?Callback1Argument<FocusState> = None): Unit {
+        if (let Some(v) <- callback) {
+            offFocus0(focusStateChangeCallbackManager, v)
+        } else {
+            focusStateChangeCallbackManager.unregisterAll()
+        }
     }
 
     /**
@@ -642,9 +624,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
@@ -653,16 +633,14 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        onSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
+    public func onSmoothZoomInfoAvailable(callback: Callback1Argument<SmoothZoomInfo>): Unit {
+        onSmoothZoom0(smoothZoomCallbackManager, callback)
     }
 
     /**
      * Unsubscribes from zoom info events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { ?Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
@@ -671,33 +649,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-        offSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
-    }
-
-    /**
-     * Unsubscribes all callbacks from the event specified by the param.
-     *
-     * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(eventType: CameraEvents): Unit {
-        let errCode = match (eventType) {
-            case CameraEvents.CameraError => errorCallbackManager.unregisterAll()
-            case CameraEvents.FocusStateChange => focusStateChangeCallbackManager.unregisterAll()
-            case CameraEvents.SmoothZoomInfoAvailable => smoothZoomCallbackManager.unregisterAll()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offSmoothZoomInfoAvailable(callback!: ?Callback1Argument<SmoothZoomInfo> = None): Unit {
+        if (let Some(v) <- callback) {
+            offSmoothZoom0(smoothZoomCallbackManager, v)
+        } else {
+            smoothZoomCallbackManager.unregisterAll()
         }
-        successOrThrow(errCode)
     }
 }
 
@@ -826,11 +783,7 @@ class CallbackManager {
     }
 }
 
-func onError0(manager: CallbackManager, event: CameraEvents, callback: Callback0Argument): Unit {
-    if (event != CameraEvents.CameraError) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func onError0(manager: CallbackManager, callback: Callback0Argument): Unit {
     let ffiCallback = Callback1Param<Int32, Unit> {
         value: Int32 =>
         if (value == SUCCESS_CODE) {
@@ -844,20 +797,12 @@ func onError0(manager: CallbackManager, event: CameraEvents, callback: Callback0
     successOrThrow(errCode)
 }
 
-func offError0(manager: CallbackManager, event: CameraEvents, callback: Callback0Argument): Unit {
-    if (event != CameraEvents.CameraError) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func offError0(manager: CallbackManager, callback: Callback0Argument): Unit {
     let errCode = manager.unregister(callback)
     successOrThrow(errCode)
 }
 
-func onFocus0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-    if (event != CameraEvents.FocusStateChange) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func onFocus0(manager: CallbackManager, callback: Callback1Argument<FocusState>): Unit {
     let ffiCallback = Callback1Param<Int32, Unit> {
         code: Int32 => callback.invoke(None, FocusState.parse(code))
     }
@@ -866,20 +811,12 @@ func onFocus0(manager: CallbackManager, event: CameraEvents, callback: Callback1
     successOrThrow(errCode)
 }
 
-func offFocus0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
-    if (event != CameraEvents.FocusStateChange) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func offFocus0(manager: CallbackManager, callback: Callback1Argument<FocusState>): Unit {
     let errCode = manager.unregister(callback)
     successOrThrow(errCode)
 }
 
-func onSmoothZoom0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-    if (event != CameraEvents.SmoothZoomInfoAvailable) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func onSmoothZoom0(manager: CallbackManager, callback: Callback1Argument<SmoothZoomInfo>): Unit {
     let ffiCallback = Callback1Param<Int32, Unit> {
         duration: Int32 => callback.invoke(None, SmoothZoomInfo(duration))
     }
@@ -888,11 +825,7 @@ func onSmoothZoom0(manager: CallbackManager, event: CameraEvents, callback: Call
     successOrThrow(errCode)
 }
 
-func offSmoothZoom0(manager: CallbackManager, event: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
-    if (event != CameraEvents.SmoothZoomInfoAvailable) {
-        throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-    }
-
+func offSmoothZoom0(manager: CallbackManager, callback: Callback1Argument<SmoothZoomInfo>): Unit {
     let errCode = manager.unregister(callback)
     successOrThrow(errCode)
 }
