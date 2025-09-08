@@ -115,10 +115,8 @@ public class CameraInput <: RemoteDataLite {
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'error', camera: CameraDevice, callback: ErrorCallback): void
      */
@@ -127,11 +125,7 @@ public class CameraInput <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
-        match (eventType) {
-            case CameraEvents.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
+    public func onError(camera: CameraDevice, callback: Callback0Argument): Unit {
         synchronized(errorMutex) {
             let callbackList = errorList
             if (findCallbackObject(callbackList, callback)) {
@@ -157,10 +151,8 @@ public class CameraInput <: RemoteDataLite {
     /**
      * Unsubscribes from error events.
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { ?Callback0Argument } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
@@ -169,22 +161,18 @@ public class CameraInput <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
-        match (eventType) {
-            case CameraEvents.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
+    public func offError(camera: CameraDevice, callback!: ?Callback0Argument = None): Unit {
         synchronized(errorMutex) {
             let callbackList = errorList
             if (callbackList.size == 0) {
                 CAMERA_LOG.error("CameraInput Off failed: The event is not registered")
                 return
             }
-            unsafe {
+            if (let Some(v) <- callback) {
                 callbackList.removeIf(
                     {
-                        item => if (refEq(item[0], callback)) {
-                            let errCode = FfiCameraInputOffError(this.getID(), item[1])
+                        item => if (refEq(item[0], v)) {
+                            let errCode = unsafe { FfiCameraInputOffError(this.getID(), item[1]) }
                             successOrThrow(errCode)
                             true
                         } else {
@@ -192,37 +180,8 @@ public class CameraInput <: RemoteDataLite {
                             false
                         }
                     })
-            }
-        }
-    }
-
-    /**
-     * Unsubscribes from error events.
-     *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { CameraDevice } camera - Camera device.
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(eventType: CameraEvents, camera: CameraDevice): Unit {
-        match (eventType) {
-            case CameraEvents.CameraError => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-        synchronized(errorMutex) {
-            let callbackList = errorList
-            if (callbackList.size == 0) {
-                CAMERA_LOG.error("CameraInput off failed: The event is not registered")
-                return
-            }
-            unsafe {
-                let errCode = FfiCameraInputOffAllError(this.getID())
+            } else {
+                let errCode = unsafe { FfiCameraInputOffAllError(this.getID()) }
                 if (errCode != SUCCESS_CODE) {
                     throw BusinessException(errCode, getErrorMsg(errCode))
                 } else {
