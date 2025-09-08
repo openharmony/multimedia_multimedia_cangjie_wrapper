@@ -447,9 +447,7 @@ public class CameraManager <: RemoteDataLite {
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CameraStatusInfo> } callback - Callback used to get the camera status change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'cameraStatus', callback: AsyncCallback<CameraStatusInfo>): void
      */
@@ -458,11 +456,7 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<CameraStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.CameraStatus => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
+    public func onCameraStatus(callback: Callback1Argument<CameraStatusInfo>): Unit {
         synchronized(cameraStatusMutex) {
             let callbackList = cameraStatusList
             if (findCallbackObject(callbackList, callback)) {
@@ -485,9 +479,7 @@ public class CameraManager <: RemoteDataLite {
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FoldStatusInfo> } callback - Callback used to get the fold status change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'foldStatusChange', callback: AsyncCallback<FoldStatusInfo>): void
      */
@@ -496,11 +488,7 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<FoldStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.FoldStatusChange => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
+    public func onFoldStatusChange(callback: Callback1Argument<FoldStatusInfo>): Unit {
         synchronized(foldStatusMutex) {
             let callbackList = foldStatusList
             if (findCallbackObject(callbackList, callback)) {
@@ -524,9 +512,7 @@ public class CameraManager <: RemoteDataLite {
      * Description: Currently, it is not allowed to use off() to unregister the callback
      * within the callback method of on().
      *
-     * @param { CameraEvents } eventType - Event type
      * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'torchStatusChange', callback: AsyncCallback<TorchStatusInfo>): void
      */
@@ -535,11 +521,7 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.TorchStatusChange => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
+    public func onTorchStatusChange(callback: Callback1Argument<TorchStatusInfo>): Unit {
         synchronized(torchStatusMutex) {
             let callbackList = torchStatusList
             if (findCallbackObject(callbackList, callback)) {
@@ -559,9 +541,7 @@ public class CameraManager <: RemoteDataLite {
     /**
      * Unsubscribes from camera status change event callback.
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CameraStatusInfo> } callback - Callback used to get the camera status change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'cameraStatus', callback?: AsyncCallback<CameraStatusInfo>): void
      */
@@ -570,20 +550,20 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<CameraStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.CameraStatus => off(IdClassInfo(this.getID(), "CameraManager"), cameraStatusList,
-                cameraStatusMutex, callback, FfiCameraManagerOffCameraStatusChanged)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offCameraStatus(callback!: ?Callback1Argument<CameraStatusInfo> = None): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "CameraManager"), cameraStatusList, cameraStatusMutex, v,
+                FfiCameraManagerOffCameraStatusChanged)
+        } else {
+            offAll(IdClassInfo(this.getID(), "CameraManager"), cameraStatusList, cameraStatusMutex,
+                FfiCameraManagerOffAllCameraStatusChanged)
         }
     }
 
     /**
      * Unsubscribes from fold status change event callback.
      *
-     * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FoldStatusInfo> } callback - Callback used to get the fold status change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'foldStatusChange', callback?: AsyncCallback<FoldStatusInfo>): void
      */
@@ -592,20 +572,20 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<FoldStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.FoldStatusChange => off(IdClassInfo(this.getID(), "CameraManager"), foldStatusList,
-                foldStatusMutex, callback, FfiCameraManagerOffFoldStatusChanged)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offFoldStatusChange(callback!: ?Callback1Argument<FoldStatusInfo> = None): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "CameraManager"), foldStatusList, foldStatusMutex, v,
+                FfiCameraManagerOffFoldStatusChanged)
+        } else {
+            offAll(IdClassInfo(this.getID(), "CameraManager"), foldStatusList, foldStatusMutex,
+                FfiCameraManagerOffAllFoldStatusChanged)
         }
     }
 
     /**
      * Unsubscribes torch status change event callback.
      *
-     * @param { CameraEvents } eventType - Event type
      * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
      */
@@ -614,38 +594,13 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.TorchStatusChange => off(IdClassInfo(this.getID(), "CameraManager"), torchStatusList,
-                torchStatusMutex, callback, FfiCameraManagerOffTorchStatusChange)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-    }
-
-    /**
-     * Unsubscribes callback.
-     *
-     * @param { CameraEvents } eventType - Event type
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'cameraStatus', callback?: AsyncCallback<CameraStatusInfo>): void
-     * @relation off(type: 'foldStatusChange', callback?: AsyncCallback<FoldStatusInfo>): void
-     * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func off(eventType: CameraEvents): Unit {
-        match (eventType) {
-            case CameraEvents.CameraStatus => offAll(IdClassInfo(this.getID(), "CameraManager"), cameraStatusList,
-                cameraStatusMutex, FfiCameraManagerOffAllCameraStatusChanged)
-            case CameraEvents.FoldStatusChange => offAll(IdClassInfo(this.getID(), "CameraManager"),
-                foldStatusList, foldStatusMutex, FfiCameraManagerOffAllFoldStatusChanged)
-            case CameraEvents.TorchStatusChange => offAll(IdClassInfo(this.getID(), "CameraManager"),
-                torchStatusList, torchStatusMutex, FfiCameraManagerOffAllTorchStatusChange)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func off(callback!: ?Callback1Argument<TorchStatusInfo>): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "CameraManager"), torchStatusList, torchStatusMutex, v,
+                FfiCameraManagerOffTorchStatusChange)
+        } else {
+            offAll(IdClassInfo(this.getID(), "CameraManager"), torchStatusList, torchStatusMutex,
+                FfiCameraManagerOffAllTorchStatusChange)
         }
     }
 }
