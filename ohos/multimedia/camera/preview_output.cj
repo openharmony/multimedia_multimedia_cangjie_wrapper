@@ -186,33 +186,22 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Subscribes frame start event callback.
-     * Subscribes frame end event callback.
-     * Subscribes to error events.
+     * Registers a listener for the preview frame to start to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
      *
-     * @param { CameraEvents } eventType - Event type.
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation on(type: 'frameStart', callback: AsyncCallback<void>): void
-     * @relation on(type: 'frameEnd', callback: AsyncCallback<void>): void
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        match (eventType) {
-            case CameraEvents.FrameStart => onFrameStart(callback)
-            case CameraEvents.FrameEnd => onFrameEnd(callback)
-            case CameraEvents.CameraError => onError(callback)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-    }
-
-    func onFrameStart(callback: Callback0Argument): Unit {
+    public func onFrameStart(callback: Callback0Argument): Unit {
         synchronized(frameStartMutex) {
             let callbackList = frameStartCallbackList
             if (findCallbackObject(callbackList, callback)) {
@@ -227,7 +216,29 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
         }
     }
 
-    func onFrameEnd(callback: Callback0Argument): Unit {
+    /**
+     * Registers a listener for the end of the preview frame to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     *
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     *
+     * @param { Callback0Argument } callback - Callback used to return the result.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'frameEnd', callback: AsyncCallback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func onFrameEnd(callback: Callback0Argument): Unit {
         synchronized(frameEndMutex) {
             let callbackList = frameEndCallbackList
             if (findCallbackObject(callbackList, callback)) {
@@ -242,7 +253,23 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
         }
     }
 
-    func onError(callback: Callback0Argument): Unit {
+    /**
+     * Registers a listener for error events on the preview output to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     *
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { Callback0Argument } callback - Callback used to get the preview output errors.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     * @relation on(type: 'error', callback: ErrorCallback): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func onError(callback: Callback0Argument): Unit {
         synchronized(errorMutex) {
             let callbackList = errorCallbackList
             if (findCallbackObject(callbackList, callback)) {
@@ -265,42 +292,57 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
 
     /**
      * Unsubscribes from frame start event callback.
-     * Unsubscribes from frame end event callback.
-     * Unsubscribes from error events.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { ?Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
-        match (eventType) {
-            case CameraEvents.FrameStart => off(IdClassInfo(this.getID(), "PreviewOutput"), frameStartCallbackList,
-                frameStartMutex, callback, FfiCameraPreviewOutputOffFrameStart)
-            case CameraEvents.FrameEnd => off(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
-                frameEndMutex, callback, FfiCameraPreviewOutputOffFrameEnd)
-            case CameraEvents.CameraError => off(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
-                errorMutex, callback, FfiCameraPreviewOutputOffError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offFrameStart(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "PreviewOutput"), frameStartCallbackList, frameStartMutex, v,
+                FfiCameraPreviewOutputOffFrameStart)
+        } else {
+            offAll(IdClassInfo(this.getID(), "PreviewOutput"), frameStartCallbackList, frameStartMutex,
+                FfiCameraPreviewOutputOffAllFrameStart)
         }
     }
 
     /**
-     * Unsubscribes all callbacks from the event specified by the param.
+     * Unsubscribes from frame end event callback.
      *
-     * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
      * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func offFrameEnd(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList, frameEndMutex, v,
+                FfiCameraPreviewOutputOffFrameEnd)
+        } else {
+            offAll(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList, frameEndMutex,
+                FfiCameraPreviewOutputOffAllFrameEnd)
+        }
+    }
+
+    /**
+     * Registers a listener for error events on the preview output to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     *
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { ?Callback0Argument } callback - Callback used to get the preview output errors.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
@@ -308,15 +350,13 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(eventType: CameraEvents): Unit {
-        match (eventType) {
-            case CameraEvents.FrameStart => offAll(IdClassInfo(this.getID(), "PreviewOutput"),
-                frameStartCallbackList, frameStartMutex, FfiCameraPreviewOutputOffAllFrameStart)
-            case CameraEvents.FrameEnd => offAll(IdClassInfo(this.getID(), "PreviewOutput"), frameEndCallbackList,
-                frameEndMutex, FfiCameraPreviewOutputOffAllFrameEnd)
-            case CameraEvents.CameraError => offAll(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList,
-                errorMutex, FfiCameraPreviewOutputOffAllError)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+    public func offError(callback!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- callback) {
+            off(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList, errorMutex, v,
+                FfiCameraPreviewOutputOffError)
+        } else {
+            offAll(IdClassInfo(this.getID(), "PreviewOutput"), errorCallbackList, errorMutex,
+                FfiCameraPreviewOutputOffAllError)
         }
     }
 }
