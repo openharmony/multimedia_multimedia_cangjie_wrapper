@@ -594,7 +594,7 @@ public class CameraManager <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(callback!: ?Callback1Argument<TorchStatusInfo>): Unit {
+    public func offTorchStatusChange(callback!: ?Callback1Argument<TorchStatusInfo>): Unit {
         if (let Some(v) <- callback) {
             off(IdClassInfo(this.getID(), "CameraManager"), torchStatusList, torchStatusMutex, v,
                 FfiCameraManagerOffTorchStatusChange)
