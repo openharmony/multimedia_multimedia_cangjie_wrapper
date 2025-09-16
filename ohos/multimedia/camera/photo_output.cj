@@ -642,7 +642,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
         stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
-    public func off(callback!: ?Callback1Argument<Float64> = None): Unit {
+    public func offEstimatedCaptureDuration(callback!: ?Callback1Argument<Float64> = None): Unit {
         if (let Some(v) <- callback) {
             off(IdClassInfo(this.getID(), "PhotoOutput"), estimatedCaptureDurationList, estimatedCaptureDurationMutex,
                 v, FfiCameraPhotoOutputOffEstimatedCaptureDuration)
