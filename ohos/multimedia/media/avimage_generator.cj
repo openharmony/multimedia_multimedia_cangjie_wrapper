@@ -39,8 +39,7 @@ foreign {
 * @relation function createAVImageGenerator(): Promise<AVImageGenerator>
 */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public func createAVImageGenerator(): AVImageGenerator {
@@ -60,8 +59,7 @@ public func createAVImageGenerator(): AVImageGenerator {
 * @relation interface AVImageGenerator
 */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public class AVImageGenerator <: RemoteDataLite {
@@ -79,8 +77,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @relation fdSrc ?: AVFileDescriptor
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public mut prop fdSrc: AVFileDescriptor {
@@ -113,8 +110,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @relation fetchFrameByTime(timeUs: number, options: AVImageQueryOptions, param: PixelMapParams): Promise<image.PixelMap>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param: PixelMapParams): PixelMap {
@@ -133,8 +129,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public func release(): Unit {

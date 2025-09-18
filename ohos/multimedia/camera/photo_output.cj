@@ -28,8 +28,7 @@ import std.sync.*
  * @relation interface PhotoOutput extends CameraOutput
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class PhotoOutput <: RemoteDataLite & CameraOutput {
@@ -62,8 +61,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func release(): Unit {
@@ -79,8 +77,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation capture(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func capture(): Unit {
@@ -98,8 +95,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation capture(setting: PhotoCaptureSetting): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func capture(setting: PhotoCaptureSetting): Unit {
@@ -121,8 +117,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation isMovingPhotoSupported(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isMovingPhotoSupported(): Bool {
@@ -143,9 +138,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation enableMovingPhoto(enabled: boolean): void
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.MICROPHONE",
-        stagemodelonly: true,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func enableMovingPhoto(enabled: Bool): Unit {
@@ -161,8 +155,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation isMirrorSupported(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isMirrorSupported(): Bool {
@@ -184,8 +177,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation enableMirror(enabled: boolean): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func enableMirror(enabled: Bool): Unit {
@@ -200,8 +192,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType> {
@@ -216,8 +207,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation setMovingPhotoVideoCodecType(codecType: VideoCodecType): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setMovingPhotoVideoCodecType(codecType: VideoCodecType): Unit {
@@ -233,8 +223,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation getActiveProfile(): Profile
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveProfile(): Profile {
@@ -254,8 +243,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation getPhotoRotation(deviceDegree: int): ImageRotation
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getPhotoRotation(deviceDegree: Int32): ImageRotation {
@@ -279,8 +267,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'captureStartWithInfo', callback: AsyncCallback<CaptureStartInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
@@ -314,8 +301,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'frameShutter', callback: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
@@ -353,8 +339,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'captureEnd', callback: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
@@ -392,8 +377,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'frameShutterEnd', callback: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
@@ -432,8 +416,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -498,8 +481,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'estimatedCaptureDuration', callback: AsyncCallback<double>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
@@ -533,8 +515,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'captureStartWithInfo', callback?: AsyncCallback<CaptureStartInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
@@ -556,8 +537,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'frameShutter', callback?: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
@@ -578,8 +558,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'captureEnd', callback?: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
@@ -600,8 +579,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'frameShutterEnd', callback?: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
@@ -623,8 +601,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -647,8 +624,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'estimatedCaptureDuration', callback?: AsyncCallback<double>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
@@ -675,8 +651,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

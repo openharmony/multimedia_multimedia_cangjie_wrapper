@@ -35,8 +35,7 @@ const INVALID_ARGUMENT_ERROR: Int32 = 13900020
  * @relation function getPhotoAccessHelper(context: Context): PhotoAccessHelper
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
@@ -55,8 +54,7 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
  * @relation interface PhotoAccessHelper
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAccessHelper <: RemoteDataLite {
@@ -83,8 +81,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation release(): Promise<void>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func release(): Unit {
@@ -105,9 +102,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.READ_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
@@ -129,9 +125,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation getBurstAssets(burstKey: string, options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.READ_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetResult {
@@ -160,9 +155,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation getAlbums(type: AlbumType, subtype: AlbumSubtype, options?: FetchOptions): Promise<FetchResult<Album>>;
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.READ_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
@@ -187,8 +181,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation registerChange(uri: string, forChildUris: boolean, callback: Callback<ChangeData>): void;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func registerChange(uri: String, forChildUris: Bool, callback: Callback1Argument<ChangeData>): Unit {
@@ -228,8 +221,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation unRegisterChange(uri: string, callback?: Callback<ChangeData>): void;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func unRegisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
@@ -286,8 +278,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation showAssetsCreationDialog(srcFileUris: Array<string>, photoCreationConfigs: Array<PhotoCreationConfig>): Promise<Array<string>>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationConfigs: Array<PhotoCreationConfig>,
@@ -325,9 +316,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @relation applyChanges(mediaChangeRequest: MediaChangeRequest): Promise<void>;
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func applyChanges(mediaChangeRequest: MediaChangeRequest): Unit {

@@ -38,8 +38,7 @@ foreign {
  * @relation interface Image
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Image <: RemoteDataLite {
@@ -50,8 +49,7 @@ public class Image <: RemoteDataLite {
      * @relation clipRect: Region
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop clipRect: Region {
@@ -72,8 +70,7 @@ public class Image <: RemoteDataLite {
      * @relation readonly size: Size
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop size: Size {
@@ -94,8 +91,7 @@ public class Image <: RemoteDataLite {
      * @relation readonly format: int
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop format: Int32 {
@@ -125,8 +121,7 @@ public class Image <: RemoteDataLite {
      * @relation getComponent(componentType: ComponentType): Promise<Component>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getComponent(componentType: ComponentType): Component {
@@ -151,8 +146,7 @@ public class Image <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func release(): Unit {
