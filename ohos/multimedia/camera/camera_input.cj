@@ -28,8 +28,7 @@ import std.sync.*
  * @relation interface CameraInput
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraInput <: RemoteDataLite {
@@ -54,8 +53,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation open(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func open(): Unit {
@@ -77,8 +75,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation open(isSecureEnabled: boolean): Promise<bigint>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func open(isSecureEnabled: Bool): UInt64 {
@@ -97,8 +94,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation close(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func close(): Unit {
@@ -123,8 +119,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation on(type: 'error', camera: CameraDevice, callback: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
@@ -165,8 +160,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
@@ -206,8 +200,7 @@ public class CameraInput <: RemoteDataLite {
      * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice): Unit {

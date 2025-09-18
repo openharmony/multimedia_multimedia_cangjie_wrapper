@@ -24,8 +24,7 @@ import ohos.ffi.*
  * @relation class MediaAlbumChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
@@ -38,8 +37,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     /**
@@ -69,8 +67,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation getAlbum(): Album
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAlbum(): Album {
@@ -93,8 +90,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation setAlbumName(name: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func setAlbumName(name: String): Unit {
@@ -114,8 +110,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation addAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addAssets(assets: Array<PhotoAsset>): Unit {
@@ -136,8 +131,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation removeAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func removeAssets(assets: Array<PhotoAsset>): Unit {

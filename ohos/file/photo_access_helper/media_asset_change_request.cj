@@ -25,8 +25,7 @@ import ohos.app.ability.ui_ability.*
  * @relation interface MediaChangeRequest {}
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public interface MediaChangeRequest {}
@@ -37,8 +36,7 @@ public interface MediaChangeRequest {}
  * @relation class MediaAssetChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
@@ -59,8 +57,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation constructor(asset: PhotoAsset)
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public init(asset: PhotoAsset) {
@@ -83,8 +80,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation static createImageAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createImageAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
@@ -109,8 +105,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation static createVideoAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
@@ -134,8 +129,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation static createAssetRequest(context: Context, photoType: PhotoType, extension: string, options?: CreateOptions): MediaAssetChangeRequest
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createAssetRequest(context: UIAbilityContext, photoType: PhotoType, extension: String,
@@ -166,9 +160,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation static deleteAssets(context: Context, assets: Array<PhotoAsset>): Promise<void>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func deleteAssets(context: UIAbilityContext, assets: Array<PhotoAsset>): Unit {
@@ -190,9 +183,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation static deleteAssets(context: Context, uriList: Array<string>): Promise<void>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func deleteAssets(context: UIAbilityContext, assets: Array<String>): Unit {
@@ -211,8 +203,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation getAsset(): PhotoAsset
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAsset(): PhotoAsset {
@@ -235,8 +226,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation setTitle(title: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func setTitle(title: String): Unit {
@@ -257,9 +247,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation getWriteCacheHandler(): Promise<number>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getWriteCacheHandler(): Int32 {
@@ -280,8 +269,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation addResource(type: ResourceType, fileUri: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addResource(resourceType: ResourceType, fileUri: String): Unit {
@@ -303,8 +291,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation addResource(type: ResourceType, data: ArrayBuffer): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addResource(resourceType: ResourceType, data: Array<Byte>): Unit {
@@ -322,8 +309,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation saveCameraPhoto(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func saveCameraPhoto(): Unit {
@@ -339,8 +325,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation discardCameraPhoto(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func discardCameraPhoto(): Unit {
