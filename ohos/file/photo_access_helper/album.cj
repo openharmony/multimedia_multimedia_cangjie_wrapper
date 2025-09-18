@@ -24,8 +24,7 @@ import ohos.ffi.*
  * @relation interface AbsAlum
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class AbsAlbum <: RemoteDataLite{
@@ -38,8 +37,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation readonly albumType: AlbumType
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumType: AlbumType {
@@ -57,8 +55,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation readonly albumSubtype: AlbumSubtype
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumSubtype: AlbumSubtype {
@@ -76,8 +73,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation albumName: string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public mut prop albumName: String {
@@ -104,8 +100,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation readonly albumUri: string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumUri: String {
@@ -125,8 +120,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation readonly count: number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop count: Int32 {
@@ -141,8 +135,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation readonly coverUri: string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop coverUri: String {
@@ -167,9 +160,8 @@ public open class AbsAlbum <: RemoteDataLite{
      * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.READ_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
@@ -194,8 +186,7 @@ class AbsAlbumImpl {}
  * @relation interface Album extends AbsAlbum
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class Album <: AbsAlbum {
@@ -213,8 +204,7 @@ public class Album <: AbsAlbum {
      * @relation readonly imageCount: number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop imageCount: Int32 {
@@ -229,8 +219,7 @@ public class Album <: AbsAlbum {
      * @relation readonly videoCount: number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]  
     public prop videoCount: Int32 {
@@ -250,9 +239,8 @@ public class Album <: AbsAlbum {
      * @relation commitModify(): Promise<void>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func commitModify(): Unit {
