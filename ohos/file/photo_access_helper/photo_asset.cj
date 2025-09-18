@@ -25,8 +25,7 @@ import ohos.multimedia.image.*
  * @relation interface PhotoAsset
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAsset <: RemoteDataLite {
@@ -36,8 +35,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly uri: string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop uri: String {
@@ -57,8 +55,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly photoType: PhotoType
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop photoType: PhotoType {
@@ -76,8 +73,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly displayName: string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop displayName: String {
@@ -109,8 +105,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation get(member: string): MemberType
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func get(member: String): MemberType {
@@ -137,8 +132,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation set(member: string, value: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func set(member: String, value: String): Unit {
@@ -166,9 +160,8 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation commitModify(): Promise<void>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func commitModify(): Unit {
@@ -188,9 +181,8 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation getThumbnail(size?: image.Size): Promise<image.PixelMap>
      */
     @!APILevel[
-        21,
+        22,
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        stagemodelonly: true,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getThumbnail(size!: ?Size = Size(256, 256)): PixelMap {

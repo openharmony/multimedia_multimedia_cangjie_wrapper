@@ -84,8 +84,7 @@ foreign {
  * @relation function createImageSource(uri: string): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(uri: String): ImageSource {
@@ -112,8 +111,7 @@ public func createImageSource(uri: String): ImageSource {
  * @relation function createImageSource(uri: string, options: SourceOptions): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(uri: String, options: SourceOptions): ImageSource {
@@ -139,8 +137,7 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  * @relation function createImageSource(fd: int): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(fd: Int32): ImageSource {
@@ -161,8 +158,7 @@ public func createImageSource(fd: Int32): ImageSource {
  * @relation function createImageSource(fd: int, options: SourceOptions): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
@@ -182,8 +178,7 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * @relation function createImageSource(buf: ArrayBuffer): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(buf: Array<UInt8>): ImageSource {
@@ -210,8 +205,7 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  * @relation function createImageSource(buf: ArrayBuffer, options: SourceOptions): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageSource {
@@ -239,8 +233,7 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
  * @relation function createImageSource(rawfile: resourceManager.RawFileDescriptor, options?: SourceOptions): ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOptions = SourceOptions(0)): ImageSource {
@@ -259,8 +252,7 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
  * @relation interface ImageSource
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class ImageSource <: RemoteDataLite {
@@ -272,8 +264,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation readonly supportedFormats: Array<string>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public prop supportedFormats: Array<String> {
@@ -322,8 +313,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation getFrameCount(): Promise<int>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getFrameCount(): UInt32 {
@@ -342,8 +332,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation getImageInfoSync(index?: int): ImageInfo
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getImageInfo(index!: UInt32 = 0): ImageInfo {
@@ -379,8 +368,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation getImageProperty(key: PropertyKey, options?: ImagePropertyOptions): Promise<string>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = ImagePropertyOptions()): String {
@@ -412,8 +400,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation modifyImageProperty(key: PropertyKey, value: string): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func modifyImageProperty(key: PropertyKey, value: String): Unit {
@@ -439,8 +426,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation updateData(buf: ArrayBuffer, isFinished: boolean, value: int, length: int): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func updateData(buf: Array<UInt8>, isFinished: Bool, offset: UInt32, length: UInt32): Unit {
@@ -462,8 +448,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation createPixelMapSync(options?: DecodingOptions): PixelMap
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
@@ -498,8 +483,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation createPixelMapList(options?: DecodingOptions): Promise<Array<PixelMap>>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap> {
@@ -533,8 +517,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation getDelayTimeList(): Promise<Array<int>>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getDelayTimeList(): Array<Int32> {
@@ -556,8 +539,7 @@ public class ImageSource <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func release(): Unit {
