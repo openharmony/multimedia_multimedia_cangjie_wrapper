@@ -16,7 +16,7 @@ OS媒体软件仓颉接口是在OpenHarmony上基于媒体子系统能力之上�
 - 图片编解码：支持常见图片格式的编解码。
 - 获取视频缩略图：为应用提供获取视频缩略图的功能。
 - 创建，访问，修改相册：支持本地和分布式媒体数据创建，访问，修改相册。
-- 仓颉OS媒体软件FFI接口定义：负责定义C互操作仓颉接口，用于实现仓颉OS媒体软件能力。
+- 仓颉OS媒体软件FFI接口定义：负责定义C语言互操作仓颉接口，用于实现仓颉OS媒体软件能力。
 - 相机管理：负责提供相机基础功能，封装C接口提供给仓颉进行互操作。
 - 图片处理：负责提供图片基础功能，封装C接口提供给仓颉进行互操作。
 - 媒体服务：负责提供媒体基础功能，封装C接口提供给仓颉进行互操作。
@@ -28,16 +28,20 @@ OS媒体软件仓颉接口是在OpenHarmony上基于媒体子系统能力之上�
 
 ```
 foundation/multimedia/multimedia_cangjie_wrapper
-├── figures             # 存放README中的架构图
-├── kit                 # 仓颉媒体kit化接口
+├── figures                         # 存放README中的架构图
+├── kit                             # 仓颉媒体kit化接口
 │   ├── CameraKit
 │   ├── ImageKit
 │   ├── MediaKit
 │   └── MediaLibraryKit
-├── ohos                # 仓颉媒体接口实现
+├── ohos                            # 仓颉媒体接口实现
 │   ├── file
+│   │   └── photo_access_helper     # 创建、访问、修改相册相关接口
 │   └── multimedia
-└── test                # 仓颉测试用例
+│       └── camera                  # 预览、拍照和录像相关接口
+│       └── image                   # 图片编解码相关接口
+│       └── media                   # 获取视频缩略图相关接口
+└── test                            # 仓颉测试用例
 ```
 
 ## 使用说明
@@ -78,20 +82,24 @@ MediaLibrary相关API请参见[ohos.file.photo_access_helper（相册管理模�
 
 ## 相关仓
 
-[ability\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+[ability_cangjie_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
 
-[bundlemanager\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/bundlemanager_bundlemanager_cangjie_wrapper)
+[ark_compiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
-[distributeddatamgr\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/distributeddatamgr_distributeddatamgr_cangjie_wrapper)
+[bundlemanager_cangjie_wrapper](https://gitcode.com/openharmony-sig/bundlemanager_bundlemanager_cangjie_wrapper)
 
-[global\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
+[distributeddatamgr_cangjie_wrapper](https://gitcode.com/openharmony-sig/distributeddatamgr_distributeddatamgr_cangjie_wrapper)
 
-[graphic\_cangjie\_wrapper](https://gitcode.com/openharmony-sig/graphic_graphic_cangjie_wrapper)
+[global_cangjie_wrapper](https://gitcode.com/openharmony-sig/global_global_cangjie_wrapper)
 
-[multimedia\_camera\_framework](https://gitee.com/openharmony/multimedia_camera_framework/blob/master/README.md)
+[graphic_cangjie_wrapper](https://gitcode.com/openharmony-sig/graphic_graphic_cangjie_wrapper)
 
-[multimedia\_image\_framework](https://gitee.com/openharmony/multimedia_image_framework/blob/master/README.md)
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
 
-[multimedia\_media\_library](https://gitee.com/openharmony/multimedia_media_library/blob/master/README.md)
+[multimedia_camera_framework](https://gitcode.com/openharmony/multimedia_camera_framework)
 
-[multimedia\_player\_framework](https://gitee.com/openharmony/multimedia_player_framework/blob/master/README.md)
+[multimedia_image_framework](https://gitcode.com/openharmony/multimedia_image_framework)
+
+[multimedia_media_library](https://gitcode.com/openharmony/multimedia_media_library)
+
+[multimedia_player_framework](https://gitcode.com/openharmony/multimedia_player_framework)
