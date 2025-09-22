@@ -13,6 +13,6 @@
  * limitations under the License.
  */
 
-package kit.MediaKit
+package MediaKit
 
 public import ohos.multimedia.media.*

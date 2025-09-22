@@ -19,10 +19,10 @@
 package ohos_app_cangjie_entry
 
 internal import ohos.base.*
-internal import kit.MediaLibraryKit.*
+internal import MediaLibraryKit.*
 import std.unittest.testmacro.*
-internal import kit.ArkData.*
-import kit.ImageKit.ImageSource
+internal import ArkData.*
+import ImageKit.ImageSource
 import ohos.file.fs.FileIo as  FileFs
 import std.unittest.*
 import std.unittest.common.*
@@ -36,7 +36,7 @@ import ohos.ability_access_ctrl.Permissions
 import ohos.hilog.*
 import ohos.callback_invoke.*
 import ohos.business_exception.*
-import kit.CoreFileKit.*
+import CoreFileKit.*
 
 public class MyCallback<T> <: Callback1Argument<T> {
     public let callabck_: (T) -> Unit

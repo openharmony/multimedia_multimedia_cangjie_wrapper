@@ -13,7 +13,7 @@
 
 import("//build/templates/cangjie/cjc.gni")
 
-ohos_cangjie_shared_library("kit.MediaLibraryKit") {
+ohos_cangjie_shared_library("MediaLibraryKit") {
   sources = ["index.cj"]
 
   cj_deps = [
