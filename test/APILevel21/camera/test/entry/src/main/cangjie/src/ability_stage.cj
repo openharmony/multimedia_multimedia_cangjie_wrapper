@@ -15,9 +15,9 @@
 
 package ohos_app_cangjie_entry
 
-import kit.AbilityKit.{AbilityStage}
+import AbilityKit.{AbilityStage}
 import ohos.arkui.state_management.AppStorage
-import kit.AbilityKit.AbilityStageContext
+import AbilityKit.AbilityStageContext
 
 class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
