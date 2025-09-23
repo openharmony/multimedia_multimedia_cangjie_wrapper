@@ -1,67 +1,68 @@
 {
-    "name": "@ohos/multimedia_cangjie_wrapper",
-    "description": "The Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the media subsystem.",
-    "version": "6.0",
-    "license": "Apache License 2.0",
-    "publishAs": "code-segment",
-    "segment": {
-      "destPath": "foundation/multimedia/multimedia_cangjie_wrapper"
+  "name": "@ohos/multimedia_cangjie_wrapper",
+  "description": "The Cangjie API is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the media subsystem.",
+  "version": "6.0",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "foundation/multimedia/multimedia_cangjie_wrapper"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "multimedia_cangjie_wrapper",
+    "subsystem": "multimedia",
+    "syscap": [
+      "SystemCapability.Multimedia.Image.Core",
+      "SystemCapability.Multimedia.Image.ImageSource",
+      "SystemCapability.Multimedia.Image.ImagePacker",
+      "SystemCapability.Multimedia.Image.ImageReceiver",
+      "SystemCapability.Multimedia.Image.ImageCreator",
+      "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+      "SystemCapability.Multimedia.Media.AVImageGenerator",
+      "SystemCapability.Multimedia.Media.Core",
+      "SystemCapability.Multimedia.Camera.Core"
+    ],
+    "features": [],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "1300KB",
+    "ram": "1212KB",
+    "hisysevent_config": [],
+    "deps": {
+      "components": [
+        "ability_cangjie_wrapper",
+        "bundlemanager_cangjie_wrapper",
+        "cangjie_ark_interop",
+        "distributeddatamgr_cangjie_wrapper",
+        "global_cangjie_wrapper",
+        "graphic_cangjie_wrapper",
+        "hiviewdfx_cangjie_wrapper",
+        "media_library",
+        "camera_framework",
+        "image_framework",
+        "player_framework"
+      ]
     },
-    "dirs": {},
-    "scripts": {},
-    "component": {
-      "name": "multimedia_cangjie_wrapper",
-      "subsystem": "multimedia",
-      "syscap": [
-        "SystemCapability.Multimedia.Image.Core",
-        "SystemCapability.Multimedia.Image.ImageSource",
-        "SystemCapability.Multimedia.Image.ImagePacker",
-        "SystemCapability.Multimedia.Image.ImageReceiver",
-        "SystemCapability.Multimedia.Image.ImageCreator",
-        "SystemCapability.FileManagement.PhotoAccessHelper.Core",
-        "SystemCapability.Multimedia.Media.AVImageGenerator",
-        "SystemCapability.Multimedia.Media.Core",
-        "SystemCapability.Multimedia.Camera.Core"
+    "build": {
+      "sub_component": [
+        "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:MediaLibraryKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:ImageKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:MediaKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:CameraKit"
       ],
-      "features": [
+      "inner_kits": [
+        {
+          "name": "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image"
+        }
       ],
-      "adapted_system_type": [ "standard" ],
-      "rom": "1300KB",
-      "ram": "1212KB",
-      "hisysevent_config": [  ],
-      "deps": {
-        "components": [
-          "ability_cangjie_wrapper",
-          "bundlemanager_cangjie_wrapper",
-          "cangjie_ark_interop",
-          "distributeddatamgr_cangjie_wrapper",
-          "global_cangjie_wrapper",
-          "graphic_cangjie_wrapper",
-          "hiviewdfx_cangjie_wrapper",
-          "media_library",
-          "camera_framework",
-          "image_framework",
-          "player_framework"
-        ]
-      },
-      "build": {
-        "sub_component": [
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:MediaLibraryKit",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:ImageKit",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:MediaKit",
-          "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:CameraKit"
-        ],
-        "inner_kits": [
-          {
-            "name": "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image"
-          }
-        ],
-        "test": []
-      }
+      "test": []
     }
   }
+}
