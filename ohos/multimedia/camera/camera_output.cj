@@ -23,7 +23,7 @@ import ohos.labels.APILevel
  * @relation interface CameraOutput
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface CameraOutput {
@@ -34,7 +34,7 @@ public interface CameraOutput {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func release(): Unit

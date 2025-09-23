@@ -28,7 +28,7 @@ import std.sync.*
  * @relation interface PreviewOutput extends CameraOutput
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class PreviewOutput <: RemoteDataLite & CameraOutput {
@@ -53,7 +53,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func release(): Unit {
@@ -69,7 +69,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation getSupportedFrameRates(): Array<FrameRateRange>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedFrameRates(): Array<FrameRateRange> {
@@ -93,7 +93,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation setFrameRate(minFps: int, maxFps: int): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setFrameRate(minFps: Int32, maxFps: Int32): Unit {
@@ -109,7 +109,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation getActiveFrameRate(): FrameRateRange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveFrameRate(): FrameRateRange {
@@ -127,7 +127,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation getActiveProfile(): Profile
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveProfile(): Profile {
@@ -147,7 +147,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation getPreviewRotation(displayRotation: int): ImageRotation
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getPreviewRotation(displayRotation: Int32): ImageRotation {
@@ -167,7 +167,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation setPreviewRotation(previewRotation: ImageRotation, isDisplayLocked?: boolean): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setPreviewRotation(previewRotation: ImageRotation, isDisplayLocked!: Bool = false): Unit {
@@ -191,7 +191,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -268,7 +268,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -294,7 +294,7 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

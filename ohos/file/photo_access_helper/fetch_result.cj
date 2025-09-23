@@ -24,7 +24,7 @@ import ohos.ffi.*
  * @relation interface FetchResult<T>
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class FetchResult <: RemoteDataLite {
@@ -40,7 +40,7 @@ public open class FetchResult <: RemoteDataLite {
      * @relation close(): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func close(): Unit {
@@ -58,7 +58,7 @@ public open class FetchResult <: RemoteDataLite {
      * @relation getCount(): number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getCount(): Int32 {
@@ -79,7 +79,7 @@ public open class FetchResult <: RemoteDataLite {
      * @relation isAfterLast(): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func isAfterLast(): Bool {
@@ -102,7 +102,7 @@ class FetchResultImpl {}
  * @relation interface FetchResult<T>
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class AlbumResult <: FetchResult {
@@ -122,7 +122,7 @@ public class AlbumResult <: FetchResult {
      * @relation getFirstObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getFirstObject(): Album {
@@ -144,7 +144,7 @@ public class AlbumResult <: FetchResult {
      * @relation getNextObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getNextObject(): Album {
@@ -164,7 +164,7 @@ public class AlbumResult <: FetchResult {
      * @relation getLastObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getLastObject(): Album {
@@ -184,7 +184,7 @@ public class AlbumResult <: FetchResult {
      * @relation getObjectByPosition(index: number): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getObjectByPosition(index: Int32): Album {
@@ -204,7 +204,7 @@ public class AlbumResult <: FetchResult {
      * @relation getAllObjects(): Promise<Array<T>>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAllObjects(): Array<Album> {
@@ -227,7 +227,7 @@ public class AlbumResult <: FetchResult {
  * @relation interface FetchResult<T>
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAssetResult <: FetchResult {
@@ -247,7 +247,7 @@ public class PhotoAssetResult <: FetchResult {
      * @relation getFirstObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getFirstObject(): PhotoAsset {
@@ -269,7 +269,7 @@ public class PhotoAssetResult <: FetchResult {
      * @relation getNextObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getNextObject(): PhotoAsset {
@@ -289,7 +289,7 @@ public class PhotoAssetResult <: FetchResult {
      * @relation getLastObject(): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getLastObject(): PhotoAsset {
@@ -309,7 +309,7 @@ public class PhotoAssetResult <: FetchResult {
      * @relation getObjectByPosition(index: number): Promise<T>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getObjectByPosition(index: Int32): PhotoAsset {
@@ -329,7 +329,7 @@ public class PhotoAssetResult <: FetchResult {
      * @relation getAllObjects(): Promise<Array<T>>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAllObjects(): Array<PhotoAsset> {

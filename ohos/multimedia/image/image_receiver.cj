@@ -48,7 +48,7 @@ foreign {
  * @relation function createImageReceiver(size: Size, format: ImageFormat, capacity: int): ImageReceiver
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver {
@@ -68,7 +68,7 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
  * @relation interface ImageReceiver
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public class ImageReceiver <: RemoteDataLite {
@@ -79,7 +79,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation readonly size: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop size: Size {
@@ -100,7 +100,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation readonly capacity: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop capacity: Int32 {
@@ -121,7 +121,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation readonly format: ImageFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop format: ImageFormat {
@@ -151,7 +151,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation getReceivingSurfaceId(): Promise<string>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func getReceivingSurfaceId(): String {
@@ -174,7 +174,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation readLatestImage(): Promise<Image>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func readLatestImage(): Image {
@@ -192,7 +192,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation readNextImage(): Promise<Image>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func readNextImage(): Image {
@@ -209,7 +209,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation on(type: 'imageArrival', callback: AsyncCallback<void>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func on(eventType: ReceiveType, callback: Callback0Argument): Unit {
@@ -226,7 +226,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation off(type: 'imageArrival', callback?: AsyncCallback<void>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func off(eventType: ReceiveType): Unit {}
@@ -237,7 +237,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func release(): Unit {
@@ -251,7 +251,7 @@ public class ImageReceiver <: RemoteDataLite {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public enum ReceiveType {
@@ -260,7 +260,7 @@ public enum ReceiveType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     ImageArrival

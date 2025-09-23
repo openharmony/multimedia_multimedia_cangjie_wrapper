@@ -61,7 +61,7 @@ foreign {
  * @relation interface ImagePacker
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImagePacker"
 ]
 public class ImagePacker <: RemoteDataLite {
@@ -81,7 +81,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation readonly supportedFormats: Array<string>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public prop supportedFormats: Array<String> {
@@ -113,7 +113,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation packToData(source: ImageSource, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToData(source: ImageSource, options: PackingOption): Array<UInt8> {
@@ -147,7 +147,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation packToData(source: PixelMap, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToData(source: PixelMap, options: PackingOption): Array<UInt8> {
@@ -195,7 +195,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation packToFile(source: ImageSource, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): Unit {
@@ -226,7 +226,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation packToFile(source: PixelMap, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Unit {
@@ -242,7 +242,7 @@ public class ImagePacker <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func release(): Unit {
@@ -257,7 +257,7 @@ public class ImagePacker <: RemoteDataLite {
  * @relation function createImagePacker(): ImagePacker
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImagePacker"
 ]
 public func createImagePacker(): ImagePacker {

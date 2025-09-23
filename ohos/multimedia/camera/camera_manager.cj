@@ -28,7 +28,7 @@ import std.sync.*
  * @relation interface CameraManager
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraManager <: RemoteDataLite {
@@ -58,7 +58,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation isCameraMuted(): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isCameraMuted(): Bool {
@@ -72,7 +72,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation isTorchModeSupported(mode: TorchMode): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isTorchModeSupported(mode: TorchMode): Bool {
@@ -86,7 +86,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation isTorchSupported(): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isTorchSupported(): Bool {
@@ -100,7 +100,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation getTorchMode(): TorchMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getTorchMode(): TorchMode {
@@ -117,7 +117,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation setTorchMode(mode: TorchMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setTorchMode(mode: TorchMode): Unit {
@@ -132,7 +132,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation getSupportedCameras(): Array<CameraDevice>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedCameras(): Array<CameraDevice> {
@@ -152,7 +152,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation getSupportedSceneModes(camera: CameraDevice): Array<SceneMode>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedSceneModes(camera: CameraDevice): Array<SceneMode> {
@@ -179,7 +179,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode): CameraOutputCapability
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode): CameraOutputCapability {
@@ -212,7 +212,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createCameraInput(camera: CameraDevice): CameraInput
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.CAMERA",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
@@ -244,7 +244,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createCameraInput(position: CameraPosition, type: CameraType): CameraInput
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.CAMERA",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
@@ -270,7 +270,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createPreviewOutput(profile: Profile, surfaceId: string): PreviewOutput
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createPreviewOutput(profile: Profile, surfaceId: String): PreviewOutput {
@@ -297,7 +297,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createPreviewOutput(surfaceId: string): PreviewOutput
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createPreviewOutput(surfaceId: String): PreviewOutput {
@@ -326,7 +326,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createPhotoOutput(profile?: Profile): PhotoOutput
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createPhotoOutput(profile!: ?Profile = None): PhotoOutput {
@@ -351,7 +351,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createVideoOutput(profile: VideoProfile, surfaceId: string): VideoOutput
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createVideoOutput(profile: VideoProfile, surfaceId: String): VideoOutput {
@@ -380,7 +380,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createVideoOutput(surfaceId: string): VideoOutput
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createVideoOutput(surfaceId: String): VideoOutput {
@@ -409,7 +409,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation createSession<T extends Session>(mode: SceneMode): T
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func createSession(mode: SceneMode): Session {
@@ -437,7 +437,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation on(type: 'cameraStatus', callback: AsyncCallback<CameraStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CameraStatusInfo>): Unit {
@@ -474,7 +474,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation on(type: 'foldStatusChange', callback: AsyncCallback<FoldStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FoldStatusInfo>): Unit {
@@ -512,7 +512,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation on(type: 'torchStatusChange', callback: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
@@ -546,7 +546,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation off(type: 'cameraStatus', callback?: AsyncCallback<CameraStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CameraStatusInfo>): Unit {
@@ -567,7 +567,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation off(type: 'foldStatusChange', callback?: AsyncCallback<FoldStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FoldStatusInfo>): Unit {
@@ -588,7 +588,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
@@ -610,7 +610,7 @@ public class CameraManager <: RemoteDataLite {
      * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

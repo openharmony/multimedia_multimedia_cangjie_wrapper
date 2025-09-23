@@ -24,7 +24,7 @@ import ohos.ffi.*
  * @relation class MediaAlbumChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
@@ -37,7 +37,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     /**
@@ -67,7 +67,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation getAlbum(): Album
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAlbum(): Album {
@@ -90,7 +90,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation setAlbumName(name: string): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func setAlbumName(name: String): Unit {
@@ -110,7 +110,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation addAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addAssets(assets: Array<PhotoAsset>): Unit {
@@ -131,7 +131,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @relation removeAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func removeAssets(assets: Array<PhotoAsset>): Unit {
