@@ -21,6 +21,13 @@ As shown in the architecture diagram:
 - Image Processing: Responsible for providing basic image functions, and providing the package C interface to Cangjie for interoperability.
 - Media Services: Responsible for providing basic media functions, encapsulating C interfaces for Cangjie for interoperability.
 - Album Management: Responsible for providing the basic functions of the album, and providing the package C interface to Cangjie for interoperability.
+- cangjie_ark_interop: Responsible for providing Cangjie APILevel class definitions, which are used to annotate APIs, as well as providing the definition of BusinessException class that is thrown to users.
+- hiviewdfx_cangjie_wrapper: Responsible for providing logging interfaces, which are used to print logs at key points in the execution path.
+- graphic_cangjie_wrapper: Responsible for providing color management type definitions, which are used for parameters and return types of interfaces related to the camera and image modules.
+- distributeddatamgr_cangjie_wrapper: Responsible for providing data sharing predicate definitions, which are used for configuration parameters of album interface acquisition in the album module.
+- global_cangjie_wrapper: Responsible for providing resource management interfaces, which are used for interface parameter types of image resource acquisition.
+- bundlemanager_cangjie_wrapper: Responsible for providing package management interfaces, which are used to obtain package information in the interface implementation of the album module.
+- ability_cangjie_wrapper: Responsible for providing meta-ability context interfaces, which are used for parameters and return types of relevant interfaces in each module.
 
 ## Directory Structure
 
@@ -38,15 +45,14 @@ foundation/multimedia/multimedia_cangjie_wrapper
 │   ├── file
 │   │   └── photo_access_helper     # The interfaces for create, access, and modify albums.
 │   └── multimedia
-│       └── camera                  # The Interfaces for previewing, taking photos, and recording videos.
-│       └── image                   # The Interfaces for image encoding and decoding.
+│       ├── camera                  # The Interfaces for previewing, taking photos, and recording videos.
+│       ├── image                   # The Interfaces for image encoding and decoding.
 │       └── media                   # The Interfaces for retrieving video thumbnails.
 └── test                            # Cangjie test cases
-    └── APILevel22
-        └── camera                  # camera test cases
-        └── image                   # image test cases
-        └── media                   # media test cases
-        └── photo_accesshelper      # photo_accesshelper test cases
+    ├── camera                      # camera test cases
+    ├── image                       # image test cases
+    ├── media                       # media test cases
+    └── photo_accesshelper          # photo_accesshelper test cases
 ```
 
 ## Usage Guidelines
