@@ -28,7 +28,7 @@ import std.sync.*
  * @relation interface VideoOutput extends CameraOutput
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class VideoOutput <: RemoteDataLite & CameraOutput {
@@ -53,7 +53,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func release(): Unit {
@@ -69,7 +69,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation start(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func start(): Unit {
@@ -86,7 +86,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation stop(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func stop(): Unit {
@@ -104,7 +104,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation getSupportedFrameRates(): Array<FrameRateRange>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedFrameRates(): Array<FrameRateRange> {
@@ -130,7 +130,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation setFrameRate(minFps: int, maxFps: int): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setFrameRate(minFps: Int32, maxFps: Int32): Unit {
@@ -146,7 +146,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation getActiveFrameRate(): FrameRateRange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveFrameRate(): FrameRateRange {
@@ -166,7 +166,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation getActiveProfile(): VideoProfile
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveProfile(): VideoProfile {
@@ -188,7 +188,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation getVideoRotation(deviceDegree: int): ImageRotation
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getVideoRotation(deviceDegree: Int32): ImageRotation {
@@ -215,7 +215,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -298,7 +298,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -324,7 +324,7 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

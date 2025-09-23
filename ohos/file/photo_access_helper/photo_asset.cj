@@ -25,7 +25,7 @@ import ohos.multimedia.image.*
  * @relation interface PhotoAsset
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAsset <: RemoteDataLite {
@@ -35,7 +35,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly uri: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop uri: String {
@@ -55,7 +55,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly photoType: PhotoType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop photoType: PhotoType {
@@ -73,7 +73,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation readonly displayName: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop displayName: String {
@@ -105,7 +105,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation get(member: string): MemberType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func get(member: String): MemberType {
@@ -132,7 +132,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation set(member: string, value: string): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func set(member: String, value: String): Unit {
@@ -160,7 +160,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation commitModify(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -181,7 +181,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @relation getThumbnail(size?: image.Size): Promise<image.PixelMap>
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

@@ -26,7 +26,7 @@ import ohos.business_exception.*
  * @relation interface ImageInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class ImageInfo {
@@ -36,7 +36,7 @@ public class ImageInfo {
      * @relation size: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var size: Size
@@ -47,7 +47,7 @@ public class ImageInfo {
      * @relation density: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var density: Int32
@@ -58,7 +58,7 @@ public class ImageInfo {
      * @relation stride: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var stride: Int32
@@ -69,7 +69,7 @@ public class ImageInfo {
      * @relation pixelFormat: PixelMapFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var pixelFormat: PixelMapFormat
@@ -80,7 +80,7 @@ public class ImageInfo {
      * @relation alphaType: AlphaType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var alphaType: AlphaType
@@ -91,7 +91,7 @@ public class ImageInfo {
      * @relation mimeType: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var mimeType: String
@@ -102,7 +102,7 @@ public class ImageInfo {
      * @relation isHdr: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var isHdr: Bool
@@ -125,7 +125,7 @@ public class ImageInfo {
  * @relation interface SourceOptions
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class SourceOptions {
@@ -135,7 +135,7 @@ public class SourceOptions {
      * @relation sourceDensity: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var sourceDensity: Int32
@@ -146,7 +146,7 @@ public class SourceOptions {
      * @relation sourcePixelFormat?: PixelMapFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var sourcePixelFormat: PixelMapFormat
@@ -157,7 +157,7 @@ public class SourceOptions {
      * @relation sourceSize?: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var sourceSize: Size
@@ -167,7 +167,7 @@ public class SourceOptions {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(sourceDensity: Int32, sourcePixelFormat!: PixelMapFormat = PixelMapFormat.Unknown, sourceSize!: Size = Size(0, 0)) {
@@ -187,7 +187,7 @@ public class SourceOptions {
  * @relation interface InitializationOptions
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class InitializationOptions {
@@ -197,7 +197,7 @@ public class InitializationOptions {
      * @relation alphaType?: AlphaType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var alphaType: AlphaType
@@ -208,7 +208,7 @@ public class InitializationOptions {
      * @relation editable?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var editable: Bool
@@ -219,7 +219,7 @@ public class InitializationOptions {
      * @relation srcPixelFormat?: PixelMapFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var srcPixelFormat: PixelMapFormat
@@ -230,7 +230,7 @@ public class InitializationOptions {
      * @relation pixelFormat?: PixelMapFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var pixelFormat: PixelMapFormat
@@ -241,7 +241,7 @@ public class InitializationOptions {
      * @relation scaleMode?: ScaleMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var scaleMode: ScaleMode
@@ -252,7 +252,7 @@ public class InitializationOptions {
      * @relation size: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var size: Size
@@ -262,7 +262,7 @@ public class InitializationOptions {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(size: Size, alphaType!: AlphaType = AlphaType.Premul, editable!: Bool = false, srcPixelFormat!: PixelMapFormat = PixelMapFormat.Bgra8888,
@@ -289,7 +289,7 @@ public class InitializationOptions {
  * @relation interface DecodingOptions
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class DecodingOptions {
@@ -299,7 +299,7 @@ public class DecodingOptions {
      * @relation sampleSize?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var sampleSize: UInt32
@@ -310,7 +310,7 @@ public class DecodingOptions {
      * @relation rotate?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var rotate: UInt32
@@ -321,7 +321,7 @@ public class DecodingOptions {
      * @relation editable?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var editable: Bool
@@ -333,7 +333,7 @@ public class DecodingOptions {
      * @relation desiredSize?: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredSize: Size
@@ -344,7 +344,7 @@ public class DecodingOptions {
      * @relation desiredRegion?: Region
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredRegion: Region
@@ -355,7 +355,7 @@ public class DecodingOptions {
      * @relation desiredPixelFormat?: PixelMapFormat
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredPixelFormat: PixelMapFormat
@@ -366,7 +366,7 @@ public class DecodingOptions {
      * @relation index?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var index: UInt32
@@ -377,7 +377,7 @@ public class DecodingOptions {
      * @relation fitDensity?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var fitDensity: Int32
@@ -388,7 +388,7 @@ public class DecodingOptions {
      * @relation desiredColorSpace?: colorSpaceManager.ColorSpaceManager
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredColorSpace: ?ColorSpaceManager
@@ -399,7 +399,7 @@ public class DecodingOptions {
      * @relation desiredDynamicRange?: DecodingDynamicRange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredDynamicRange: DecodingDynamicRange
@@ -409,7 +409,7 @@ public class DecodingOptions {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public init(sampleSize!: UInt32 = 1, rotate!: UInt32 = 0, editable!: Bool = false,
@@ -453,7 +453,7 @@ public class DecodingOptions {
  * @relation interface PositionArea
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class PositionArea {
@@ -463,7 +463,7 @@ public class PositionArea {
      * @relation pixels: ArrayBuffer
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var pixels: Array<UInt8>
@@ -474,7 +474,7 @@ public class PositionArea {
      * @relation offset: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var offset: UInt32
@@ -485,7 +485,7 @@ public class PositionArea {
      * @relation stride: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var stride: UInt32
@@ -496,7 +496,7 @@ public class PositionArea {
      * @relation region: Region
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var region: Region
@@ -506,7 +506,7 @@ public class PositionArea {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(pixels: Array<UInt8>, offset: UInt32, stride: UInt32, region: Region) {
@@ -523,7 +523,7 @@ public class PositionArea {
  * @relation interface Size
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Size {
@@ -533,7 +533,7 @@ public class Size {
      * @relation height: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var height: Int32
@@ -544,7 +544,7 @@ public class Size {
      * @relation width: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var width: Int32
@@ -554,7 +554,7 @@ public class Size {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(height: Int32, width: Int32) {
@@ -578,7 +578,7 @@ public class Size {
  * @relation interface Region
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Region {
@@ -588,7 +588,7 @@ public class Region {
      * @relation size: Size
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var size: Size
@@ -599,7 +599,7 @@ public class Region {
      * @relation x: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var x: Int32
@@ -610,7 +610,7 @@ public class Region {
      * @relation y: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var y: Int32
@@ -620,7 +620,7 @@ public class Region {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(size: Size, x: Int32, y: Int32) {
@@ -646,7 +646,7 @@ public class Region {
  * @relation interface Component
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Component {
@@ -656,7 +656,7 @@ public class Component {
      * @relation readonly componentType: ComponentType
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public let componentType: ComponentType
@@ -667,7 +667,7 @@ public class Component {
      * @relation readonly rowStride: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public let rowStride: Int32
@@ -678,7 +678,7 @@ public class Component {
      * @relation readonly pixelStride: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public let pixelStride: Int32
@@ -689,7 +689,7 @@ public class Component {
      * @relation readonly byteBuffer: ArrayBuffer
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public let byteBuffer: Array<UInt8>
@@ -718,7 +718,7 @@ public class Component {
  * @relation interface PackingOption
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImagePacker"
 ]
 public class PackingOption {
@@ -728,7 +728,7 @@ public class PackingOption {
      * @relation format: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public var format: String
@@ -739,7 +739,7 @@ public class PackingOption {
      * @relation quality: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public var quality: UInt8
@@ -751,7 +751,7 @@ public class PackingOption {
      * @relation bufferSize?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public var bufferSize: UInt64
@@ -762,7 +762,7 @@ public class PackingOption {
      * @relation desiredDynamicRange?: PackingDynamicRange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public var desiredDynamicRange: PackingDynamicRange
@@ -773,7 +773,7 @@ public class PackingOption {
      * @relation needsPackProperties?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public var needsPackProperties: Bool
@@ -783,7 +783,7 @@ public class PackingOption {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public init(format: String, quality: UInt8, bufferSize!: UInt64 = 0,
@@ -802,7 +802,7 @@ public class PackingOption {
  * @relation interface ImagePropertyOptions
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class ImagePropertyOptions {
@@ -812,7 +812,7 @@ public class ImagePropertyOptions {
      * @relation index?: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var index: UInt32
@@ -823,7 +823,7 @@ public class ImagePropertyOptions {
      * @relation defaultValue?: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var defaultValue: String
@@ -833,7 +833,7 @@ public class ImagePropertyOptions {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public init(index!: UInt32 = 0, defaultValue!: String = "") {

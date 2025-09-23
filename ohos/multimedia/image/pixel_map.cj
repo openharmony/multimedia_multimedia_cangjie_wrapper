@@ -107,7 +107,7 @@ foreign {
  * @relation function createPixelMapSync(colors: ArrayBuffer, options: InitializationOptions): PixelMap
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions): PixelMap {
@@ -131,7 +131,7 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
  * @relation interface PixelMap
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class PixelMap <: RemoteDataLite {
@@ -151,7 +151,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation readonly isEditable: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop isEditable: Bool {
@@ -172,7 +172,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation readonly isStrideAlignment: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop isStrideAlignment: Bool {
@@ -193,7 +193,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation release(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func release(): Unit {
@@ -213,7 +213,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation readPixelsToBuffer(dst: ArrayBuffer): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func readPixelsToBuffer(dst: Array<UInt8>): Unit {
@@ -233,7 +233,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation writeBufferToPixels(src: ArrayBuffer): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func writeBufferToPixels(src: Array<UInt8>): Unit {
@@ -253,7 +253,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation getImageInfo(): Promise<ImageInfo>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getImageInfo(): ImageInfo {
@@ -277,7 +277,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation getBytesNumberPerRow(): number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getBytesNumberPerRow(): UInt32 {
@@ -297,7 +297,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation getPixelBytesNumber(): number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getPixelBytesNumber(): UInt32 {
@@ -317,7 +317,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation getDensity():number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getDensity(): Int32 {
@@ -337,7 +337,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation opacity(rate: number): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func opacity(rate: Float32): Unit {
@@ -356,7 +356,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation scale(x: number, y: number): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func scale(x: Float32, y: Float32): Unit {
@@ -375,7 +375,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation translate(x: number, y: number): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func translate(x: Float32, y: Float32): Unit {
@@ -393,7 +393,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation rotate(angle: number): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func rotate(angle: Float32): Unit {
@@ -412,7 +412,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation flip(horizontal: boolean, vertical: boolean): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func flip(horizontal: Bool, vertical: Bool): Unit {
@@ -430,7 +430,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation crop(region: Region): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func crop(region: Region): Unit {
@@ -448,7 +448,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation writePixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func writePixels(area: PositionArea): Unit {
@@ -472,7 +472,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation readPixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func readPixels(area: PositionArea): Unit {
@@ -496,7 +496,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation createAlphaPixelmapSync(): PixelMap
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func createAlphaPixelmap(): PixelMap {
@@ -518,7 +518,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation setColorSpace(colorSpace: colorSpaceManager.ColorSpaceManager): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func setColorSpace(colorSpace: ColorSpaceManager): Unit {
@@ -538,7 +538,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation getColorSpace(): colorSpaceManager.ColorSpaceManager
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getColorSpace(): ColorSpaceManager {
@@ -560,7 +560,7 @@ public class PixelMap <: RemoteDataLite {
      * @relation applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit {

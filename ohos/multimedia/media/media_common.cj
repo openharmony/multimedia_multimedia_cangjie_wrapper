@@ -73,7 +73,7 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
  * @relation interface AVFileDescriptor
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.Core"
 ]
 public class AVFileDescriptor {
@@ -84,7 +84,7 @@ public class AVFileDescriptor {
      * @relation fd: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var fd: Int32
@@ -96,7 +96,7 @@ public class AVFileDescriptor {
      * @relation offset?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var offset: Int64
@@ -108,7 +108,7 @@ public class AVFileDescriptor {
      * @relation length?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var length: Int64
@@ -117,7 +117,7 @@ public class AVFileDescriptor {
      * AVFileDescriptor constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public init(
@@ -137,7 +137,7 @@ public class AVFileDescriptor {
  * @relation interface PixelMapParams
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public class PixelMapParams {
@@ -148,7 +148,7 @@ public class PixelMapParams {
      * @relation width?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public var width: Int32
@@ -160,7 +160,7 @@ public class PixelMapParams {
      * @relation height?: number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public var height: Int32
@@ -169,7 +169,7 @@ public class PixelMapParams {
      * PixelMapParams constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public init(width!: Int32 = -1, height!: Int32 = -1) {
@@ -185,7 +185,7 @@ public class PixelMapParams {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public enum AVImageQueryOptions {
@@ -195,7 +195,7 @@ public enum AVImageQueryOptions {
      * @relation AV_IMAGE_QUERY_NEXT_SYNC = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryNextSync
@@ -207,7 +207,7 @@ public enum AVImageQueryOptions {
      * @relation AV_IMAGE_QUERY_PREVIOUS_SYNC = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryPreviousSync
@@ -219,7 +219,7 @@ public enum AVImageQueryOptions {
      * @relation AV_IMAGE_QUERY_CLOSEST_SYNC = 2
      */    
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryClosestSync
@@ -231,7 +231,7 @@ public enum AVImageQueryOptions {
      * @relation AV_IMAGE_QUERY_CLOSEST = 3
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryClosest

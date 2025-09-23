@@ -28,7 +28,7 @@ import ohos.labels.APILevel
  * @relation function getCameraManager(context: Context): CameraManager
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public func getCameraManager(context: UIAbilityContext): CameraManager {

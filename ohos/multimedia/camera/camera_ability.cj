@@ -90,7 +90,7 @@ struct CPoint {
  * @relation interface Point
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class Point {
@@ -100,7 +100,7 @@ public class Point {
      * @relation x: double
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var x: Float64
@@ -111,7 +111,7 @@ public class Point {
      * @relation y: double
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var y: Float64
@@ -120,7 +120,7 @@ public class Point {
      * Point constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public init(x: Float64, y: Float64) {
@@ -145,7 +145,7 @@ public class Point {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum ExposureMode {
@@ -155,7 +155,7 @@ public enum ExposureMode {
      * @relation EXPOSURE_MODE_LOCKED = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeLocked
@@ -166,7 +166,7 @@ public enum ExposureMode {
      * @relation EXPOSURE_MODE_AUTO = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeAuto
@@ -177,7 +177,7 @@ public enum ExposureMode {
      * @relation EXPOSURE_MODE_CONTINUOUS_AUTO = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeContinuousAuto
@@ -210,7 +210,7 @@ public enum ExposureMode {
  * @relation interface AutoExposureQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface AutoExposureQuery {
@@ -223,7 +223,7 @@ public interface AutoExposureQuery {
      * @relation isExposureModeSupported(aeMode: ExposureMode): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isExposureModeSupported(aeMode: ExposureMode): Bool {
@@ -245,7 +245,7 @@ public interface AutoExposureQuery {
      * @relation getExposureBiasRange(): Array<double>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureBiasRange(): Array<Float64> {
@@ -266,7 +266,7 @@ public interface AutoExposureQuery {
  * @relation interface AutoExposure extends AutoExposureQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface AutoExposure <: AutoExposureQuery {
@@ -278,7 +278,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation getExposureMode(): ExposureMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureMode(): ExposureMode {
@@ -299,7 +299,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation setExposureMode(aeMode: ExposureMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setExposureMode(aeMode: ExposureMode): Unit {
@@ -319,7 +319,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation getMeteringPoint(): Point
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getMeteringPoint(): Point {
@@ -339,7 +339,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation setMeteringPoint(point: Point): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setMeteringPoint(point: Point): Unit {
@@ -360,7 +360,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation setExposureBias(exposureBias: double): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setExposureBias(exposureBias: Float64): Unit {
@@ -380,7 +380,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @relation getExposureValue(): double
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureValue(): Float64 {
@@ -399,7 +399,7 @@ public interface AutoExposure <: AutoExposureQuery {
  * @relation interface ColorManagementQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ColorManagementQuery {
@@ -411,7 +411,7 @@ public interface ColorManagementQuery {
      * @relation getSupportedColorSpaces(): Array<colorSpaceManager.ColorSpace>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getSupportedColorSpaces(): Array<ColorSpace> {
@@ -441,7 +441,7 @@ public interface ColorManagementQuery {
  * @relation interface ColorManagement extends ColorManagementQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ColorManagement <: ColorManagementQuery {
@@ -456,7 +456,7 @@ public interface ColorManagement <: ColorManagementQuery {
      * @relation setColorSpace(colorSpace: colorSpaceManager.ColorSpace): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setColorSpace(colorSpace: ColorSpace): Unit {
@@ -476,7 +476,7 @@ public interface ColorManagement <: ColorManagementQuery {
      * @relation getActiveColorSpace(): colorSpaceManager.ColorSpace
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getActiveColorSpace(): ColorSpace {
@@ -497,7 +497,7 @@ public interface ColorManagement <: ColorManagementQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FlashMode {
@@ -507,7 +507,7 @@ public enum FlashMode {
      * @relation FLASH_MODE_CLOSE = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeClose
@@ -518,7 +518,7 @@ public enum FlashMode {
      * @relation FLASH_MODE_OPEN = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeOpen
@@ -529,7 +529,7 @@ public enum FlashMode {
      * @relation FLASH_MODE_AUTO = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeAuto
@@ -540,7 +540,7 @@ public enum FlashMode {
      * @relation FLASH_MODE_ALWAYS_OPEN = 3
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeAlwaysOpen
@@ -575,7 +575,7 @@ public enum FlashMode {
  * @relation interface FlashQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface FlashQuery {
@@ -587,7 +587,7 @@ public interface FlashQuery {
      * @relation hasFlash(): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func hasFlash(): Bool {
@@ -609,7 +609,7 @@ public interface FlashQuery {
      * @relation isFlashModeSupported(flashMode: FlashMode): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isFlashModeSupported(flashMode: FlashMode): Bool {
@@ -630,7 +630,7 @@ public interface FlashQuery {
  * @relation interface Flash extends FlashQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Flash <: FlashQuery {
@@ -642,7 +642,7 @@ public interface Flash <: FlashQuery {
      * @relation setFlashMode(flashMode: FlashMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFlashMode(flashMode: FlashMode): Unit {
@@ -661,7 +661,7 @@ public interface Flash <: FlashQuery {
      * @relation getFlashMode(): FlashMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFlashMode(): FlashMode {
@@ -682,7 +682,7 @@ public interface Flash <: FlashQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FocusState {
@@ -692,7 +692,7 @@ public enum FocusState {
      * @relation FOCUS_STATE_SCAN = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateScan
@@ -703,7 +703,7 @@ public enum FocusState {
      * @relation FOCUS_STATE_FOCUSED = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateFocused
@@ -714,7 +714,7 @@ public enum FocusState {
      * @relation FOCUS_STATE_UNFOCUSED = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateUnfocused
@@ -748,7 +748,7 @@ public enum FocusState {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FocusMode {
@@ -758,7 +758,7 @@ public enum FocusMode {
      * @relation FOCUS_MODE_MANUAL = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeManual
@@ -769,7 +769,7 @@ public enum FocusMode {
      * @relation FOCUS_MODE_CONTINUOUS_AUTO = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeContinuousAuto
@@ -780,7 +780,7 @@ public enum FocusMode {
      * @relation FOCUS_MODE_AUTO = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeAuto
@@ -791,7 +791,7 @@ public enum FocusMode {
      * @relation FOCUS_MODE_LOCKED = 3
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeLocked
@@ -826,7 +826,7 @@ public enum FocusMode {
  * @relation interface FocusQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface FocusQuery {
@@ -839,7 +839,7 @@ public interface FocusQuery {
      * @relation isFocusModeSupported(afMode: FocusMode): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isFocusModeSupported(afMode: FocusMode): Bool {
@@ -859,7 +859,7 @@ public interface FocusQuery {
  * @relation interface Focus extends FocusQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Focus <: FocusQuery {
@@ -871,7 +871,7 @@ public interface Focus <: FocusQuery {
      * @relation setFocusMode(afMode: FocusMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFocusMode(afMode: FocusMode): Unit {
@@ -888,7 +888,7 @@ public interface Focus <: FocusQuery {
      * @relation getFocusMode(): FocusMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocusMode(): FocusMode {
@@ -908,7 +908,7 @@ public interface Focus <: FocusQuery {
      * @relation setFocusPoint(point: Point): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFocusPoint(point: Point): Unit {
@@ -928,7 +928,7 @@ public interface Focus <: FocusQuery {
      * @relation getFocusPoint(): Point
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocusPoint(): Point {
@@ -948,7 +948,7 @@ public interface Focus <: FocusQuery {
      * @relation getFocalLength(): double
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocalLength(): Float64 {
@@ -968,7 +968,7 @@ public interface Focus <: FocusQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum VideoStabilizationMode {
@@ -978,7 +978,7 @@ public enum VideoStabilizationMode {
      * @relation OFF = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Off
@@ -989,7 +989,7 @@ public enum VideoStabilizationMode {
      * @relation LOW = 1
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Low
@@ -1000,7 +1000,7 @@ public enum VideoStabilizationMode {
      * @relation MIDDLE = 2
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Middle
@@ -1011,7 +1011,7 @@ public enum VideoStabilizationMode {
      * @relation HIGH = 3
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     High
@@ -1022,7 +1022,7 @@ public enum VideoStabilizationMode {
      * @relation AUTO = 4
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Auto
@@ -1059,7 +1059,7 @@ public enum VideoStabilizationMode {
  * @relation interface StabilizationQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface StabilizationQuery {
@@ -1072,7 +1072,7 @@ public interface StabilizationQuery {
      * @relation isVideoStabilizationModeSupported(vsMode: VideoStabilizationMode): boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isVideoStabilizationModeSupported(vsMode: VideoStabilizationMode): Bool {
@@ -1093,7 +1093,7 @@ public interface StabilizationQuery {
  * @relation interface Stabilization extends StabilizationQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Stabilization <: StabilizationQuery {
@@ -1105,7 +1105,7 @@ public interface Stabilization <: StabilizationQuery {
      * @relation getActiveVideoStabilizationMode(): VideoStabilizationMode
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getActiveVideoStabilizationMode(): VideoStabilizationMode {
@@ -1127,7 +1127,7 @@ public interface Stabilization <: StabilizationQuery {
      * @relation setVideoStabilizationMode(mode: VideoStabilizationMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setVideoStabilizationMode(mode: VideoStabilizationMode): Unit {
@@ -1146,7 +1146,7 @@ public interface Stabilization <: StabilizationQuery {
  * @relation interface SmoothZoomInfo
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class SmoothZoomInfo {
@@ -1156,7 +1156,7 @@ public class SmoothZoomInfo {
      * @relation duration: int
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var duration: Int32
@@ -1177,7 +1177,7 @@ public class SmoothZoomInfo {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum SmoothZoomMode {
@@ -1187,7 +1187,7 @@ public enum SmoothZoomMode {
      * @relation NORMAL = 0
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Normal
@@ -1216,7 +1216,7 @@ public enum SmoothZoomMode {
  * @relation interface ZoomQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ZoomQuery {
@@ -1228,7 +1228,7 @@ public interface ZoomQuery {
      * @relation getZoomRatioRange(): Array<double>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getZoomRatioRange(): Array<Float64> {
@@ -1249,7 +1249,7 @@ public interface ZoomQuery {
  * @relation interface Zoom extends ZoomQuery
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Zoom <: ZoomQuery {
@@ -1261,7 +1261,7 @@ public interface Zoom <: ZoomQuery {
      * @relation setZoomRatio(zoomRatio: double): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setZoomRatio(zoomRatio: Float64): Unit {
@@ -1281,7 +1281,7 @@ public interface Zoom <: ZoomQuery {
      * @relation getZoomRatio(): double
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getZoomRatio(): Float64 {
@@ -1301,7 +1301,7 @@ public interface Zoom <: ZoomQuery {
      * @relation setSmoothZoom(targetRatio: double, mode?: SmoothZoomMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setSmoothZoom(targetRatio: Float64, mode: SmoothZoomMode): Unit {
@@ -1320,7 +1320,7 @@ public interface Zoom <: ZoomQuery {
      * @relation setSmoothZoom(targetRatio: double, mode?: SmoothZoomMode): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setSmoothZoom(targetRatio: Float64): Unit {
