@@ -21,6 +21,13 @@ OS媒体软件仓颉接口是在OpenHarmony上基于媒体子系统能力之上�
 - 图片处理：负责提供图片基础功能，封装C接口提供给仓颉进行互操作。
 - 媒体服务：负责提供媒体基础功能，封装C接口提供给仓颉进行互操作。
 - 相册管理：负责提供相册基础功能，封装C接口提供给仓颉进行互操作。
+- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注，以及提供抛向用户的BusinessException异常类定义。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
+- graphic_cangjie_wrapper：负责提供颜色管理类型定义，用于相机和图片模块相关接口的参数、返回类型。
+- distributeddatamgr_cangjie_wrapper：负责提供数据共享谓词定义，用于相册模块获取相册接口的配置参数。
+- global_cangjie_wrapper：负责提供资源管理接口，用于获取图片资源的接口参数类型。
+- bundlemanager_cangjie_wrapper：负责提供包管理接口，用户相册模块接口实现中获取包信息。
+- ability_cangjie_wrapper：负责提供元能力上下文接口，用于各模块相关接口的参数、返回类型。
 
 ## 目录
 
@@ -38,15 +45,14 @@ foundation/multimedia/multimedia_cangjie_wrapper
 │   ├── file
 │   │   └── photo_access_helper     # 创建、访问、修改相册相关接口
 │   └── multimedia
-│       └── camera                  # 预览、拍照和录像相关接口
-│       └── image                   # 图片编解码相关接口
+│       ├── camera                  # 预览、拍照和录像相关接口
+│       ├── image                   # 图片编解码相关接口
 │       └── media                   # 获取视频缩略图相关接口
 └── test                            # 仓颉测试用例
-    └── APILevel22
-        └── camera                  # camera测试用例
-        └── image                   # image测试用例
-        └── media                   # media测试用例
-        └── photo_accesshelper      # photo_accesshelper测试用例
+    ├── camera                      # camera测试用例
+    ├── image                       # image测试用例
+    ├── media                       # media测试用例
+    └── photo_accesshelper          # photo_accesshelper测试用例
 ```
 
 ## 使用说明
