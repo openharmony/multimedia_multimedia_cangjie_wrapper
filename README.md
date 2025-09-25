@@ -25,7 +25,6 @@ Framework:
 - Image codec wrapper: Provides Implementation encapsulation of Cangjie Image codec, providing Image codec capabilities.
 - Get video thumbnails wrapper: Provides Implementation encapsulation of Cangjie Get video thumbnails, providing Get video thumbnails capabilities.
 - Create, access, modify albums wrapper: Provides Implementation encapsulation of Cangjie Create, access, modify albums, providing Create, access, modify albums capabilities.
-- Cangjie OS Media Software FFI Interface Definition: Responsible for defining the C Language interoperability Cangjie interface, which is used to realize the Cangjie OS media software capabilities.
 
 - Explanation of Dependencies in the Architecture Diagram:
 
