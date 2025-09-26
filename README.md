@@ -14,17 +14,17 @@ As shown in the architecture diagram:
 
 Interface:
 
-- Preview, take photos and videos: Provide a camera operation interface to support preview, take photos and record videos.
-- Image codec: Supports the encoding and decoding of common image formats.
-- Get video thumbnails: Provide apps with the ability to get video thumbnails.
-- Create, access, modify albums: Supports local and distributed media data creation, access, and modification of albums.
+- Camera Management Interface: Provide a camera operation interface to support preview, take photos and record videos.
+- Image Process Interface: Supports the encoding and decoding of common image formats.
+- Media Services Interface: Provide apps with the ability to get video thumbnails.
+- Photo Album Management Interface: Supports local and distributed media data creation, access, and modification of albums.
 
 Framework:
 
-- Preview, take photos and videos wrapper: Provides Implementation encapsulation of Cangjie Preview, take photos and videos, providing Preview, take photos and videos capabilities.
-- Image codec wrapper: Provides Implementation encapsulation of Cangjie Image codec, providing Image codec capabilities.
-- Get video thumbnails wrapper: Provides Implementation encapsulation of Cangjie Get video thumbnails, providing Get video thumbnails capabilities.
-- Create, access, modify albums wrapper: Provides Implementation encapsulation of Cangjie Create, access, modify albums, providing Create, access, modify albums capabilities.
+- Camera Management Wrapper: Provides Implementation encapsulation of Cangjie Preview, take photos and videos, providing Preview, take photos and videos capabilities.
+- Image Process Wrapper: Provides Implementation encapsulation of Cangjie Image codec, providing Image codec capabilities.
+- Media Services Wrapper: Provides Implementation encapsulation of Cangjie Get video thumbnails, providing Get video thumbnails capabilities.
+- Photo Album Management Wrapper: Provides Implementation encapsulation of Cangjie Create, access, modify albums, providing Create, access, modify albums capabilities.
 
 - Explanation of Dependencies in the Architecture Diagram:
 
@@ -76,27 +76,36 @@ The current OS media software Cangjie interface provides the following functions
 - Get video thumbnails.
 - Create, access, modify albums.
 
-See Camera APIs[Camera Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/CameraKit/cj-apis-multimedia-camera.md). For guidance, please refer to[Camera Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/camera/cj-camera-overview.md).
+See Camera Management APIs[Camera Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/CameraKit/cj-apis-multimedia-camera.md). For guidance, please refer to[Camera Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/camera/cj-camera-overview.md).
 
-See Image APIs[Image Processing](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ImageKit/cj-apis-image.md). For guidance, please refer to[Image Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/image/cj-image-overview.md).
+See Image Process APIs[Image Process](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ImageKit/cj-apis-image.md). For guidance, please refer to[Image Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/image/cj-image-overview.md).
 
-See Media APIs[Media Service](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/MediaKit/cj-apis-multimedia_media.md). For guidance, please refer to[Media Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/media/cj-media-kit-intro.md).
+See Media Services APIs[Media Services](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/MediaKit/cj-apis-multimedia_media.md). For guidance, please refer to[Media Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/media/cj-media-kit-intro.md).
 
-See MediaLibrary APIs[Photo Album Management Module](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/MediaLibraryKit/cj-apis-multimedia-photo_accesshelper.md). For guidance, please refer to[Photo Album Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/medialibrary/cj-photoAccessHelper-systemAlbum-guidelines.md).
+See Photo Album Management APIs[Photo Album Management](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/MediaLibraryKit/cj-apis-multimedia-photo_accesshelper.md). For guidance, please refer to[Photo Album Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/media/medialibrary/cj-photoAccessHelper-systemAlbum-guidelines.md).
 
 ## Constraints
 
 Hardware-based decoding and encoding functions of audio and video data are device-specific.
 
-Compared with ArkTS, the following functions are not supported at the moment:
+Compared with ArkTS:
 
-- Multi-graph objects.
-- Image metadata.
-- Audio and video playback.
-- Audio and video recording.
-- Video transcoding.
-- Get audio and video metadata.
-- Screen recording.
+- In Camera Management, the following functions are not supported at the moment:
+  - Flashlight mode.
+  - Settings for picture quality, color space parameters, etc.
+
+- In Image Process, the following functions are not supported at the moment:
+  - Multi-graph objects.
+  - Image metadata.
+
+- In Media Services, the following functions are not supported at the moment:
+  - Audio and video playback.
+  - Audio and video recording.
+  - Video transcoding.
+  - Get audio and video metadata.
+  - Screen recording.
+
+- Audio Kit, AVCodec Kit, AVSession Kit, DRM Kit, Ringtone Kit and Scan Kit are not supported temporarily.
 
 ## Code Contribution
 
