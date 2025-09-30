@@ -52,10 +52,10 @@
         "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
         "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
         "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
-        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:MediaLibraryKit",
-        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:ImageKit",
-        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:MediaKit",
-        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:CameraKit"
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:kit.MediaLibraryKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:kit.ImageKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:kit.CameraKit"
       ],
       "inner_kits": [
         {
