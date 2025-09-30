@@ -13,6 +13,6 @@
  * limitations under the License.
  */
 
-package MediaLibraryKit
+package kit.MediaLibraryKit
 
 public import ohos.file.photo_access_helper.*
