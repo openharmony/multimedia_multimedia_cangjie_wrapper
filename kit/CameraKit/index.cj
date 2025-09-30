@@ -13,6 +13,6 @@
  * limitations under the License.
  */
 
-package CameraKit
+package kit.CameraKit
 
 public import ohos.multimedia.camera.*

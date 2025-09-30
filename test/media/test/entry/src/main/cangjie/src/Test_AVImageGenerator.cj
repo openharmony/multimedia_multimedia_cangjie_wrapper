@@ -20,9 +20,9 @@ import std.time.*
 import std.unittest.*
 import std.unittest.common.*
 import std.unittest.testmacro.*
-import MediaKit.*
+import kit.MediaKit.*
 import ohos.base.*
-import PerformanceAnalysisKit.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 @Test
 class Test_AVImageGenerator {
     @TestCase
