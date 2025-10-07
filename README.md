@@ -1,4 +1,4 @@
-# multimedia_cangjie_wrapper
+# multimedia_cangjie_wrapper(beta feature)
 
 ## Introduction
 
