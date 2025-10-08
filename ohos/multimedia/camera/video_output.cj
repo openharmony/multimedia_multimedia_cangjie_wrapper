@@ -26,8 +26,6 @@ import std.sync.*
 
 /**
  * Video output object.
- *
- * @relation interface VideoOutput extends CameraOutput
  */
 @!APILevel[
     22,
@@ -68,7 +66,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation start(): Promise<void>
      */
     @!APILevel[
         22,
@@ -85,7 +82,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * Stop video output.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation stop(): Promise<void>
      */
     @!APILevel[
         22,
@@ -103,7 +99,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Array<FrameRateRange> } The array of supported frame rate range.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getSupportedFrameRates(): Array<FrameRateRange>
      */
     @!APILevel[
         22,
@@ -129,7 +124,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @param { Int32 } maxFps - Maximum frame rate per second.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400110 - Unresolved conflicts with current configurations.
-     * @relation setFrameRate(minFps: int, maxFps: int): void
      */
     @!APILevel[
         22,
@@ -145,7 +139,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { FrameRateRange } The active frame rate range.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getActiveFrameRate(): FrameRateRange
      */
     @!APILevel[
         22,
@@ -165,7 +158,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { VideoProfile } The current preconfig type.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getActiveProfile(): VideoProfile
      */
     @!APILevel[
         22,
@@ -187,7 +179,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @returns { ImageRotation } The video rotation angle.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getVideoRotation(deviceDegree: int): ImageRotation
      */
     @!APILevel[
         22,
@@ -212,9 +203,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'frameStart', callback: AsyncCallback<void>): void
-     * @relation on(type: 'frameEnd', callback: AsyncCallback<void>): void
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -295,9 +283,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -321,9 +306,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         22,

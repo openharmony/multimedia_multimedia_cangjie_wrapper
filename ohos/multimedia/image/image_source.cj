@@ -83,7 +83,6 @@ foreign {
  *
  * @param { String } uri - Image source URI.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(uri: string): ImageSource
  */
 @!APILevel[
     22,
@@ -110,7 +109,6 @@ public func createImageSource(uri: String): ImageSource {
  * @param { String } uri - Image source URI.
  * @param { SourceOptions } options - The config of Image source.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(uri: string, options: SourceOptions): ImageSource
  */
 @!APILevel[
     22,
@@ -136,7 +134,6 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  *
  * @param { Int32 } fd - ID of a file descriptor.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(fd: int): ImageSource
  */
 @!APILevel[
     22,
@@ -157,7 +154,6 @@ public func createImageSource(fd: Int32): ImageSource {
  * @param { Int32 } fd - ID of a file descriptor.
  * @param { SourceOptions } options - The config of Image source.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(fd: int, options: SourceOptions): ImageSource
  */
 @!APILevel[
     22,
@@ -177,7 +173,6 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  *
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(buf: ArrayBuffer): ImageSource
  */
 @!APILevel[
     22,
@@ -204,7 +199,6 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @param { SourceOptions } options - The config of Image source.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(buf: ArrayBuffer, options: SourceOptions): ImageSource
  */
 @!APILevel[
     22,
@@ -232,7 +226,6 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
  * @param { resourceManager.RawFileDescriptor } rawfile - The raw file descriptor of the image.
  * @param { SourceOptions } options - The config of Image source.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @relation function createImageSource(rawfile: resourceManager.RawFileDescriptor, options?: SourceOptions): ImageSource
  */
 @!APILevel[
     22,
@@ -250,8 +243,6 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
 
 /**
  * ImageSource instance.
- *
- * @relation interface ImageSource
  */
 @!APILevel[
     22,
@@ -263,7 +254,6 @@ public class ImageSource <: RemoteDataLite {
      *
      * @throws { BusinessException } 62980102 - Failed to malloc memory.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly supportedFormats: Array<string>
      */
     @!APILevel[
         22,
@@ -312,7 +302,6 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980118 - Failed to create the image plugin.
      * @throws { BusinessException } 62980122 - Failed to decode the image header.
      * @throws { BusinessException } 62980137 - Invalid media operation.
-     * @relation getFrameCount(): Promise<int>
      */
     @!APILevel[
         22,
@@ -331,7 +320,6 @@ public class ImageSource <: RemoteDataLite {
      *  the default value 0 is used.
      * @returns { ImageInfo } An instance used to return the image information.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getImageInfoSync(index?: int): ImageInfo
      */
     @!APILevel[
         22,
@@ -367,7 +355,6 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980122 - Failed to decode the image header.
      * @throws { BusinessException } 62980123 - The image does not support EXIF decoding.
      * @throws { BusinessException } 62980135 - The EXIF value is invalid.
-     * @relation getImageProperty(key: PropertyKey, options?: ImagePropertyOptions): Promise<string>
      */
     @!APILevel[
         22,
@@ -399,7 +386,6 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980133 - The EXIF data is out of range.
      * @throws { BusinessException } 62980135 - The EXIF value is invalid.
      * @throws { BusinessException } 62980146 - The EXIF data failed to be written to the file.
-     * @relation modifyImageProperty(key: PropertyKey, value: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -425,7 +411,6 @@ public class ImageSource <: RemoteDataLite {
      * @param { UInt32 } value The offset of data.
      * @param { UInt32 } length The length fo buf.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation updateData(buf: ArrayBuffer, isFinished: boolean, value: int, length: int): Promise<void>
      */
     @!APILevel[
         22,
@@ -447,7 +432,6 @@ public class ImageSource <: RemoteDataLite {
      * @param { DecodingOptions } options Image decoding parameters.
      * @returns { PixelMap } An instance used to return the PixelMap object.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation createPixelMapSync(options?: DecodingOptions): PixelMap
      */
     @!APILevel[
         22,
@@ -482,7 +466,6 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980137 - Invalid media operation.
      * @throws { BusinessException } 62980173 - The DMA memory does not exist.
      * @throws { BusinessException } 62980174 - The DMA memory data is abnormal.
-     * @relation createPixelMapList(options?: DecodingOptions): Promise<Array<PixelMap>>
      */
     @!APILevel[
         22,
@@ -516,7 +499,6 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980118 - Failed to create the image plugin.
      * @throws { BusinessException } 62980122 - Failed to decode the image header.
      * @throws { BusinessException } 62980149 - Invalid MIME type for the image source.
-     * @relation getDelayTimeList(): Promise<Array<int>>
      */
     @!APILevel[
         22,
@@ -538,7 +520,6 @@ public class ImageSource <: RemoteDataLite {
      * Releases an ImageSource instance.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,

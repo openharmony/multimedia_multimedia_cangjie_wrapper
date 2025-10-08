@@ -26,8 +26,6 @@ import std.sync.*
 
 /**
  * Camera manager object.
- *
- * @relation interface CameraManager
  */
 @!APILevel[
     22,
@@ -57,7 +55,6 @@ public class CameraManager <: RemoteDataLite {
      * Queries whether the current camera is muted.
      *
      * @returns { Bool } Is camera muted.
-     * @relation isCameraMuted(): boolean
      */
     @!APILevel[
         22,
@@ -71,7 +68,6 @@ public class CameraManager <: RemoteDataLite {
      * Check if a specifies torch mode is supported.
      * @param { TorchMode } mode - torch mode.
      * @returns { Bool } is torch mode supported.
-     * @relation isTorchModeSupported(mode: TorchMode): boolean
      */
     @!APILevel[
         22,
@@ -85,7 +81,6 @@ public class CameraManager <: RemoteDataLite {
      * Check if the device has a torch.
      *
      * @returns { Bool } this value that specifies whether the device has a torch.
-     * @relation isTorchSupported(): boolean
      */
     @!APILevel[
         22,
@@ -99,7 +94,6 @@ public class CameraManager <: RemoteDataLite {
      * Get current torch mode.
      *
      * @returns { TorchMode } torch mode.
-     * @relation getTorchMode(): TorchMode
      */
     @!APILevel[
         22,
@@ -116,7 +110,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { TorchMode } mode - torch mode.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation setTorchMode(mode: TorchMode): void
      */
     @!APILevel[
         22,
@@ -131,7 +124,6 @@ public class CameraManager <: RemoteDataLite {
      * Gets the supported camera device objects and return the results synchronously.
      *
      * @returns { Array<CameraDevice> } An array of supported cameras.
-     * @relation getSupportedCameras(): Array<CameraDevice>
      */
     @!APILevel[
         22,
@@ -151,7 +143,6 @@ public class CameraManager <: RemoteDataLite {
      *
      * @param { CameraDevice } camera - Camera device.
      * @returns { Array<SceneMode> } An array of supported scene mode of camera.
-     * @relation getSupportedSceneModes(camera: CameraDevice): Array<SceneMode>
      */
     @!APILevel[
         22,
@@ -178,7 +169,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { CameraDevice } camera - Camera device, obtained through the getSupportedCameras interface.
      * @param { SceneMode } mode - Scene mode, obtained through the getSupportedSceneModes interface.
      * @returns { CameraOutputCapability } The camera output capability.
-     * @relation getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode): CameraOutputCapability
      */
     @!APILevel[
         22,
@@ -211,7 +201,6 @@ public class CameraManager <: RemoteDataLite {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createCameraInput(camera: CameraDevice): CameraInput
      */
     @!APILevel[
         22,
@@ -243,7 +232,6 @@ public class CameraManager <: RemoteDataLite {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createCameraInput(position: CameraPosition, type: CameraType): CameraInput
      */
     @!APILevel[
         22,
@@ -269,7 +257,6 @@ public class CameraManager <: RemoteDataLite {
      * @returns { PreviewOutput } The PreviewOutput instance.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createPreviewOutput(profile: Profile, surfaceId: string): PreviewOutput
      */
     @!APILevel[
         22,
@@ -296,7 +283,6 @@ public class CameraManager <: RemoteDataLite {
      * @returns { PreviewOutput } The PreviewOutput instance.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createPreviewOutput(surfaceId: string): PreviewOutput
      */
     @!APILevel[
         22,
@@ -325,7 +311,6 @@ public class CameraManager <: RemoteDataLite {
      * @returns { PhotoOutput } The PhotoOutput instance.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createPhotoOutput(profile?: Profile): PhotoOutput
      */
     @!APILevel[
         22,
@@ -350,7 +335,6 @@ public class CameraManager <: RemoteDataLite {
      * @returns { VideoOutput } The VideoOutput instance.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createVideoOutput(profile: VideoProfile, surfaceId: string): VideoOutput
      */
     @!APILevel[
         22,
@@ -379,7 +363,6 @@ public class CameraManager <: RemoteDataLite {
      * @returns { VideoOutput } The VideoOutput instance.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createVideoOutput(surfaceId: string): VideoOutput
      */
     @!APILevel[
         22,
@@ -408,7 +391,6 @@ public class CameraManager <: RemoteDataLite {
      * 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
      * 3. Parameter verification failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation createSession<T extends Session>(mode: SceneMode): T
      */
     @!APILevel[
         22,
@@ -436,7 +418,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<CameraStatusInfo> } callback - Callback used to get the camera status change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'cameraStatus', callback: AsyncCallback<CameraStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -473,7 +454,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<FoldStatusInfo> } callback - Callback used to get the fold status change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'foldStatusChange', callback: AsyncCallback<FoldStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -511,7 +491,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'torchStatusChange', callback: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -545,7 +524,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<CameraStatusInfo> } callback - Callback used to get the camera status change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'cameraStatus', callback?: AsyncCallback<CameraStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -566,7 +544,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<FoldStatusInfo> } callback - Callback used to get the fold status change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'foldStatusChange', callback?: AsyncCallback<FoldStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -587,7 +564,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
         22,
@@ -607,9 +583,6 @@ public class CameraManager <: RemoteDataLite {
      * @param { CameraEvents } eventType - Event type
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'cameraStatus', callback?: AsyncCallback<CameraStatusInfo>): void
-     * @relation off(type: 'foldStatusChange', callback?: AsyncCallback<FoldStatusInfo>): void
-     * @relation off(type: 'torchStatusChange', callback?: AsyncCallback<TorchStatusInfo>): void
      */
     @!APILevel[
         22,
