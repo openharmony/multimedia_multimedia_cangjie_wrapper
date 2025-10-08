@@ -36,8 +36,6 @@ foreign {
 
 /**
  * Provides basic image operations, including obtaining image information, and reading and writing image data.
- *
- * @relation interface Image
  */
 @!APILevel[
     22,
@@ -48,7 +46,6 @@ public class Image <: RemoteDataLite {
      * Gets the image area to crop, default is size.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation clipRect: Region
      */
     @!APILevel[
         22,
@@ -69,7 +66,6 @@ public class Image <: RemoteDataLite {
      * Image size.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly size: Size
      */
     @!APILevel[
         22,
@@ -90,7 +86,6 @@ public class Image <: RemoteDataLite {
      * Image format.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly format: int
      */
     @!APILevel[
         22,
@@ -120,7 +115,6 @@ public class Image <: RemoteDataLite {
      * Get component buffer from image.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getComponent(componentType: ComponentType): Promise<Component>
      */
     @!APILevel[
         22,
@@ -144,8 +138,6 @@ public class Image <: RemoteDataLite {
 
     /**
      * Release current image to receive another.
-     *
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,

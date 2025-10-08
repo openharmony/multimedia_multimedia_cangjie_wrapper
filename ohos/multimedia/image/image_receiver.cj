@@ -47,7 +47,6 @@ foreign {
  *
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
- * @relation function createImageReceiver(size: Size, format: ImageFormat, capacity: int): ImageReceiver
  */
 @!APILevel[
     22,
@@ -66,8 +65,6 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
 
 /**
  * Image receiver object.
- *
- * @relation interface ImageReceiver
  */
 @!APILevel[
     22,
@@ -78,7 +75,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Image size.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly size: Size
      */
     @!APILevel[
         22,
@@ -99,7 +95,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Image capacity.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly capacity: int
      */
     @!APILevel[
         22,
@@ -120,7 +115,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Image format.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly format: ImageFormat
      */
     @!APILevel[
         22,
@@ -150,7 +144,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Get an id which indicates a surface and can be used to set to Camera or other component can receive a surface.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getReceivingSurfaceId(): Promise<string>
      */
     @!APILevel[
         22,
@@ -173,7 +166,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Get lasted image from receiver.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readLatestImage(): Promise<Image>
      */
     @!APILevel[
         22,
@@ -191,7 +183,6 @@ public class ImageReceiver <: RemoteDataLite {
      * Get next image from receiver.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readNextImage(): Promise<Image>
      */
     @!APILevel[
         22,
@@ -207,8 +198,6 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Subscribe callback when receiving an image.
-     *
-     * @relation on(type: 'imageArrival', callback: AsyncCallback<void>): void
      */
     @!APILevel[
         22,
@@ -224,8 +213,6 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Remove callback subscriptions when releasing buffer.
-     *
-     * @relation off(type: 'imageArrival', callback?: AsyncCallback<void>): void
      */
     @!APILevel[
         22,
@@ -235,8 +222,6 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Release image receiver instance.
-     *
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,
