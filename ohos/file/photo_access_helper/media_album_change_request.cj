@@ -22,8 +22,6 @@ import ohos.ffi.*
 
 /**
  * Defines the class of media album change request.
- *
- * @relation class MediaAlbumChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
     22,
@@ -48,7 +46,6 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation constructor(album: Album)
      */
     public init(album: Album) {
         super(
@@ -66,7 +63,6 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAlbum(): Album
      */
     @!APILevel[
         22,
@@ -89,7 +85,6 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation setAlbumName(name: string): void
      */
     @!APILevel[
         22,
@@ -109,7 +104,6 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation addAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
         22,
@@ -130,7 +124,6 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation removeAssets(assets: Array<PhotoAsset>): void
      */
     @!APILevel[
         22,

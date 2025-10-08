@@ -27,7 +27,6 @@ import ohos.labels.APILevel
  * @returns { CameraManager } CameraManager instance.
  * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
  * @throws { BusinessException } 7400201 - Camera service fatal error.
- * @relation function getCameraManager(context: Context): CameraManager
  */
 @!APILevel[
     22,

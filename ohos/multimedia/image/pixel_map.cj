@@ -106,7 +106,6 @@ foreign {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
  * 2.Incorrect parameter types. 3.Parameter verification failed.
- * @relation function createPixelMapSync(colors: ArrayBuffer, options: InitializationOptions): PixelMap
  */
 @!APILevel[
     22,
@@ -129,8 +128,6 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
 
 /**
  * PixelMap instance.
- *
- * @relation interface PixelMap
  */
 @!APILevel[
     22,
@@ -150,7 +147,6 @@ public class PixelMap <: RemoteDataLite {
      * Whether the image pixel map can be edited.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly isEditable: boolean
      */
     @!APILevel[
         22,
@@ -171,7 +167,6 @@ public class PixelMap <: RemoteDataLite {
      * Is it stride Alignment.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly isStrideAlignment: boolean
      */
     @!APILevel[
         22,
@@ -192,7 +187,6 @@ public class PixelMap <: RemoteDataLite {
      * Releases this PixelMap object.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,
@@ -212,7 +206,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { Array<UInt8> } dst A buffer to which the image pixel map data will be written.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readPixelsToBuffer(dst: ArrayBuffer): Promise<void>
      */
     @!APILevel[
         22,
@@ -232,7 +225,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { Array<UInt8> } src A buffer from which the image data will be read.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation writeBufferToPixels(src: ArrayBuffer): Promise<void>
      */
     @!APILevel[
         22,
@@ -252,7 +244,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @returns { ImageInfo } An instance used to return the image pixel map information.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getImageInfo(): Promise<ImageInfo>
      */
     @!APILevel[
         22,
@@ -276,7 +267,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @returns { UInt32 } Number of bytes in each line.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getBytesNumberPerRow(): number
      */
     @!APILevel[
         22,
@@ -296,7 +286,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @returns { UInt32 } Total number of bytes.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getPixelBytesNumber(): number
      */
     @!APILevel[
         22,
@@ -316,7 +305,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @returns { Int32 } The number of density.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getDensity():number
      */
     @!APILevel[
         22,
@@ -336,7 +324,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { Float32 } rate The value of transparent rate.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation opacity(rate: number): Promise<void>
      */
     @!APILevel[
         22,
@@ -355,7 +342,6 @@ public class PixelMap <: RemoteDataLite {
      * @param { Float32 } x The zoom value of width.
      * @param { Float32 } y The zoom value of height.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation scale(x: number, y: number): Promise<void>
      */
     @!APILevel[
         22,
@@ -374,7 +360,6 @@ public class PixelMap <: RemoteDataLite {
      * @param { Float32 } x The position value of width.
      * @param { Float32 } y The position value of height.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation translate(x: number, y: number): Promise<void>
      */
     @!APILevel[
         22,
@@ -392,7 +377,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { Float32 } angle The rotation angle.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation rotate(angle: number): Promise<void>
      */
     @!APILevel[
         22,
@@ -411,7 +395,6 @@ public class PixelMap <: RemoteDataLite {
      * @param { Bool } horizontal Is flip in horizontal.
      * @param { Bool } vertical Is flip in vertical.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation flip(horizontal: boolean, vertical: boolean): Promise<void>
      */
     @!APILevel[
         22,
@@ -429,7 +412,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { Region } region The region to crop.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation crop(region: Region): Promise<void>
      */
     @!APILevel[
         22,
@@ -447,7 +429,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { PositionArea } area Area to which the image pixel map data will be written.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation writePixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
         22,
@@ -471,7 +452,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @param { PositionArea } area Area from which the image pixel map data will be read.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readPixels(area: PositionArea): Promise<void>
      */
     @!APILevel[
         22,
@@ -495,7 +475,6 @@ public class PixelMap <: RemoteDataLite {
      *
      * @returns { PixelMap } An instance used to return the new image pixel map.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation createAlphaPixelmapSync(): PixelMap
      */
     @!APILevel[
         22,
@@ -517,7 +496,6 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980111 - The image source data is incomplete.
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
-     * @relation setColorSpace(colorSpace: colorSpaceManager.ColorSpaceManager): void
      */
     @!APILevel[
         22,
@@ -537,7 +515,6 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980103 - If the image data unsupport.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
-     * @relation getColorSpace(): colorSpaceManager.ColorSpaceManager
      */
     @!APILevel[
         22,
@@ -559,7 +536,6 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980108 - Failed to convert the color space.
      * @throws { BusinessException } 62980115 - Invalid image parameter.
-     * @relation applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager): Promise<void>
      */
     @!APILevel[
         22,
