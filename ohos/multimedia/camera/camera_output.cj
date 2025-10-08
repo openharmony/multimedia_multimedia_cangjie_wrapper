@@ -21,8 +21,6 @@ import ohos.labels.APILevel
 
 /**
  * Camera output object.
- *
- * @relation interface CameraOutput
  */
 @!APILevel[
     22,
@@ -33,7 +31,6 @@ public interface CameraOutput {
      * Release output instance.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,

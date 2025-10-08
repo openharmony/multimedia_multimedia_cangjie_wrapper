@@ -26,8 +26,6 @@ import std.sync.*
 
 /**
  * Session object.
- *
- * @relation interface Session
  */
 @!APILevel[
     22,
@@ -39,7 +37,6 @@ public interface Session {
      *
      * @throws { BusinessException } 7400105 - Session config locked.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation beginConfig(): void
      */
     @!APILevel[
         22,
@@ -57,7 +54,6 @@ public interface Session {
      *
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation commitConfig(): Promise<void>
      */
     @!APILevel[
         22,
@@ -76,7 +72,6 @@ public interface Session {
      *
      * @param { CameraInput } cameraInput - Target camera input to add.
      * @returns { Bool } You can add the input into the session.
-     * @relation canAddInput(cameraInput: CameraInput): boolean
      */
     @!APILevel[
         22,
@@ -100,7 +95,6 @@ public interface Session {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation addInput(cameraInput: CameraInput): void
      */
     @!APILevel[
         22,
@@ -121,7 +115,6 @@ public interface Session {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation removeInput(cameraInput: CameraInput): void
      */
     @!APILevel[
         22,
@@ -143,7 +136,6 @@ public interface Session {
      *
      * @param { CameraOutput } cameraOutput - Target camera output to add.
      * @returns { Bool } You can add the output into the session.
-     * @relation canAddOutput(cameraOutput: CameraOutput): boolean
      */
     @!APILevel[
         22,
@@ -167,7 +159,6 @@ public interface Session {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation addOutput(cameraOutput: CameraOutput): void
      */
     @!APILevel[
         22,
@@ -189,7 +180,6 @@ public interface Session {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation removeOutput(cameraOutput: CameraOutput): void
      */
     @!APILevel[
         22,
@@ -209,7 +199,6 @@ public interface Session {
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation start(): Promise<void>
      */
     @!APILevel[
         22,
@@ -226,7 +215,6 @@ public interface Session {
      * Stops capture session.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation stop(): Promise<void>
      */
     @!APILevel[
         22,
@@ -243,7 +231,6 @@ public interface Session {
      * Release capture session instance.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         22,
@@ -272,8 +259,6 @@ func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
 
 /**
  * Photo session object.
- *
- * @relation interface PhotoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, ColorManagement, AutoDeviceSwitch, Macro
  */
 @!APILevel[
     22,
@@ -307,7 +292,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation canPreconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): boolean
      */
     @!APILevel[
         22,
@@ -325,7 +309,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation preconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): void
      */
     @!APILevel[
         22,
@@ -347,7 +330,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -362,7 +344,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -381,7 +362,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         22,
@@ -396,7 +376,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         22,
@@ -415,7 +394,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
@@ -430,7 +408,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
@@ -445,9 +422,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @throws { BusinessException } 401 - The parameter check failed.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
@@ -466,8 +440,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
 /**
  * Video session object.
- *
- * @relation interface VideoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, AutoDeviceSwitch, Macro
  */
 @!APILevel[
     22,
@@ -501,7 +473,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation canPreconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): boolean
      */
     @!APILevel[
         22,
@@ -519,7 +490,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
      *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation preconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): void
      */
     @!APILevel[
         22,
@@ -543,7 +513,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -560,7 +529,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         22,
@@ -581,7 +549,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         22,
@@ -598,7 +565,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
      */
     @!APILevel[
         22,
@@ -619,7 +585,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
@@ -636,7 +601,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
@@ -652,9 +616,6 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { CameraEvents } eventType - Event type.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', callback?: ErrorCallback): void
-     * @relation off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void
-     * @relation off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void
      */
     @!APILevel[
         22,
