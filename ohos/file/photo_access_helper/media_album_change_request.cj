@@ -43,7 +43,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * The constructor to create a MediaAlbumChangeRequest instance.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -60,7 +61,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Obtains the album in the current album change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -82,7 +84,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Sets the album name.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -100,7 +103,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Add assets to the album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
@@ -120,7 +124,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Removes assets from the album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
