@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.labels.*
@@ -24,8 +26,6 @@ import std.sync.*
 
 /**
  * Preview output object.
- *
- * @relation interface PreviewOutput extends CameraOutput
  */
 @!APILevel[
     since: "22",
@@ -66,7 +66,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Array<FrameRateRange> } The array of supported frame rate range.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getSupportedFrameRates(): Array<FrameRateRange>
      */
     @!APILevel[
         since: "22",
@@ -90,7 +89,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { Int32 } maxFps - Maximum frame rate per second.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400110 - Unresolved conflicts with current configurations.
-     * @relation setFrameRate(minFps: int, maxFps: int): void
      */
     @!APILevel[
         since: "22",
@@ -106,7 +104,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { FrameRateRange } The active frame rate range.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getActiveFrameRate(): FrameRateRange
      */
     @!APILevel[
         since: "22",
@@ -124,7 +121,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Profile } The current preconfig type.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getActiveProfile(): Profile
      */
     @!APILevel[
         since: "22",
@@ -144,7 +140,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @returns { ImageRotation } The preview rotation angle.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getPreviewRotation(displayRotation: int): ImageRotation
      */
     @!APILevel[
         since: "22",
@@ -164,7 +159,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { Bool } isDisplayLocked - TRUE means the display is locked, if not set, the default is FALSE.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation setPreviewRotation(previewRotation: ImageRotation, isDisplayLocked?: boolean): void
      */
     @!APILevel[
         since: "22",
@@ -186,9 +180,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'frameStart', callback: AsyncCallback<void>): void
-     * @relation on(type: 'frameEnd', callback: AsyncCallback<void>): void
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -263,9 +254,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to return the result.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -289,9 +277,6 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameStart', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'frameEnd', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",

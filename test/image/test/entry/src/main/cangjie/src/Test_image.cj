@@ -15,13 +15,13 @@
 
 package ohos_app_cangjie_entry
 
-import ImageKit.Component as ImageComponent
-import ImageKit.Image as ImageImage
-import ImageKit.*
+import kit.ImageKit.Component as ImageComponent
+import kit.ImageKit.Image as ImageImage
+import kit.ImageKit.*
 import std.convert.*
 import std.io.*
-import CoreFileKit.*
-import ArkGraphics2D.*
+import kit.CoreFileKit.*
+import kit.ArkGraphics2D.*
 import std.process.*
 import std.math.*
 import std.unittest.testmacro.*
@@ -35,8 +35,8 @@ import std.unittest.*
 import std.unittest.common.*
 import std.unittest.testmacro.*
 import ohos.business_exception.*
-import CoreFileKit.*
-import PerformanceAnalysisKit.Hilog
+import kit.CoreFileKit.*
+import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.*
 
 let colors: Array<UInt8> = Array<UInt8>(96, repeat: 0)

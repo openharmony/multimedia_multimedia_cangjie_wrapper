@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.labels.*
@@ -32,7 +34,6 @@ const INVALID_ARGUMENT_ERROR: Int32 = 13900020
  * Returns an instance of PhotoAccessHelper
  *
  * @throws { BusinessException } 13900020 - Invalid argument
- * @relation function getPhotoAccessHelper(context: Context): PhotoAccessHelper
  */
 @!APILevel[
     since: "22",
@@ -50,8 +51,6 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
 
 /**
  * Helper functions to access photos and albums.
- *
- * @relation interface PhotoAccessHelper
  */
 @!APILevel[
     since: "22",
@@ -78,7 +77,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation release(): Promise<void>;
      */
     @!APILevel[
         since: "22",
@@ -99,7 +97,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
         since: "22",
@@ -122,7 +119,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      *
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 14000011 - Internal system error
-     * @relation getBurstAssets(burstKey: string, options: FetchOptions): Promise<FetchResult<PhotoAsset>>;
      */
     @!APILevel[
         since: "22",
@@ -152,7 +148,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAlbums(type: AlbumType, subtype: AlbumSubtype, options?: FetchOptions): Promise<FetchResult<Album>>;
      */
     @!APILevel[
         since: "22",
@@ -178,7 +173,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @relation registerChange(uri: string, forChildUris: boolean, callback: Callback<ChangeData>): void;
      */
     @!APILevel[
         since: "22",
@@ -218,7 +212,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
-     * @relation unRegisterChange(uri: string, callback?: Callback<ChangeData>): void;
      */
     @!APILevel[
         since: "22",
@@ -275,7 +268,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - Internal system error
-     * @relation showAssetsCreationDialog(srcFileUris: Array<string>, photoCreationConfigs: Array<PhotoCreationConfig>): Promise<Array<string>>;
      */
     @!APILevel[
         since: "22",
@@ -313,7 +305,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation applyChanges(mediaChangeRequest: MediaChangeRequest): Promise<void>;
      */
     @!APILevel[
         since: "22",

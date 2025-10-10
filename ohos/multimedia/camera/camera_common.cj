@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.ffi.*
@@ -74,8 +76,6 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 
 /**
  * Rectangle definition.
- *
- * @relation interface Rect
  */
 @!APILevel[
     since: "22",
@@ -84,8 +84,6 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 public class Rect {
     /**
      * X coordinator of top left point.
-     *
-     * @relation topLeftX: double
      */
     @!APILevel[
         since: "22",
@@ -94,8 +92,6 @@ public class Rect {
     public var topLeftX: Float64
     /**
      * Y coordinator of top left point.
-     *
-     * @relation topLeftY: double
      */
     @!APILevel[
         since: "22",
@@ -104,8 +100,6 @@ public class Rect {
     public var topLeftY: Float64
     /**
      * Width of this rectangle.
-     *
-     * @relation width: double
      */
     @!APILevel[
         since: "22",
@@ -114,8 +108,6 @@ public class Rect {
     public var width: Float64
     /**
      * Height of this rectangle.
-     *
-     * @relation height: double
      */
     @!APILevel[
         since: "22",
@@ -133,8 +125,6 @@ public class Rect {
 
 /**
  * Enum for torch mode.
- *
- * @relation enum TorchMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -144,8 +134,6 @@ public class Rect {
 public enum TorchMode {
     /**
      * The device torch is always off.
-     *
-     * @relation OFF = 0
      */
     @!APILevel[
         since: "22",
@@ -155,8 +143,6 @@ public enum TorchMode {
     |
     /**
      * The device torch is always on.
-     *
-     * @relation ON = 1
      */
     @!APILevel[
         since: "22",
@@ -166,8 +152,6 @@ public enum TorchMode {
     |
     /**
      * The device continuously monitors light levels and uses the torch when necessary.
-     *
-     * @relation AUTO = 2
      */
     @!APILevel[
         since: "22",
@@ -197,8 +181,6 @@ public enum TorchMode {
 
 /**
  * Enumerates the image rotation angles.
- *
- * @relation enum ImageRotation
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -208,8 +190,6 @@ public enum TorchMode {
 public enum ImageRotation {
     /**
      * The capture image rotates 0 degrees.
-     *
-     * @relation ROTATION_0 = 0
      */
     @!APILevel[
         since: "22",
@@ -219,8 +199,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 90 degrees.
-     *
-     * @relation ROTATION_90 = 90
      */
     @!APILevel[
         since: "22",
@@ -230,8 +208,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 180 degrees.
-     *
-     * @relation ROTATION_180 = 180
      */
     @!APILevel[
         since: "22",
@@ -241,8 +217,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 270 degrees.
-     *
-     * @relation ROTATION_270 = 270
      */
     @!APILevel[
         since: "22",
@@ -274,8 +248,6 @@ public enum ImageRotation {
 
 /**
  * Enum for camera status.
- *
- * @relation enum CameraStatus
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -285,8 +257,6 @@ public enum ImageRotation {
 public enum CameraStatus {
     /**
      * Appear status.
-     *
-     * @relation CAMERA_STATUS_APPEAR = 0
      */
     @!APILevel[
         since: "22",
@@ -296,8 +266,6 @@ public enum CameraStatus {
     |
     /**
      * Disappear status.
-     *
-     * @relation CAMERA_STATUS_DISAPPEAR = 1
      */
     @!APILevel[
         since: "22",
@@ -307,8 +275,6 @@ public enum CameraStatus {
     |
     /**
      * Available status.
-     *
-     * @relation CAMERA_STATUS_AVAILABLE = 2
      */
     @!APILevel[
         since: "22",
@@ -318,8 +284,6 @@ public enum CameraStatus {
     |
     /**
      * Unavailable status.
-     *
-     * @relation CAMERA_STATUS_UNAVAILABLE = 3
      */
     @!APILevel[
         since: "22",
@@ -341,8 +305,6 @@ public enum CameraStatus {
 
 /**
  * Torch status info.
- *
- * @relation interface TorchStatusInfo
  */
 @!APILevel[
     since: "22",
@@ -351,8 +313,6 @@ public enum CameraStatus {
 public class TorchStatusInfo {
     /**
      * is torch available
-     *
-     * @relation readonly isTorchAvailable: boolean
      */
     @!APILevel[
         since: "22",
@@ -361,8 +321,6 @@ public class TorchStatusInfo {
     public let isTorchAvailable: Bool
     /**
      * is torch active
-     *
-     * @relation readonly isTorchActive: boolean
      */
     @!APILevel[
         since: "22",
@@ -371,8 +329,6 @@ public class TorchStatusInfo {
     public let isTorchActive: Bool
     /**
      * the current torch brightness level.
-     *
-     * @relation readonly torchLevel: double
      */
     @!APILevel[
         since: "22",
@@ -389,8 +345,6 @@ public class TorchStatusInfo {
 
 /**
  * Frame rate range.
- *
- * @relation interface FrameRateRange
  */
 @!APILevel[
     since: "22",
@@ -399,8 +353,6 @@ public class TorchStatusInfo {
 public class FrameRateRange {
     /**
      * Min frame rate.
-     *
-     * @relation readonly min: int
      */
     @!APILevel[
         since: "22",
@@ -409,8 +361,6 @@ public class FrameRateRange {
     public let min: Int32
     /**
      * Max frame rate.
-     *
-     * @relation readonly max: int
      */
     @!APILevel[
         since: "22",
@@ -426,8 +376,6 @@ public class FrameRateRange {
 
 /**
  * Size parameter.
- *
- * @relation interface Size
  */
 @!APILevel[
     since: "22",
@@ -436,8 +384,6 @@ public class FrameRateRange {
 public class Size {
     /**
      * Height.
-     *
-     * @relation width: int
      */
     @!APILevel[
         since: "22",
@@ -446,8 +392,6 @@ public class Size {
     public var width: UInt32
     /**
      * Width.
-     *
-     * @relation height: int
      */
     @!APILevel[
         since: "22",
@@ -465,8 +409,6 @@ class ProfileImpl {}
 
 /**
  * Profile for camera streams.
- *
- * @relation interface Profile
  */
 @!APILevel[
     since: "22",
@@ -475,8 +417,6 @@ class ProfileImpl {}
 public open class Profile {
     /**
      * Camera format.
-     *
-     * @relation readonly format: CameraFormat
      */
     @!APILevel[
         since: "22",
@@ -485,8 +425,6 @@ public open class Profile {
     public let format: CameraFormat
     /**
      * Picture size.
-     *
-     * @relation readonly size: Size
      */
     @!APILevel[
         since: "22",
@@ -504,8 +442,6 @@ public open class Profile {
 
 /**
  * Video profile.
- *
- * @relation interface VideoProfile extends Profile
  */
 @!APILevel[
     since: "22",
@@ -514,8 +450,6 @@ public open class Profile {
 public class VideoProfile <: Profile {
     /**
      * Frame rate in unit fps (frames per second).
-     *
-     * @relation readonly frameRateRange: FrameRateRange
      */
     @!APILevel[
         since: "22",
@@ -531,8 +465,6 @@ public class VideoProfile <: Profile {
 
 /**
  * Metadata object type.
- *
- * @relation enum MetadataObjectType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -542,8 +474,6 @@ public class VideoProfile <: Profile {
 public enum MetadataObjectType {
     /**
      * Face detection type.
-     *
-     * @relation FACE_DETECTION = 0
      */
     @!APILevel[
         since: "22",
@@ -569,8 +499,6 @@ public enum MetadataObjectType {
 
 /**
  * Camera output capability.
- *
- * @relation interface CameraOutputCapability
  */
 @!APILevel[
     since: "22",
@@ -579,8 +507,6 @@ public enum MetadataObjectType {
 public class CameraOutputCapability {
     /**
      * Preview profiles.
-     *
-     * @relation readonly previewProfiles: Array<Profile>
      */
     @!APILevel[
         since: "22",
@@ -589,8 +515,6 @@ public class CameraOutputCapability {
     public let previewProfiles: Array<Profile>
     /**
      * Photo profiles.
-     *
-     * @relation readonly photoProfiles: Array<Profile>
      */
     @!APILevel[
         since: "22",
@@ -599,8 +523,6 @@ public class CameraOutputCapability {
     public let photoProfiles: Array<Profile>
     /**
      * Video profiles.
-     *
-     * @relation readonly videoProfiles: Array<VideoProfile>
      */
     @!APILevel[
         since: "22",
@@ -609,8 +531,6 @@ public class CameraOutputCapability {
     public let videoProfiles: Array<VideoProfile>
     /**
      * All the supported metadata Object Types.
-     *
-     * @relation readonly supportedMetadataObjectTypes: Array<MetadataObjectType>
      */
     @!APILevel[
         since: "22",
@@ -629,8 +549,6 @@ public class CameraOutputCapability {
 
 /**
  * Enum for fold status.
- *
- * @relation enum FoldStatus
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -640,8 +558,6 @@ public class CameraOutputCapability {
 public enum FoldStatus {
     /**
      * Non-foldable status.
-     *
-     * @relation NON_FOLDABLE = 0
      */
     @!APILevel[
         since: "22",
@@ -651,8 +567,6 @@ public enum FoldStatus {
     |
     /**
      * Expanded status.
-     *
-     * @relation EXPANDED = 1
      */
     @!APILevel[
         since: "22",
@@ -662,8 +576,6 @@ public enum FoldStatus {
     |
     /**
      * Folded status.
-     *
-     * @relation FOLDED = 2
      */
     @!APILevel[
         since: "22",
@@ -684,8 +596,6 @@ public enum FoldStatus {
 
 /**
  * Fold status info.
- *
- * @relation interface FoldStatusInfo
  */
 @!APILevel[
     since: "22",
@@ -694,8 +604,6 @@ public enum FoldStatus {
 public class FoldStatusInfo {
     /**
      * Gets supported camera devices under the current fold status.
-     *
-     * @relation readonly supportedCameras: Array<CameraDevice>
      */
     @!APILevel[
         since: "22",
@@ -704,8 +612,6 @@ public class FoldStatusInfo {
     public let supportedCameras: Array<CameraDevice>
     /**
      * Current fold status.
-     *
-     * @relation readonly foldStatus: FoldStatus
      */
     @!APILevel[
         since: "22",
@@ -724,8 +630,6 @@ public class FoldStatusInfo {
 
 /**
  * Enum for camera connection type.
- *
- * @relation enum ConnectionType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -735,8 +639,6 @@ public class FoldStatusInfo {
 public enum ConnectionType {
     /**
      * Built-in camera.
-     *
-     * @relation CAMERA_CONNECTION_BUILT_IN = 0
      */
     @!APILevel[
         since: "22",
@@ -746,8 +648,6 @@ public enum ConnectionType {
     |
     /**
      * Camera connected using USB
-     *
-     * @relation CAMERA_CONNECTION_USB_PLUGIN = 1
      */
     @!APILevel[
         since: "22",
@@ -757,8 +657,6 @@ public enum ConnectionType {
     |
     /**
      * Remote camera
-     *
-     * @relation CAMERA_CONNECTION_REMOTE = 2
      */
     @!APILevel[
         since: "22",
@@ -788,8 +686,6 @@ public enum ConnectionType {
 
 /**
  * Enum for camera format type.
- *
- * @relation enum CameraFormat
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -799,8 +695,6 @@ public enum ConnectionType {
 public enum CameraFormat {
     /**
      * YCBCR P010 Format.
-     *
-     * @relation CAMERA_FORMAT_YCBCR_P010 = 2001
      */
     @!APILevel[
         since: "22",
@@ -810,8 +704,6 @@ public enum CameraFormat {
     |
     /**
      * YCRCB P010 Format.
-     *
-     * @relation CAMERA_FORMAT_YCRCB_P010 = 2002
      */
     @!APILevel[
         since: "22",
@@ -821,8 +713,6 @@ public enum CameraFormat {
     |
     /**
      * HEIC Format.
-     *
-     * @relation CAMERA_FORMAT_HEIC = 2003
      */
     @!APILevel[
         since: "22",
@@ -832,8 +722,6 @@ public enum CameraFormat {
     |
     /**
      * JPEG Format.
-     *
-     * @relation CAMERA_FORMAT_JPEG = 2000
      */
     @!APILevel[
         since: "22",
@@ -843,8 +731,6 @@ public enum CameraFormat {
     |
     /**
      * YUV 420 Format.
-     *
-     * @relation CAMERA_FORMAT_YUV_420_SP = 1003
      */
     @!APILevel[
         since: "22",
@@ -854,8 +740,6 @@ public enum CameraFormat {
     |
     /**
      * RGBA 8888 Format.
-     *
-     * @relation CAMERA_FORMAT_RGBA_8888 = 3
      */
     @!APILevel[
         since: "22",
@@ -891,8 +775,6 @@ public enum CameraFormat {
 
 /**
  * Camera device object.
- *
- * @relation interface CameraDevice
  */
 @!APILevel[
     since: "22",
@@ -901,8 +783,6 @@ public enum CameraFormat {
 public class CameraDevice {
     /**
      * Camera ID attribute.
-     *
-     * @relation readonly cameraId: string
      */
     @!APILevel[
         since: "22",
@@ -911,8 +791,6 @@ public class CameraDevice {
     public let cameraId: String
     /**
      * Camera position attribute.
-     *
-     * @relation readonly cameraPosition: CameraPosition
      */
     @!APILevel[
         since: "22",
@@ -921,8 +799,6 @@ public class CameraDevice {
     public let cameraPosition: CameraPosition
     /**
      * Camera type attribute.
-     *
-     * @relation readonly cameraType: CameraType
      */
     @!APILevel[
         since: "22",
@@ -931,8 +807,6 @@ public class CameraDevice {
     public let cameraType: CameraType
     /**
      * Camera connection type attribute.
-     *
-     * @relation readonly connectionType: ConnectionType
      */
     @!APILevel[
         since: "22",
@@ -941,8 +815,6 @@ public class CameraDevice {
     public let connectionType: ConnectionType
     /**
      * Camera sensor orientation attribute.
-     *
-     * @relation readonly cameraOrientation: int
      */
     @!APILevel[
         since: "22",
@@ -962,8 +834,6 @@ public class CameraDevice {
 
 /**
  * Camera status info.
- *
- * @relation interface CameraStatusInfo
  */
 @!APILevel[
     since: "22",
@@ -972,8 +842,6 @@ public class CameraDevice {
 public class CameraStatusInfo {
     /**
      * Camera instance.
-     *
-     * @relation camera: CameraDevice
      */
     @!APILevel[
         since: "22",
@@ -982,8 +850,6 @@ public class CameraStatusInfo {
     public var camera: CameraDevice
     /**
      * Current camera status.
-     *
-     * @relation status: CameraStatus
      */
     @!APILevel[
         since: "22",
@@ -1174,8 +1040,6 @@ public enum CameraEvents {
 
 /**
  * Enum for camera position.
- *
- * @relation enum CameraPosition
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1185,8 +1049,6 @@ public enum CameraEvents {
 public enum CameraPosition {
     /**
      * Unspecified position.
-     *
-     * @relation CAMERA_POSITION_UNSPECIFIED = 0
      */
     @!APILevel[
         since: "22",
@@ -1196,8 +1058,6 @@ public enum CameraPosition {
     |
     /**
      * Back position.
-     *
-     * @relation CAMERA_POSITION_BACK = 1
      */
     @!APILevel[
         since: "22",
@@ -1207,8 +1067,6 @@ public enum CameraPosition {
     |
     /**
      * Front position.
-     *
-     * @relation CAMERA_POSITION_FRONT = 2
      */
     @!APILevel[
         since: "22",
@@ -1238,8 +1096,6 @@ public enum CameraPosition {
 
 /**
  * Enum for camera type.
- *
- * @relation enum CameraType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1249,8 +1105,6 @@ public enum CameraPosition {
 public enum CameraType {
     /**
      * Default camera type
-     *
-     * @relation CAMERA_TYPE_DEFAULT = 0
      */
     @!APILevel[
         since: "22",
@@ -1260,8 +1114,6 @@ public enum CameraType {
     |
     /**
      * Wide camera
-     *
-     * @relation CAMERA_TYPE_WIDE_ANGLE = 1
      */
     @!APILevel[
         since: "22",
@@ -1271,8 +1123,6 @@ public enum CameraType {
     |
     /**
      * Ultra wide camera
-     *
-     * @relation CAMERA_TYPE_ULTRA_WIDE = 2
      */
     @!APILevel[
         since: "22",
@@ -1282,8 +1132,6 @@ public enum CameraType {
     |
     /**
      * Telephoto camera
-     *
-     * @relation CAMERA_TYPE_TELEPHOTO = 3
      */
     @!APILevel[
         since: "22",
@@ -1293,8 +1141,6 @@ public enum CameraType {
     |
     /**
      * True depth camera
-     *
-     * @relation CAMERA_TYPE_TRUE_DEPTH = 4
      */
     @!APILevel[
         since: "22",
@@ -1328,8 +1174,6 @@ public enum CameraType {
 
 /**
  * Enumerates the camera scene modes.
- *
- * @relation enum SceneMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1339,8 +1183,6 @@ public enum CameraType {
 public enum SceneMode {
     /**
      * Normal photo mode.
-     *
-     * @relation NORMAL_PHOTO = 1
      */
     @!APILevel[
         since: "22",
@@ -1350,8 +1192,6 @@ public enum SceneMode {
     |
     /**
      * Normal video mode.
-     *
-     * @relation NORMAL_VIDEO = 2
      */
     @!APILevel[
         since: "22",
@@ -1361,8 +1201,6 @@ public enum SceneMode {
     |
     /**
      * Secure camera mode.
-     *
-     * @relation SECURE_PHOTO = 12
      */
     @!APILevel[
         since: "22",
@@ -1392,8 +1230,6 @@ public enum SceneMode {
 
 /**
  * Enumerates the image quality levels.
- *
- * @relation enum QualityLevel
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1403,8 +1239,6 @@ public enum SceneMode {
 public enum QualityLevel {
     /**
      * High image quality.
-     *
-     * @relation QUALITY_LEVEL_HIGH = 0
      */
     @!APILevel[
         since: "22",
@@ -1414,8 +1248,6 @@ public enum QualityLevel {
     |
     /**
      * Medium image quality.
-     *
-     * @relation QUALITY_LEVEL_MEDIUM = 1
      */
     @!APILevel[
         since: "22",
@@ -1425,8 +1257,6 @@ public enum QualityLevel {
     |
     /**
      * Low image quality.
-     *
-     * @relation QUALITY_LEVEL_LOW = 2
      */
     @!APILevel[
         since: "22",
@@ -1447,8 +1277,6 @@ public enum QualityLevel {
 
 /**
  * Photo capture location
- *
- * @relation interface Location
  */
 @!APILevel[
     since: "22",
@@ -1457,8 +1285,6 @@ public enum QualityLevel {
 public class Location {
     /**
      * Latitude.
-     *
-     * @relation latitude: double
      */
     @!APILevel[
         since: "22",
@@ -1467,8 +1293,6 @@ public class Location {
     public var latitude: Float64
     /**
      * Longitude.
-     *
-     * @relation longitude: double
      */
     @!APILevel[
         since: "22",
@@ -1477,8 +1301,6 @@ public class Location {
     public var longitude: Float64
     /**
      * Altitude.
-     *
-     * @relation altitude: double
      */
     @!APILevel[
         since: "22",
@@ -1506,8 +1328,6 @@ public class Location {
 
 /**
  * Photo capture options to set.
- *
- * @relation interface PhotoCaptureSetting
  */
 @!APILevel[
     since: "22",
@@ -1516,8 +1336,6 @@ public class Location {
 public class PhotoCaptureSetting {
     /**
      * Photo image quality.
-     *
-     * @relation quality?: QualityLevel
      */
     @!APILevel[
         since: "22",
@@ -1526,8 +1344,6 @@ public class PhotoCaptureSetting {
     public var quality: QualityLevel
     /**
      * Photo rotation.
-     *
-     * @relation rotation?: ImageRotation
      */
     @!APILevel[
         since: "22",
@@ -1536,8 +1352,6 @@ public class PhotoCaptureSetting {
     public var rotation: ImageRotation
     /**
      * Photo location.
-     *
-     * @relation location?: Location
      */
     @!APILevel[
         since: "22",
@@ -1548,8 +1362,6 @@ public class PhotoCaptureSetting {
      * Mirror enable switch (default off).
      * It is necessary to utilize the function isMirrorSupported to ascertain whether it is supported
      * prior to its implementation.
-     *
-     * @relation mirror?: boolean
      */
     @!APILevel[
         since: "22",
@@ -1579,8 +1391,6 @@ public class PhotoCaptureSetting {
 
 /**
  * Enumerates the camera video codec type.
- *
- * @relation enum VideoCodecType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1590,8 +1400,6 @@ public class PhotoCaptureSetting {
 public enum VideoCodecType {
     /**
      * Video encoding type AVC.
-     *
-     * @relation AVC = 0
      */
     @!APILevel[
         since: "22",
@@ -1601,8 +1409,6 @@ public enum VideoCodecType {
     |
     /**
      * Video encoding type HEVC.
-     *
-     * @relation HEVC = 1
      */
     @!APILevel[
         since: "22",
@@ -1622,8 +1428,6 @@ public enum VideoCodecType {
 
 /**
  * Capture start info.
- *
- * @relation interface CaptureStartInfo
  */
 @!APILevel[
     since: "22",
@@ -1632,8 +1436,6 @@ public enum VideoCodecType {
 public class CaptureStartInfo {
     /**
      * Capture id.
-     *
-     * @relation captureId: int
      */
     @!APILevel[
         since: "22",
@@ -1642,8 +1444,6 @@ public class CaptureStartInfo {
     public var captureId: Int32
     /**
      * Time(in milliseconds) is the shutter time for the photo.
-     *
-     * @relation time: long
      */
     @!APILevel[
         since: "22",
@@ -1659,8 +1459,6 @@ public class CaptureStartInfo {
 
 /**
  * Frame shutter callback info.
- *
- * @relation interface FrameShutterInfo
  */
 @!APILevel[
     since: "22",
@@ -1669,8 +1467,6 @@ public class CaptureStartInfo {
 public class FrameShutterInfo {
     /**
      * Capture id.
-     *
-     * @relation captureId: int
      */
     @!APILevel[
         since: "22",
@@ -1679,8 +1475,6 @@ public class FrameShutterInfo {
     public var captureId: Int32
     /**
      * Timestamp for frame.
-     *
-     * @relation timestamp: long
      */
     @!APILevel[
         since: "22",
@@ -1696,8 +1490,6 @@ public class FrameShutterInfo {
 
 /**
  * Capture end info.
- *
- * @relation interface CaptureEndInfo
  */
 @!APILevel[
     since: "22",
@@ -1706,8 +1498,6 @@ public class FrameShutterInfo {
 public class CaptureEndInfo {
     /**
      * Capture id.
-     *
-     * @relation captureId: int
      */
     @!APILevel[
         since: "22",
@@ -1716,8 +1506,6 @@ public class CaptureEndInfo {
     public var captureId: Int32
     /**
      * Frame count.
-     *
-     * @relation frameCount: int
      */
     @!APILevel[
         since: "22",
@@ -1733,8 +1521,6 @@ public class CaptureEndInfo {
 
 /**
  * Frame shutter end callback info.
- *
- * @relation interface FrameShutterEndInfo
  */
 @!APILevel[
     since: "22",
@@ -1743,8 +1529,6 @@ public class CaptureEndInfo {
 public class FrameShutterEndInfo {
     /**
      * Capture id.
-     *
-     * @relation captureId: int
      */
     @!APILevel[
         since: "22",
@@ -1760,8 +1544,6 @@ public class FrameShutterEndInfo {
 /**
  * Types of preconfig, which used to configure session conveniently.
  * Preconfig type contains common use cases of camera output.
- *
- * @relation enum PreconfigType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1771,8 +1553,6 @@ public class FrameShutterEndInfo {
 public enum PreconfigType {
     /**
      * 720P output for preconfig.
-     *
-     * @relation PRECONFIG_720P = 0
      */
     @!APILevel[
         since: "22",
@@ -1782,8 +1562,6 @@ public enum PreconfigType {
     |
     /**
      * 1080P output for preconfig.
-     *
-     * @relation PRECONFIG_1080P = 1
      */
     @!APILevel[
         since: "22",
@@ -1793,8 +1571,6 @@ public enum PreconfigType {
     |
     /**
      * 4K output for preconfig.
-     *
-     * @relation PRECONFIG_4K = 2
      */
     @!APILevel[
         since: "22",
@@ -1804,8 +1580,6 @@ public enum PreconfigType {
     |
     /**
      * high quality output for preconfig.
-     *
-     * @relation PRECONFIG_HIGH_QUALITY = 3
      */
     @!APILevel[
         since: "22",
@@ -1839,8 +1613,6 @@ public enum PreconfigType {
 
 /**
  * The aspect ratios of preconfig, which used to configure session conveniently.
- *
- * @relation enum PreconfigRatio
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1850,8 +1622,6 @@ public enum PreconfigType {
 public enum PreconfigRatio {
     /**
      * Aspect ratio 1:1 for preconfig.
-     *
-     * @relation PRECONFIG_RATIO_1_1 = 0
      */
     @!APILevel[
         since: "22",
@@ -1861,8 +1631,6 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 4:3 for preconfig.
-     *
-     * @relation PRECONFIG_RATIO_4_3 = 1
      */
     @!APILevel[
         since: "22",
@@ -1872,8 +1640,6 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 16:9 for preconfig.
-     *
-     * @relation PRECONFIG_RATIO_16_9 = 2
      */
     @!APILevel[
         since: "22",

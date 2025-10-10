@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.image
 
 import ohos.labels.*
@@ -34,8 +36,6 @@ foreign {
 
 /**
  * Provides basic image operations, including obtaining image information, and reading and writing image data.
- *
- * @relation interface Image
  */
 @!APILevel[
     since: "22",
@@ -46,7 +46,6 @@ public class Image <: RemoteDataLite {
      * Gets the image area to crop, default is size.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation clipRect: Region
      */
     @!APILevel[
         since: "22",
@@ -67,7 +66,6 @@ public class Image <: RemoteDataLite {
      * Image size.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly size: Size
      */
     @!APILevel[
         since: "22",
@@ -88,7 +86,6 @@ public class Image <: RemoteDataLite {
      * Image format.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly format: int
      */
     @!APILevel[
         since: "22",
@@ -118,7 +115,6 @@ public class Image <: RemoteDataLite {
      * Get component buffer from image.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation getComponent(componentType: ComponentType): Promise<Component>
      */
     @!APILevel[
         since: "22",
@@ -142,8 +138,6 @@ public class Image <: RemoteDataLite {
 
     /**
      * Release current image to receive another.
-     *
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         since: "22",

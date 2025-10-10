@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.labels.*
@@ -21,8 +23,6 @@ import ohos.multimedia.image.*
 
 /**
  * Provides APIs for encapsulating file asset attributes.
- *
- * @relation interface PhotoAsset
  */
 @!APILevel[
     since: "22",
@@ -31,8 +31,6 @@ import ohos.multimedia.image.*
 public class PhotoAsset <: RemoteDataLite {
     /**
      * uri of the asset.
-     *
-     * @relation readonly uri: string
      */
     @!APILevel[
         since: "22",
@@ -51,8 +49,6 @@ public class PhotoAsset <: RemoteDataLite {
 
     /**
      * Photo type, image or video
-     *
-     * @relation readonly photoType: PhotoType
      */
     @!APILevel[
         since: "22",
@@ -69,8 +65,6 @@ public class PhotoAsset <: RemoteDataLite {
 
     /**
      * Display name (with a file name extension) of the asset.
-     *
-     * @relation readonly displayName: string
      */
     @!APILevel[
         since: "22",
@@ -102,7 +96,6 @@ public class PhotoAsset <: RemoteDataLite {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
-     * @relation get(member: string): MemberType
      */
     @!APILevel[
         since: "22",
@@ -129,7 +122,6 @@ public class PhotoAsset <: RemoteDataLite {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
-     * @relation set(member: string, value: string): void
      */
     @!APILevel[
         since: "22",
@@ -157,7 +149,6 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000001 - Invalid display name
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation commitModify(): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -178,7 +169,6 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getThumbnail(size?: image.Size): Promise<image.PixelMap>
      */
     @!APILevel[
         since: "22",

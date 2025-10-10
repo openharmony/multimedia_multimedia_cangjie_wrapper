@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.business_exception.{ UNIVERSAL_ERROR_MAP, BusinessException }
@@ -139,8 +141,6 @@ func checkRet(errCode: Int32, funcName: String) {
 
 /**
  * Enumerate the album subtypes.
- *
- * @relation enum AlbumSubtype
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -150,8 +150,6 @@ func checkRet(errCode: Int32, funcName: String) {
 public enum AlbumSubtype {
     /**
      * Generic user-created albums.
-     *
-     * @relation USER_GENERIC = 1
      */
     @!APILevel[
         since: "22",
@@ -161,8 +159,6 @@ public enum AlbumSubtype {
 
     /**
      * Favorite album, which assets are marked as favorite.
-     *
-     * @relation FAVORITE = 1025
      */
     | @!APILevel[
         since: "22",
@@ -172,8 +168,6 @@ public enum AlbumSubtype {
 
     /**
      * Video album, which contains all video assets.
-     *
-     * @relation VIDEO
      */
     | @!APILevel[
         since: "22",
@@ -183,8 +177,6 @@ public enum AlbumSubtype {
 
     /**
      * Image album
-     *
-     * @relation IMAGE = 1031
      */
     | @!APILevel[
         since: "22",
@@ -194,8 +186,6 @@ public enum AlbumSubtype {
 
     /**
      * Any album
-     *
-     * @relation ANY = 2147483647
      */
     | @!APILevel[
         since: "22",
@@ -231,8 +221,6 @@ public enum AlbumSubtype {
 
 /**
  * Enumerates the album types.
- *
- * @relation enum AlbumType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -242,8 +230,6 @@ public enum AlbumSubtype {
 public enum AlbumType {
     /**
      * User album.
-     *
-     * @relation USER = 0
      */
     @!APILevel[
         since: "22",
@@ -253,8 +239,6 @@ public enum AlbumType {
 
     /**
      * System album.
-     *
-     * @relation SYSTEM = 1024
      */
     | @!APILevel[
         since: "22",
@@ -284,8 +268,6 @@ public enum AlbumType {
 
 /**
  * Defines the options for fetching media files.
- *
- * @relation interface FetchOptions
  */
 @!APILevel[
     since: "22",
@@ -294,8 +276,6 @@ public enum AlbumType {
 public class FetchOptions {
     /**
      * Indicates the members to query.
-     *
-     * @relation fetchColumns: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -305,8 +285,6 @@ public class FetchOptions {
 
     /**
      * Predicates that specify the fetch criteria.
-     *
-     * @relation predicates: dataSharePredicates.DataSharePredicates;
      */
     @!APILevel[
         since: "22",
@@ -336,8 +314,6 @@ public class FetchOptions {
 
 /**
  * Enumerates the PhotoAsset types.
- *
- * @relation enum PhotoSubtype
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -347,8 +323,6 @@ public class FetchOptions {
 public enum PhotoSubtype {
     /**
      * Default Photo Type
-     *
-     * @relation DEFAULT = 0
      */
     @!APILevel[
         since: "22",
@@ -357,8 +331,6 @@ public enum PhotoSubtype {
     Default
     /**
      * Moving Photo Type
-     *
-     * @relation MOVING_PHOTO = 3
      */
     | @!APILevel[
         since: "22",
@@ -367,8 +339,6 @@ public enum PhotoSubtype {
     MovingPhoto
     /**
      * Burst Photo Type
-     *
-     * @relation BURST = 4
      */
     | @!APILevel[
         since: "22",
@@ -391,8 +361,6 @@ public enum PhotoSubtype {
 
 /**
  * Enumerates the asset delivery modes.
- *
- * @relation enum DeliveryMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -402,8 +370,6 @@ public enum PhotoSubtype {
 public enum DeliveryMode {
     /**
      * Fast mode.
-     *
-     * @relation FAST_MODE = 0
      */
     @!APILevel[
         since: "22",
@@ -413,8 +379,6 @@ public enum DeliveryMode {
 
     /**
      * High-quality mode.
-     *
-     * @relation HIGH_QUALITY_MODE = 1
      */
     | @!APILevel[
         since: "22",
@@ -424,8 +388,6 @@ public enum DeliveryMode {
 
     /**
      * Balance mode.
-     *
-     * @relation BALANCE_MODE = 2
      */
     | @!APILevel[
         since: "22",
@@ -448,8 +410,6 @@ public enum DeliveryMode {
 
 /**
  * PhotoViewMIMETypes represents the type of media resource that photo picker selects.
- *
- * @relation export enum PhotoViewMIMETypes
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -459,8 +419,6 @@ public enum DeliveryMode {
 public enum PhotoViewMIMETypes {
     /**
      * IMAGE_TYPE indicates that the selected media resources are images.
-     *
-     * @relation IMAGE_TYPE = 'image/\*'
      */
     @!APILevel[
         since: "22",
@@ -470,8 +428,6 @@ public enum PhotoViewMIMETypes {
 
     /**
      * VIDEO_TYPE indicates that the selected media resources are videos.
-     *
-     * @relation VIDEO_TYPE = 'video/\*'
      */
     | @!APILevel[
         since: "22",
@@ -481,8 +437,6 @@ public enum PhotoViewMIMETypes {
 
     /**
      * IMAGE_VIDEO_TYPE indicates that the selected media resources are images and videos.
-     *
-     * @relation IMAGE_VIDEO_TYPE = '*\/\*',
      */
     | @!APILevel[
         since: "22",
@@ -492,8 +446,6 @@ public enum PhotoViewMIMETypes {
 
     /**
      * MOVING_PHOTO_IMAGE_TYPE indicates that the selected media resources are moving photos.
-     *
-     * @relation MOVING_PHOTO_IMAGE_TYPE = 'image/movingPhoto'
      */
     | @!APILevel[
         since: "22",
@@ -517,8 +469,6 @@ public enum PhotoViewMIMETypes {
 
 /**
  * Enumerates the types of recommended images.
- *
- * @relation enum RecommendationType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -528,8 +478,6 @@ public enum PhotoViewMIMETypes {
 public enum RecommendationType {
     /**
      * QR_OR_BAR_CODE indicates that QR code or barcode photos can be recommended
-     *
-     * @relation QR_OR_BAR_CODE = 1
      */
     @!APILevel[
         since: "22",
@@ -539,8 +487,6 @@ public enum RecommendationType {
 
     /**
      * QR_CODE indicates that QR code photos can be recommended
-     *
-     * @relation QR_CODE = 2
      */
     | @!APILevel[
         since: "22",
@@ -550,8 +496,6 @@ public enum RecommendationType {
 
     /**
      * BAR_CODE indicates that barcode photos can be recommended
-     *
-     * @relation BAR_CODE = 3
      */
     | @!APILevel[
         since: "22",
@@ -561,8 +505,6 @@ public enum RecommendationType {
 
     /**
      * ID_CARD indicates that QR code or barcode photos can be recommended
-     *
-     * @relation ID_CARD = 4
      */
     | @!APILevel[
         since: "22",
@@ -572,8 +514,6 @@ public enum RecommendationType {
 
     /**
      * PROFILE_PICTURE indicates that profile picture photos can be recommended
-     *
-     * @relation PROFILE_PICTURE = 5
      */
     | @!APILevel[
         since: "22",
@@ -583,8 +523,6 @@ public enum RecommendationType {
 
     /**
      * PASSPORT indicates that passport photos can be recommended
-     *
-     * @relation PASSPORT = 6
      */
     | @!APILevel[
         since: "22",
@@ -594,8 +532,6 @@ public enum RecommendationType {
 
     /**
      * BANK_CARD indicates that bank card photos can be recommended
-     *
-     * @relation BANK_CARD = 7
      */
     | @!APILevel[
         since: "22",
@@ -605,8 +541,6 @@ public enum RecommendationType {
 
     /**
      * DRIVER_LICENSE indicates that driver license photos can be recommended
-     *
-     * @relation DRIVER_LICENSE = 8
      */
     | @!APILevel[
         since: "22",
@@ -616,8 +550,6 @@ public enum RecommendationType {
 
     /**
      * DRIVING_LICENSE indicates that driving license photos can be recommended
-     *
-     * @relation DRIVING_LICENSE = 9
      */
     | @!APILevel[
         since: "22",
@@ -627,8 +559,6 @@ public enum RecommendationType {
 
     /**
      * FEATURED_SINGLE_PORTRAIT indicates that featured single portrait photos can be recommended
-     *
-     * @relation FEATURED_SINGLE_PORTRAIT = 10
      */
     | @!APILevel[
         since: "22",
@@ -658,8 +588,6 @@ public enum RecommendationType {
 
 /**
  * Enumerates the formats for displaying media assets.
- *
- * @relation enum DynamicRangeType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -669,8 +597,6 @@ public enum RecommendationType {
 public enum DynamicRangeType {
     /**
      * Standard dynamic range (SDR).
-     *
-     * @relation SDR = 0
      */
     @!APILevel[
         since: "22",
@@ -680,8 +606,6 @@ public enum DynamicRangeType {
 
     /**
      * High dynamic range (HDR).
-     *
-     * @relation HDR = 1
      */
     | @!APILevel[
         since: "22",
@@ -693,8 +617,6 @@ public enum DynamicRangeType {
 
 /**
  * Enumerates the types of the resources to write.
- *
- * @relation enum ResourceType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -704,8 +626,6 @@ public enum DynamicRangeType {
 public enum ResourceType {
     /**
      * Image resource
-     *
-     * @relation IMAGE_RESOURCE = 1
      */
     @!APILevel[
         since: "22",
@@ -715,8 +635,6 @@ public enum ResourceType {
 
     /**
      * Video resource
-     *
-     * @relation VIDEO_RESOURCE = 2
      */
     | @!APILevel[
         since: "22",
@@ -738,8 +656,6 @@ public enum ResourceType {
 
 /**
  * Config to create photo asset
- *
- * @relation interface PhotoCreationConfig
  */
 @!APILevel[
     since: "22",
@@ -748,8 +664,6 @@ public enum ResourceType {
 public class PhotoCreationConfig {
     /**
      * Extension of the asset
-     *
-     * @relation fileNameExtension: string
      */
     @!APILevel[
         since: "22",
@@ -759,8 +673,6 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo type of the asset to create, include image or video
-     *
-     * @relation photoType: PhotoType
      */
     @!APILevel[
         since: "22",
@@ -770,8 +682,6 @@ public class PhotoCreationConfig {
 
     /**
      * Title of the asset
-     *
-     * @relation title?: string
      */
     @!APILevel[
         since: "22",
@@ -781,8 +691,6 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo subtype of the asset to create, include default or moving_photo
-     *
-     * @relation subtype?: PhotoSubtype
      */
     @!APILevel[
         since: "22",
@@ -823,8 +731,6 @@ public class PhotoCreationConfig {
 
 /**
  * Enumeration types of data change.
- *
- * @relation enum NotifyType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -834,8 +740,6 @@ public class PhotoCreationConfig {
 public enum NotifyType {
     /**
      * Data(assets or albums) have been newly created
-     *
-     * @relation NOTIFY_ADD
      */
     @!APILevel[
         since: "22",
@@ -845,8 +749,6 @@ public enum NotifyType {
 
     /**
      * Data(assets or albums) have been modified
-     *
-     * @relation NOTIFY_UPDATE
      */
     | @!APILevel[
         since: "22",
@@ -856,8 +758,6 @@ public enum NotifyType {
 
     /**
      * Data(assets or albums) have been removed
-     *
-     * @relation NOTIFY_REMOVE
      */
     | @!APILevel[
         since: "22",
@@ -867,8 +767,6 @@ public enum NotifyType {
 
     /**
      * Assets have been added to an album.
-     *
-     * @relation NOTIFY_ALBUM_ADD_ASSET
      */
     | @!APILevel[
         since: "22",
@@ -878,8 +776,6 @@ public enum NotifyType {
 
     /**
      * Assets have been removed from an album.
-     *
-     * @relation NOTIFY_ALBUM_REMOVE_ASSET
      */
     | @!APILevel[
         since: "22",
@@ -902,8 +798,6 @@ public enum NotifyType {
 
 /**
  * Defines the change data
- *
- * @relation interface ChangeData
  */
 @!APILevel[
     since: "22",
@@ -912,8 +806,6 @@ public enum NotifyType {
 public class ChangeData {
     /**
      * The NotifyType of ChangeData
-     *
-     * @relation type: NotifyType
      */
     @!APILevel[
         since: "22",
@@ -923,8 +815,6 @@ public class ChangeData {
 
     /**
      * The changed uris
-     *
-     * @relation uris: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -934,8 +824,6 @@ public class ChangeData {
 
     /**
      * Change details of the asset uris to an album.
-     *
-     * @relation extraUris: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -952,8 +840,6 @@ public class ChangeData {
 
 /**
  * Options for creating an image or video asset.
- *
- * @relation interface CreateOptions
  */
 @!APILevel[
     since: "22",
@@ -962,8 +848,6 @@ public class ChangeData {
 public class CreateOptions {
     /**
      * Title of the asset
-     *
-     * @relation title?: string
      */
     @!APILevel[
         since: "22",
@@ -973,8 +857,6 @@ public class CreateOptions {
 
     /**
      * Specify subtype of the asset to create
-     *
-     * @relation subtype?: PhotoSubtype
      */
     @!APILevel[
         since: "22",
@@ -997,8 +879,6 @@ public class CreateOptions {
 
 /**
  * Options to request media asset
- *
- * @relation interface RequestOptions
  */
 @!APILevel[
     since: "22",
@@ -1007,8 +887,6 @@ public class CreateOptions {
 public class RequestOptions {
     /**
      * Indicates the delivery mode
-     *
-     * @relation deliveryMode: DeliveryMode
      */
     @!APILevel[
         since: "22",
@@ -1027,8 +905,6 @@ public class RequestOptions {
 
 /**
  * Enumeration of photo asset members
- *
- * @relation enum PhotoKeys
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1038,8 +914,6 @@ public class RequestOptions {
 public enum PhotoKeys <: ToString {
     /**
      * Asset uri, read only
-     *
-     * @relation URI = 'uri'
      */
     @!APILevel[
         since: "22",
@@ -1049,8 +923,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Photo type of the asset, read only
-     *
-     * @relation PHOTO_TYPE = 'media_type'
      */
     | @!APILevel[
         since: "22",
@@ -1060,8 +932,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Asset name, read only
-     *
-     * @relation DISPLAY_NAME = 'display_name'
      */
     | @!APILevel[
         since: "22",
@@ -1071,8 +941,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Size of the asset, read only
-     *
-     * @relation SIZE = 'size'
      */
     | @!APILevel[
         since: "22",
@@ -1082,8 +950,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Creation date of the asset, read only
-     *
-     * @relation DATE_ADDED = 'date_added'
      */
     | @!APILevel[
         since: "22",
@@ -1093,8 +959,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Modified date of the asset, read only
-     *
-     * @relation DATE_MODIFIED = 'date_modified'
      */
     | @!APILevel[
         since: "22",
@@ -1104,8 +968,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Duration of video files, read only
-     *
-     * @relation DURATION = 'duration'
      */
     | @!APILevel[
         since: "22",
@@ -1115,8 +977,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width of the image asset, read only
-     *
-     * @relation WIDTH = 'width'
      */
     | @!APILevel[
         since: "22",
@@ -1126,8 +986,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Height of the image asset, read only
-     *
-     * @relation HEIGHT = 'height'
      */
     | @!APILevel[
         since: "22",
@@ -1137,8 +995,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Date taken of the asset, read only
-     *
-     * @relation DATE_TAKEN = 'date_taken'
      */
     | @!APILevel[
         since: "22",
@@ -1148,8 +1004,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Orientation of the image asset, read only
-     *
-     * @relation ORIENTATION = 'orientation'
      */
     | @!APILevel[
         since: "22",
@@ -1159,8 +1013,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Favorite state of the asset, read only
-     *
-     * @relation FAVORITE = 'is_favorite'
      */
     | @!APILevel[
         since: "22",
@@ -1170,8 +1022,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Title of the asset
-     *
-     * @relation TITLE = 'title'
      */
     | @!APILevel[
         since: "22",
@@ -1181,8 +1031,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Creation time of the asset in milliseconds, read only
-     *
-     * @relation DATE_ADDED_MS = 'date_added_ms',
      */
     | @!APILevel[
         since: "22",
@@ -1192,8 +1040,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Modified time of the asset in milliseconds, read only
-     *
-     * @relation DATE_MODIFIED_MS = 'date_modified_ms'
      */
     | @!APILevel[
         since: "22",
@@ -1203,8 +1049,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Photo subtype of the asset, read only
-     *
-     * @relation PHOTO_SUBTYPE = 'subtype'
      */
     | @!APILevel[
         since: "22",
@@ -1214,8 +1058,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Dynamic range type of the asset, read only
-     *
-     * @relation DYNAMIC_RANGE_TYPE = 'dynamic_range_type'
      */
     | @!APILevel[
         since: "22",
@@ -1225,8 +1067,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Cover position of the asset, read only
-     *
-     * @relation COVER_POSITION = 'cover_position'
      */
     | @!APILevel[
         since: "22",
@@ -1236,8 +1076,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Unique uuid of the burst photos, read only
-     *
-     * @relation BURST_KEY = 'burst_key'
      */
     | @!APILevel[
         since: "22",
@@ -1247,8 +1085,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width and height information of lcd picture, read only
-     *
-     * @relation LCD_SIZE = 'lcd_size'
      */
     | @!APILevel[
         since: "22",
@@ -1258,8 +1094,6 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width and height information of thumbnail picture, read only
-     *
-     * @relation THM_SIZE = 'thm_size'
      */
     | @!APILevel[
         since: "22",
@@ -1305,8 +1139,6 @@ public enum PhotoKeys <: ToString {
 
 /**
  * Enumeration uris for registerChange.
- *
- * @relation enum DefaultChangeUri
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1316,8 +1148,6 @@ public enum PhotoKeys <: ToString {
 public enum DefaultChangeUri <: ToString {
     /**
      * Uri for default PhotoAsset, use with forDescendant{true}, will receive all PhotoAsset's change notifications
-     *
-     * @relation DEFAULT_PHOTO_URI = 'file://media/Photo'
      */
     @!APILevel[
         since: "22",
@@ -1327,8 +1157,6 @@ public enum DefaultChangeUri <: ToString {
 
     /**
      * Uri for default Album, use with forDescendant{true}, will receive all Album's change notifications
-     *
-     * @relation DEFAULT_ALBUM_URI = 'file://media/PhotoAlbum'
      */
     | @!APILevel[
         since: "22",
@@ -1355,8 +1183,6 @@ public enum DefaultChangeUri <: ToString {
 
 /**
  * Enumerates the key album attributes.
- *
- * @relation enum AlbumKeys
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1366,8 +1192,6 @@ public enum DefaultChangeUri <: ToString {
 public enum AlbumKeys <: ToString {
     /**
      * URI of the album.
-     *
-     * @relation URI = 'uri'
      */
     @!APILevel[
         since: "22",
@@ -1377,8 +1201,6 @@ public enum AlbumKeys <: ToString {
 
      /**
      * Name of the album.
-     *
-     * @relation ALBUM_NAME = 'album_name',
      */
     | @!APILevel[
         since: "22",
@@ -1407,8 +1229,6 @@ class BaseSelectOptionsImpl {}
 
 /**
  * Enumerates media file types.
- *
- * @relation enum PhotoType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1418,8 +1238,6 @@ class BaseSelectOptionsImpl {}
 public enum PhotoType {
     /**
      * Image asset
-     *
-     * @relation IMAGE = 1
      */
     @!APILevel[
         since: "22",
@@ -1429,8 +1247,6 @@ public enum PhotoType {
 
     /**
      * Video asset
-     *
-     * @relation VIDEO = 2
      */
     | @!APILevel[
         since: "22",
@@ -1460,8 +1276,6 @@ public enum PhotoType {
 
 /**
  * Indicates the type of photo asset member.
- *
- * @relation type MemberType = number | string | boolean
  */
 @!APILevel[
     since: "22",
@@ -1470,8 +1284,6 @@ public enum PhotoType {
 public enum MemberType {
     /**
      * Indicates the type of photo asset member.
-     *
-     * @relation type MemberType = number | string | boolean
      */
     @!APILevel[
         since: "22",
@@ -1480,8 +1292,6 @@ public enum MemberType {
     Int64Value(Int64)
     /**
      * Indicates the type of photo asset member.
-     *
-     * @relation type MemberType = number | string | boolean
      */
     | @!APILevel[
         since: "22",
@@ -1490,8 +1300,6 @@ public enum MemberType {
     StringValue(String)
     /**
      * Indicates the type of photo asset member.
-     *
-     * @relation type MemberType = number | string | boolean
      */
     | @!APILevel[
         since: "22",

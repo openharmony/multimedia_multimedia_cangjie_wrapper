@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.labels.APILevel
 
 /**
  * Camera output object.
- *
- * @relation interface CameraOutput
  */
 @!APILevel[
     since: "22",
@@ -31,7 +31,6 @@ public interface CameraOutput {
      * Release output instance.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         since: "22",

@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.graphics.color_space_manager.ColorSpace
@@ -86,8 +88,6 @@ struct CPoint {
 
 /**
  * Point coordinates are used for focus and exposure configuration.
- *
- * @relation interface Point
  */
 @!APILevel[
     since: "22",
@@ -96,8 +96,6 @@ struct CPoint {
 public class Point {
     /**
      * x co-ordinate
-     *
-     * @relation x: double
      */
     @!APILevel[
         since: "22",
@@ -107,8 +105,6 @@ public class Point {
 
     /**
      * y co-ordinate
-     *
-     * @relation y: double
      */
     @!APILevel[
         since: "22",
@@ -140,8 +136,6 @@ public class Point {
 
 /**
  * Enum for exposure mode.
- *
- * @relation enum ExposureMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -151,8 +145,6 @@ public class Point {
 public enum ExposureMode {
     /**
      * Lock exposure mode.
-     *
-     * @relation EXPOSURE_MODE_LOCKED = 0
      */
     @!APILevel[
         since: "22",
@@ -162,8 +154,6 @@ public enum ExposureMode {
     |
     /**
      * Auto exposure mode. Exposure area center point can be set by AutoExposure.setMeteringPoint interface.
-     *
-     * @relation EXPOSURE_MODE_AUTO = 1
      */
     @!APILevel[
         since: "22",
@@ -173,8 +163,6 @@ public enum ExposureMode {
     |
     /**
      * Continuous automatic exposure.
-     *
-     * @relation EXPOSURE_MODE_CONTINUOUS_AUTO = 2
      */
     @!APILevel[
         since: "22",
@@ -206,8 +194,6 @@ public enum ExposureMode {
 
 /**
  * AutoExposureQuery object.
- *
- * @relation interface AutoExposureQuery
  */
 @!APILevel[
     since: "22",
@@ -220,7 +206,6 @@ public interface AutoExposureQuery {
      * @param { ExposureMode } aeMode - Exposure mode
      * @returns { Bool } Is the exposure mode supported.
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
-     * @relation isExposureModeSupported(aeMode: ExposureMode): boolean
      */
     @!APILevel[
         since: "22",
@@ -242,7 +227,6 @@ public interface AutoExposureQuery {
      *
      * @returns { Array<Float64> } The array of compensation range.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getExposureBiasRange(): Array<double>
      */
     @!APILevel[
         since: "22",
@@ -262,8 +246,6 @@ public interface AutoExposureQuery {
 
 /**
  * AutoExposure object.
- *
- * @relation interface AutoExposure extends AutoExposureQuery
  */
 @!APILevel[
     since: "22",
@@ -275,7 +257,6 @@ public interface AutoExposure <: AutoExposureQuery {
      *
      * @returns { ExposureMode } The current exposure mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getExposureMode(): ExposureMode
      */
     @!APILevel[
         since: "22",
@@ -296,7 +277,6 @@ public interface AutoExposure <: AutoExposureQuery {
      * @param { ExposureMode } aeMode - Exposure mode
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setExposureMode(aeMode: ExposureMode): void
      */
     @!APILevel[
         since: "22",
@@ -316,7 +296,6 @@ public interface AutoExposure <: AutoExposureQuery {
      *
      * @returns { Point } The current metering point.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getMeteringPoint(): Point
      */
     @!APILevel[
         since: "22",
@@ -336,7 +315,6 @@ public interface AutoExposure <: AutoExposureQuery {
      *
      * @param { Point } point - metering point
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setMeteringPoint(point: Point): void
      */
     @!APILevel[
         since: "22",
@@ -357,7 +335,6 @@ public interface AutoExposure <: AutoExposureQuery {
      * @param { Float64 } exposureBias - Exposure compensation
      * @throws { BusinessException } 7400102 - Operation not allowed.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setExposureBias(exposureBias: double): void
      */
     @!APILevel[
         since: "22",
@@ -377,7 +354,6 @@ public interface AutoExposure <: AutoExposureQuery {
      *
      * @returns { Float64 } The exposure value.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getExposureValue(): double
      */
     @!APILevel[
         since: "22",
@@ -395,8 +371,6 @@ public interface AutoExposure <: AutoExposureQuery {
 
 /**
  * Color Management Query object.
- *
- * @relation interface ColorManagementQuery
  */
 @!APILevel[
     since: "22",
@@ -408,7 +382,6 @@ public interface ColorManagementQuery {
      *
      * @returns { Array<colorSpaceManager.ColorSpace> } The array of the supported color space for the session.
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
-     * @relation getSupportedColorSpaces(): Array<colorSpaceManager.ColorSpace>
      */
     @!APILevel[
         since: "22",
@@ -437,8 +410,6 @@ public interface ColorManagementQuery {
 
 /**
  * Color Management object.
- *
- * @relation interface ColorManagement extends ColorManagementQuery
  */
 @!APILevel[
     since: "22",
@@ -453,7 +424,6 @@ public interface ColorManagement <: ColorManagementQuery {
      * @throws { BusinessException } 7400102 - The colorSpace does not match the format.
      * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation setColorSpace(colorSpace: colorSpaceManager.ColorSpace): void
      */
     @!APILevel[
         since: "22",
@@ -473,7 +443,6 @@ public interface ColorManagement <: ColorManagementQuery {
      *
      * @returns { colorSpaceManager.ColorSpace } Current color space.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getActiveColorSpace(): colorSpaceManager.ColorSpace
      */
     @!APILevel[
         since: "22",
@@ -492,8 +461,6 @@ public interface ColorManagement <: ColorManagementQuery {
 
 /**
  * Enum for flash mode.
- *
- * @relation enum FlashMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -503,8 +470,6 @@ public interface ColorManagement <: ColorManagementQuery {
 public enum FlashMode {
     /**
      * Close mode.
-     *
-     * @relation FLASH_MODE_CLOSE = 0
      */
     @!APILevel[
         since: "22",
@@ -514,8 +479,6 @@ public enum FlashMode {
     |
     /**
      * Open mode.
-     *
-     * @relation FLASH_MODE_OPEN = 1
      */
     @!APILevel[
         since: "22",
@@ -525,8 +488,6 @@ public enum FlashMode {
     |
     /**
      * Auto mode.
-     *
-     * @relation FLASH_MODE_AUTO = 2
      */
     @!APILevel[
         since: "22",
@@ -536,8 +497,6 @@ public enum FlashMode {
     |
     /**
      * Always open mode.
-     *
-     * @relation FLASH_MODE_ALWAYS_OPEN = 3
      */
     @!APILevel[
         since: "22",
@@ -571,8 +530,6 @@ public enum FlashMode {
 
 /**
  * Flash Query object.
- *
- * @relation interface FlashQuery
  */
 @!APILevel[
     since: "22",
@@ -584,7 +541,6 @@ public interface FlashQuery {
      *
      * @returns { Bool } The flash light support status.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation hasFlash(): boolean
      */
     @!APILevel[
         since: "22",
@@ -606,7 +562,6 @@ public interface FlashQuery {
      * @param { FlashMode } flashMode - Flash mode
      * @returns { Bool } Is the flash mode supported.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation isFlashModeSupported(flashMode: FlashMode): boolean
      */
     @!APILevel[
         since: "22",
@@ -626,8 +581,6 @@ public interface FlashQuery {
 
 /**
  * Flash object.
- *
- * @relation interface Flash extends FlashQuery
  */
 @!APILevel[
     since: "22",
@@ -639,7 +592,6 @@ public interface Flash <: FlashQuery {
      *
      * @param { FlashMode } flashMode - Target flash mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setFlashMode(flashMode: FlashMode): void
      */
     @!APILevel[
         since: "22",
@@ -658,7 +610,6 @@ public interface Flash <: FlashQuery {
      *
      * @returns { FlashMode } The current flash mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getFlashMode(): FlashMode
      */
     @!APILevel[
         since: "22",
@@ -677,8 +628,6 @@ public interface Flash <: FlashQuery {
 
 /**
  * Enum for focus state.
- *
- * @relation enum FocusState
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -688,8 +637,6 @@ public interface Flash <: FlashQuery {
 public enum FocusState {
     /**
      * Scan state.
-     *
-     * @relation FOCUS_STATE_SCAN = 0
      */
     @!APILevel[
         since: "22",
@@ -699,8 +646,6 @@ public enum FocusState {
     |
     /**
      * Focused state.
-     *
-     * @relation FOCUS_STATE_FOCUSED = 1
      */
     @!APILevel[
         since: "22",
@@ -710,8 +655,6 @@ public enum FocusState {
     |
     /**
      * Unfocused state.
-     *
-     * @relation FOCUS_STATE_UNFOCUSED = 2
      */
     @!APILevel[
         since: "22",
@@ -743,8 +686,6 @@ public enum FocusState {
 
 /**
  * Enum for focus mode.
- *
- * @relation enum FocusMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -754,8 +695,6 @@ public enum FocusState {
 public enum FocusMode {
     /**
      * Manual mode.
-     *
-     * @relation FOCUS_MODE_MANUAL = 0
      */
     @!APILevel[
         since: "22",
@@ -765,8 +704,6 @@ public enum FocusMode {
     |
     /**
      * Continuous auto mode.
-     *
-     * @relation FOCUS_MODE_CONTINUOUS_AUTO = 1
      */
     @!APILevel[
         since: "22",
@@ -776,8 +713,6 @@ public enum FocusMode {
     |
     /**
      * Auto mode.
-     *
-     * @relation FOCUS_MODE_AUTO = 2
      */
     @!APILevel[
         since: "22",
@@ -787,8 +722,6 @@ public enum FocusMode {
     |
     /**
      * Locked mode.
-     *
-     * @relation FOCUS_MODE_LOCKED = 3
      */
     @!APILevel[
         since: "22",
@@ -822,8 +755,6 @@ public enum FocusMode {
 
 /**
  * Focus Query object.
- *
- * @relation interface FocusQuery
  */
 @!APILevel[
     since: "22",
@@ -836,7 +767,6 @@ public interface FocusQuery {
      * @param { FocusMode } afMode - Focus mode.
      * @returns { Bool } Is the focus mode supported.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation isFocusModeSupported(afMode: FocusMode): boolean
      */
     @!APILevel[
         since: "22",
@@ -855,8 +785,6 @@ public interface FocusQuery {
 
 /**
  * Focus object.
- *
- * @relation interface Focus extends FocusQuery
  */
 @!APILevel[
     since: "22",
@@ -868,7 +796,6 @@ public interface Focus <: FocusQuery {
      *
      * @param { FocusMode } afMode - Target focus mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setFocusMode(afMode: FocusMode): void
      */
     @!APILevel[
         since: "22",
@@ -885,7 +812,6 @@ public interface Focus <: FocusQuery {
      *
      * @returns { FocusMode } The current focus mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getFocusMode(): FocusMode
      */
     @!APILevel[
         since: "22",
@@ -905,7 +831,6 @@ public interface Focus <: FocusQuery {
      *
      * @param { Point } point - Target focus point.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setFocusPoint(point: Point): void
      */
     @!APILevel[
         since: "22",
@@ -925,7 +850,6 @@ public interface Focus <: FocusQuery {
      * @returns { Point } Used to get the current focus. Failure of the interface call will return the
      * corresponding error code, which is of type CameraErrorCode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getFocusPoint(): Point
      */
     @!APILevel[
         since: "22",
@@ -945,7 +869,6 @@ public interface Focus <: FocusQuery {
      *
      * @returns { Float64 } The current focal point.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getFocalLength(): double
      */
     @!APILevel[
         since: "22",
@@ -963,8 +886,6 @@ public interface Focus <: FocusQuery {
 
 /**
  * Enum for video stabilization mode.
- *
- * @relation enum VideoStabilizationMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -974,8 +895,6 @@ public interface Focus <: FocusQuery {
 public enum VideoStabilizationMode {
     /**
      * Turn off video stablization.
-     *
-     * @relation OFF = 0
      */
     @!APILevel[
         since: "22",
@@ -985,8 +904,6 @@ public enum VideoStabilizationMode {
     |
     /**
      * LOW mode provides basic stabilization effect.
-     *
-     * @relation LOW = 1
      */
     @!APILevel[
         since: "22",
@@ -996,8 +913,6 @@ public enum VideoStabilizationMode {
     |
     /**
      * MIDDLE mode means algorithms can achieve better effects than LOW mode.
-     *
-     * @relation MIDDLE = 2
      */
     @!APILevel[
         since: "22",
@@ -1007,8 +922,6 @@ public enum VideoStabilizationMode {
     |
     /**
      * HIGH mode means algorithms can achieve better effects than MIDDLE mode.
-     *
-     * @relation HIGH = 3
      */
     @!APILevel[
         since: "22",
@@ -1018,8 +931,6 @@ public enum VideoStabilizationMode {
     |
     /**
      * The stabilization algorithm is selected automatically. Selection of the stabilization algorithm is performed automatically.
-     *
-     * @relation AUTO = 4
      */
     @!APILevel[
         since: "22",
@@ -1055,8 +966,6 @@ public enum VideoStabilizationMode {
 
 /**
  * Stabilization Query object.
- *
- * @relation interface StabilizationQuery
  */
 @!APILevel[
     since: "22",
@@ -1069,7 +978,6 @@ public interface StabilizationQuery {
      * @param { VideoStabilizationMode } vsMode - Video Stabilization mode.
      * @returns { Bool } Is video stabilization mode supported.
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
-     * @relation isVideoStabilizationModeSupported(vsMode: VideoStabilizationMode): boolean
      */
     @!APILevel[
         since: "22",
@@ -1089,8 +997,6 @@ public interface StabilizationQuery {
 
 /**
  * Stabilization object.
- *
- * @relation interface Stabilization extends StabilizationQuery
  */
 @!APILevel[
     since: "22",
@@ -1102,7 +1008,6 @@ public interface Stabilization <: StabilizationQuery {
      *
      * @returns { VideoStabilizationMode } The current video stabilization mode.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation getActiveVideoStabilizationMode(): VideoStabilizationMode
      */
     @!APILevel[
         since: "22",
@@ -1124,7 +1029,6 @@ public interface Stabilization <: StabilizationQuery {
      *
      * @param { VideoStabilizationMode } mode - video stabilization mode to set.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setVideoStabilizationMode(mode: VideoStabilizationMode): void
      */
     @!APILevel[
         since: "22",
@@ -1142,8 +1046,6 @@ public interface Stabilization <: StabilizationQuery {
 
 /**
  * SmoothZoomInfo object
- *
- * @relation interface SmoothZoomInfo
  */
 @!APILevel[
     since: "22",
@@ -1152,8 +1054,6 @@ public interface Stabilization <: StabilizationQuery {
 public class SmoothZoomInfo {
     /**
      * The duration of smooth zoom.
-     *
-     * @relation duration: int
      */
     @!APILevel[
         since: "22",
@@ -1172,8 +1072,6 @@ public class SmoothZoomInfo {
 
 /**
  * Enum for smooth zoom mode.
- *
- * @relation enum SmoothZoomMode
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1183,8 +1081,6 @@ public class SmoothZoomInfo {
 public enum SmoothZoomMode {
     /**
      * Normal zoom mode.
-     *
-     * @relation NORMAL = 0
      */
     @!APILevel[
         since: "22",
@@ -1212,8 +1108,6 @@ public enum SmoothZoomMode {
 
 /**
  * Zoom query object.
- *
- * @relation interface ZoomQuery
  */
 @!APILevel[
     since: "22",
@@ -1225,7 +1119,6 @@ public interface ZoomQuery {
      *
      * @returns { Array<Float64> } The zoom ratio range.
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
-     * @relation getZoomRatioRange(): Array<double>
      */
     @!APILevel[
         since: "22",
@@ -1245,8 +1138,6 @@ public interface ZoomQuery {
 
 /**
  * Zoom object.
- *
- * @relation interface Zoom extends ZoomQuery
  */
 @!APILevel[
     since: "22",
@@ -1258,7 +1149,6 @@ public interface Zoom <: ZoomQuery {
      *
      * @param { Float64 } zoomRatio - Zoom ratio.
      * @throws { BusinessException } 7400103 - Session not config.
-     * @relation setZoomRatio(zoomRatio: double): void
      */
     @!APILevel[
         since: "22",
@@ -1278,7 +1168,6 @@ public interface Zoom <: ZoomQuery {
      * @returns { Float64 } The zoom ratio value.
      * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getZoomRatio(): double
      */
     @!APILevel[
         since: "22",
@@ -1298,7 +1187,6 @@ public interface Zoom <: ZoomQuery {
      *
      * @param { Float64 } targetRatio - Target zoom ratio.
      * @param { SmoothZoomMode } mode - Smooth zoom mode.
-     * @relation setSmoothZoom(targetRatio: double, mode?: SmoothZoomMode): void
      */
     @!APILevel[
         since: "22",
@@ -1317,7 +1205,6 @@ public interface Zoom <: ZoomQuery {
      * Sets target zoom ratio by smooth method.
      *
      * @param { Float64 } targetRatio - Target zoom ratio.
-     * @relation setSmoothZoom(targetRatio: double, mode?: SmoothZoomMode): void
      */
     @!APILevel[
         since: "22",
