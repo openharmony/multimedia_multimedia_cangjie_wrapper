@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.image
 
 import ohos.labels.*
@@ -57,8 +59,6 @@ foreign {
 
 /**
  * ImagePacker instance.
- *
- * @relation interface ImagePacker
  */
 @!APILevel[
     since: "22",
@@ -78,7 +78,6 @@ public class ImagePacker <: RemoteDataLite {
      *
      * @throws { BusinessException } 62980098 - Failed to malloc memory.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @relation readonly supportedFormats: Array<string>
      */
     @!APILevel[
         since: "22",
@@ -110,7 +109,6 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToData(source: ImageSource, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
         since: "22",
@@ -144,7 +142,6 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToData(source: PixelMap, options: PackingOption): Promise<ArrayBuffer>
      */
     @!APILevel[
         since: "22",
@@ -192,7 +189,6 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToFile(source: ImageSource, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -223,7 +219,6 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
      * @throws { BusinessException } 62980172 - Failed to encode icc.
      * @throws { BusinessException } 62980252 - Failed to create surface.
-     * @relation packToFile(source: PixelMap, fd: int, options: PackingOption): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -238,8 +233,6 @@ public class ImagePacker <: RemoteDataLite {
 
     /**
      * Releases an ImagePacker instance
-     *
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -253,8 +246,6 @@ public class ImagePacker <: RemoteDataLite {
 
 /**
  * Creates an ImagePacker instance.
- *
- * @relation function createImagePacker(): ImagePacker
  */
 @!APILevel[
     since: "22",

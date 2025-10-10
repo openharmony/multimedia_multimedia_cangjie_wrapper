@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.labels.*
@@ -21,8 +23,6 @@ import ohos.app.ability.ui_ability.*
 
 /**
  * Defines the interface of media change request.
- *
- * @relation interface MediaChangeRequest {}
  */
 @!APILevel[
     since: "22",
@@ -32,8 +32,6 @@ public interface MediaChangeRequest {}
 
 /**
  * Defines the class of media asset change request.
- *
- * @relation class MediaAssetChangeRequest implements MediaChangeRequest
  */
 @!APILevel[
     since: "22",
@@ -54,7 +52,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation constructor(asset: PhotoAsset)
      */
     @!APILevel[
         since: "22",
@@ -77,7 +74,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation static createImageAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
      */
     @!APILevel[
         since: "22",
@@ -102,7 +98,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation static createVideoAssetRequest(context: Context, fileUri: string): MediaAssetChangeRequest
      */
     @!APILevel[
         since: "22",
@@ -126,7 +121,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation static createAssetRequest(context: Context, photoType: PhotoType, extension: string, options?: CreateOptions): MediaAssetChangeRequest
      */
     @!APILevel[
         since: "22",
@@ -157,7 +151,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation static deleteAssets(context: Context, assets: Array<PhotoAsset>): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -180,7 +173,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000002 - The uri format is incorrect or does not exist.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation static deleteAssets(context: Context, uriList: Array<string>): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -200,7 +192,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAsset(): PhotoAsset
      */
     @!APILevel[
         since: "22",
@@ -223,7 +214,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation setTitle(title: string): void
      */
     @!APILevel[
         since: "22",
@@ -244,7 +234,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation getWriteCacheHandler(): Promise<number>
      */
     @!APILevel[
         since: "22",
@@ -266,7 +255,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation addResource(type: ResourceType, fileUri: string): void
      */
     @!APILevel[
         since: "22",
@@ -288,7 +276,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation addResource(type: ResourceType, data: ArrayBuffer): void
      */
     @!APILevel[
         since: "22",
@@ -306,7 +293,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      *
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation saveCameraPhoto(): void
      */
     @!APILevel[
         since: "22",
@@ -322,7 +308,6 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      *
      * @throws { BusinessException } 14000011 - Internal system error
      * @throws { BusinessException } 14000016 - Operation Not Support
-     * @relation discardCameraPhoto(): void
      */
     @!APILevel[
         since: "22",

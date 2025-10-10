@@ -22,15 +22,15 @@ import ohos.base.*
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import std.unittest.testmacro.*
-import CameraKit.*
-import ImageKit.Size as ImageSize
-import ImageKit.*
+import kit.CameraKit.*
+import kit.ImageKit.Size as ImageSize
+import kit.ImageKit.*
 import std.sync.*
 import std.time.*
-import ArkGraphics2D.ColorSpace
-import ImageKit.{createImageReceiver, ImageFormat}
+import kit.ArkGraphics2D.ColorSpace
+import kit.ImageKit.{createImageReceiver, ImageFormat}
 import ohos.ui_test.Driver
-import TestKit.On
+import kit.TestKit.On
 import ohos.multimedia.camera.Point as cameraPoint
 import std.unittest.*
 import std.unittest.common.*
@@ -39,7 +39,7 @@ import ohos.base.*
 import std.collection.map
 import std.collection.collectArray
 import std.collection.forEach
-import AbilityKit.Permissions
+import kit.AbilityKit.Permissions
 
 var cameraManager: Option<CameraManager> = None
 

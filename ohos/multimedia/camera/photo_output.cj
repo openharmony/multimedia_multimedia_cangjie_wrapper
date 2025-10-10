@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.labels.*
@@ -24,8 +26,6 @@ import std.sync.*
 
 /**
  * Photo output object.
- *
- * @relation interface PhotoOutput extends CameraOutput
  */
 @!APILevel[
     since: "22",
@@ -74,7 +74,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @throws { BusinessException } 7400104 - Session not running.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation capture(): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -92,7 +91,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400104 - Session not running.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation capture(setting: PhotoCaptureSetting): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -114,7 +112,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Bool } TRUE if the moving photo is supported.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation isMovingPhotoSupported(): boolean
      */
     @!APILevel[
         since: "22",
@@ -135,7 +132,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 201 - permission denied.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation enableMovingPhoto(enabled: boolean): void
      */
     @!APILevel[
         since: "22",
@@ -152,7 +148,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Bool } Is the mirror supported.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation isMirrorSupported(): boolean
      */
     @!APILevel[
         since: "22",
@@ -174,7 +169,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { Bool } enabled - enable moving photo mirror if TRUE.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation enableMirror(enabled: boolean): void
      */
     @!APILevel[
         since: "22",
@@ -189,7 +183,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * Get supported moving photo video codec types.
      *
      * @returns { Array<VideoCodecType> } An array of supported video codec types for moving photo.
-     * @relation getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType>
      */
     @!APILevel[
         since: "22",
@@ -204,7 +197,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { VideoCodecType } codecType - Codec type for moving photo.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation setMovingPhotoVideoCodecType(codecType: VideoCodecType): void
      */
     @!APILevel[
         since: "22",
@@ -220,7 +212,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @returns { Profile } The current preconfig type.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getActiveProfile(): Profile
      */
     @!APILevel[
         since: "22",
@@ -240,7 +231,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @returns { ImageRotation } The photo rotation angle.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation getPhotoRotation(deviceDegree: int): ImageRotation
      */
     @!APILevel[
         since: "22",
@@ -264,7 +254,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'captureStartWithInfo', callback: AsyncCallback<CaptureStartInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -298,7 +287,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'frameShutter', callback: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -336,7 +324,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'captureEnd', callback: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -374,7 +361,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'frameShutterEnd', callback: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -412,8 +398,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'captureReady', callback: AsyncCallback<void>): void
-     * @relation on(type: 'error', callback: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -478,7 +462,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in milliseconds).
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'estimatedCaptureDuration', callback: AsyncCallback<double>): void
      */
     @!APILevel[
         since: "22",
@@ -512,7 +495,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'captureStartWithInfo', callback?: AsyncCallback<CaptureStartInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -534,7 +516,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameShutter', callback?: AsyncCallback<FrameShutterInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -555,7 +536,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'captureEnd', callback?: AsyncCallback<CaptureEndInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -576,7 +556,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end information.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'frameShutterEnd', callback?: AsyncCallback<FrameShutterEndInfo>): void
      */
     @!APILevel[
         since: "22",
@@ -597,8 +576,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'captureReady', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -621,7 +598,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration (in milliseconds).
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'estimatedCaptureDuration', callback?: AsyncCallback<double>): void
      */
     @!APILevel[
         since: "22",
@@ -642,13 +618,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'captureStartWithInfo', callback?: AsyncCallback<CaptureStartInfo>): void
-     * @relation off(type: 'frameShutter', callback?: AsyncCallback<FrameShutterInfo>): void
-     * @relation off(type: 'captureEnd', callback?: AsyncCallback<CaptureEndInfo>): void
-     * @relation off(type: 'frameShutterEnd', callback?: AsyncCallback<FrameShutterEndInfo>): void
-     * @relation off(type: 'captureReady', callback?: AsyncCallback<void>): void
-     * @relation off(type: 'estimatedCaptureDuration', callback?: AsyncCallback<double>): void
-     * @relation off(type: 'error', callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",

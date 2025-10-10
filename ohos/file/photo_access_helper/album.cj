@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.labels.*
@@ -20,8 +22,6 @@ import ohos.ffi.*
 
 /**
  * Defines the abstract interface of albums.
- *
- * @relation interface AbsAlum
  */
 @!APILevel[
     since: "22",
@@ -33,8 +33,6 @@ public open class AbsAlbum <: RemoteDataLite{
     }
     /**
      * Album type
-     *
-     * @relation readonly albumType: AlbumType
      */
     @!APILevel[
         since: "22",
@@ -51,8 +49,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album subtype
-     *
-     * @relation readonly albumSubtype: AlbumSubtype
      */
     @!APILevel[
         since: "22",
@@ -69,8 +65,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album name.
-     *
-     * @relation albumName: string
      */
     @!APILevel[
         since: "22",
@@ -96,8 +90,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album uri.
-     *
-     * @relation readonly albumUri: string
      */
     @!APILevel[
         since: "22",
@@ -116,8 +108,6 @@ public open class AbsAlbum <: RemoteDataLite{
     
     /**
      * Number of assets in the album
-     *
-     * @relation readonly count: number
      */
     @!APILevel[
         since: "22",
@@ -131,8 +121,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Cover uri for the album
-     *
-     * @relation readonly coverUri: string
      */
     @!APILevel[
         since: "22",
@@ -157,7 +145,6 @@ public open class AbsAlbum <: RemoteDataLite{
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>
      */
     @!APILevel[
         since: "22",
@@ -182,8 +169,6 @@ class AbsAlbumImpl {}
 
 /**
  * Defines the album.
- *
- * @relation interface Album extends AbsAlbum
  */
 @!APILevel[
     since: "22",
@@ -200,8 +185,6 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of image assets in the album
-     *
-     * @relation readonly imageCount: number
      */
     @!APILevel[
         since: "22",
@@ -215,8 +198,6 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of video assets in the album
-     *
-     * @relation readonly videoCount: number
      */
     @!APILevel[
         since: "22",
@@ -236,7 +217,6 @@ public class Album <: AbsAlbum {
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation commitModify(): Promise<void>
      */
     @!APILevel[
         since: "22",

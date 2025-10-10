@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.app.ability.ui_ability.UIAbilityContext
@@ -25,7 +27,6 @@ import ohos.labels.APILevel
  * @returns { CameraManager } CameraManager instance.
  * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
  * @throws { BusinessException } 7400201 - Camera service fatal error.
- * @relation function getCameraManager(context: Context): CameraManager
  */
 @!APILevel[
     since: "22",

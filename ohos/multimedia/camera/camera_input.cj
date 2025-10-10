@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.camera
 
 import ohos.labels.*
@@ -24,8 +26,6 @@ import std.sync.*
 
 /**
  * Camera input object.
- *
- * @relation interface CameraInput
  */
 @!APILevel[
     since: "22",
@@ -50,7 +50,6 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400107 - Can not use camera cause of conflict.
      * @throws { BusinessException } 7400108 - Camera disabled cause of security reason.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation open(): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -72,7 +71,6 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400107 - Can not use camera cause of conflict.
      * @throws { BusinessException } 7400108 - Camera disabled cause of security reason.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation open(isSecureEnabled: boolean): Promise<bigint>
      */
     @!APILevel[
         since: "22",
@@ -91,7 +89,6 @@ public class CameraInput <: RemoteDataLite {
      * Close camera.
      *
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation close(): Promise<void>
      */
     @!APILevel[
         since: "22",
@@ -116,7 +113,6 @@ public class CameraInput <: RemoteDataLite {
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation on(type: 'error', camera: CameraDevice, callback: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -157,7 +153,6 @@ public class CameraInput <: RemoteDataLite {
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",
@@ -197,7 +192,6 @@ public class CameraInput <: RemoteDataLite {
      * @param { CameraDevice } camera - Camera device.
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
-     * @relation off(type: 'error', camera: CameraDevice, callback?: ErrorCallback): void
      */
     @!APILevel[
         since: "22",

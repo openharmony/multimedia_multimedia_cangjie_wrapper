@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.media
 
 import ohos.ffi.*
@@ -36,7 +38,6 @@ foreign {
 * Creates an AVImageGenerator instance. The API can be used to obtain a video thumbnail.
 *
 * @throws { BusinessException } 5400101 - No memory.
-* @relation function createAVImageGenerator(): Promise<AVImageGenerator>
 */
 @!APILevel[
     since: "22",
@@ -55,8 +56,6 @@ public func createAVImageGenerator(): AVImageGenerator {
 /**
 * Provides APIs to obtain a thumbnail from a video. Before calling any API of AVImageGenerator,
 * you must use createAVImageGenerator to create an AVImageGenerator instance.
-*
-* @relation interface AVImageGenerator
 */
 @!APILevel[
     since: "22",
@@ -73,8 +72,6 @@ public class AVImageGenerator <: RemoteDataLite {
 
     /**
      * Media file descriptor, which specifies the data source.
-     *
-     * @relation fdSrc ?: AVFileDescriptor
      */
     @!APILevel[
         since: "22",
@@ -107,7 +104,6 @@ public class AVImageGenerator <: RemoteDataLite {
      * @param { PixelMapParams } param - Format parameters of the thumbnail to be obtained.
      * @returns { PixelMap } Promise used to return the video thumbnail.
      * @throws { BusinessException } 5400101 - No memory.
-     * @relation fetchFrameByTime(timeUs: number, options: AVImageQueryOptions, param: PixelMapParams): Promise<image.PixelMap>
      */
     @!APILevel[
         since: "22",
@@ -126,7 +122,6 @@ public class AVImageGenerator <: RemoteDataLite {
      * Releases this AVImageGenerator instance. 
      * 
      * @throws { BusinessException } 5400102 - Operation not allowed.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         since: "22",

@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.image
 
 import ohos.graphics.color_space_manager.*
@@ -22,8 +24,6 @@ import ohos.business_exception.*
 
 /**
  * Describes image information.
- *
- * @relation interface ImageInfo
  */
 @!APILevel[
     since: "22",
@@ -32,8 +32,6 @@ import ohos.business_exception.*
 public class ImageInfo {
     /**
      * Indicates image dimensions.
-     *
-     * @relation size: Size
      */
     @!APILevel[
         since: "22",
@@ -43,8 +41,6 @@ public class ImageInfo {
 
     /**
      * Indicates image default density.
-     *
-     * @relation density: int
      */
     @!APILevel[
         since: "22",
@@ -54,8 +50,6 @@ public class ImageInfo {
 
     /**
      * The number of byte per row.
-     *
-     * @relation stride: int
      */
     @!APILevel[
         since: "22",
@@ -65,8 +59,6 @@ public class ImageInfo {
 
     /**
      * Indicates image format.
-     *
-     * @relation pixelFormat: PixelMapFormat
      */
     @!APILevel[
         since: "22",
@@ -76,8 +68,6 @@ public class ImageInfo {
 
     /**
      * Indicates image alpha type.
-     *
-     * @relation alphaType: AlphaType
      */
     @!APILevel[
         since: "22",
@@ -87,8 +77,6 @@ public class ImageInfo {
 
     /**
      * Indicates image mime type.
-     *
-     * @relation mimeType: string
      */
     @!APILevel[
         since: "22",
@@ -98,8 +86,6 @@ public class ImageInfo {
 
     /**
      * Indicates whether the image high dynamic range.
-     *
-     * @relation isHdr: boolean
      */
     @!APILevel[
         since: "22",
@@ -121,8 +107,6 @@ public class ImageInfo {
 
 /**
  * Initialization options for ImageSource.
- *
- * @relation interface SourceOptions
  */
 @!APILevel[
     since: "22",
@@ -131,8 +115,6 @@ public class ImageInfo {
 public class SourceOptions {
     /**
      * The density for ImageSource.
-     *
-     * @relation sourceDensity: int
      */
     @!APILevel[
         since: "22",
@@ -142,8 +124,6 @@ public class SourceOptions {
 
     /**
      * PixelMap expected format.
-     *
-     * @relation sourcePixelFormat?: PixelMapFormat
      */
     @!APILevel[
         since: "22",
@@ -153,8 +133,6 @@ public class SourceOptions {
 
     /**
      * PixelMap size.
-     *
-     * @relation sourceSize?: Size
      */
     @!APILevel[
         since: "22",
@@ -183,8 +161,6 @@ public class SourceOptions {
 
 /**
  * Initialization options for pixelmap.
- *
- * @relation interface InitializationOptions
  */
 @!APILevel[
     since: "22",
@@ -193,8 +169,6 @@ public class SourceOptions {
 public class InitializationOptions {
     /**
      * PixelMap expected alpha type.
-     *
-     * @relation alphaType?: AlphaType
      */
     @!APILevel[
         since: "22",
@@ -204,8 +178,6 @@ public class InitializationOptions {
 
     /**
      * Editable or not.
-     *
-     * @relation editable?: boolean
      */
     @!APILevel[
         since: "22",
@@ -215,8 +187,6 @@ public class InitializationOptions {
 
     /**
      * PixelMap source format.
-     *
-     * @relation srcPixelFormat?: PixelMapFormat
      */
     @!APILevel[
         since: "22",
@@ -226,8 +196,6 @@ public class InitializationOptions {
 
     /**
      * PixelMap expected format.
-     *
-     * @relation pixelFormat?: PixelMapFormat
      */
     @!APILevel[
         since: "22",
@@ -237,8 +205,6 @@ public class InitializationOptions {
 
     /**
      * PixelMap expected scaling effect.
-     *
-     * @relation scaleMode?: ScaleMode
      */
     @!APILevel[
         since: "22",
@@ -248,8 +214,6 @@ public class InitializationOptions {
 
     /**
      * PixelMap size.
-     *
-     * @relation size: Size
      */
     @!APILevel[
         since: "22",
@@ -285,8 +249,6 @@ public class InitializationOptions {
 
 /**
  * Describes image decoding parameters.
- *
- * @relation interface DecodingOptions
  */
 @!APILevel[
     since: "22",
@@ -295,8 +257,6 @@ public class InitializationOptions {
 public class DecodingOptions {
     /**
      * Sampling ratio of the image pixel map.
-     *
-     * @relation sampleSize?: int
      */
     @!APILevel[
         since: "22",
@@ -306,8 +266,6 @@ public class DecodingOptions {
 
     /**
      * Rotation angle of the image pixel map. The value ranges from 0 to 360.
-     *
-     * @relation rotate?: int
      */
     @!APILevel[
         since: "22",
@@ -317,8 +275,6 @@ public class DecodingOptions {
 
     /**
      * Whether the image pixel map is editable.
-     *
-     * @relation editable?: boolean
      */
     @!APILevel[
         since: "22",
@@ -329,8 +285,6 @@ public class DecodingOptions {
     /**
      * Width and height of the image pixel map. The value (0, 0) indicates that the pixels are decoded
      * based on the original image size.
-     *
-     * @relation desiredSize?: Size
      */
     @!APILevel[
         since: "22",
@@ -340,8 +294,6 @@ public class DecodingOptions {
 
     /**
      * Cropping region of the image pixel map.
-     *
-     * @relation desiredRegion?: Region
      */
     @!APILevel[
         since: "22",
@@ -351,8 +303,6 @@ public class DecodingOptions {
 
     /**
      * Data format of the image pixel map.
-     *
-     * @relation desiredPixelFormat?: PixelMapFormat
      */
     @!APILevel[
         since: "22",
@@ -362,8 +312,6 @@ public class DecodingOptions {
 
     /**
      * Number of image frames.
-     *
-     * @relation index?: int
      */
     @!APILevel[
         since: "22",
@@ -373,8 +321,6 @@ public class DecodingOptions {
 
     /**
      * The density for image pixel map.
-     *
-     * @relation fitDensity?: int
      */
     @!APILevel[
         since: "22",
@@ -384,8 +330,6 @@ public class DecodingOptions {
 
     /**
      * Color space of the image pixel map.
-     *
-     * @relation desiredColorSpace?: colorSpaceManager.ColorSpaceManager
      */
     @!APILevel[
         since: "22",
@@ -395,8 +339,6 @@ public class DecodingOptions {
 
     /**
      * The desired dynamic range of the image pixelmap.
-     *
-     * @relation desiredDynamicRange?: DecodingDynamicRange
      */
     @!APILevel[
         since: "22",
@@ -449,8 +391,6 @@ public class DecodingOptions {
 
 /**
  * Describes area information in an image.
- *
- * @relation interface PositionArea
  */
 @!APILevel[
     since: "22",
@@ -459,8 +399,6 @@ public class DecodingOptions {
 public class PositionArea {
     /**
      * Image data that will be read or written.
-     *
-     * @relation pixels: ArrayBuffer
      */
     @!APILevel[
         since: "22",
@@ -470,8 +408,6 @@ public class PositionArea {
 
     /**
      * Offset for data reading.
-     *
-     * @relation offset: number
      */
     @!APILevel[
         since: "22",
@@ -481,8 +417,6 @@ public class PositionArea {
 
     /**
      * Number of bytes to read.
-     *
-     * @relation stride: number
      */
     @!APILevel[
         since: "22",
@@ -492,8 +426,6 @@ public class PositionArea {
 
     /**
      * Region to read.
-     *
-     * @relation region: Region
      */
     @!APILevel[
         since: "22",
@@ -519,8 +451,6 @@ public class PositionArea {
 
 /**
  * Describes the size of an image.
- *
- * @relation interface Size
  */
 @!APILevel[
     since: "22",
@@ -529,8 +459,6 @@ public class PositionArea {
 public class Size {
     /**
      * Height.
-     *
-     * @relation height: int
      */
     @!APILevel[
         since: "22",
@@ -540,8 +468,6 @@ public class Size {
 
     /**
      * Width.
-     *
-     * @relation width: int
      */
     @!APILevel[
         since: "22",
@@ -574,8 +500,6 @@ public class Size {
 
 /**
  * Describes region information.
- *
- * @relation interface Region
  */
 @!APILevel[
     since: "22",
@@ -584,8 +508,6 @@ public class Size {
 public class Region {
     /**
      * Image size.
-     *
-     * @relation size: Size
      */
     @!APILevel[
         since: "22",
@@ -595,8 +517,6 @@ public class Region {
 
     /**
      * x-coordinate at the upper left corner of the image.
-     *
-     * @relation x: int
      */
     @!APILevel[
         since: "22",
@@ -606,8 +526,6 @@ public class Region {
 
     /**
      * y-coordinate at the upper left corner of the image.
-     *
-     * @relation y: int
      */
     @!APILevel[
         since: "22",
@@ -642,8 +560,6 @@ public class Region {
 
 /**
  * Describes image color components.
- *
- * @relation interface Component
  */
 @!APILevel[
     since: "22",
@@ -652,8 +568,6 @@ public class Region {
 public class Component {
     /**
      * Component type.
-     *
-     * @relation readonly componentType: ComponentType
      */
     @!APILevel[
         since: "22",
@@ -663,8 +577,6 @@ public class Component {
 
     /**
      * Row stride.
-     *
-     * @relation readonly rowStride: int
      */
     @!APILevel[
         since: "22",
@@ -674,8 +586,6 @@ public class Component {
 
     /**
      * Pixel stride.
-     *
-     * @relation readonly pixelStride: int
      */
     @!APILevel[
         since: "22",
@@ -685,8 +595,6 @@ public class Component {
 
     /**
      * Component buffer.
-     *
-     * @relation readonly byteBuffer: ArrayBuffer
      */
     @!APILevel[
         since: "22",
@@ -714,8 +622,6 @@ public class Component {
 
 /**
  * Describes the option for image packing.
- *
- * @relation interface PackingOption
  */
 @!APILevel[
     since: "22",
@@ -724,8 +630,6 @@ public class Component {
 public class PackingOption {
     /**
      * Multipurpose Internet Mail Extensions (MIME) format of the target image, for example, image/jpeg.
-     *
-     * @relation format: string
      */
     @!APILevel[
         since: "22",
@@ -735,8 +639,6 @@ public class PackingOption {
 
     /**
      * Quality of the target image. The value is an integer ranging from 0 to 100. A larger value indicates better.
-     *
-     * @relation quality: int
      */
     @!APILevel[
         since: "22",
@@ -747,8 +649,6 @@ public class PackingOption {
     /**
      * BufferSize of the target image.
      * If bufferSize is equal to 0, then a suitable value is used instead of 0.
-     *
-     * @relation bufferSize?: int
      */
     @!APILevel[
         since: "22",
@@ -758,8 +658,6 @@ public class PackingOption {
 
     /**
      * The desired dynamic range of the target image.
-     *
-     * @relation desiredDynamicRange?: PackingDynamicRange
      */
     @!APILevel[
         since: "22",
@@ -769,8 +667,6 @@ public class PackingOption {
 
     /**
      * Whether the image properties can be saved, like Exif.
-     *
-     * @relation needsPackProperties?: boolean
      */
     @!APILevel[
         since: "22",
@@ -798,8 +694,6 @@ public class PackingOption {
 
 /**
  * Describes image properties.
- *
- * @relation interface ImagePropertyOptions
  */
 @!APILevel[
     since: "22",
@@ -808,8 +702,6 @@ public class PackingOption {
 public class ImagePropertyOptions {
     /**
      * Index of an image.
-     *
-     * @relation index?: int
      */
     @!APILevel[
         since: "22",
@@ -819,8 +711,6 @@ public class ImagePropertyOptions {
 
     /**
      * Default property value.
-     *
-     * @relation defaultValue?: string
      */
     @!APILevel[
         since: "22",

@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.file.photo_access_helper
 
 import ohos.labels.*
@@ -20,8 +22,6 @@ import ohos.ffi.*
 
 /**
  * Provides APIs to manage the file retrieval result.
- *
- * @relation interface FetchResult<T>
  */
 @!APILevel[
     since: "22",
@@ -37,7 +37,6 @@ public open class FetchResult <: RemoteDataLite {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation close(): void
      */
     @!APILevel[
         since: "22",
@@ -55,7 +54,6 @@ public open class FetchResult <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getCount(): number
      */
     @!APILevel[
         since: "22",
@@ -76,7 +74,6 @@ public open class FetchResult <: RemoteDataLite {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation isAfterLast(): boolean
      */
     @!APILevel[
         since: "22",
@@ -98,8 +95,6 @@ class FetchResultImpl {}
 
 /**
  * Provides APIs to manage the file retrieval album result.
- *
- * @relation interface FetchResult<T>
  */
 @!APILevel[
     since: "22",
@@ -119,7 +114,6 @@ public class AlbumResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getFirstObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -141,7 +135,6 @@ public class AlbumResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getNextObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -161,7 +154,6 @@ public class AlbumResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getLastObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -181,7 +173,6 @@ public class AlbumResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getObjectByPosition(index: number): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -201,7 +192,6 @@ public class AlbumResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAllObjects(): Promise<Array<T>>
      */
     @!APILevel[
         since: "22",
@@ -223,8 +213,6 @@ public class AlbumResult <: FetchResult {
 
 /**
  * Provides APIs to manage the file retrieval photoasset result.
- *
- * @relation interface FetchResult<T>
  */
 @!APILevel[
     since: "22",
@@ -244,7 +232,6 @@ public class PhotoAssetResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getFirstObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -266,7 +253,6 @@ public class PhotoAssetResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getNextObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -286,7 +272,6 @@ public class PhotoAssetResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getLastObject(): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -306,7 +291,6 @@ public class PhotoAssetResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getObjectByPosition(index: number): Promise<T>
      */
     @!APILevel[
         since: "22",
@@ -326,7 +310,6 @@ public class PhotoAssetResult <: FetchResult {
      *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
-     * @relation getAllObjects(): Promise<Array<T>>
      */
     @!APILevel[
         since: "22",
