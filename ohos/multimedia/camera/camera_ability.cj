@@ -930,7 +930,8 @@ public enum VideoStabilizationMode {
     High
     |
     /**
-     * The stabilization algorithm is selected automatically. Selection of the stabilization algorithm is performed automatically.
+     * The stabilization algorithm is selected automatically. Selection of the stabilization algorithm is
+     * performed automatically.
      */
     @!APILevel[
         22,

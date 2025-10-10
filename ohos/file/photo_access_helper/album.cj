@@ -140,7 +140,8 @@ public open class AbsAlbum <: RemoteDataLite{
     /**
      * Fetch assets in an album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -212,7 +213,8 @@ public class Album <: AbsAlbum {
     /**
      * Modify metadata for the album
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument

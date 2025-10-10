@@ -49,7 +49,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Constructor used to initialize an asset change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -70,7 +71,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Creates an image asset change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
@@ -94,7 +96,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Creates a video asset change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
@@ -118,7 +121,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Create an asset change request based on the file type and filename extension.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -148,7 +152,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
      *
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -169,7 +174,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
      *
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000002 - The uri format is incorrect or does not exist.
      * @throws { BusinessException } 14000011 - System inner fail
@@ -189,7 +195,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Obtains the asset in this asset change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -211,7 +218,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Sets the media asset title.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -230,7 +238,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * Obtains the handler used for writing a file to cache.
      *
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
@@ -250,7 +259,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Adds a resource using fileUri.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
@@ -272,7 +282,8 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Adds a resource using ArrayBuffer data.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
