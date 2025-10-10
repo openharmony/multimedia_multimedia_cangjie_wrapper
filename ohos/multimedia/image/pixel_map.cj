@@ -104,7 +104,8 @@ foreign {
  * @param { InitializationOptions } options Initialization options for pixelmap.
  * @returns { PixelMap } Return the PixelMap object.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+ * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left
+ * unspecified.
  * 2.Incorrect parameter types. 3.Parameter verification failed.
  */
 @!APILevel[
