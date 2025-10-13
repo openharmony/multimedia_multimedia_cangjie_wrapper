@@ -19,9 +19,11 @@ package ohos.file.photo_access_helper
 
 import ohos.labels.*
 import ohos.ffi.*
+import ohos.business_exception.BusinessException
 
 /**
  * Defines the class of media album change request.
+ *
  */
 @!APILevel[
     22,
@@ -36,18 +38,18 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
         releaseFFIData(myDataId)
     }
 
+    /**
+     * The constructor to create a MediaAlbumChangeRequest instance.
+     *
+     * @param { Album } album - Specify which album to change
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessException } 14000011 - System inner fail
+     */
     @!APILevel[
         22,
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    /**
-     * The constructor to create a MediaAlbumChangeRequest instance.
-     *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessException } 14000011 - System inner fail
-     */
     public init(album: Album) {
         super(
             unsafe {
@@ -61,8 +63,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Obtains the album in the current album change request.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @returns { Album } - Returns the album
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -75,7 +77,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
         let id = unsafe { FfiMediaAlbumChangeRequestImplGetAlbum(getID(), inout errCode) }
         checkRet(errCode, "getAlbum")
         return if (id == 0) {
-            throw IllegalArgumentException("Album id is invalid.")
+            throw BusinessException(401, "Parameter error.")
         } else {
             Album(id)
         }
@@ -84,8 +86,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Sets the album name.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { String } name - Album name to set.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -103,8 +105,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Add assets to the album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { Array<PhotoAsset> } assets - Array of assets to add.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
@@ -124,8 +126,8 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
     /**
      * Removes assets from the album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { Array<PhotoAsset> } assets - Array of assets to remove.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support

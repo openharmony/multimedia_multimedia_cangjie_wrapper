@@ -19,6 +19,7 @@ package ohos.multimedia.image
 
 import ohos.labels.*
 import ohos.ffi.*
+import ohos.business_exception.BusinessException
 
 foreign {
     func FfiOHOSImageGetClipRect(id: Int64, retVal: CPointer<CRegion>): UInt32
@@ -36,6 +37,7 @@ foreign {
 
 /**
  * Provides basic image operations, including obtaining image information, and reading and writing image data.
+ *
  */
 @!APILevel[
     22,
@@ -114,6 +116,8 @@ public class Image <: RemoteDataLite {
     /**
      * Get component buffer from image.
      *
+     * @param { ComponentType } componentType - The component type of image.
+     * @returns { Component } Return the component buffer.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
@@ -133,11 +137,12 @@ public class Image <: RemoteDataLite {
                 }
             }
         }
-        throw IllegalStateException("Unreachable Code.")
+        throw BusinessException(16000050, "Internal error.")
     }
 
     /**
      * Release current image to receive another.
+     *
      */
     @!APILevel[
         22,

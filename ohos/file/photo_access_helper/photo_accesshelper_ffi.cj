@@ -20,6 +20,7 @@ package ohos.file.photo_access_helper
 import ohos.ffi.*
 import std.collection.*
 import ohos.multimedia.image.*
+import ohos.business_exception.BusinessException
 
 foreign {
     // PhotoAccessHelper
@@ -189,7 +190,7 @@ struct PhotoAssetMember {
                 let str = stringValue.toString()
                 StringValue(str)
             case 2 => BoolValue(boolValue)
-            case _ => throw IllegalArgumentException("Invalid member type")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 
