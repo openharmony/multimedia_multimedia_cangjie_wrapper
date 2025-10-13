@@ -28,6 +28,9 @@ import std.collection.*
 const LOG_CORE: UInt32 = 3
 const LOG_DOMAIN_PLAYER: UInt32 = 0xD002B2B
 const MEDIA_MEMORY_ERROR: Int32 = 5400101
+const MEDIA_OPERATION_ERROR: Int32 = 5400102
+const MSERR_INVALID_VAL: Int32 = 331350038
+const MSERR_UNKNOWN: Int32 = 331350528
 let AV_PLAYER_LOG = HilogChannel(LOG_CORE, LOG_DOMAIN_PLAYER, "CJ-AVPlayer")
 let ERROR_CODE_MAP = HashMap<Int32, String>(
     [
@@ -62,9 +65,19 @@ func getErrorMsg(code: Int32): String {
     }
 }
 
+func codeTransform(code: Int32): Int32 {
+    match (code) {
+        case MSERR_UNKNOWN => MEDIA_MEMORY_ERROR
+        case MSERR_INVALID_VAL => MEDIA_OPERATION_ERROR
+        case _ => code
+    }
+}
+
 func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
     if (code != SUCCESS_CODE) {
-        throw BusinessException(code, "${className} ${funcName} failed: ${getErrorMsg(code)}")
+        let errorCode = codeTransform(code)
+        AV_PLAYER_LOG.error("${className} ${funcName} failed: ${getErrorMsg(errorCode)}")
+        throw BusinessException(errorCode, "${getErrorMsg(errorCode)}")
     }
 }
 
@@ -126,6 +139,60 @@ public class AVFileDescriptor {
 }
 
 /**
+ * Defines the descriptor of an audio and video file, which is used in DataSource playback mode.
+ * Use scenario: An application can create a playback instance and start playback before it finishes
+ * downloading the audio and video resources.
+ *
+ * @relation interface AVFileDescriptor
+ */
+@!APILevel[
+    22,
+    syscap: "SystemCapability.Multimedia.Media.AVPlayer"
+]
+public class AVDataSrcDescriptor {
+    /**
+     * Size of the file, -1 means the file size is unknown, in this case,
+     * seek and setSpeed can't be executed, loop can't be set, and can't replay.
+     *
+     * @relation fileSize: number
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVPlayer"
+    ]
+    public var fileSize: Int64
+
+    /**
+     * Callback function implemented by users, which is used to fill data.
+     * buffer - The buffer need to fill.
+     * length - The stream length player want to get.
+     * pos - The stream position player want get start, and is an optional parameter.
+     * When fileSize set to -1, this parameter is not used.
+     * Returns length of the data to be filled, Return -1 to indicate that the end of the stream is reached,
+     * Return -2 to indicate that an unrecoverable error has been encountered.
+     *
+     * @relation callback: (buffer: ArrayBuffer, length: number, pos?: number) => number
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVPlayer"
+    ]
+    public var callback: (Array<UInt8>, UInt32, ?Int64) -> Int32
+
+    /**
+     * AVDataSrcDescriptor constructor.
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVPlayer"
+    ]
+    public init(fileSize: Int64, callback: (Array<UInt8>, UInt32, ?Int64) -> Int32) {
+        this.fileSize = fileSize
+        this.callback = callback
+    }
+}
+
+/**
  * Defines the format parameters of the video thumbnail to be obtained.
  */
 @!APILevel[
@@ -163,6 +230,372 @@ public class PixelMapParams {
     public init(width!: Int32 = -1, height!: Int32 = -1) {
         this.width = width
         this.height = height
+    }
+}
+
+/**
+ * Defines the audio and video metadata. Parameters that are not declared as read-only in
+ * AVRecorderConfig can be used as input parameters for recording of AVRecorder.
+ *
+ * @relation interface AVMetadata
+ */
+@!APILevel[
+    22,
+    syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+]
+public class AVMetadata {
+    /**
+     * Title of the album. This parameter is read-only in the current version.
+     *
+     * @relation album?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let album: ?String
+    /**
+     * Artist of the album. This parameter is read-only in the current version.
+     *
+     * @relation albumArtist?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let albumArtist: ?String
+    /**
+     * Artist of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation artist?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let artist: ?String
+    /**
+     * Author of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation author?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let author: ?String
+    /**
+     * Time when the media asset is created. This parameter is read-only in the current version.
+     *
+     * @relation dateTime?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let dateTime: ?String
+    /**
+     * Time when the media asset is created. The value is in the YYYY-MM-DD HH:mm:ss format.
+     * This parameter is read-only in the current version.
+     *
+     * @relation dateTimeFormat?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let dateTimeFormat: ?String
+    /**
+     * Composer of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation composer?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let composer: ?String
+    /**
+     * Duration of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation duration?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let duration: ?String
+    /**
+     * Type or genre of the media asset.
+     *
+     * @relation genre?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let genre: ?String
+    /**
+     * Whether the media asset contains audio. This parameter is read-only in the current version.
+     *
+     * @relation hasAudio?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let hasAudio: ?String
+    /**
+     * Whether the media asset contains a video. This parameter is read-only in the current version.
+     *
+     * @relation hasVideo?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let hasVideo: ?String
+    /**
+     * MIME type of the media asset. This parameter is read-only in the current version.
+     * Some example mime types include: "video/mp4", "audio/mp4", "audio/amr-wb".
+     *
+     * @relation mimeType?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let mimeType: ?String
+    /**
+     * Number of tracks of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation trackCount?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let trackCount: ?String
+    /**
+     * Audio sampling rate, in Hz. This parameter is read-only in the current version.
+     *
+     * @relation sampleRate?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let sampleRate: ?String
+    /**
+     * Title of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation title?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let title: ?String
+    /**
+     * Video height, in px. This parameter is read-only in the current version.
+     *
+     * @relation videoHeight?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let videoHeight: ?String
+    /**
+     * Video width, in px. This parameter is read-only in the current version.
+     *
+     * @relation videoWidth?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let videoWidth: ?String
+    /**
+     * Video rotation direction, in degrees.
+     *
+     * @relation videoOrientation?: string
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let videoOrientation: ?String
+    /**
+     * HDR type of the media asset. This parameter is read-only in the current version.
+     *
+     * @relation hdrType?: HdrType
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let hdrType: ?HdrType
+    /**
+     * Geographical location of the media asset.
+     *
+     * @relation location?: Location
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let location: ?Location
+    /**
+     * Custom key-value mappings obtained from **moov.meta.list**.
+     *
+     * @relation customInfo?: Record<string, string>
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
+    ]
+    public let customInfo: HashMap<String, String>
+
+    protected init(
+        album!: ?String = None,
+        albumArtist!: ?String = None,
+        artist!: ?String = None,
+        author!: ?String = None,
+        dateTime!: ?String = None,
+        dateTimeFormat!: ?String = None,
+        composer!: ?String = None,
+        duration!: ?String = None,
+        genre!: ?String = None,
+        hasAudio!: ?String = None,
+        hasVideo!: ?String = None,
+        mimeType!: ?String = None,
+        trackCount!: ?String = None,
+        sampleRate!: ?String = None,
+        title!: ?String = None,
+        videoHeight!: ?String = None,
+        videoWidth!: ?String = None,
+        videoOrientation!: ?String = None,
+        hdrType!: ?HdrType = None,
+        location!: ?Location = None,
+        customInfo!: HashMap<String, String> = HashMap<String, String>()
+    ) {
+        this.album = album
+        this.albumArtist = albumArtist
+        this.artist = artist
+        this.author = author
+        this.dateTime = dateTime
+        this.dateTimeFormat = dateTimeFormat
+        this.composer = composer
+        this.duration = duration
+        this.genre = genre
+        this.hasAudio = hasAudio
+        this.hasVideo = hasVideo
+        this.mimeType = mimeType
+        this.trackCount = trackCount
+        this.sampleRate = sampleRate
+        this.title = title
+        this.videoHeight = videoHeight
+        this.videoWidth = videoWidth
+        this.videoOrientation = videoOrientation
+        this.hdrType = hdrType
+        this.location = location
+        this.customInfo = customInfo
+    }
+}
+
+/**
+ * Enumerates options about the HDR Type of the video.
+ *
+ * @relation enum HdrType
+ */
+@Derive[ToString, Equatable]
+@!APILevel[
+    22,
+    syscap: "SystemCapability.Multimedia.Media.Core"
+]
+public enum HdrType {
+    /**
+     * This option is used to mark none HDR type.
+     *
+     * @relation AV_HDR_TYPE_NONE = 0
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.Core"
+    ]
+    AvHdrTypeNone
+    |
+    /**
+     * This option is used to mark HDR Vivid type.
+     *
+     * @relation AV_HDR_TYPE_VIVID = 1
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.Core"
+    ]
+    AvHdrTypeVivid
+    | ...
+
+    protected func get(): Int32 {
+        match (this) {
+            case AvHdrTypeNone => 0
+            case AvHdrTypeVivid => 1
+            case _ => throw IllegalArgumentException("The type is not supported.")
+        }
+    }
+
+    static func parse(val: Int32): HdrType {
+        match (val) {
+            case 0 => AvHdrTypeNone
+            case 1 => AvHdrTypeVivid
+            case _ => throw IllegalArgumentException("Unknown value")
+        }
+    }
+
+    static func tryParse(val: ?Int32): ?HdrType {
+        match (val) {
+            case Some(v) => parse(v)
+            case None => None
+        }
+    }
+}
+
+/**
+ * Provides the geographical location definitions for media resources.
+ *
+ * @relation interface Location
+ */
+@!APILevel[
+    22,
+    syscap: "SystemCapability.Multimedia.Media.Core"
+]
+public class Location {
+    /**
+     * Latitude.
+     *
+     * @relation latitude: number
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.Core"
+    ]
+    public let latitude: Float64
+    /**
+     * Longitude.
+     *
+     * @relation longitude: number
+     */
+    @!APILevel[
+        22,
+        syscap: "SystemCapability.Multimedia.Media.Core"
+    ]
+    public let longitude: Float64
+
+    protected Location(latitude: Float64, longitude: Float64) {
+        this.latitude = latitude
+        this.longitude = longitude
     }
 }
 
