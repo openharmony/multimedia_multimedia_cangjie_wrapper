@@ -21,6 +21,7 @@ import ohos.labels.APILevel
 
 /**
  * Camera output object.
+ *
  */
 @!APILevel[
     22,

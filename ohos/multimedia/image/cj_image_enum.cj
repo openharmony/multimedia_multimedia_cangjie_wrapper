@@ -19,9 +19,11 @@ package ohos.multimedia.image
 
 import std.deriving.Derive
 import ohos.labels.*
+import ohos.business_exception.BusinessException
 
 /**
  * Enumerates pixel map formats.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -31,6 +33,7 @@ import ohos.labels.*
 public enum PixelMapFormat {
     /**
      * Indicates an unknown format.
+     *
      */
     @!APILevel[
         22,
@@ -42,6 +45,7 @@ public enum PixelMapFormat {
      * Indicates that each pixel is stored on 16 bits. Only the R, G, and B components are encoded
      * from the higher-order to the lower-order bits: red is stored with 5 bits of precision,
      * green is stored with 6 bits of precision, and blue is stored with 5 bits of precision.
+     *
      */
     @!APILevel[
         22,
@@ -53,6 +57,7 @@ public enum PixelMapFormat {
      * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
      * A(8bits)
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -64,6 +69,7 @@ public enum PixelMapFormat {
      * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
      * A(8bits)
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -74,6 +80,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that each pixel is stored on 24 bits. Each pixel contains 3 components：R(8bits), G(8bits), B(8bits)
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -84,6 +91,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that each pixel is stored on 8 bits. Each pixel contains 1 component：ALPHA(8bits)
      * and is stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -95,6 +103,7 @@ public enum PixelMapFormat {
      * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
      * A(8bits)
      * and are stored from the higher-order to the lower-order bits in F16.
+     *
      */
     @!APILevel[
         22,
@@ -105,6 +114,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that the storage order is to store Y first and then V U alternately each occupies 8 bits
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -115,6 +125,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that the storage order is to store Y first and then U V alternately each occupies 8 bits
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -125,6 +136,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：
      * R(10bits), G(10bits), B(10bits), A(2bits) and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -135,6 +147,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that the storage order is to store Y first and then U V alternately each occupies 10 bits
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -145,6 +158,7 @@ public enum PixelMapFormat {
     /**
      * Indicates that the storage order is to store Y first and then V U alternately each occupies 10 bits
      * and are stored from the higher-order to the lower-order bits.
+     *
      */
     @!APILevel[
         22,
@@ -167,7 +181,7 @@ public enum PixelMapFormat {
             case Rgba1010102 => 10
             case YcbcrP010 => 11
             case YcrcbP010 => 12
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
 
@@ -185,13 +199,14 @@ public enum PixelMapFormat {
             case 10 => Rgba1010102
             case 11 => YcbcrP010
             case 12 => YcrcbP010
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980113, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates alpha types.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -201,6 +216,7 @@ public enum PixelMapFormat {
 public enum AlphaType {
     /**
      * Indicates an unknown alpha type.
+     *
      */
     @!APILevel[
         22,
@@ -210,6 +226,7 @@ public enum AlphaType {
     |
     /**
      * Indicates that the image has no alpha channel, or all pixels in the image are fully opaque.
+     *
      */
     @!APILevel[
         22,
@@ -219,6 +236,7 @@ public enum AlphaType {
     |
     /**
      * Indicates that RGB components of each pixel in the image are premultiplied by alpha.
+     *
      */
     @!APILevel[
         22,
@@ -229,6 +247,7 @@ public enum AlphaType {
     /**
      * Indicates that RGB components of each pixel in the image are independent of alpha and are not premultiplied by
      * alpha.
+     *
      */
     @!APILevel[
         22,
@@ -243,7 +262,7 @@ public enum AlphaType {
             case Opaque => 1
             case Premul => 2
             case UnPremul => 3
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
 
@@ -253,13 +272,14 @@ public enum AlphaType {
             case 1 => Opaque
             case 2 => Premul
             case 3 => UnPremul
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980113, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for image scale mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -269,6 +289,7 @@ public enum AlphaType {
 public enum ScaleMode {
     /**
      * Indicates the effect that fits the image into the target size.
+     *
      */
     @!APILevel[
         22,
@@ -279,6 +300,7 @@ public enum ScaleMode {
     /**
      * Indicates the effect that scales an image to fill the target image area and center-crops the part outside the
      * area.
+     *
      */
     @!APILevel[
         22,
@@ -291,13 +313,14 @@ public enum ScaleMode {
         match (this) {
             case FitTargetSize => 0
             case CenterCrop => 1
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for image formats.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -307,6 +330,7 @@ public enum ScaleMode {
 public enum ImageFormat {
     /**
      * YCBCR422 semi-planar format.
+     *
      */
     @!APILevel[
         22,
@@ -316,6 +340,7 @@ public enum ImageFormat {
     |
     /**
      * JPEG encoding format.
+     *
      */
     @!APILevel[
         22,
@@ -329,7 +354,7 @@ public enum ImageFormat {
             match (this) {
                 case Ycbcr422Sp => 1000
                 case Jpeg => 2000
-                case _ => throw IllegalArgumentException("The type is not supported yet.")
+                case _ => throw BusinessException(62980115, "Parameter error.")
             }
         }
     }
@@ -338,13 +363,14 @@ public enum ImageFormat {
         match (val) {
             case 1000 => Ycbcr422Sp
             case 2000 => Jpeg
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980113, "Parameter error.")
         }
     }
 }
 
 /**
  * The component type of image.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -354,6 +380,7 @@ public enum ImageFormat {
 public enum ComponentType {
     /**
      * Luma info.
+     *
      */
     @!APILevel[
         22,
@@ -363,6 +390,7 @@ public enum ComponentType {
     |
     /**
      * Chrominance info.
+     *
      */
     @!APILevel[
         22,
@@ -372,6 +400,7 @@ public enum ComponentType {
     |
     /**
      * Chroma info.
+     *
      */
     @!APILevel[
         22,
@@ -381,6 +410,7 @@ public enum ComponentType {
     |
     /**
      * Jpeg type.
+     *
      */
     @!APILevel[
         22,
@@ -395,7 +425,7 @@ public enum ComponentType {
             case YuvU => 2
             case YuvV => 3
             case Jpeg => 4
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
 
@@ -405,13 +435,14 @@ public enum ComponentType {
             case 2 => YuvU
             case 3 => YuvV
             case 4 => Jpeg
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980113, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates exchangeable image file format (Exif) information types of an image.
+ *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -421,6 +452,7 @@ public enum ComponentType {
 public enum PropertyKey <: ToString {
     /**
      * Image width.
+     *
      */
     | @!APILevel[
         22,
@@ -430,6 +462,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Image length.
+     *
      */
     @!APILevel[
         22,
@@ -439,6 +472,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Number of bits in each pixel of an image.
+     *
      */
     @!APILevel[
         22,
@@ -448,6 +482,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Image description.
+     *
      */
     @!APILevel[
         22,
@@ -457,6 +492,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Make.
+     *
      */
     @!APILevel[
         22,
@@ -466,6 +502,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Model.
+     *
      */
     @!APILevel[
         22,
@@ -475,6 +512,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Image rotation mode.
+     *
      */
     @!APILevel[
         22,
@@ -484,6 +522,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Date time.
+     *
      */
     @!APILevel[
         22,
@@ -493,6 +532,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Photo mode.
+     *
      */
     @!APILevel[
         22,
@@ -502,6 +542,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Exposure time.
+     *
      */
     @!APILevel[
         22,
@@ -511,6 +552,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Aperture value.
+     *
      */
     @!APILevel[
         22,
@@ -520,6 +562,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS latitude reference. For example, N indicates north latitude and S indicates south latitude.
+     *
      */
     @!APILevel[
         22,
@@ -529,6 +572,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS latitude.
+     *
      */
     @!APILevel[
         22,
@@ -538,6 +582,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS longitude reference. For example, E indicates east longitude and W indicates west longitude.
+     *
      */
     @!APILevel[
         22,
@@ -547,6 +592,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS longitude.
+     *
      */
     @!APILevel[
         22,
@@ -556,6 +602,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS time stamp.
+     *
      */
     @!APILevel[
         22,
@@ -565,6 +612,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GPS date stamp.
+     *
      */
     @!APILevel[
         22,
@@ -574,6 +622,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * ISO speedratings.
+     *
      */
     @!APILevel[
         22,
@@ -583,6 +632,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Sensitivity type.
+     *
      */
     @!APILevel[
         22,
@@ -592,6 +642,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Standard output sensitivity.
+     *
      */
     @!APILevel[
         22,
@@ -601,6 +652,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Recommended exposure index.
+     *
      */
     @!APILevel[
         22,
@@ -610,6 +662,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * ISO speed.
+     *
      */
     @!APILevel[
         22,
@@ -619,6 +672,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Shooting time.
+     *
      */
     @!APILevel[
         22,
@@ -628,6 +682,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Aperture value.
+     *
      */
     @!APILevel[
         22,
@@ -637,6 +692,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Exposure bias value.
+     *
      */
     @!APILevel[
         22,
@@ -646,6 +702,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Metering mode.
+     *
      */
     @!APILevel[
         22,
@@ -655,6 +712,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Light source.
+     *
      */
     @!APILevel[
         22,
@@ -664,6 +722,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Flash.
+     *
      */
     @!APILevel[
         22,
@@ -673,6 +732,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Focal length.
+     *
      */
     @!APILevel[
         22,
@@ -682,6 +742,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Food.
+     *
      */
     @!APILevel[
         22,
@@ -691,6 +752,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Stage.
+     *
      */
     @!APILevel[
         22,
@@ -700,6 +762,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Blue Sky.
+     *
      */
     @!APILevel[
         22,
@@ -709,6 +772,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Green Plant.
+     *
      */
     @!APILevel[
         22,
@@ -718,6 +782,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Beach.
+     *
      */
     @!APILevel[
         22,
@@ -727,6 +792,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Snow.
+     *
      */
     @!APILevel[
         22,
@@ -736,6 +802,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Sunset.
+     *
      */
     @!APILevel[
         22,
@@ -745,6 +812,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Flowers.
+     *
      */
     @!APILevel[
         22,
@@ -754,6 +822,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Night.
+     *
      */
     @!APILevel[
         22,
@@ -763,6 +832,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture Scene: Text.
+     *
      */
     @!APILevel[
         22,
@@ -772,6 +842,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Face Count.
+     *
      */
     @!APILevel[
         22,
@@ -781,6 +852,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Capture mode.
+     *
      */
     @!APILevel[
         22,
@@ -790,6 +862,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Roll Angle.
+     *
      */
     @!APILevel[
         22,
@@ -799,6 +872,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Pitch Angle.
+     *
      */
     @!APILevel[
         22,
@@ -808,6 +882,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Physical aperture.
+     *
      */
     @!APILevel[
         22,
@@ -817,6 +892,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Focus Mode.
+     *
      */
     @!APILevel[
         22,
@@ -826,6 +902,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * User comment.
+     *
      */
     @!APILevel[
         22,
@@ -835,6 +912,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Pixel x dimension.
+     *
      */
     @!APILevel[
         22,
@@ -844,6 +922,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Pixel y dimension.
+     *
      */
     @!APILevel[
         22,
@@ -853,6 +932,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Scene type.
+     *
      */
     @!APILevel[
         22,
@@ -862,6 +942,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * White balance.
+     *
      */
     @!APILevel[
         22,
@@ -871,6 +952,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * Focal length in 35mm film.
+     *
      */
     @!APILevel[
         22,
@@ -941,7 +1023,7 @@ public enum PropertyKey <: ToString {
             case SceneType => "SceneType"
             case WhiteBalance => "WhiteBalance"
             case FocalLengthIn35mmFilm => "FocalLengthIn35mmFilm"
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
 }
@@ -949,6 +1031,7 @@ public enum PropertyKey <: ToString {
 
 /**
  * Enumerates decoding dynamic range.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -958,6 +1041,7 @@ public enum PropertyKey <: ToString {
 public enum DecodingDynamicRange {
     /**
      * Decoding according to the content of the image.
+     *
      */
     @!APILevel[
         22,
@@ -967,6 +1051,7 @@ public enum DecodingDynamicRange {
     |
     /**
      * Decoding to standard dynamic range.
+     *
      */
     @!APILevel[
         22,
@@ -976,6 +1061,7 @@ public enum DecodingDynamicRange {
     |
     /**
      * Decoding to high dynamic range.
+     *
      */
     @!APILevel[
         22,
@@ -990,7 +1076,7 @@ public enum DecodingDynamicRange {
                 case Auto => return 0
                 case Sdr => return 1
                 case Hdr => return 2
-                case _ => throw IllegalArgumentException("The type is not supported yet.")
+                case _ => throw BusinessException(62980115, "Parameter error.")
             }
         }
     }
@@ -999,6 +1085,7 @@ public enum DecodingDynamicRange {
 
 /**
  * Enumerates packing dynamic range.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1008,6 +1095,7 @@ public enum DecodingDynamicRange {
 public enum PackingDynamicRange {
     /**
      * Packing according to the content of the image.
+     *
      */
     @!APILevel[
         22,
@@ -1017,6 +1105,7 @@ public enum PackingDynamicRange {
     |
     /**
      * Packing to standard dynamic range.
+     *
      */
     @!APILevel[
         22,
@@ -1030,7 +1119,7 @@ public enum PackingDynamicRange {
             match (this) {
                 case Auto => return 0
                 case Sdr => return 1
-                case _ => throw IllegalArgumentException("The type is not supported yet.")
+                case _ => throw BusinessException(62980115, "Parameter error.")
             }
         }
     }

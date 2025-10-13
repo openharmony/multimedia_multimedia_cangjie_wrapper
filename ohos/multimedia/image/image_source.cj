@@ -82,6 +82,7 @@ foreign {
  * Creates an ImageSource instance based on the URI.
  *
  * @param { String } uri - Image source URI.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -108,6 +109,7 @@ public func createImageSource(uri: String): ImageSource {
  *
  * @param { String } uri - Image source URI.
  * @param { SourceOptions } options - The config of Image source.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -133,6 +135,7 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  * Creates an ImageSource instance based on the file descriptor.
  *
  * @param { Int32 } fd - ID of a file descriptor.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -153,6 +156,7 @@ public func createImageSource(fd: Int32): ImageSource {
  *
  * @param { Int32 } fd - ID of a file descriptor.
  * @param { SourceOptions } options - The config of Image source.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -172,6 +176,7 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * Creates an ImageSource instance based on the buffer.
  *
  * @param { Array<UInt8> } buf - The buffer of the image.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -225,6 +230,7 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
  *
  * @param { resourceManager.RawFileDescriptor } rawfile - The raw file descriptor of the image.
  * @param { SourceOptions } options - The config of Image source.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
@@ -243,6 +249,7 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
 
 /**
  * ImageSource instance.
+ *
  */
 @!APILevel[
     22,
@@ -339,8 +346,8 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the value of a property in an image with the specified index. This method return the property value in
-     * a string.
+     * Obtains the value of a property in an image with the specified index. This method return the property value in a
+     * string.
      *
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
