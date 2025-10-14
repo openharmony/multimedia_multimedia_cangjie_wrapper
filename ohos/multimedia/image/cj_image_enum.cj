@@ -50,7 +50,8 @@ public enum PixelMapFormat {
     Rgb565
     |
     /**
-     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits), A(8bits)
+     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
+     * A(8bits)
      * and are stored from the higher-order to the lower-order bits.
      */
     @!APILevel[
@@ -60,7 +61,8 @@ public enum PixelMapFormat {
     Rgba8888
     |
     /**
-     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits), A(8bits)
+     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
+     * A(8bits)
      * and are stored from the higher-order to the lower-order bits.
      */
     @!APILevel[
@@ -90,7 +92,8 @@ public enum PixelMapFormat {
     Alpha8
     |
     /**
-     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits), A(8bits)
+     * Indicates that each pixel is stored on 32 bits. Each pixel contains 4 components：B(8bits), G(8bits), R(8bits),
+     * A(8bits)
      * and are stored from the higher-order to the lower-order bits in F16.
      */
     @!APILevel[
@@ -224,7 +227,8 @@ public enum AlphaType {
     Premul
     |
     /**
-     * Indicates that RGB components of each pixel in the image are independent of alpha and are not premultiplied by alpha.
+     * Indicates that RGB components of each pixel in the image are independent of alpha and are not premultiplied by
+     * alpha.
      */
     @!APILevel[
         since: "22",
@@ -273,7 +277,8 @@ public enum ScaleMode {
     FitTargetSize
     |
     /**
-     * Indicates the effect that scales an image to fill the target image area and center-crops the part outside the area.
+     * Indicates the effect that scales an image to fill the target image area and center-crops the part outside the
+     * area.
      */
     @!APILevel[
         since: "22",

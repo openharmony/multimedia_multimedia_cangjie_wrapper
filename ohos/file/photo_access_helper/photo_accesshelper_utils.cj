@@ -1075,7 +1075,7 @@ public enum PhotoKeys <: ToString {
     CoverPosition
 
     /**
-     * Unique uuid of the burst photos, read only
+     * Unique UUID of the burst photos, read only
      */
     | @!APILevel[
         since: "22",
