@@ -339,7 +339,8 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the value of a property in an image with the specified index. This method return the property value in a string.
+     * Obtains the value of a property in an image with the specified index. This method return the property value in
+     * a string.
      *
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
@@ -381,7 +382,8 @@ public class ImageSource <: RemoteDataLite {
      * Modify the value of a property in an image with the specified key. 
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left
+     * unspecified; 2.Incorrect parameter types.
      * @throws { BusinessException } 62980123 - The image does not support EXIF decoding.
      * @throws { BusinessException } 62980133 - The EXIF data is out of range.
      * @throws { BusinessException } 62980135 - The EXIF value is invalid.
@@ -457,7 +459,8 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980102 - Failed to malloc memory.
      * @throws { BusinessException } 62980103 - The image data is not supported.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error occurs during the process of checking size.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error
+     * occurs during the process of checking size.
      * @throws { BusinessException } 62980109 - Failed to crop the image.
      * @throws { BusinessException } 62980111 - The image source data is incomplete.
      * @throws { BusinessException } 62980115 - Invalid image parameter.

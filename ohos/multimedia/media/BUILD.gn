@@ -17,7 +17,7 @@ import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia.media") {
   sources = [
-    "avimage_generator.cj",
+    "avmetadata_extractor.cj",
     "media_common.cj",
     "media_ffi.cj",
   ]

@@ -191,8 +191,8 @@ public class CameraManager <: RemoteDataLite {
      * Creates a CameraInput instance by camera.
      *
      * Before using this interface, first through the getSupportedCameras interface to query the current list of camera
-     * devices supported by the device, the developer needs to be based on specific scenarios to choose the camera device
-     * that meets the needs of the developer, and then use this interface to create a CameraInput instance.
+     * devices supported by the device, the developer needs to be based on specific scenarios to choose the camera
+     * device that meets the needs of the developer, and then use this interface to create a CameraInput instance.
      *
      * @permission ohos.permission.CAMERA
      * @param { CameraDevice } camera - Camera device used to create the instance.

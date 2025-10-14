@@ -92,7 +92,8 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Obtains a PhotoAsset member parameter.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
@@ -118,7 +119,8 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Sets a PhotoAsset member parameter.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
@@ -143,7 +145,8 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Commits the modification on the file metadata to the database.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -164,7 +167,8 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Obtains the file thumbnail of the given size.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
