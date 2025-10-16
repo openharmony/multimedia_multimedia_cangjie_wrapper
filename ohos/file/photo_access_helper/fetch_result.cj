@@ -22,6 +22,7 @@ import ohos.ffi.*
 
 /**
  * Provides APIs to manage the file retrieval result.
+ *
  */
 @!APILevel[
     22,
@@ -50,8 +51,8 @@ public open class FetchResult <: RemoteDataLite {
     /**
      * Obtains the total number of objects in the fetch result.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @returns { Int32 } Returns the total number of objects in the fetch result.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -73,6 +74,7 @@ public open class FetchResult <: RemoteDataLite {
      * Checks whether the result set points to the last row.
      * You need to check whether the object is the last one before calling getNextObject.
      *
+     * @returns { Bool } Returns true if the fetch result points to the last row; returns false otherwise.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -96,6 +98,7 @@ class FetchResultImpl {}
 
 /**
  * Provides APIs to manage the file retrieval album result.
+ *
  */
 @!APILevel[
     22,
@@ -113,6 +116,7 @@ public class AlbumResult <: FetchResult {
     /**
      * Obtains the first object in the fetch result.
      *
+     * @returns { Album } Returns the first Album object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -134,6 +138,7 @@ public class AlbumResult <: FetchResult {
      * Before calling this method, you must use isAfterLast() to check whether the current position is the last row
      * in the fetch result. This method only works when the current position is not the last row.
      *
+     * @returns { Album } Returns the next Album object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -153,6 +158,7 @@ public class AlbumResult <: FetchResult {
     /**
      * Obtains the last object in the fetch result
      *
+     * @returns { Album } Returns the last Album object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -172,6 +178,8 @@ public class AlbumResult <: FetchResult {
     /**
      * Obtains the object with the specified index in the result set.
      *
+     * @param { Int32 } index - The index of the album in the fetch result.
+     * @returns { Album } Returns the Album object at the specified index.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -191,6 +199,7 @@ public class AlbumResult <: FetchResult {
     /**
      * Obtains all objects in the fetch result.
      *
+     * @returns { Array<Album> } Returns an array containing all Album objects in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -214,6 +223,7 @@ public class AlbumResult <: FetchResult {
 
 /**
  * Provides APIs to manage the file retrieval photoasset result.
+ *
  */
 @!APILevel[
     22,
@@ -231,6 +241,7 @@ public class PhotoAssetResult <: FetchResult {
     /**
      * Obtains the first object in the fetch result.
      *
+     * @returns { PhotoAsset } Returns the first PhotoAsset object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -252,6 +263,7 @@ public class PhotoAssetResult <: FetchResult {
      * Before calling this method, you must use isAfterLast() to check whether the current position is the last row
      * in the fetch result. This method only works when the current position is not the last row.
      *
+     * @returns { PhotoAsset } Returns the next PhotoAsset object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -271,6 +283,7 @@ public class PhotoAssetResult <: FetchResult {
     /**
      * Obtains the last object in the fetch result
      *
+     * @returns { PhotoAsset } Returns the last PhotoAsset object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -290,6 +303,8 @@ public class PhotoAssetResult <: FetchResult {
     /**
      * Obtains the object with the specified index in the result set.
      *
+     * @param { Int32 } index - The index of the photo asset in the fetch result.
+     * @returns { PhotoAsset } Returns the PhotoAsset object at the specified index.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -309,6 +324,7 @@ public class PhotoAssetResult <: FetchResult {
     /**
      * Obtains all objects in the fetch result.
      *
+     * @returns { Array<PhotoAsset> } Returns an array containing all PhotoAsset objects in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */

@@ -76,6 +76,7 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 
 /**
  * Rectangle definition.
+ *
  */
 @!APILevel[
     22,
@@ -84,6 +85,7 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 public class Rect {
     /**
      * X coordinator of top left point.
+     *
      */
     @!APILevel[
         22,
@@ -92,6 +94,7 @@ public class Rect {
     public var topLeftX: Float64
     /**
      * Y coordinator of top left point.
+     *
      */
     @!APILevel[
         22,
@@ -100,6 +103,7 @@ public class Rect {
     public var topLeftY: Float64
     /**
      * Width of this rectangle.
+     *
      */
     @!APILevel[
         22,
@@ -108,6 +112,7 @@ public class Rect {
     public var width: Float64
     /**
      * Height of this rectangle.
+     *
      */
     @!APILevel[
         22,
@@ -125,6 +130,7 @@ public class Rect {
 
 /**
  * Enum for torch mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -134,6 +140,7 @@ public class Rect {
 public enum TorchMode {
     /**
      * The device torch is always off.
+     *
      */
     @!APILevel[
         22,
@@ -143,6 +150,7 @@ public enum TorchMode {
     |
     /**
      * The device torch is always on.
+     *
      */
     @!APILevel[
         22,
@@ -152,6 +160,7 @@ public enum TorchMode {
     |
     /**
      * The device continuously monitors light levels and uses the torch when necessary.
+     *
      */
     @!APILevel[
         22,
@@ -165,7 +174,7 @@ public enum TorchMode {
             case 0 => Off
             case 1 => On
             case 2 => Auto
-            case _ => throw IllegalArgumentException("Unkown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -174,13 +183,14 @@ public enum TorchMode {
             case Off => 0
             case On => 1
             case Auto => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates the image rotation angles.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -190,6 +200,7 @@ public enum TorchMode {
 public enum ImageRotation {
     /**
      * The capture image rotates 0 degrees.
+     *
      */
     @!APILevel[
         22,
@@ -199,6 +210,7 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 90 degrees.
+     *
      */
     @!APILevel[
         22,
@@ -208,6 +220,7 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 180 degrees.
+     *
      */
     @!APILevel[
         22,
@@ -217,6 +230,7 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 270 degrees.
+     *
      */
     @!APILevel[
         22,
@@ -231,7 +245,7 @@ public enum ImageRotation {
             case Rotation90 => 90
             case Rotation180 => 180
             case Rotation270 => 270
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -241,13 +255,14 @@ public enum ImageRotation {
             case 90 => Rotation90
             case 180 => Rotation180
             case 270 => Rotation270
-            case _ => throw IllegalArgumentException("Unkown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for camera status.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -257,6 +272,7 @@ public enum ImageRotation {
 public enum CameraStatus {
     /**
      * Appear status.
+     *
      */
     @!APILevel[
         22,
@@ -266,6 +282,7 @@ public enum CameraStatus {
     |
     /**
      * Disappear status.
+     *
      */
     @!APILevel[
         22,
@@ -275,6 +292,7 @@ public enum CameraStatus {
     |
     /**
      * Available status.
+     *
      */
     @!APILevel[
         22,
@@ -284,6 +302,7 @@ public enum CameraStatus {
     |
     /**
      * Unavailable status.
+     *
      */
     @!APILevel[
         22,
@@ -298,13 +317,14 @@ public enum CameraStatus {
             case 1 => CameraStatusDisappear
             case 2 => CameraStatusAvailable
             case 3 => CameraStatusUnavailable
-            case _ => throw IllegalArgumentException("Unkown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Torch status info.
+ *
  */
 @!APILevel[
     22,
@@ -313,6 +333,7 @@ public enum CameraStatus {
 public class TorchStatusInfo {
     /**
      * is torch available
+     *
      */
     @!APILevel[
         22,
@@ -321,6 +342,7 @@ public class TorchStatusInfo {
     public let isTorchAvailable: Bool
     /**
      * is torch active
+     *
      */
     @!APILevel[
         22,
@@ -329,6 +351,7 @@ public class TorchStatusInfo {
     public let isTorchActive: Bool
     /**
      * the current torch brightness level.
+     *
      */
     @!APILevel[
         22,
@@ -345,6 +368,7 @@ public class TorchStatusInfo {
 
 /**
  * Frame rate range.
+ *
  */
 @!APILevel[
     22,
@@ -353,6 +377,7 @@ public class TorchStatusInfo {
 public class FrameRateRange {
     /**
      * Min frame rate.
+     *
      */
     @!APILevel[
         22,
@@ -361,6 +386,7 @@ public class FrameRateRange {
     public let min: Int32
     /**
      * Max frame rate.
+     *
      */
     @!APILevel[
         22,
@@ -376,6 +402,7 @@ public class FrameRateRange {
 
 /**
  * Size parameter.
+ *
  */
 @!APILevel[
     22,
@@ -384,6 +411,7 @@ public class FrameRateRange {
 public class Size {
     /**
      * Height.
+     *
      */
     @!APILevel[
         22,
@@ -392,6 +420,7 @@ public class Size {
     public var width: UInt32
     /**
      * Width.
+     *
      */
     @!APILevel[
         22,
@@ -409,6 +438,7 @@ class ProfileImpl {}
 
 /**
  * Profile for camera streams.
+ *
  */
 @!APILevel[
     22,
@@ -417,6 +447,7 @@ class ProfileImpl {}
 public open class Profile {
     /**
      * Camera format.
+     *
      */
     @!APILevel[
         22,
@@ -425,6 +456,7 @@ public open class Profile {
     public let format: CameraFormat
     /**
      * Picture size.
+     *
      */
     @!APILevel[
         22,
@@ -442,6 +474,7 @@ public open class Profile {
 
 /**
  * Video profile.
+ *
  */
 @!APILevel[
     22,
@@ -450,6 +483,7 @@ public open class Profile {
 public class VideoProfile <: Profile {
     /**
      * Frame rate in unit fps (frames per second).
+     *
      */
     @!APILevel[
         22,
@@ -465,6 +499,7 @@ public class VideoProfile <: Profile {
 
 /**
  * Metadata object type.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -474,6 +509,7 @@ public class VideoProfile <: Profile {
 public enum MetadataObjectType {
     /**
      * Face detection type.
+     *
      */
     @!APILevel[
         22,
@@ -485,20 +521,21 @@ public enum MetadataObjectType {
     func getValue(): Int32 {
         match (this) {
             case MetadataObjectType.FaceDetection => 0
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
     static func parse(val: Int32): MetadataObjectType {
         match (val) {
             case 0 => MetadataObjectType.FaceDetection
-            case _ => throw IllegalArgumentException("Unknown MetadataObjectType value ${val}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Camera output capability.
+ *
  */
 @!APILevel[
     22,
@@ -507,6 +544,7 @@ public enum MetadataObjectType {
 public class CameraOutputCapability {
     /**
      * Preview profiles.
+     *
      */
     @!APILevel[
         22,
@@ -515,6 +553,7 @@ public class CameraOutputCapability {
     public let previewProfiles: Array<Profile>
     /**
      * Photo profiles.
+     *
      */
     @!APILevel[
         22,
@@ -523,6 +562,7 @@ public class CameraOutputCapability {
     public let photoProfiles: Array<Profile>
     /**
      * Video profiles.
+     *
      */
     @!APILevel[
         22,
@@ -531,6 +571,7 @@ public class CameraOutputCapability {
     public let videoProfiles: Array<VideoProfile>
     /**
      * All the supported metadata Object Types.
+     *
      */
     @!APILevel[
         22,
@@ -549,6 +590,7 @@ public class CameraOutputCapability {
 
 /**
  * Enum for fold status.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -558,6 +600,7 @@ public class CameraOutputCapability {
 public enum FoldStatus {
     /**
      * Non-foldable status.
+     *
      */
     @!APILevel[
         22,
@@ -567,6 +610,7 @@ public enum FoldStatus {
     |
     /**
      * Expanded status.
+     *
      */
     @!APILevel[
         22,
@@ -576,6 +620,7 @@ public enum FoldStatus {
     |
     /**
      * Folded status.
+     *
      */
     @!APILevel[
         22,
@@ -589,13 +634,14 @@ public enum FoldStatus {
             case 0 => NonFoldable
             case 1 => Expanded
             case 2 => Folded
-            case _ => throw IllegalArgumentException("Unknown value ${val}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Fold status info.
+ *
  */
 @!APILevel[
     22,
@@ -604,6 +650,7 @@ public enum FoldStatus {
 public class FoldStatusInfo {
     /**
      * Gets supported camera devices under the current fold status.
+     *
      */
     @!APILevel[
         22,
@@ -612,6 +659,7 @@ public class FoldStatusInfo {
     public let supportedCameras: Array<CameraDevice>
     /**
      * Current fold status.
+     *
      */
     @!APILevel[
         22,
@@ -630,6 +678,7 @@ public class FoldStatusInfo {
 
 /**
  * Enum for camera connection type.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -639,6 +688,7 @@ public class FoldStatusInfo {
 public enum ConnectionType {
     /**
      * Built-in camera.
+     *
      */
     @!APILevel[
         22,
@@ -648,6 +698,7 @@ public enum ConnectionType {
     |
     /**
      * Camera connected using USB
+     *
      */
     @!APILevel[
         22,
@@ -657,6 +708,7 @@ public enum ConnectionType {
     |
     /**
      * Remote camera
+     *
      */
     @!APILevel[
         22,
@@ -670,7 +722,7 @@ public enum ConnectionType {
             case 0 => CameraConnectionBuiltIn
             case 1 => CameraConnectionUsbPlugin
             case 2 => CameraConnectionRemote
-            case _ => throw IllegalArgumentException("Unknown value ${val}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -679,13 +731,14 @@ public enum ConnectionType {
             case CameraConnectionBuiltIn => 0
             case CameraConnectionUsbPlugin => 1
             case CameraConnectionRemote => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for camera format type.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -695,6 +748,7 @@ public enum ConnectionType {
 public enum CameraFormat {
     /**
      * YCBCR P010 Format.
+     *
      */
     @!APILevel[
         22,
@@ -704,6 +758,7 @@ public enum CameraFormat {
     |
     /**
      * YCRCB P010 Format.
+     *
      */
     @!APILevel[
         22,
@@ -713,6 +768,7 @@ public enum CameraFormat {
     |
     /**
      * HEIC Format.
+     *
      */
     @!APILevel[
         22,
@@ -722,6 +778,7 @@ public enum CameraFormat {
     |
     /**
      * JPEG Format.
+     *
      */
     @!APILevel[
         22,
@@ -731,6 +788,7 @@ public enum CameraFormat {
     |
     /**
      * YUV 420 Format.
+     *
      */
     @!APILevel[
         22,
@@ -740,6 +798,7 @@ public enum CameraFormat {
     |
     /**
      * RGBA 8888 Format.
+     *
      */
     @!APILevel[
         22,
@@ -756,7 +815,7 @@ public enum CameraFormat {
             case CameraFormatJpeg => 2000
             case CameraFormatYuv420Sp => 1003
             case CameraFormatRgba8888 => 3
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -768,13 +827,14 @@ public enum CameraFormat {
             case 2000 => CameraFormatJpeg
             case 1003 => CameraFormatYuv420Sp
             case 3 => CameraFormatRgba8888
-            case _ => throw IllegalArgumentException("Unknown value ${val}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Camera device object.
+ *
  */
 @!APILevel[
     22,
@@ -783,6 +843,7 @@ public enum CameraFormat {
 public class CameraDevice {
     /**
      * Camera ID attribute.
+     *
      */
     @!APILevel[
         22,
@@ -791,6 +852,7 @@ public class CameraDevice {
     public let cameraId: String
     /**
      * Camera position attribute.
+     *
      */
     @!APILevel[
         22,
@@ -799,6 +861,7 @@ public class CameraDevice {
     public let cameraPosition: CameraPosition
     /**
      * Camera type attribute.
+     *
      */
     @!APILevel[
         22,
@@ -807,6 +870,7 @@ public class CameraDevice {
     public let cameraType: CameraType
     /**
      * Camera connection type attribute.
+     *
      */
     @!APILevel[
         22,
@@ -815,6 +879,7 @@ public class CameraDevice {
     public let connectionType: ConnectionType
     /**
      * Camera sensor orientation attribute.
+     *
      */
     @!APILevel[
         22,
@@ -834,6 +899,7 @@ public class CameraDevice {
 
 /**
  * Camera status info.
+ *
  */
 @!APILevel[
     22,
@@ -842,6 +908,7 @@ public class CameraDevice {
 public class CameraStatusInfo {
     /**
      * Camera instance.
+     *
      */
     @!APILevel[
         22,
@@ -850,6 +917,7 @@ public class CameraStatusInfo {
     public var camera: CameraDevice
     /**
      * Current camera status.
+     *
      */
     @!APILevel[
         22,
@@ -1033,13 +1101,14 @@ public enum CameraEvents {
             case MetadataObjectsAvailable => "metadataObjectsAvailable"
             case FocusStateChange => "focusStateChange"
             case SmoothZoomInfoAvailable => "smoothZoomInfoAvailable"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for camera position.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1049,6 +1118,7 @@ public enum CameraEvents {
 public enum CameraPosition {
     /**
      * Unspecified position.
+     *
      */
     @!APILevel[
         22,
@@ -1058,6 +1128,7 @@ public enum CameraPosition {
     |
     /**
      * Back position.
+     *
      */
     @!APILevel[
         22,
@@ -1067,6 +1138,7 @@ public enum CameraPosition {
     |
     /**
      * Front position.
+     *
      */
     @!APILevel[
         22,
@@ -1080,7 +1152,7 @@ public enum CameraPosition {
             case 0 => CameraPositionUnspecified
             case 1 => CameraPositionBack
             case 2 => CameraPositionFront
-            case _ => throw IllegalArgumentException("Unknown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -1089,13 +1161,14 @@ public enum CameraPosition {
             case CameraPositionUnspecified => 0
             case CameraPositionBack => 1
             case CameraPositionFront => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for camera type.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1105,6 +1178,7 @@ public enum CameraPosition {
 public enum CameraType {
     /**
      * Default camera type
+     *
      */
     @!APILevel[
         22,
@@ -1114,6 +1188,7 @@ public enum CameraType {
     |
     /**
      * Wide camera
+     *
      */
     @!APILevel[
         22,
@@ -1123,6 +1198,7 @@ public enum CameraType {
     |
     /**
      * Ultra wide camera
+     *
      */
     @!APILevel[
         22,
@@ -1132,6 +1208,7 @@ public enum CameraType {
     |
     /**
      * Telephoto camera
+     *
      */
     @!APILevel[
         22,
@@ -1141,6 +1218,7 @@ public enum CameraType {
     |
     /**
      * True depth camera
+     *
      */
     @!APILevel[
         22,
@@ -1156,7 +1234,7 @@ public enum CameraType {
             case 2 => CameraTypeUltraWide
             case 3 => CameraTypeTelephoto
             case 4 => CameraTypeTrueDepth
-            case _ => throw IllegalArgumentException("Unknown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -1167,13 +1245,14 @@ public enum CameraType {
             case CameraTypeUltraWide => 2
             case CameraTypeTelephoto => 3
             case CameraTypeTrueDepth => 4
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates the camera scene modes.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1183,6 +1262,7 @@ public enum CameraType {
 public enum SceneMode {
     /**
      * Normal photo mode.
+     *
      */
     @!APILevel[
         22,
@@ -1192,6 +1272,7 @@ public enum SceneMode {
     |
     /**
      * Normal video mode.
+     *
      */
     @!APILevel[
         22,
@@ -1201,6 +1282,7 @@ public enum SceneMode {
     |
     /**
      * Secure camera mode.
+     *
      */
     @!APILevel[
         22,
@@ -1214,7 +1296,7 @@ public enum SceneMode {
             case 1 => NormalPhoto
             case 2 => NormalVideo
             case 12 => SecurePhoto
-            case _ => throw IllegalArgumentException("Unknown value.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 
@@ -1223,13 +1305,14 @@ public enum SceneMode {
             case NormalPhoto => 1
             case NormalVideo => 2
             case SecurePhoto => 12
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates the image quality levels.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1239,6 +1322,7 @@ public enum SceneMode {
 public enum QualityLevel {
     /**
      * High image quality.
+     *
      */
     @!APILevel[
         22,
@@ -1248,6 +1332,7 @@ public enum QualityLevel {
     |
     /**
      * Medium image quality.
+     *
      */
     @!APILevel[
         22,
@@ -1257,6 +1342,7 @@ public enum QualityLevel {
     |
     /**
      * Low image quality.
+     *
      */
     @!APILevel[
         22,
@@ -1270,13 +1356,14 @@ public enum QualityLevel {
             case QualityLevelHigh => 0
             case QualityLevelMedium => 1
             case QualityLevelLow => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Photo capture location
+ *
  */
 @!APILevel[
     22,
@@ -1285,6 +1372,7 @@ public enum QualityLevel {
 public class Location {
     /**
      * Latitude.
+     *
      */
     @!APILevel[
         22,
@@ -1293,6 +1381,7 @@ public class Location {
     public var latitude: Float64
     /**
      * Longitude.
+     *
      */
     @!APILevel[
         22,
@@ -1301,6 +1390,7 @@ public class Location {
     public var longitude: Float64
     /**
      * Altitude.
+     *
      */
     @!APILevel[
         22,
@@ -1328,6 +1418,7 @@ public class Location {
 
 /**
  * Photo capture options to set.
+ *
  */
 @!APILevel[
     22,
@@ -1336,6 +1427,7 @@ public class Location {
 public class PhotoCaptureSetting {
     /**
      * Photo image quality.
+     *
      */
     @!APILevel[
         22,
@@ -1344,6 +1436,7 @@ public class PhotoCaptureSetting {
     public var quality: QualityLevel
     /**
      * Photo rotation.
+     *
      */
     @!APILevel[
         22,
@@ -1352,6 +1445,7 @@ public class PhotoCaptureSetting {
     public var rotation: ImageRotation
     /**
      * Photo location.
+     *
      */
     @!APILevel[
         22,
@@ -1362,6 +1456,7 @@ public class PhotoCaptureSetting {
      * Mirror enable switch (default off).
      * It is necessary to utilize the function isMirrorSupported to ascertain whether it is supported
      * prior to its implementation.
+     *
      */
     @!APILevel[
         22,
@@ -1391,6 +1486,7 @@ public class PhotoCaptureSetting {
 
 /**
  * Enumerates the camera video codec type.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1400,6 +1496,7 @@ public class PhotoCaptureSetting {
 public enum VideoCodecType {
     /**
      * Video encoding type AVC.
+     *
      */
     @!APILevel[
         22,
@@ -1409,6 +1506,7 @@ public enum VideoCodecType {
     |
     /**
      * Video encoding type HEVC.
+     *
      */
     @!APILevel[
         22,
@@ -1421,13 +1519,14 @@ public enum VideoCodecType {
         match (this) {
             case Avc => 0
             case Hevc => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Capture start info.
+ *
  */
 @!APILevel[
     22,
@@ -1436,6 +1535,7 @@ public enum VideoCodecType {
 public class CaptureStartInfo {
     /**
      * Capture id.
+     *
      */
     @!APILevel[
         22,
@@ -1444,6 +1544,7 @@ public class CaptureStartInfo {
     public var captureId: Int32
     /**
      * Time(in milliseconds) is the shutter time for the photo.
+     *
      */
     @!APILevel[
         22,
@@ -1459,6 +1560,7 @@ public class CaptureStartInfo {
 
 /**
  * Frame shutter callback info.
+ *
  */
 @!APILevel[
     22,
@@ -1467,6 +1569,7 @@ public class CaptureStartInfo {
 public class FrameShutterInfo {
     /**
      * Capture id.
+     *
      */
     @!APILevel[
         22,
@@ -1475,6 +1578,7 @@ public class FrameShutterInfo {
     public var captureId: Int32
     /**
      * Timestamp for frame.
+     *
      */
     @!APILevel[
         22,
@@ -1490,6 +1594,7 @@ public class FrameShutterInfo {
 
 /**
  * Capture end info.
+ *
  */
 @!APILevel[
     22,
@@ -1498,6 +1603,7 @@ public class FrameShutterInfo {
 public class CaptureEndInfo {
     /**
      * Capture id.
+     *
      */
     @!APILevel[
         22,
@@ -1506,6 +1612,7 @@ public class CaptureEndInfo {
     public var captureId: Int32
     /**
      * Frame count.
+     *
      */
     @!APILevel[
         22,
@@ -1521,6 +1628,7 @@ public class CaptureEndInfo {
 
 /**
  * Frame shutter end callback info.
+ *
  */
 @!APILevel[
     22,
@@ -1529,6 +1637,7 @@ public class CaptureEndInfo {
 public class FrameShutterEndInfo {
     /**
      * Capture id.
+     *
      */
     @!APILevel[
         22,
@@ -1544,6 +1653,7 @@ public class FrameShutterEndInfo {
 /**
  * Types of preconfig, which used to configure session conveniently.
  * Preconfig type contains common use cases of camera output.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1553,6 +1663,7 @@ public class FrameShutterEndInfo {
 public enum PreconfigType {
     /**
      * 720P output for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1562,6 +1673,7 @@ public enum PreconfigType {
     |
     /**
      * 1080P output for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1571,6 +1683,7 @@ public enum PreconfigType {
     |
     /**
      * 4K output for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1580,6 +1693,7 @@ public enum PreconfigType {
     |
     /**
      * high quality output for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1595,7 +1709,7 @@ public enum PreconfigType {
                 case Preconfig1080p => 1
                 case Preconfig4k => 2
                 case PreconfigHighQuality => 3
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -1606,13 +1720,14 @@ public enum PreconfigType {
             case 1 => Preconfig1080p
             case 2 => Preconfig4k
             case 3 => PreconfigHighQuality
-            case _ => throw IllegalArgumentException("Invalid PreconfigType ${value}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * The aspect ratios of preconfig, which used to configure session conveniently.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1622,6 +1737,7 @@ public enum PreconfigType {
 public enum PreconfigRatio {
     /**
      * Aspect ratio 1:1 for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1631,6 +1747,7 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 4:3 for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1640,6 +1757,7 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 16:9 for preconfig.
+     *
      */
     @!APILevel[
         22,
@@ -1654,7 +1772,7 @@ public enum PreconfigRatio {
                 case PreconfigRatio_1_1 => 0
                 case PreconfigRatio_4_3 => 1
                 case PreconfigRatio_16_9 => 2
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -1664,7 +1782,7 @@ public enum PreconfigRatio {
             case 0 => PreconfigRatio_1_1
             case 1 => PreconfigRatio_4_3
             case 2 => PreconfigRatio_16_9
-            case _ => throw IllegalArgumentException("Invalid PreconfigRatio ${value}")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
