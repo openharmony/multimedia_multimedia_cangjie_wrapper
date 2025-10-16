@@ -22,6 +22,7 @@ import ohos.ffi.*
 
 /**
  * Defines the abstract interface of albums.
+ *
  */
 @!APILevel[
     22,
@@ -33,6 +34,7 @@ public open class AbsAlbum <: RemoteDataLite{
     }
     /**
      * Album type
+     *
      */
     @!APILevel[
         22,
@@ -49,6 +51,7 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album subtype
+     *
      */
     @!APILevel[
         22,
@@ -65,6 +68,7 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album name.
+     *
      */
     @!APILevel[
         22,
@@ -90,6 +94,7 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album uri.
+     *
      */
     @!APILevel[
         22,
@@ -108,6 +113,7 @@ public open class AbsAlbum <: RemoteDataLite{
     
     /**
      * Number of assets in the album
+     *
      */
     @!APILevel[
         22,
@@ -121,6 +127,7 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Cover uri for the album
+     *
      */
     @!APILevel[
         22,
@@ -140,8 +147,9 @@ public open class AbsAlbum <: RemoteDataLite{
     /**
      * Fetch assets in an album.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { FetchOptions } options - Fetch options.
+     * @returns { PhotoAssetResult } Returns the fetch result
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -170,6 +178,7 @@ class AbsAlbumImpl {}
 
 /**
  * Defines the album.
+ *
  */
 @!APILevel[
     22,
@@ -186,6 +195,7 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of image assets in the album
+     *
      */
     @!APILevel[
         22,
@@ -199,6 +209,7 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of video assets in the album
+     *
      */
     @!APILevel[
         22,
@@ -213,8 +224,7 @@ public class Album <: AbsAlbum {
     /**
      * Modify metadata for the album
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument

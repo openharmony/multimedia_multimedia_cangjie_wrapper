@@ -26,6 +26,7 @@ import std.sync.*
 
 /**
  * Session object.
+ *
  */
 @!APILevel[
     22,
@@ -245,7 +246,7 @@ public interface Session {
 }
 
 func getCameraOutputId(cameraOutput: CameraOutput): Int64 {
-    (cameraOutput as RemoteDataLite)?.getID() ?? throw IllegalArgumentException("Unkown value.")
+    (cameraOutput as RemoteDataLite)?.getID() ?? throw BusinessException(7400101, "Parameter error.")
 }
 
 func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
@@ -253,12 +254,13 @@ func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
         case v: PhotoOutput => return 1
         case v: PreviewOutput => return 2
         case v: VideoOutput => return 3
-        case _ => throw IllegalArgumentException("Unknown CameraOutput type.")
+        case _ => throw BusinessException(7400101, "Parameter error.")
     }
 }
 
 /**
  * Photo session object.
+ *
  */
 @!APILevel[
     22,
@@ -440,6 +442,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
 /**
  * Video session object.
+ *
  */
 @!APILevel[
     22,

@@ -26,6 +26,7 @@ import std.sync.*
 
 /**
  * Camera input object.
+ *
  */
 @!APILevel[
     22,

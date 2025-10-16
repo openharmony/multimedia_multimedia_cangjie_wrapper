@@ -59,6 +59,7 @@ foreign {
 
 /**
  * ImagePacker instance.
+ *
  */
 @!APILevel[
     22,
@@ -76,6 +77,7 @@ public class ImagePacker <: RemoteDataLite {
     /**
      * Supported image formats.
      *
+     * @type { Array<String> } Return the supported image formats
      * @throws { BusinessException } 62980098 - Failed to malloc memory.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
@@ -104,8 +106,8 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error
      * occurs during the process of checking size.
-     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized
-     * or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized or
+     * supported format, or it may be occorrupted.
      * @throws { BusinessException } 62980115 - If the parameter is invalid.
      * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
@@ -139,8 +141,8 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error
      * occurs during the process of checking size.
-     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized
-     * or supported format, or it may be occorrupted.
+     * @throws { BusinessException } 62980113 - Unknown image format. The image data provided is not in a recognized or
+     * supported format, or it may be occorrupted.
      * @throws { BusinessException } 62980115 - If the parameter is invalid.
      * @throws { BusinessException } 62980119 - Failed to encode the image.
      * @throws { BusinessException } 62980120 - Add pixelmap out of range.
@@ -239,6 +241,7 @@ public class ImagePacker <: RemoteDataLite {
 
     /**
      * Releases an ImagePacker instance
+     *
      */
     @!APILevel[
         22,
@@ -252,6 +255,8 @@ public class ImagePacker <: RemoteDataLite {
 
 /**
  * Creates an ImagePacker instance.
+ *
+ * @returns { ImagePacker } Returns the ImagePacker instance.
  */
 @!APILevel[
     22,

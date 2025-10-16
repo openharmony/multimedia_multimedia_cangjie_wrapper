@@ -143,7 +143,6 @@ public class AVFileDescriptor {
  * Use scenario: An application can create a playback instance and start playback before it finishes
  * downloading the audio and video resources.
  *
- * @relation interface AVFileDescriptor
  */
 @!APILevel[
     22,
@@ -154,7 +153,6 @@ public class AVDataSrcDescriptor {
      * Size of the file, -1 means the file size is unknown, in this case,
      * seek and setSpeed can't be executed, loop can't be set, and can't replay.
      *
-     * @relation fileSize: number
      */
     @!APILevel[
         22,
@@ -171,7 +169,6 @@ public class AVDataSrcDescriptor {
      * Returns length of the data to be filled, Return -1 to indicate that the end of the stream is reached,
      * Return -2 to indicate that an unrecoverable error has been encountered.
      *
-     * @relation callback: (buffer: ArrayBuffer, length: number, pos?: number) => number
      */
     @!APILevel[
         22,
@@ -237,7 +234,6 @@ public class PixelMapParams {
  * Defines the audio and video metadata. Parameters that are not declared as read-only in
  * AVRecorderConfig can be used as input parameters for recording of AVRecorder.
  *
- * @relation interface AVMetadata
  */
 @!APILevel[
     22,
@@ -247,7 +243,6 @@ public class AVMetadata {
     /**
      * Title of the album. This parameter is read-only in the current version.
      *
-     * @relation album?: string
      */
     @!APILevel[
         22,
@@ -257,7 +252,6 @@ public class AVMetadata {
     /**
      * Artist of the album. This parameter is read-only in the current version.
      *
-     * @relation albumArtist?: string
      */
     @!APILevel[
         22,
@@ -267,7 +261,6 @@ public class AVMetadata {
     /**
      * Artist of the media asset. This parameter is read-only in the current version.
      *
-     * @relation artist?: string
      */
     @!APILevel[
         22,
@@ -277,7 +270,6 @@ public class AVMetadata {
     /**
      * Author of the media asset. This parameter is read-only in the current version.
      *
-     * @relation author?: string
      */
     @!APILevel[
         22,
@@ -287,7 +279,6 @@ public class AVMetadata {
     /**
      * Time when the media asset is created. This parameter is read-only in the current version.
      *
-     * @relation dateTime?: string
      */
     @!APILevel[
         22,
@@ -298,7 +289,6 @@ public class AVMetadata {
      * Time when the media asset is created. The value is in the YYYY-MM-DD HH:mm:ss format.
      * This parameter is read-only in the current version.
      *
-     * @relation dateTimeFormat?: string
      */
     @!APILevel[
         22,
@@ -308,7 +298,6 @@ public class AVMetadata {
     /**
      * Composer of the media asset. This parameter is read-only in the current version.
      *
-     * @relation composer?: string
      */
     @!APILevel[
         22,
@@ -318,7 +307,6 @@ public class AVMetadata {
     /**
      * Duration of the media asset. This parameter is read-only in the current version.
      *
-     * @relation duration?: string
      */
     @!APILevel[
         22,
@@ -328,7 +316,6 @@ public class AVMetadata {
     /**
      * Type or genre of the media asset.
      *
-     * @relation genre?: string
      */
     @!APILevel[
         22,
@@ -338,7 +325,6 @@ public class AVMetadata {
     /**
      * Whether the media asset contains audio. This parameter is read-only in the current version.
      *
-     * @relation hasAudio?: string
      */
     @!APILevel[
         22,
@@ -348,7 +334,6 @@ public class AVMetadata {
     /**
      * Whether the media asset contains a video. This parameter is read-only in the current version.
      *
-     * @relation hasVideo?: string
      */
     @!APILevel[
         22,
@@ -359,7 +344,6 @@ public class AVMetadata {
      * MIME type of the media asset. This parameter is read-only in the current version.
      * Some example mime types include: "video/mp4", "audio/mp4", "audio/amr-wb".
      *
-     * @relation mimeType?: string
      */
     @!APILevel[
         22,
@@ -369,7 +353,6 @@ public class AVMetadata {
     /**
      * Number of tracks of the media asset. This parameter is read-only in the current version.
      *
-     * @relation trackCount?: string
      */
     @!APILevel[
         22,
@@ -379,7 +362,6 @@ public class AVMetadata {
     /**
      * Audio sampling rate, in Hz. This parameter is read-only in the current version.
      *
-     * @relation sampleRate?: string
      */
     @!APILevel[
         22,
@@ -389,7 +371,6 @@ public class AVMetadata {
     /**
      * Title of the media asset. This parameter is read-only in the current version.
      *
-     * @relation title?: string
      */
     @!APILevel[
         22,
@@ -399,7 +380,6 @@ public class AVMetadata {
     /**
      * Video height, in px. This parameter is read-only in the current version.
      *
-     * @relation videoHeight?: string
      */
     @!APILevel[
         22,
@@ -409,7 +389,6 @@ public class AVMetadata {
     /**
      * Video width, in px. This parameter is read-only in the current version.
      *
-     * @relation videoWidth?: string
      */
     @!APILevel[
         22,
@@ -419,7 +398,6 @@ public class AVMetadata {
     /**
      * Video rotation direction, in degrees.
      *
-     * @relation videoOrientation?: string
      */
     @!APILevel[
         22,
@@ -429,7 +407,6 @@ public class AVMetadata {
     /**
      * HDR type of the media asset. This parameter is read-only in the current version.
      *
-     * @relation hdrType?: HdrType
      */
     @!APILevel[
         22,
@@ -439,7 +416,6 @@ public class AVMetadata {
     /**
      * Geographical location of the media asset.
      *
-     * @relation location?: Location
      */
     @!APILevel[
         22,
@@ -449,7 +425,6 @@ public class AVMetadata {
     /**
      * Custom key-value mappings obtained from **moov.meta.list**.
      *
-     * @relation customInfo?: Record<string, string>
      */
     @!APILevel[
         22,
@@ -507,7 +482,6 @@ public class AVMetadata {
 /**
  * Enumerates options about the HDR Type of the video.
  *
- * @relation enum HdrType
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -518,7 +492,6 @@ public enum HdrType {
     /**
      * This option is used to mark none HDR type.
      *
-     * @relation AV_HDR_TYPE_NONE = 0
      */
     @!APILevel[
         22,
@@ -529,7 +502,6 @@ public enum HdrType {
     /**
      * This option is used to mark HDR Vivid type.
      *
-     * @relation AV_HDR_TYPE_VIVID = 1
      */
     @!APILevel[
         22,
@@ -542,7 +514,7 @@ public enum HdrType {
         match (this) {
             case AvHdrTypeNone => 0
             case AvHdrTypeVivid => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400108, "Parameter error.")
         }
     }
 
@@ -550,7 +522,7 @@ public enum HdrType {
         match (val) {
             case 0 => AvHdrTypeNone
             case 1 => AvHdrTypeVivid
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400108, "Parameter error.")
         }
     }
 
@@ -565,7 +537,6 @@ public enum HdrType {
 /**
  * Provides the geographical location definitions for media resources.
  *
- * @relation interface Location
  */
 @!APILevel[
     22,
@@ -575,7 +546,6 @@ public class Location {
     /**
      * Latitude.
      *
-     * @relation latitude: number
      */
     @!APILevel[
         22,
@@ -585,7 +555,6 @@ public class Location {
     /**
      * Longitude.
      *
-     * @relation longitude: number
      */
     @!APILevel[
         22,

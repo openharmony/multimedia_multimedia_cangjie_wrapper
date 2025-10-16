@@ -141,6 +141,7 @@ func checkRet(errCode: Int32, funcName: String) {
 
 /**
  * Enumerate the album subtypes.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -150,6 +151,7 @@ func checkRet(errCode: Int32, funcName: String) {
 public enum AlbumSubtype {
     /**
      * Generic user-created albums.
+     *
      */
     @!APILevel[
         22,
@@ -159,6 +161,7 @@ public enum AlbumSubtype {
 
     /**
      * Favorite album, which assets are marked as favorite.
+     *
      */
     | @!APILevel[
         22,
@@ -168,6 +171,7 @@ public enum AlbumSubtype {
 
     /**
      * Video album, which contains all video assets.
+     *
      */
     | @!APILevel[
         22,
@@ -177,6 +181,7 @@ public enum AlbumSubtype {
 
     /**
      * Image album
+     *
      */
     | @!APILevel[
         22,
@@ -186,6 +191,7 @@ public enum AlbumSubtype {
 
     /**
      * Any album
+     *
      */
     | @!APILevel[
         22,
@@ -202,7 +208,7 @@ public enum AlbumSubtype {
                 case Video => 1026
                 case Image => 1031
                 case AnyAlbum => 2147483647
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -214,13 +220,14 @@ public enum AlbumSubtype {
             case 1026 => Video
             case 1031 => Image
             case 2147483647 => AnyAlbum
-            case _ => throw IllegalArgumentException("Invalid AlbumSubtype value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates the album types.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -230,6 +237,7 @@ public enum AlbumSubtype {
 public enum AlbumType {
     /**
      * User album.
+     *
      */
     @!APILevel[
         22,
@@ -239,6 +247,7 @@ public enum AlbumType {
 
     /**
      * System album.
+     *
      */
     | @!APILevel[
         22,
@@ -252,7 +261,7 @@ public enum AlbumType {
             match (this) {
                 case User => 0
                 case System => 1024
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -261,13 +270,14 @@ public enum AlbumType {
         match (value) {
             case 0 => User
             case 1024 => System
-            case _ => throw IllegalArgumentException("Invalid AlbumType value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Defines the options for fetching media files.
+ *
  */
 @!APILevel[
     22,
@@ -276,6 +286,7 @@ public enum AlbumType {
 public class FetchOptions {
     /**
      * Indicates the members to query.
+     *
      */
     @!APILevel[
         22,
@@ -285,6 +296,7 @@ public class FetchOptions {
 
     /**
      * Predicates that specify the fetch criteria.
+     *
      */
     @!APILevel[
         22,
@@ -314,6 +326,7 @@ public class FetchOptions {
 
 /**
  * Enumerates the PhotoAsset types.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -323,6 +336,7 @@ public class FetchOptions {
 public enum PhotoSubtype {
     /**
      * Default Photo Type
+     *
      */
     @!APILevel[
         22,
@@ -331,6 +345,7 @@ public enum PhotoSubtype {
     Default
     /**
      * Moving Photo Type
+     *
      */
     | @!APILevel[
         22,
@@ -339,6 +354,7 @@ public enum PhotoSubtype {
     MovingPhoto
     /**
      * Burst Photo Type
+     *
      */
     | @!APILevel[
         22,
@@ -353,7 +369,7 @@ public enum PhotoSubtype {
                 case Default => 0
                 case MovingPhoto => 3
                 case Burst => 4
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -361,6 +377,7 @@ public enum PhotoSubtype {
 
 /**
  * Enumerates the asset delivery modes.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -370,6 +387,7 @@ public enum PhotoSubtype {
 public enum DeliveryMode {
     /**
      * Fast mode.
+     *
      */
     @!APILevel[
         22,
@@ -379,6 +397,7 @@ public enum DeliveryMode {
 
     /**
      * High-quality mode.
+     *
      */
     | @!APILevel[
         22,
@@ -388,6 +407,7 @@ public enum DeliveryMode {
 
     /**
      * Balance mode.
+     *
      */
     | @!APILevel[
         22,
@@ -402,7 +422,7 @@ public enum DeliveryMode {
                 case FastMode => 0
                 case HighQualityMode => 1
                 case BalanceMode => 2
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -410,6 +430,7 @@ public enum DeliveryMode {
 
 /**
  * PhotoViewMIMETypes represents the type of media resource that photo picker selects.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -419,6 +440,7 @@ public enum DeliveryMode {
 public enum PhotoViewMIMETypes {
     /**
      * IMAGE_TYPE indicates that the selected media resources are images.
+     *
      */
     @!APILevel[
         22,
@@ -428,6 +450,7 @@ public enum PhotoViewMIMETypes {
 
     /**
      * VIDEO_TYPE indicates that the selected media resources are videos.
+     *
      */
     | @!APILevel[
         22,
@@ -437,6 +460,7 @@ public enum PhotoViewMIMETypes {
 
     /**
      * IMAGE_VIDEO_TYPE indicates that the selected media resources are images and videos.
+     *
      */
     | @!APILevel[
         22,
@@ -446,6 +470,7 @@ public enum PhotoViewMIMETypes {
 
     /**
      * MOVING_PHOTO_IMAGE_TYPE indicates that the selected media resources are moving photos.
+     *
      */
     | @!APILevel[
         22,
@@ -461,7 +486,7 @@ public enum PhotoViewMIMETypes {
                 case VideoType => 1
                 case ImageVideoType => 2
                 case MovingPhotoImageType => 3
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -469,6 +494,7 @@ public enum PhotoViewMIMETypes {
 
 /**
  * Enumerates the types of recommended images.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -478,6 +504,7 @@ public enum PhotoViewMIMETypes {
 public enum RecommendationType {
     /**
      * QR_OR_BAR_CODE indicates that QR code or barcode photos can be recommended
+     *
      */
     @!APILevel[
         22,
@@ -487,6 +514,7 @@ public enum RecommendationType {
 
     /**
      * QR_CODE indicates that QR code photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -496,6 +524,7 @@ public enum RecommendationType {
 
     /**
      * BAR_CODE indicates that barcode photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -505,6 +534,7 @@ public enum RecommendationType {
 
     /**
      * ID_CARD indicates that QR code or barcode photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -514,6 +544,7 @@ public enum RecommendationType {
 
     /**
      * PROFILE_PICTURE indicates that profile picture photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -523,6 +554,7 @@ public enum RecommendationType {
 
     /**
      * PASSPORT indicates that passport photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -532,6 +564,7 @@ public enum RecommendationType {
 
     /**
      * BANK_CARD indicates that bank card photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -541,6 +574,7 @@ public enum RecommendationType {
 
     /**
      * DRIVER_LICENSE indicates that driver license photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -550,6 +584,7 @@ public enum RecommendationType {
 
     /**
      * DRIVING_LICENSE indicates that driving license photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -559,6 +594,7 @@ public enum RecommendationType {
 
     /**
      * FEATURED_SINGLE_PORTRAIT indicates that featured single portrait photos can be recommended
+     *
      */
     | @!APILevel[
         22,
@@ -580,7 +616,7 @@ public enum RecommendationType {
                 case DriverLicense => 8
                 case DrivingLicense => 9
                 case FeaturedSinglePortrait => 10
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -588,6 +624,7 @@ public enum RecommendationType {
 
 /**
  * Enumerates the formats for displaying media assets.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -597,6 +634,7 @@ public enum RecommendationType {
 public enum DynamicRangeType {
     /**
      * Standard dynamic range (SDR).
+     *
      */
     @!APILevel[
         22,
@@ -606,6 +644,7 @@ public enum DynamicRangeType {
 
     /**
      * High dynamic range (HDR).
+     *
      */
     | @!APILevel[
         22,
@@ -617,6 +656,7 @@ public enum DynamicRangeType {
 
 /**
  * Enumerates the types of the resources to write.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -626,6 +666,7 @@ public enum DynamicRangeType {
 public enum ResourceType {
     /**
      * Image resource
+     *
      */
     @!APILevel[
         22,
@@ -635,6 +676,7 @@ public enum ResourceType {
 
     /**
      * Video resource
+     *
      */
     | @!APILevel[
         22,
@@ -648,7 +690,7 @@ public enum ResourceType {
             match (this) {
                 case ImageResource => 1
                 case VideoResource => 2
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -656,6 +698,7 @@ public enum ResourceType {
 
 /**
  * Config to create photo asset
+ *
  */
 @!APILevel[
     22,
@@ -664,6 +707,7 @@ public enum ResourceType {
 public class PhotoCreationConfig {
     /**
      * Extension of the asset
+     *
      */
     @!APILevel[
         22,
@@ -673,6 +717,7 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo type of the asset to create, include image or video
+     *
      */
     @!APILevel[
         22,
@@ -682,6 +727,7 @@ public class PhotoCreationConfig {
 
     /**
      * Title of the asset
+     *
      */
     @!APILevel[
         22,
@@ -691,6 +737,7 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo subtype of the asset to create, include default or moving_photo
+     *
      */
     @!APILevel[
         22,
@@ -731,6 +778,7 @@ public class PhotoCreationConfig {
 
 /**
  * Enumeration types of data change.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -740,6 +788,7 @@ public class PhotoCreationConfig {
 public enum NotifyType {
     /**
      * Data(assets or albums) have been newly created
+     *
      */
     @!APILevel[
         22,
@@ -749,6 +798,7 @@ public enum NotifyType {
 
     /**
      * Data(assets or albums) have been modified
+     *
      */
     | @!APILevel[
         22,
@@ -758,6 +808,7 @@ public enum NotifyType {
 
     /**
      * Data(assets or albums) have been removed
+     *
      */
     | @!APILevel[
         22,
@@ -767,6 +818,7 @@ public enum NotifyType {
 
     /**
      * Assets have been added to an album.
+     *
      */
     | @!APILevel[
         22,
@@ -776,6 +828,7 @@ public enum NotifyType {
 
     /**
      * Assets have been removed from an album.
+     *
      */
     | @!APILevel[
         22,
@@ -791,13 +844,14 @@ public enum NotifyType {
             case 2 => NotifyRemove
             case 3 => NotifyAlbumAddAsset
             case 4 => NotifyAlbumRemoveAsset
-            case _ => throw IllegalArgumentException("Invalid NotifyType value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Defines the change data
+ *
  */
 @!APILevel[
     22,
@@ -806,6 +860,7 @@ public enum NotifyType {
 public class ChangeData {
     /**
      * The NotifyType of ChangeData
+     *
      */
     @!APILevel[
         22,
@@ -815,6 +870,7 @@ public class ChangeData {
 
     /**
      * The changed uris
+     *
      */
     @!APILevel[
         22,
@@ -824,6 +880,7 @@ public class ChangeData {
 
     /**
      * Change details of the asset uris to an album.
+     *
      */
     @!APILevel[
         22,
@@ -840,6 +897,7 @@ public class ChangeData {
 
 /**
  * Options for creating an image or video asset.
+ *
  */
 @!APILevel[
     22,
@@ -848,6 +906,7 @@ public class ChangeData {
 public class CreateOptions {
     /**
      * Title of the asset
+     *
      */
     @!APILevel[
         22,
@@ -857,6 +916,7 @@ public class CreateOptions {
 
     /**
      * Specify subtype of the asset to create
+     *
      */
     @!APILevel[
         22,
@@ -879,6 +939,7 @@ public class CreateOptions {
 
 /**
  * Options to request media asset
+ *
  */
 @!APILevel[
     22,
@@ -887,6 +948,7 @@ public class CreateOptions {
 public class RequestOptions {
     /**
      * Indicates the delivery mode
+     *
      */
     @!APILevel[
         22,
@@ -905,6 +967,7 @@ public class RequestOptions {
 
 /**
  * Enumeration of photo asset members
+ *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -914,6 +977,7 @@ public class RequestOptions {
 public enum PhotoKeys <: ToString {
     /**
      * Asset uri, read only
+     *
      */
     @!APILevel[
         22,
@@ -923,6 +987,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Photo type of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -932,6 +997,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Asset name, read only
+     *
      */
     | @!APILevel[
         22,
@@ -941,6 +1007,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Size of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -950,6 +1017,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Creation date of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -959,6 +1027,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Modified date of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -968,6 +1037,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Duration of video files, read only
+     *
      */
     | @!APILevel[
         22,
@@ -977,6 +1047,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width of the image asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -986,6 +1057,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Height of the image asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -995,6 +1067,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Date taken of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1004,6 +1077,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Orientation of the image asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1013,6 +1087,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Favorite state of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1022,6 +1097,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Title of the asset
+     *
      */
     | @!APILevel[
         22,
@@ -1031,6 +1107,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Creation time of the asset in milliseconds, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1040,6 +1117,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Modified time of the asset in milliseconds, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1049,6 +1127,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Photo subtype of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1058,6 +1137,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Dynamic range type of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1067,6 +1147,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Cover position of the asset, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1085,6 +1166,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width and height information of lcd picture, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1094,6 +1176,7 @@ public enum PhotoKeys <: ToString {
 
     /**
      * Width and height information of thumbnail picture, read only
+     *
      */
     | @!APILevel[
         22,
@@ -1132,13 +1215,14 @@ public enum PhotoKeys <: ToString {
             case BurstKey => 'burst_key'
             case LcdSize => 'lcd_size'
             case ThmSize => 'thumb_size'
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumeration uris for registerChange.
+ *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1148,6 +1232,7 @@ public enum PhotoKeys <: ToString {
 public enum DefaultChangeUri <: ToString {
     /**
      * Uri for default PhotoAsset, use with forDescendant{true}, will receive all PhotoAsset's change notifications
+     *
      */
     @!APILevel[
         22,
@@ -1157,6 +1242,7 @@ public enum DefaultChangeUri <: ToString {
 
     /**
      * Uri for default Album, use with forDescendant{true}, will receive all Album's change notifications
+     *
      */
     | @!APILevel[
         22,
@@ -1176,13 +1262,14 @@ public enum DefaultChangeUri <: ToString {
         match (this) {
             case DefaultPhotoUri => 'file://media/Photo'
             case DefaultAlbumUri => 'file://media/PhotoAlbum'
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Enumerates the key album attributes.
+ *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1192,6 +1279,7 @@ public enum DefaultChangeUri <: ToString {
 public enum AlbumKeys <: ToString {
     /**
      * URI of the album.
+     *
      */
     @!APILevel[
         22,
@@ -1201,6 +1289,7 @@ public enum AlbumKeys <: ToString {
 
      /**
      * Name of the album.
+     *
      */
     | @!APILevel[
         22,
@@ -1220,7 +1309,7 @@ public enum AlbumKeys <: ToString {
         match (this) {
             case Uri => 'uri'
             case AlbumName => 'album_name'
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
@@ -1229,6 +1318,7 @@ class BaseSelectOptionsImpl {}
 
 /**
  * Enumerates media file types.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1238,6 +1328,7 @@ class BaseSelectOptionsImpl {}
 public enum PhotoType {
     /**
      * Image asset
+     *
      */
     @!APILevel[
         22,
@@ -1247,6 +1338,7 @@ public enum PhotoType {
 
     /**
      * Video asset
+     *
      */
     | @!APILevel[
         22,
@@ -1260,7 +1352,7 @@ public enum PhotoType {
             match (this) {
                 case Image => 1
                 case Video => 2
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(13900020, "Parameter error.")
             }
         }
     }
@@ -1269,13 +1361,14 @@ public enum PhotoType {
         match (value) {
             case 1 => Image
             case 2 => Video
-            case _ => throw IllegalArgumentException("Invalid PhotoType value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
 
 /**
  * Indicates the type of photo asset member.
+ *
  */
 @!APILevel[
     22,
@@ -1284,6 +1377,7 @@ public enum PhotoType {
 public enum MemberType {
     /**
      * Indicates the type of photo asset member.
+     *
      */
     @!APILevel[
         22,
@@ -1292,6 +1386,7 @@ public enum MemberType {
     Int64Value(Int64)
     /**
      * Indicates the type of photo asset member.
+     *
      */
     | @!APILevel[
         22,
@@ -1300,6 +1395,7 @@ public enum MemberType {
     StringValue(String)
     /**
      * Indicates the type of photo asset member.
+     *
      */
     | @!APILevel[
         22,
@@ -1313,31 +1409,28 @@ public enum MemberType {
             case Int64Value(v) => "getNumber()"
             case StringValue(v) => "getString()"
             case BoolValue(v) => "getBool()"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 
     func getNumber(): Int64 {
         match (this) {
             case Int64Value(v) => v
-            case _ => throw IllegalArgumentException(
-                "This data is not Int64 type. Please use ${getType()} to obtain the value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 
     func getString(): String {
         match (this) {
             case StringValue(v) => v
-            case _ => throw IllegalArgumentException(
-                "This data is not String type. Please use ${getType()} to obtain the value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 
     func getBool(): Bool {
         match (this) {
             case BoolValue(v) => v
-            case _ => throw IllegalArgumentException(
-                "This data is not Bool type. Please use ${getType()} to obtain the value.")
+            case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
 }
