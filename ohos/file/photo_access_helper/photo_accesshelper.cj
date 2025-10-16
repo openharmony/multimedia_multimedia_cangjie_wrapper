@@ -33,6 +33,8 @@ const INVALID_ARGUMENT_ERROR: Int32 = 13900020
 /**
  * Returns an instance of PhotoAccessHelper
  *
+ * @param { Context } context - The context that initiates the request.
+ * @returns { PhotoAccessHelper } Returns the PhotoAccessHelper instance.
  * @throws { BusinessException } 13900020 - Invalid argument
  */
 @!APILevel[
@@ -51,6 +53,7 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
 
 /**
  * Helper functions to access photos and albums.
+ *
  */
 @!APILevel[
     since: "22",
@@ -73,8 +76,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Release PhotoAccessHelper instance
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -95,6 +97,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Fetch photo assets
      *
+     * @param { FetchOptions } options - Options for fetching the image and video assets.
+     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -118,6 +122,9 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Fetch a group of burst assets
      *
+     * @param { String } burstKey - UUID of a set of burst photos (BURST_KEY of PhotoKeys). The value is a string of 36 characters.
+     * @param { FetchOptions } options - Options for fetching the burst photos.
+     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 14000011 - Internal system error
      */
@@ -136,7 +143,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
                 checkRet(errCode, "getBurstAssets")
                 return PhotoAssetResult(ret)
             }
-            throw Exception("Unreachable code.")
+            throw BusinessException(16000050, "Internal error.")
         }
     }
 
@@ -144,8 +151,11 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * Obtains albums based on the specified options and album type.
      * Before the operation, ensure that the albums to obtain exist.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { AlbumType } albumType - Type of the album.
+     * @param { AlbumSubtype } subtype - Album subtype.
+     * @param { FetchOptions } [options] - Options for fetching the albums.
+     * @returns { Promise<FetchResult<Album>> } - Returns the fetch result
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -171,8 +181,17 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Registers listening for the specified URI. This API uses a callback to return the result.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { String } uri - URI of the photo asset, URI of the album, or DefaultChangeUri.
+     * @param { boolean } forChildUris - Whether to perform fuzzy listening.
+     * If uri is the URI of an album, the value true means to listen for the changes of the files in the album;
+     * the value false means to listen for the changes of the album only.
+     * If uri is the URI of a photoAsset, there is no difference between true and false for forChildUris.
+     * If uri is DefaultChangeUri, forChildUris must be set to true. If forChildUris is false,
+     * the URI cannot be found and no message can be received.
+     * @param { Callback<ChangeData> } callback - Callback used to return the ChangeData.
+     * Multiple callback listeners can be registered for a URI.
+     * You can use unRegisterChange to unregister all listeners for the URI or a specified callback listener.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -211,8 +230,9 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * Unregisters listening for the specified URI. Multiple callbacks can be registered for a URI for listening.
      * You can use this API to unregister the listening of the specified callbacks or all callbacks.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { String } uri - URI of the photo asset, URI of the album, or DefaultChangeUri.
+     * @param { Callback<ChangeData> } [callback] - The callback function to unregister.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -269,8 +289,10 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Create a save dialog to save photos
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { Array<string> } srcFileUris - List of the file uris to be saved
+     * @param { Array<PhotoCreationConfig> } photoCreationConfigs - List of the photo asset creation configs
+     * @returns { Promise<Array<string>> } - Returns the media library file uri list to application which has been authorized
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - Internal system error
      */
@@ -306,9 +328,9 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Applies media changes.
      *
+     * @param { MediaChangeRequest } mediaChangeRequest - Request for asset changes or album changes.
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
@@ -321,7 +343,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
         match (mediaChangeRequest) {
             case v: MediaAlbumChangeRequest => v.applyChanges()
             case v: MediaAssetChangeRequest => v.applyChanges()
-            case _ => throw NoneValueException("Unknown value")
+            case _ => throw BusinessException(401, "Parameter error.")
         }
     }
 }

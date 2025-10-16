@@ -20,6 +20,7 @@ package ohos.multimedia.camera
 import ohos.graphics.color_space_manager.ColorSpace
 import ohos.labels.*
 import ohos.ffi.*
+import ohos.business_exception.BusinessException
 
 import std.deriving.Derive
 
@@ -88,6 +89,7 @@ struct CPoint {
 
 /**
  * Point coordinates are used for focus and exposure configuration.
+ *
  */
 @!APILevel[
     since: "22",
@@ -96,6 +98,7 @@ struct CPoint {
 public class Point {
     /**
      * x co-ordinate
+     *
      */
     @!APILevel[
         since: "22",
@@ -105,6 +108,7 @@ public class Point {
 
     /**
      * y co-ordinate
+     *
      */
     @!APILevel[
         since: "22",
@@ -136,6 +140,7 @@ public class Point {
 
 /**
  * Enum for exposure mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -145,6 +150,7 @@ public class Point {
 public enum ExposureMode {
     /**
      * Lock exposure mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -154,6 +160,7 @@ public enum ExposureMode {
     |
     /**
      * Auto exposure mode. Exposure area center point can be set by AutoExposure.setMeteringPoint interface.
+     *
      */
     @!APILevel[
         since: "22",
@@ -163,6 +170,7 @@ public enum ExposureMode {
     |
     /**
      * Continuous automatic exposure.
+     *
      */
     @!APILevel[
         since: "22",
@@ -177,7 +185,7 @@ public enum ExposureMode {
                 case ExposureModeLocked => 0
                 case ExposureModeAuto => 1
                 case ExposureModeContinuousAuto => 2
-                case _ => throw IllegalArgumentException("The type is not supported yet.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -187,13 +195,14 @@ public enum ExposureMode {
             case 0 => ExposureModeLocked
             case 1 => ExposureModeAuto
             case 2 => ExposureModeContinuousAuto
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * AutoExposureQuery object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -246,6 +255,7 @@ public interface AutoExposureQuery {
 
 /**
  * AutoExposure object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -371,6 +381,7 @@ public interface AutoExposure <: AutoExposureQuery {
 
 /**
  * Color Management Query object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -410,6 +421,7 @@ public interface ColorManagementQuery {
 
 /**
  * Color Management object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -461,6 +473,7 @@ public interface ColorManagement <: ColorManagementQuery {
 
 /**
  * Enum for flash mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -470,6 +483,7 @@ public interface ColorManagement <: ColorManagementQuery {
 public enum FlashMode {
     /**
      * Close mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -479,6 +493,7 @@ public enum FlashMode {
     |
     /**
      * Open mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -488,6 +503,7 @@ public enum FlashMode {
     |
     /**
      * Auto mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -497,6 +513,7 @@ public enum FlashMode {
     |
     /**
      * Always open mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -512,7 +529,7 @@ public enum FlashMode {
                 case FlashModeOpen => 1
                 case FlashModeAuto => 2
                 case FlashModeAlwaysOpen => 3
-                case _ => throw IllegalArgumentException("The type is not supported yet.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -523,13 +540,14 @@ public enum FlashMode {
             case 1 => FlashModeOpen
             case 2 => FlashModeAuto
             case 3 => FlashModeAlwaysOpen
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     } 
 }
 
 /**
  * Flash Query object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -581,6 +599,7 @@ public interface FlashQuery {
 
 /**
  * Flash object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -628,6 +647,7 @@ public interface Flash <: FlashQuery {
 
 /**
  * Enum for focus state.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -637,6 +657,7 @@ public interface Flash <: FlashQuery {
 public enum FocusState {
     /**
      * Scan state.
+     *
      */
     @!APILevel[
         since: "22",
@@ -646,6 +667,7 @@ public enum FocusState {
     |
     /**
      * Focused state.
+     *
      */
     @!APILevel[
         since: "22",
@@ -655,6 +677,7 @@ public enum FocusState {
     |
     /**
      * Unfocused state.
+     *
      */
     @!APILevel[
         since: "22",
@@ -669,7 +692,7 @@ public enum FocusState {
                 case FocusStateScan => 0
                 case FocusStateFocused => 1
                 case FocusStateUnfocused => 2
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -679,13 +702,14 @@ public enum FocusState {
             case 0 => FocusStateScan
             case 1 => FocusStateFocused
             case 2 => FocusStateUnfocused
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Enum for focus mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -695,6 +719,7 @@ public enum FocusState {
 public enum FocusMode {
     /**
      * Manual mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -704,6 +729,7 @@ public enum FocusMode {
     |
     /**
      * Continuous auto mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -713,6 +739,7 @@ public enum FocusMode {
     |
     /**
      * Auto mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -722,6 +749,7 @@ public enum FocusMode {
     |
     /**
      * Locked mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -737,7 +765,7 @@ public enum FocusMode {
                 case FocusModeContinuousAuto => 1
                 case FocusModeAuto => 2
                 case FocusModeLocked => 3
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -748,13 +776,14 @@ public enum FocusMode {
             case 1 => FocusModeContinuousAuto
             case 2 => FocusModeAuto
             case 3 => FocusModeLocked
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Focus Query object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -785,6 +814,7 @@ public interface FocusQuery {
 
 /**
  * Focus object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -886,6 +916,7 @@ public interface Focus <: FocusQuery {
 
 /**
  * Enum for video stabilization mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -895,6 +926,7 @@ public interface Focus <: FocusQuery {
 public enum VideoStabilizationMode {
     /**
      * Turn off video stablization.
+     *
      */
     @!APILevel[
         since: "22",
@@ -904,6 +936,7 @@ public enum VideoStabilizationMode {
     |
     /**
      * LOW mode provides basic stabilization effect.
+     *
      */
     @!APILevel[
         since: "22",
@@ -913,6 +946,7 @@ public enum VideoStabilizationMode {
     |
     /**
      * MIDDLE mode means algorithms can achieve better effects than LOW mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -922,6 +956,7 @@ public enum VideoStabilizationMode {
     |
     /**
      * HIGH mode means algorithms can achieve better effects than MIDDLE mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -930,8 +965,9 @@ public enum VideoStabilizationMode {
     High
     |
     /**
-     * The stabilization algorithm is selected automatically. Selection of the stabilization algorithm is
-     * performed automatically.
+     * The stabilization algorithm is selected automatically. Selection of the stabilization algorithm is performed
+     * automatically.
+     *
      */
     @!APILevel[
         since: "22",
@@ -948,7 +984,7 @@ public enum VideoStabilizationMode {
                 case Middle => 2
                 case High => 3
                 case Auto => 4
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -960,13 +996,14 @@ public enum VideoStabilizationMode {
             case 2 => Middle
             case 3 => High
             case 4 => Auto
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Stabilization Query object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -998,6 +1035,7 @@ public interface StabilizationQuery {
 
 /**
  * Stabilization object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -1047,6 +1085,7 @@ public interface Stabilization <: StabilizationQuery {
 
 /**
  * SmoothZoomInfo object
+ *
  */
 @!APILevel[
     since: "22",
@@ -1055,6 +1094,7 @@ public interface Stabilization <: StabilizationQuery {
 public class SmoothZoomInfo {
     /**
      * The duration of smooth zoom.
+     *
      */
     @!APILevel[
         since: "22",
@@ -1073,6 +1113,7 @@ public class SmoothZoomInfo {
 
 /**
  * Enum for smooth zoom mode.
+ *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1082,6 +1123,7 @@ public class SmoothZoomInfo {
 public enum SmoothZoomMode {
     /**
      * Normal zoom mode.
+     *
      */
     @!APILevel[
         since: "22",
@@ -1094,7 +1136,7 @@ public enum SmoothZoomMode {
         get() {
             match (this) {
                 case Normal => 0
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(7400101, "Parameter error.")
             }
         }
     }
@@ -1102,13 +1144,14 @@ public enum SmoothZoomMode {
     static func parse(value: Int32): SmoothZoomMode {
         return match (value) {
             case 0 => Normal
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }
 
 /**
  * Zoom query object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -1139,6 +1182,7 @@ public interface ZoomQuery {
 
 /**
  * Zoom object.
+ *
  */
 @!APILevel[
     since: "22",

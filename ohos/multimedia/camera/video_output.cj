@@ -26,6 +26,7 @@ import std.sync.*
 
 /**
  * Video output object.
+ *
  */
 @!APILevel[
     since: "22",
