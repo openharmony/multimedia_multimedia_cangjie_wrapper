@@ -26,6 +26,7 @@ import std.sync.*
 
 /**
  * Photo output object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -460,8 +461,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * within the callback method of on().
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration
-     * (in milliseconds).
+     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in
+     * milliseconds).
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
@@ -598,8 +599,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * Unsubscribes from estimated capture duration event callback.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration
-     * (in milliseconds).
+     * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration (in
+     * milliseconds).
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */

@@ -45,6 +45,10 @@ foreign {
 /**
  * Creates an ImageReceiver instance.
  *
+ * @param { Size } size - Size of the image.
+ * @param { ImageFormat } format - Format of the image.
+ * @param { Int32 } capacity - Maximum number of images that can be accessed at the same time.
+ * @returns { ImageReceiver } Returns the ImageReceiver instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left
  * unspecified; 2.Incorrect parameter types.
@@ -66,6 +70,7 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
 
 /**
  * Image receiver object.
+ *
  */
 @!APILevel[
     since: "22",
@@ -144,6 +149,7 @@ public class ImageReceiver <: RemoteDataLite {
     /**
      * Get an id which indicates a surface and can be used to set to Camera or other component can receive a surface.
      *
+     * @returns { String } Returns the surface id.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
@@ -166,6 +172,7 @@ public class ImageReceiver <: RemoteDataLite {
     /**
      * Get lasted image from receiver.
      *
+     * @returns { Image } Returns the latest image.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
@@ -183,6 +190,7 @@ public class ImageReceiver <: RemoteDataLite {
     /**
      * Get next image from receiver.
      *
+     * @returns { Image } Returns the next image.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
@@ -199,6 +207,9 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Subscribe callback when receiving an image.
+     *
+     * @param { ReceiveType } eventType - Type of the event to listen for.
+     * @param { Callback0Argument } callback - Callback used to return image.
      */
     @!APILevel[
         since: "22",
@@ -214,6 +225,8 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Remove callback subscriptions when releasing buffer.
+     *
+     * @param { ReceiveType } eventType - Type of the event to unlisten for.
      */
     @!APILevel[
         since: "22",
@@ -223,6 +236,7 @@ public class ImageReceiver <: RemoteDataLite {
 
     /**
      * Release image receiver instance.
+     *
      */
     @!APILevel[
         since: "22",
@@ -257,7 +271,7 @@ public enum ReceiveType {
     protected func toString(): String {
         match (this) {
             case ImageArrival => "imageArrival"
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(7600201, "Parameter error.")
         }
     }
 }

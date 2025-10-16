@@ -100,8 +100,8 @@ foreign {
 /**
  * Create pixelmap by data buffer.
  *
- * @param {Array<UInt8> } colors The image color buffer.
- * @param { InitializationOptions } options Initialization options for pixelmap.
+ * @param { Array<UInt8> } colors - The image color buffer.
+ * @param { InitializationOptions } options - Initialization options for pixelmap.
  * @returns { PixelMap } Return the PixelMap object.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left
@@ -129,6 +129,7 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
 
 /**
  * PixelMap instance.
+ *
  */
 @!APILevel[
     since: "22",

@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.multimedia.media
 
 import ohos.ffi.*
@@ -41,8 +43,8 @@ foreign {
 /**
  * Creates an AVMetadataExtractor instance.
  *
+ * @returns { AVMetadataExtractor } Returns the AVMetadataExtractor instance.
  * @throws { BusinessException } 5400101 - No memory.
- * @relation function createAVMetadataExtractor(): Promise<AVMetadataExtractor>
  */
 @!APILevel[
     since: "22",
@@ -62,7 +64,6 @@ public func createAVMetadataExtractor(): AVMetadataExtractor {
  * Fetch media meta data or audio art picture from source. Before calling an AVMetadataExtractor method,
  * you must use createAVMetadataExtractor() to create an AVMetadataExtractor instance.
  *
- * @relation interface AVMetadataExtractor
  */
 @!APILevel[
     since: "22",
@@ -86,7 +87,6 @@ public class AVMetadataExtractor <: RemoteDataLite {
      *
      * @throws { BusinessException } 5400101 - No memory.
      * @throws { BusinessException } 5400102 - Operation not allowed.
-     * @relation fdSrc ?: AVFileDescriptor
      */
     @!APILevel[
         since: "22",
@@ -122,7 +122,6 @@ public class AVMetadataExtractor <: RemoteDataLite {
      * you must set the data source through either **fdSrc** or **dataSrc**.
      *
      * @throws { BusinessException } 5400101 - No memory.
-     * @relation dataSrc ?: AVDataSrcDescriptor
      */
     @!APILevel[
         since: "22",
@@ -171,10 +170,10 @@ public class AVMetadataExtractor <: RemoteDataLite {
     /**
      * Obtains media metadata.
      *
+     * @returns { AVMetadata } Returns the AVMetadata instance.
      * @throws { BusinessException } 5400101 - No memory.
      * @throws { BusinessException } 5400102 - Operation not allowed.
      * @throws { BusinessException } 5400106 - Unsupported format.
-     * @relation fetchMetadata(): Promise<AVMetadata>
      */
     @!APILevel[
         since: "22",
@@ -195,8 +194,8 @@ public class AVMetadataExtractor <: RemoteDataLite {
     /**
      * Obtains the cover of the audio album.
      *
+     * @returns { PixelMap } Returns the PixelMap instance.
      * @throws { BusinessException } 5400101 - No memory.
-     * @relation fetchAlbumCover(): Promise<image.PixelMap>
      */
     @!APILevel[
         since: "22",
@@ -218,10 +217,10 @@ public class AVMetadataExtractor <: RemoteDataLite {
      * @param { AVImageQueryOptions } options - The time options about the relationship
      * between the given timeUs and a key frame, see @AVImageQueryOptions .
      * @param { PixelMapParams } param - The output pixel map format params, see @PixelMapParams .
+     * @returns { PixelMap } Returns the PixelMap instance.
      * @throws { BusinessException } 5400101 - No memory.
      * @throws { BusinessException } 5400102 - Operation not allowed.
      * @throws { BusinessException } 5400106 - Unsupported format.
-     * @relation fetchFrameByTime(timeUs: number, options: AVImageQueryOptions, param: PixelMapParams): Promise<image.PixelMap>
      */
     @!APILevel[
         since: "22",
@@ -239,7 +238,6 @@ public class AVMetadataExtractor <: RemoteDataLite {
      * Release resources used for AVMetadataExtractor.
      * 
      * @throws { BusinessException } 5400101 - No memory.
-     * @relation release(): Promise<void>
      */
     @!APILevel[
         since: "22",

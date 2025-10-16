@@ -20,9 +20,11 @@ package ohos.file.photo_access_helper
 import ohos.labels.*
 import ohos.ffi.*
 import ohos.multimedia.image.*
+import ohos.business_exception.BusinessException
 
 /**
  * Provides APIs for encapsulating file asset attributes.
+ *
  */
 @!APILevel[
     since: "22",
@@ -31,6 +33,7 @@ import ohos.multimedia.image.*
 public class PhotoAsset <: RemoteDataLite {
     /**
      * uri of the asset.
+     *
      */
     @!APILevel[
         since: "22",
@@ -49,6 +52,7 @@ public class PhotoAsset <: RemoteDataLite {
 
     /**
      * Photo type, image or video
+     *
      */
     @!APILevel[
         since: "22",
@@ -65,6 +69,7 @@ public class PhotoAsset <: RemoteDataLite {
 
     /**
      * Display name (with a file name extension) of the asset.
+     *
      */
     @!APILevel[
         since: "22",
@@ -92,8 +97,9 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Obtains a PhotoAsset member parameter.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { String } member - Photo asset member. for example : get(PhotoKeys.SIZE)
+     * @returns { MemberType } Returns the value of the specified photo asset member
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
@@ -112,15 +118,16 @@ public class PhotoAsset <: RemoteDataLite {
                 ret.free()
                 return result
             }
-            throw Exception("Unreachable code.")
+            throw BusinessException(16000050, "Internal error.")
         }
     }
 
     /**
      * Sets a PhotoAsset member parameter.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { String } member - Photo asset member
+     * @param { String } value - The new value of the member.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
@@ -145,8 +152,7 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Commits the modification on the file metadata to the database.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -167,8 +173,9 @@ public class PhotoAsset <: RemoteDataLite {
     /**
      * Obtains the file thumbnail of the given size.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-     * unspecified;
+     * @param { image.Size } [size] - Size of the thumbnail.
+     * @returns { Promise<image.PixelMap> } Returns the thumbnail's pixelMap.
+     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
