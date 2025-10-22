@@ -857,7 +857,7 @@ class Test_photoAccesshelper {
     @Tag[APILevel21, TestLevel0]
     func test_enum_AlbumKeys() {
         let arr1: Array<AlbumKeys> = [
-            Uri,
+            AlbumKeys.Uri,
             AlbumName
         ]
         let strArr: Array<String> = [
