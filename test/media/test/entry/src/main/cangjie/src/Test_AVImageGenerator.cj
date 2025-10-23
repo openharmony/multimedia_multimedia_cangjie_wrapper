@@ -26,7 +26,7 @@ import kit.PerformanceAnalysisKit.Hilog
 @Test
 class Test_AVImageGenerator {
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_AVImageQueryOptions() {
         let aVImageQueryOptionsArr: Array<AVImageQueryOptions> = [AvImageQueryNextSync, AvImageQueryPreviousSync, AvImageQueryClosestSync, AvImageQueryClosest]
         let aVImageQueryOptionsArr2: Array<AVImageQueryOptions> = [AvImageQueryNextSync, AvImageQueryPreviousSync, AvImageQueryClosestSync, AvImageQueryClosest]
