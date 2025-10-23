@@ -61,7 +61,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_GetSupportedCameras() {
         let devices = getCameraManager().getSupportedCameras()
         @Expect(devices.size, 2)
@@ -78,7 +78,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_GetSupportedSceneModes() {
         let device = getCameraManager().getSupportedCameras()[0]
         let modes = getCameraManager().getSupportedSceneModes(device)
@@ -89,7 +89,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_GetSupportedOutputCapability() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -107,19 +107,19 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsCameraMuted() {
         @Expect(getCameraManager().isCameraMuted(), false)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsTorchSupported() {
         @Expect(getCameraManager().isTorchSupported(), true)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsTorchModeSupported() {
         @Expect(getCameraManager().isTorchModeSupported(TorchMode.Off), true)
         @Expect(getCameraManager().isTorchModeSupported(TorchMode.On), true)
@@ -127,7 +127,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_SetTorchMode() {
         @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
         getCameraManager().setTorchMode(TorchMode.On)
@@ -137,7 +137,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_Onoff_CameraStatus() {
         let testCallbackCameraStatus = TestCallbackCameraStatus()
         getCameraManager().on(CameraEvents.CameraStatus, testCallbackCameraStatus)
@@ -149,7 +149,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_Onoff_FoldStatusChange() {
         let testCallbackFoldStatusChange = TestCallbackFoldStatusChange()
         getCameraManager().on(CameraEvents.FoldStatusChange, testCallbackFoldStatusChange)
@@ -161,7 +161,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_Onoff_TorchStatusChange() {
         let testCallbackTorchStatusChange = TestCallbackTorchStatusChange()
         getCameraManager().on(CameraEvents.TorchStatusChange, testCallbackTorchStatusChange)
@@ -173,7 +173,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateCameraInput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         try {
@@ -186,7 +186,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateCameraInput2_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         try {
@@ -199,7 +199,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateCameraInput3_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         try {
@@ -212,7 +212,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateCameraInput4_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         try {
@@ -225,7 +225,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreatePreviewOutput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -245,7 +245,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateVideoOutput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -265,7 +265,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraInput_OnOff() {
         let device = getCameraManager().getSupportedCameras()[0]
         let input = getCameraManager().createCameraInput(device)
@@ -279,7 +279,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraInput_Open() {
         let device = getCameraManager().getSupportedCameras()[0]
         let input = getCameraManager().createCameraInput(device)
@@ -305,7 +305,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraInput_Close() {
         let device = getCameraManager().getSupportedCameras()[0]
         let input = getCameraManager().createCameraInput(device)
@@ -322,7 +322,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -353,7 +353,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_SetFrameRate_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -374,7 +374,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_GetPreviewRotation_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -395,7 +395,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_GetActiveProfile() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -414,7 +414,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_SetPreviewRotation_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -435,7 +435,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_FrameStart() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -455,7 +455,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_FrameEnd() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -475,7 +475,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -495,7 +495,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_GetSupportedFrameRates() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -520,7 +520,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_SetFrameRate() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -621,7 +621,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -645,7 +645,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutputNoInput() {
         try {
             let photoOutput = getCameraManager().createPhotoOutput()
@@ -655,7 +655,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Capture_Medium() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -679,7 +679,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Capture_High() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -703,7 +703,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Capture_Low() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -727,7 +727,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Capture_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -750,7 +750,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_EnableMirror_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -769,7 +769,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_GetPhotoRotation_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -788,7 +788,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureStartWithInfo() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -807,7 +807,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureEnd() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -826,7 +826,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_FrameShutter() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -844,7 +844,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_FrameShutterEnd() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -863,7 +863,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureReady() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -882,7 +882,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_EstimatedCaptureDuration() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -901,7 +901,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -943,7 +943,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_IsMovingPhotoSupported_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -961,7 +961,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_EnableMovingPhoto_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1002,7 +1002,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_SetMovingPhotoVideoCodecType() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1026,7 +1026,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_SetMovingPhotoVideoCodecType2() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1050,7 +1050,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_GetActiveProfile() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1075,7 +1075,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_GetPhotoRotation() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1098,7 +1098,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1125,7 +1125,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Start_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1146,7 +1146,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Stop_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1167,7 +1167,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_GetVideoRotation_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1188,7 +1188,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_FrameStart() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1210,7 +1210,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_FrameEnd() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1232,7 +1232,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1254,7 +1254,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_GetSupportedFrameRates() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1282,7 +1282,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_SetFrameRate() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1310,7 +1310,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_SetFrameRate_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1331,7 +1331,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_GetActiveProfile() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1361,7 +1361,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_GetVideoRotation() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[1]
@@ -1387,7 +1387,7 @@ class Test_camera {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_CommitConfig_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1408,7 +1408,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_AddInput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1434,7 +1434,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_RemoveInput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1460,7 +1460,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_AddOutput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1486,7 +1486,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_RemoveOutput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
@@ -1512,7 +1512,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_Start_Error() {
         let photoSession = (getCameraManager().createSession(SceneMode.NormalPhoto) as PhotoSession).getOrThrow()
         try {
@@ -1527,7 +1527,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Session_Stop_Error() {
         let photoSession = (getCameraManager().createSession(SceneMode.NormalPhoto) as PhotoSession).getOrThrow()
         try {
@@ -1596,7 +1596,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Flash(): Unit {
         try {
             loggerInfo("[multimedia_camera | Test_Flash]: test_flash start!")
@@ -1632,7 +1632,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_AutoExposure() {
         try {
             let session: PhotoSession = getPhotoSession(0)
@@ -1682,7 +1682,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Focus() {
         try {
             let session: PhotoSession = getPhotoSession(0)
@@ -1728,7 +1728,7 @@ class Test_camera {
     setZoomRatio will not be applied once the buffer of ImageReceiver is full(ArkTS has the same behavior).
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Zoom() {
         try {
             let session: PhotoSession = getPhotoSession(0)
@@ -1761,7 +1761,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_ColorManagement() {
         try {
             let session: PhotoSession = getPhotoSession(0)
@@ -1791,7 +1791,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_Stabilization() {
         try {
             let session: VideoSession = getVideoSession()
@@ -1823,7 +1823,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSession() {
         let TAG = "TEST_PhotoSession"
         let session: PhotoSession = getPhotoSession(0)
@@ -1864,7 +1864,7 @@ class Test_camera {
     Because of the above reason, setFocusPoint will not applied and cannot trigger the callback. So, @Expect is ignored.
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSessionFocusCallback() {
         let TAG = "Test_PhotoSessionFocusCallback"
         let session = getPhotoSession(0)
@@ -1898,7 +1898,7 @@ class Test_camera {
     Because of the above reason, setFocusPoint will not applied and cannot trigger the callback. So, @Expect is ignored.
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSessionFocusCallback1() {
         let TAG = "Test_PhotoSessionFocusCallback1"
         let session = getPhotoSession(0)
@@ -1926,7 +1926,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSessionSmoothCallback() {
         let TAG = "Test_PhotoSessionSmoothCallback"
         let session = getPhotoSession(0)
@@ -1953,7 +1953,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSessionSmoothCallback1() {
         let TAG = "Test_PhotoSessionSmoothCallback1"
         let session = getPhotoSession(0)
@@ -1984,7 +1984,7 @@ class Test_camera {
     But it's verified that in ArkTS, it cannot be triggered either.
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PhotoSessionErrorCallback() {
         let TAG = "Test_PhotoSessionErrorCallback"
         let session = getPhotoSession(0)
@@ -2005,7 +2005,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSession() {
         let TAG = "TEST_VideoSession"
         let session: VideoSession = getVideoSession()
@@ -2045,7 +2045,7 @@ class Test_camera {
     Because of the above reason, setFocusPoint will not applied and cannot trigger the callback. So, @Expect is ignored.
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSessionFocusCallback() {
         let TAG = "Test_VideoSessionFocusCallback"
         let session = getVideoSession()
@@ -2079,7 +2079,7 @@ class Test_camera {
     Because of the above reason, setFocusPoint will not applied and cannot trigger the callback. So, @Expect is ignored.
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSessionFocusCallback1() {
         let TAG = "Test_VideoSessionFocusCallback1"
         let session = getVideoSession()
@@ -2107,7 +2107,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSessionSmoothCallback() {
         let TAG = "Test_VideoSessionSmoothCallback"
         let session = getVideoSession()
@@ -2134,7 +2134,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSessionSmoothCallback1() {
         let TAG = "Test_VideoSessionSmoothCallback1"
         let session = getVideoSession()
@@ -2161,7 +2161,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSessionErrorCallback() {
         let TAG = "Test_VideoSessionErrorCallback"
         let session = getVideoSession()
@@ -2183,7 +2183,7 @@ class Test_camera {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_TorchMode() {
         let torchModeArr: Array<TorchMode> = [Off, TorchMode.On, Auto]
         let torchModeArr2: Array<TorchMode> = [Off, TorchMode.On, Auto]
@@ -2200,7 +2200,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_ImageRotation() {
         let imageRotationArr: Array<ImageRotation> = [
             Rotation0,
@@ -2232,7 +2232,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraStatus() {
         let cameraStatusArr: Array<CameraStatus> = [
             CameraStatusAppear,
@@ -2264,7 +2264,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_FoldStatus() {
         let foldStatusArr: Array<FoldStatus> = [
             NonFoldable,
@@ -2293,7 +2293,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_ConnectionType() {
         let connectionTypeArr: Array<ConnectionType> = [
             CameraConnectionBuiltIn,
@@ -2322,7 +2322,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraFormat() {
         let cameraFormatArr: Array<CameraFormat> = [
             CameraFormatYcrcbP010,
@@ -2360,7 +2360,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraEvents() {
         let CameraEventsArr: Array<CameraEvents> = [
             CameraError,
@@ -2424,7 +2424,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraPosition() {
         let cameraPositionArr: Array<CameraPosition> = [
             CameraPositionUnspecified,
@@ -2453,7 +2453,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraType() {
         let cameraTypeArr: Array<CameraType> = [
             CameraTypeDefault,
@@ -2488,7 +2488,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_SceneMode() {
         let sceneModeArr: Array<SceneMode> = [
             NormalPhoto,
@@ -2512,7 +2512,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_QualityLevel() {
         let qualityLevelArr: Array<QualityLevel> = [
             QualityLevelHigh,
@@ -2541,7 +2541,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoCodecType() {
         @Expect(Avc.toString() == "VideoCodecType.Avc")
         @Expect(Hevc.toString() == "VideoCodecType.Hevc")
@@ -2549,7 +2549,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreconfigType() {
         let preconfigTypeArr: Array<PreconfigType> = [
             Preconfig720p,
@@ -2581,7 +2581,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_FocusState() {
         let focusStateArr: Array<FocusState> = [
             FocusStateScan,
@@ -2610,7 +2610,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_PreconfigRatio() {
         let preconfigRatioArr: Array<PreconfigRatio> = [
             PreconfigRatio_1_1,
@@ -2639,7 +2639,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func Test_ErrorCase() {
         let session: PhotoSession = (getCameraManager().createSession(NormalPhoto) as PhotoSession).getOrThrow()
         Test_ErrorCaseFlash(session)
@@ -2886,7 +2886,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_ExposureMode() {
         let arr1: Array<ExposureMode> = [
             ExposureModeLocked,
@@ -2906,7 +2906,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_FlashMode() {
         let arr1: Array<FlashMode> = [
             FlashModeClose,
@@ -2928,7 +2928,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_FocusMode() {
         let arr1: Array<FocusMode> = [
             FocusModeManual,
@@ -2950,7 +2950,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_VideoStabilizationMode() {
         let arr1: Array<VideoStabilizationMode> = [
             Off,
@@ -2974,7 +2974,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_SmoothZoomMode() {
         let arr1: Array<SmoothZoomMode> = [SmoothZoomMode.Normal]
         let arrStr: Array<String> = ["SmoothZoomMode.Normal"]
@@ -2985,7 +2985,7 @@ class Test_camera {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_MetadataObjectType() {
         let arr1: Array<MetadataObjectType> = [MetadataObjectType.FaceDetection]
         let arrStr: Array<String> = ["MetadataObjectType.FaceDetection"]

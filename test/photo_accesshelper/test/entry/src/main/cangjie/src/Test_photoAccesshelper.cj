@@ -87,7 +87,7 @@ class Test_photoAccesshelper {
      * 预置条件1：图库中存在不少于3张照片
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_FetchResult_PhotoAsset() {
         try {
@@ -125,7 +125,7 @@ class Test_photoAccesshelper {
      * 预置条件2：图库中存在照片
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_PhotoAsset() {
         try {
@@ -199,7 +199,7 @@ class Test_photoAccesshelper {
      * 预置条件3：图库中存在连拍照片
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_GetBurstAssets() {
         try {
@@ -229,7 +229,7 @@ class Test_photoAccesshelper {
      * 预置条件4：存在一个名为test4的相册，并且其中包含两张照片
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_FetchResult_Album() {
         try {
@@ -264,7 +264,7 @@ class Test_photoAccesshelper {
      * 预置条件5：存在收藏夹，并且其中包含照片；图库中存在视频和照片
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_SYSTEM_Album() {
         try {
@@ -304,7 +304,7 @@ class Test_photoAccesshelper {
      * 预置条件6：存在一个名为test1的相册
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_Album() {
         let predicates = DataSharePredicates()
@@ -328,7 +328,7 @@ class Test_photoAccesshelper {
      * 预置条件7：存在一个名为test2的相册
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_AlbumModify() {
         try {
@@ -374,7 +374,7 @@ class Test_photoAccesshelper {
      * 期望结果：修改系统相册名称会报错 14000011 System inner fail
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_SYSTEM_AlbumModify() {
         try {
@@ -398,7 +398,7 @@ class Test_photoAccesshelper {
      * 预置条件9：图库中存在照片和视频
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_registerChange() {
         try {
@@ -447,7 +447,7 @@ class Test_photoAccesshelper {
      * 预置条件10：无，该用例会拉起弹框，需手动点击允许或禁止
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_showAssetsCreationDialog() {
         let callback3 = MyCallback<Array<String>>(
@@ -484,7 +484,7 @@ class Test_photoAccesshelper {
      * 预置条件13：存在相册test1
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_album_change_request_album() {
         let predicates = DataSharePredicates()
@@ -532,7 +532,7 @@ class Test_photoAccesshelper {
      * 预置条件14：存在相册，第一张照片标题为123456789.jpg
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_album_change_request_addAsset() {
         let predicates = DataSharePredicates()
@@ -552,7 +552,7 @@ class Test_photoAccesshelper {
      * 预置条件15：存在用户相册，且其中的第一张照片名称为123456789.jpg
      */
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_album_change_request_removeAsset() {
         let predicates = DataSharePredicates()
@@ -568,7 +568,7 @@ class Test_photoAccesshelper {
 
     // 获取图片，改名
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_asset_change_request_constructor(): Unit {
         let predicates = DataSharePredicates()
@@ -588,7 +588,7 @@ class Test_photoAccesshelper {
 
     // 根据路径创建图片
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_createImageAssetRequest() {
         try {
             let pathDir = getAbilityContext().filesDir
@@ -609,7 +609,7 @@ class Test_photoAccesshelper {
 
     // 根据路径创建MP4
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_createVideoAssetRequest() {
         try {
             let pathDir = getAbilityContext().filesDir
@@ -632,7 +632,7 @@ class Test_photoAccesshelper {
     // 根据路径创建图片
     // 预置条件: 在/data/app/el2/100/base/com.example.myapplication/haps/entry/files/下有test.jpg文件
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     @Skip
     func test_asset_change_request_createAssetRequest_uri() {
         let photoType = PhotoType.Image
@@ -647,7 +647,7 @@ class Test_photoAccesshelper {
 
     // 根据数组创建图片
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_createAssetRequest_buffer() {
         let photoType = PhotoType.Image
         let extension = "jpg"
@@ -659,7 +659,7 @@ class Test_photoAccesshelper {
 
     // 删除图片，有确认窗口
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_deleteAssets_asset() {
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
@@ -670,7 +670,7 @@ class Test_photoAccesshelper {
 
     // 删除图片，有确认窗口
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_deleteAssets_uri() {
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
@@ -682,7 +682,7 @@ class Test_photoAccesshelper {
 
     // 创建mp4
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_asset_change_request_getWriteCacheHandler() {
         try {
             let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), PhotoType.Video, "mp4")
@@ -699,7 +699,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_AlbumSubtype(): Unit {
         let arr1: Array<AlbumSubtype> = [UserGeneric, Favorite, Video, Image, AlbumSubtype.AnyAlbum]
         let arr2: Array<AlbumSubtype> = [UserGeneric, Favorite, Video, Image, AlbumSubtype.AnyAlbum]
@@ -718,7 +718,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_AlbumType(): Unit {
         let arr1: Array<AlbumType> = [User, System]
         let arr2: Array<AlbumType> = [User, System]
@@ -734,7 +734,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_RecommendationType(): Unit {
         let arr1: Array<RecommendationType> = [QrOrBarCode, QrCode, BarCode, IdCard, ProfilePicture, PassPort, BankCard,
             DriverLicense, DrivingLicense, FeaturedSinglePortrait]
@@ -760,7 +760,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_NotifyType(): Unit {
         let arr1: Array<NotifyType> = [NotifyAdd, NotifyUpdate, NotifyRemove, NotifyAlbumAddAsset,
             NotifyAlbumRemoveAsset]
@@ -780,7 +780,7 @@ class Test_photoAccesshelper {
         }
     }
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_PhotoKeys(): Unit {
         let arr1: Array<PhotoKeys> = [
             PhotoKeys.Uri,
@@ -836,7 +836,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_DefaultChangeUri() {
         let arr1: Array<DefaultChangeUri> = [
             DefaultPhotoUri,
@@ -854,7 +854,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_enum_AlbumKeys() {
         let arr1: Array<AlbumKeys> = [
             AlbumKeys.Uri,
@@ -872,7 +872,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_PhotoType() {
         let arr1: Array<PhotoType> = [
             Image,
@@ -890,7 +890,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_PhotoSubtype() {
         let arr1: Array<PhotoSubtype> = [
             Default,
@@ -910,7 +910,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_DeliveryMode() {
         let arr1: Array<DeliveryMode> = [
             FastMode,
@@ -930,7 +930,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_PhotoViewMIMETypes() {
         let arr1: Array<PhotoViewMIMETypes> = [
             ImageType,
@@ -952,7 +952,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_DynamicRangeType() {
         let arr1: Array<DynamicRangeType> = [
             Sdr,
@@ -970,7 +970,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_ResourceType() {
         let arr1: Array<ResourceType> = [
             ImageResource,
@@ -988,7 +988,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_class_constructor() {
         try {
             let config = PhotoCreationConfig("jpg", PhotoType.Image, title: "test4", subtype: PhotoSubtype.Default)
@@ -1002,7 +1002,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_fetchResult_getAssets() {
         try {
             let predicates = DataSharePredicates()
@@ -1017,7 +1017,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_photoAccessHelper_getBurstAssets() {
         let myPhotoAccessHelper = getPhotoAccessHelper(getAbilityContext())
         try {
@@ -1031,7 +1031,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_photoAccessHelper_getAlbums() {
         let myPhotoAccessHelper = getPhotoAccessHelper(getAbilityContext())
         try {
@@ -1046,7 +1046,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_photoAccessHelper_OnOff() {
         let myPhotoAccessHelper = getPhotoAccessHelper(getAbilityContext())
         try {
@@ -1065,7 +1065,7 @@ class Test_photoAccesshelper {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_showAssetsCreationDialog_param_invalid() {
         let myPhotoAccessHelper = getPhotoAccessHelper(getAbilityContext())
         let callback3 = MyCallback<Array<String>>(

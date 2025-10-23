@@ -53,7 +53,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Packer_01(): Unit {
         let imagePacker = createImagePacker()
         let supportedFormats = imagePacker.supportedFormats
@@ -77,7 +77,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Packer_02(): Unit {
         let imagePacker = createImagePacker()
         unsafe {
@@ -97,7 +97,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageReceive(): Unit {
         var imageReceiver = createImageReceiver(Size(8, 8192), ImageFormat.Jpeg, 8)
         @Expect(imageReceiver.size.width, 8192)
@@ -119,7 +119,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageReceive_exception(): Unit {
         try {
             let imageReceiver = createImageReceiver(Size(8, 8192), ImageFormat.Jpeg, 8)
@@ -145,7 +145,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageReceive_OnOff(): Unit {
         try {
             let imageReceiver = createImageReceiver(Size(8, 8192), ImageFormat.Jpeg, 8)
@@ -159,7 +159,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageReceive_readImage(): Unit {
         try {
             let imageReceiver = createImageReceiver(Size(-1, -1), ImageFormat.Jpeg, 8)
@@ -169,7 +169,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_PixelMap_01(): Unit {
         @Expect(pixelMap.isEditable, true)
         @Expect(pixelMap.isStrideAlignment, false)
@@ -200,7 +200,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageSource_01(): Unit {
         @Expect(imageSource.getFrameCount(), 1)
         let imageInfo = imageSource.getImageInfo()
@@ -211,7 +211,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageSource_02(): Unit {
         try {
             let buf: Array<UInt8> = [1, 2, 3]
@@ -222,7 +222,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_PixelMap_02(): Unit {
         let pMap = imageSource.createPixelMap()
         let imageInfo = pMap.getImageInfo()
@@ -253,7 +253,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageSource_03(): Unit {
         let bufSource = createImageSource(hw, sourceOption)
         let maps = bufSource.createPixelMapList()
@@ -278,7 +278,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageSource_04(): Unit {
         try {
             let imgSource = createImageSource("data/storage/el1/base/EXIF.jpg", sourceOption)
@@ -289,7 +289,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_01(): Unit {
         try {
             createImageSource("")
@@ -299,7 +299,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_02(): Unit {
         try {
             createImageSource("", sourceOption)
@@ -309,7 +309,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_03(): Unit {
         try {
             createImageSource([])
@@ -319,7 +319,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_04(): Unit {
         try {
             createImageSource([], sourceOption)
@@ -329,7 +329,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_05(): Unit {
         try {
             createImageSource(0)
@@ -339,7 +339,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Exception_06(): Unit {
         try {
             createImageSource(0, sourceOption)
@@ -349,7 +349,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_PropertyKey(): Unit {
         @Expect(ImageWidth.toString(), "ImageWidth")
         @Expect(ImageLength.toString(), "ImageLength")
@@ -405,7 +405,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Enum_03(): Unit {
         @Expect(PixelMapFormat.Unknown, PixelMapFormat.Unknown)
         @Expect(Rgb565, Rgb565)
@@ -431,14 +431,14 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_PackingDynamicRange(): Unit {
         @Expect(PackingDynamicRange.Auto, PackingDynamicRange.Auto)
         @Expect(PackingDynamicRange.Sdr, PackingDynamicRange.Sdr)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_createPremultipliedPixelMap_error(): Unit {
         let color = Array<UInt8>(0, repeat: 0)
         let opts = InitializationOptions(Size(2, 2), editable: true, pixelFormat: Rgba8888,
@@ -452,7 +452,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_DecodingDynamicRange(): Unit {
         var opt = DecodingOptions(desiredDynamicRange: DecodingDynamicRange.Auto)
         opt = DecodingOptions(desiredDynamicRange: DecodingDynamicRange.Sdr)
@@ -460,7 +460,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_createImageSource_rawfd(): Unit {
         try {
             let resMgr = getAbilityContext().resourceManager
@@ -473,7 +473,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ComponentType() {
         let enumArray: Array<ComponentType> = [YuvY, YuvU, YuvV, Jpeg]
         let enumArray2: Array<ComponentType> = [YuvY, YuvU, YuvV, Jpeg]
@@ -491,7 +491,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_EnumPropertyKey() {
         let enumArray: Array<PropertyKey> = [
             ImageWidth,
@@ -607,7 +607,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_PixelMapFormat() {
         let enumArray: Array<PixelMapFormat> = [
             Unknown,
@@ -659,7 +659,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_AlphaType() {
         let enumArray: Array<AlphaType> = [Unknown, Opaque, Premul, UnPremul]
         let enumArray2: Array<AlphaType> = [Unknown, Opaque, Premul, UnPremul]
@@ -677,7 +677,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ScaleMode() {
         let enumArray: Array<ScaleMode> = [FitTargetSize, CenterCrop]
         let enumArray2: Array<ScaleMode> = [FitTargetSize, CenterCrop]
@@ -693,7 +693,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_ImageFormat() {
         let enumArray: Array<ImageFormat> = [Ycbcr422Sp, Jpeg]
         let enumArray2: Array<ImageFormat> = [Ycbcr422Sp, Jpeg]
@@ -709,7 +709,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_EnumDecodingDynamicRange() {
         let enumArray: Array<DecodingDynamicRange> = [DecodingDynamicRange.Auto, DecodingDynamicRange.Sdr, DecodingDynamicRange.Hdr]
         let enumArray2: Array<DecodingDynamicRange> = [DecodingDynamicRange.Auto, DecodingDynamicRange.Sdr, DecodingDynamicRange.Hdr]
@@ -726,7 +726,7 @@ class Test_image {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_EnumPackingDynamicRange() {
         let enumArray: Array<PackingDynamicRange> = [PackingDynamicRange.Auto, PackingDynamicRange.Sdr]
         let enumArray2: Array<PackingDynamicRange> = [PackingDynamicRange.Auto, PackingDynamicRange.Sdr]
