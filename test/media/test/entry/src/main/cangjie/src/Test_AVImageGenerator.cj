@@ -27,6 +27,25 @@ import kit.PerformanceAnalysisKit.Hilog
 class Test_AVImageGenerator {
     @TestCase
     @Tag[APILevel22, TestLevel0]
+    func testfs() {
+        let timeUs = 0
+        let queryOption = AVImageQueryOptions.AvImageQueryNextSync
+        let param = PixelMapParams(width: 300, height: 300)
+        let generator = createAVImageGenerator()
+        let rawFd = getAbilityContext().resourceManager.getRawFd("trailer.mp4")
+        generator.fdSrc = AVFileDescriptor(rawFd.fd, offset: rawFd.offset, length: rawFd.length)
+        let pic = generator.fetchFrameByTime(timeUs, queryOption, param)
+        let avFileDescriptor = generator.fdSrc
+        let fd = avFileDescriptor.fd
+        generator.release()
+        // fixing
+         let i = pic.getImageInfo()
+         Hilog.info(0, "CangjieTest", "h ${i.size.height} w ${i.size.width}")
+        @Expect(true)
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
     func test_AVImageQueryOptions() {
         let aVImageQueryOptionsArr: Array<AVImageQueryOptions> = [AvImageQueryNextSync, AvImageQueryPreviousSync, AvImageQueryClosestSync, AvImageQueryClosest]
         let aVImageQueryOptionsArr2: Array<AVImageQueryOptions> = [AvImageQueryNextSync, AvImageQueryPreviousSync, AvImageQueryClosestSync, AvImageQueryClosest]
