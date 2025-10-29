@@ -169,6 +169,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * photo mirroring function is supported through the isMirrorSupported API.
      *
      * @param { Bool } enabled - enable moving photo mirror if TRUE.
+     * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
+     * @throws { BusinessException } 7400103 - Session not config.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
