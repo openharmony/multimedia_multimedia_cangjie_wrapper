@@ -260,6 +260,36 @@ class Test_photoAccesshelper {
     }
 
     /**
+     * 测试 AlbumResult 正常功能
+     * 预置条件：图库中至少存在2个相册，每个相册中至少1张照片
+     */
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    @Skip
+    func testAlbumResult() {
+        try {
+            let predicates = DataSharePredicates()
+            let fetchOptions: FetchOptions = FetchOptions([], predicates)
+            let fetchResult: AlbumResult = photoAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric,
+                options: fetchOptions)
+            let count = fetchResult.getCount()
+            @Expect(count >= 2) // at least 2 albums
+            let firstAlbum = fetchResult.getFirstObject()
+            let photoCount = firstAlbum.count
+            @Expect(photoCount >= 1)
+            let nextAlbum = fetchResult.getNextObject()
+            @Expect(nextAlbum.imageCount >= 1)
+            let lastAlbum = fetchResult.getLastObject()
+            @Expect(lastAlbum.imageCount  >= 1)
+            let positionAlbum = fetchResult.getObjectByPosition(0)
+            @Expect(positionAlbum.imageCount  >= 1)
+            fetchResult.close()
+        } catch (e: Exception) {
+            @Expect(false)
+        }
+    }
+
+    /**
      * 测试 SYSTEM Album 正常功能
      * 预置条件5：存在收藏夹，并且其中包含照片；图库中存在视频和照片
      */
