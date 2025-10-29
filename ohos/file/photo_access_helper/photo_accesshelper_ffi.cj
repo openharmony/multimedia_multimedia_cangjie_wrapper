@@ -17,9 +17,9 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.ffi.*
-import std.collection.*
-import ohos.multimedia.image.*
+import ohos.ffi.{CArrString, CArrI64, RetDataI64, safeMalloc, CArrUI8}
+import std.collection.HashMap
+import ohos.multimedia.image.CSize
 import ohos.business_exception.BusinessException
 
 foreign {
