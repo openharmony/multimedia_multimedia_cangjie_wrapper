@@ -17,8 +17,8 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Defines the abstract interface of albums.

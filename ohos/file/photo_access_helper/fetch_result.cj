@@ -17,8 +17,8 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Provides APIs to manage the file retrieval result.

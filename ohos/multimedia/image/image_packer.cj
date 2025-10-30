@@ -17,8 +17,8 @@
 
 package ohos.multimedia.image
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RetDataCArrUI8, RetDataCArrString, RemoteDataLite, releaseFFIData}
 
 foreign {
     func FFiOHOSImagePackerConstructor(): Int64

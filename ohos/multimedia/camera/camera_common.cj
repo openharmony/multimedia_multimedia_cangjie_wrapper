@@ -17,14 +17,14 @@
 
 package ohos.multimedia.camera
 
-import ohos.ffi.*
-import ohos.hilog.*
-import ohos.business_exception.*
-import ohos.callback_invoke.*
-import std.collection.*
-import std.sync.*
+import ohos.hilog.HilogChannel
+import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
+import ohos.ffi.SUCCESS_CODE
+import ohos.callback_invoke.CallbackObject
+import std.collection.{HashMap, ArrayList}
+import std.sync.Mutex
 import std.deriving.Derive
-import ohos.labels.*
+import ohos.labels.APILevel
 
 const LOG_DOMAIN: UInt32 = 0xD002B00
 let CAMERA_LOG = HilogChannel(0, LOG_DOMAIN, "CJ-Camera")

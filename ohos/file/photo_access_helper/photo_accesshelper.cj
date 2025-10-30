@@ -17,17 +17,17 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.business_exception.*
-import ohos.callback_invoke.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, RetDataCArrString, SUCCESS_CODE,
+    cjArr2CArr, CArrI64, toArrayCString, Callback1Param}
+import ohos.business_exception.BusinessException
+import ohos.callback_invoke.{Callback1Argument, CallbackObject}
 import ohos.bundle.bundle_manager.{BundleManager, BundleInfo, BundleFlag}
-import ohos.hilog.*
-import std.sync.*
-import std.collection.*
-import ohos.app.ability.ui_ability.*
+import std.sync.Mutex
+import std.collection.ArrayList
+import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.resource_manager.ResourceManager
-import ohos.data.data_share_predicates.*
+import ohos.data.data_share_predicates.DataSharePredicates
 
 const INVALID_ARGUMENT_ERROR: Int32 = 13900020
 /**

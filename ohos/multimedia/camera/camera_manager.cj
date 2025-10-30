@@ -17,12 +17,12 @@
 
 package ohos.multimedia.camera
 
-import ohos.labels.*
-import ohos.business_exception.*
-import ohos.callback_invoke.*
-import ohos.ffi.*
-import std.collection.*
-import std.sync.*
+import ohos.labels.APILevel
+import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
+import ohos.callback_invoke.{Callback1Argument, CallbackObject}
+import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback1Param}
+import std.collection.ArrayList
+import std.sync.Mutex
 
 /**
  * Camera manager object.

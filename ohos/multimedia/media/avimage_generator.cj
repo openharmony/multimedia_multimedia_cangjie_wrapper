@@ -17,10 +17,10 @@
 
 package ohos.multimedia.media
 
-import ohos.ffi.*
-import ohos.business_exception.*
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
+import ohos.business_exception.BusinessException
 import ohos.multimedia.image.PixelMap
-import ohos.labels.*
+import ohos.labels.APILevel
 
 foreign {
     func FfiCreateAVImageGenerator(): Int64
