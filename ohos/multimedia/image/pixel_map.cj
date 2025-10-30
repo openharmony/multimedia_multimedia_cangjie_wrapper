@@ -109,7 +109,7 @@ foreign {
  * 2.Incorrect parameter types. 3.Parameter verification failed.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions): PixelMap {
@@ -132,7 +132,7 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class PixelMap <: RemoteDataLite {
@@ -151,7 +151,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop isEditable: Bool {
@@ -171,7 +171,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop isStrideAlignment: Bool {
@@ -191,7 +191,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func release(): Unit {
@@ -210,7 +210,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func readPixelsToBuffer(dst: Array<UInt8>): Unit {
@@ -229,7 +229,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func writeBufferToPixels(src: Array<UInt8>): Unit {
@@ -248,7 +248,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getImageInfo(): ImageInfo {
@@ -271,7 +271,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getBytesNumberPerRow(): UInt32 {
@@ -290,7 +290,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getPixelBytesNumber(): UInt32 {
@@ -309,7 +309,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getDensity(): Int32 {
@@ -328,7 +328,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func opacity(rate: Float32): Unit {
@@ -346,7 +346,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func scale(x: Float32, y: Float32): Unit {
@@ -364,7 +364,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func translate(x: Float32, y: Float32): Unit {
@@ -381,7 +381,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func rotate(angle: Float32): Unit {
@@ -399,7 +399,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func flip(horizontal: Bool, vertical: Bool): Unit {
@@ -416,7 +416,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func crop(region: Region): Unit {
@@ -433,7 +433,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func writePixels(area: PositionArea): Unit {
@@ -456,7 +456,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func readPixels(area: PositionArea): Unit {
@@ -479,7 +479,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func createAlphaPixelmap(): PixelMap {
@@ -500,7 +500,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func setColorSpace(colorSpace: ColorSpaceManager): Unit {
@@ -519,7 +519,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980115 - If the image parameter invalid.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getColorSpace(): ColorSpaceManager {
@@ -540,7 +540,7 @@ public class PixelMap <: RemoteDataLite {
      * @throws { BusinessException } 62980115 - Invalid image parameter.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit {

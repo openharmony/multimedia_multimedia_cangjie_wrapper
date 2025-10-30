@@ -29,7 +29,7 @@ import std.sync.Mutex
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Session {
@@ -40,7 +40,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func beginConfig(): Unit {
@@ -57,7 +57,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func commitConfig(): Unit {
@@ -75,7 +75,7 @@ public interface Session {
      * @returns { Bool } You can add the input into the session.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func canAddInput(cameraInput: CameraInput): Bool {
@@ -98,7 +98,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func addInput(cameraInput: CameraInput): Unit {
@@ -118,7 +118,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func removeInput(cameraInput: CameraInput): Unit {
@@ -139,7 +139,7 @@ public interface Session {
      * @returns { Bool } You can add the output into the session.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func canAddOutput(cameraOutput: CameraOutput): Bool {
@@ -162,7 +162,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func addOutput(cameraOutput: CameraOutput): Unit {
@@ -183,7 +183,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func removeOutput(cameraOutput: CameraOutput): Unit {
@@ -202,7 +202,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func start(): Unit {
@@ -218,7 +218,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func stop(): Unit {
@@ -234,7 +234,7 @@ public interface Session {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func release(): Unit {
@@ -263,7 +263,7 @@ func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & Focus & Zoom & ColorManagement {
@@ -296,7 +296,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_4_3): Bool {
@@ -313,7 +313,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func preconfig(
@@ -334,7 +334,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -348,7 +348,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -366,7 +366,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
@@ -380,7 +380,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
@@ -398,7 +398,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
@@ -412,7 +412,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
@@ -426,7 +426,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 401 - The parameter check failed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {
@@ -445,7 +445,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & Focus & Zoom & Stabilization & ColorManagement {
@@ -478,7 +478,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_16_9): Bool {
@@ -495,7 +495,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func preconfig(
@@ -518,7 +518,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -534,7 +534,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -554,7 +554,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
@@ -570,7 +570,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
@@ -590,7 +590,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
@@ -606,7 +606,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
@@ -621,7 +621,7 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

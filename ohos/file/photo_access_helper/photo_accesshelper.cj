@@ -38,7 +38,7 @@ const INVALID_ARGUMENT_ERROR: Int32 = 13900020
  * @throws { BusinessException } 13900020 - Invalid argument
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
@@ -56,7 +56,7 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAccessHelper <: RemoteDataLite {
@@ -82,7 +82,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func release(): Unit {
@@ -104,7 +104,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -129,7 +129,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - Internal system error
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -162,7 +162,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -197,7 +197,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 13900020 - Invalid argument
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func registerChange(uri: String, forChildUris: Bool, callback: Callback1Argument<ChangeData>): Unit {
@@ -238,7 +238,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 13900020 - Invalid argument
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func unRegisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
@@ -297,7 +297,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - Internal system error
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationConfigs: Array<PhotoCreationConfig>,
@@ -335,7 +335,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

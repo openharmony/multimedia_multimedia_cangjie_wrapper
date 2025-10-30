@@ -29,7 +29,7 @@ import ohos.labels.APILevel
  * @throws { BusinessException } 7400201 - Camera service fatal error.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public func getCameraManager(context: UIAbilityContext): CameraManager {

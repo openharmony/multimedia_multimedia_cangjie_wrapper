@@ -62,7 +62,7 @@ foreign {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImagePacker"
 ]
 public class ImagePacker <: RemoteDataLite {
@@ -82,7 +82,7 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public prop supportedFormats: Array<String> {
@@ -115,7 +115,7 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980252 - Failed to create surface.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToData(source: ImageSource, options: PackingOption): Array<UInt8> {
@@ -150,7 +150,7 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980252 - Failed to create surface.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToData(source: PixelMap, options: PackingOption): Array<UInt8> {
@@ -198,7 +198,7 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980252 - Failed to create surface.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): Unit {
@@ -229,7 +229,7 @@ public class ImagePacker <: RemoteDataLite {
      * @throws { BusinessException } 62980252 - Failed to create surface.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Unit {
@@ -244,7 +244,7 @@ public class ImagePacker <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImagePacker"
     ]
     public func release(): Unit {
@@ -259,7 +259,7 @@ public class ImagePacker <: RemoteDataLite {
  * @returns { ImagePacker } Returns the ImagePacker instance.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImagePacker"
 ]
 public func createImagePacker(): ImagePacker {

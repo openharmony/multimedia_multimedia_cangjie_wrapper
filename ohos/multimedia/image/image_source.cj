@@ -86,7 +86,7 @@ foreign {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(uri: String): ImageSource {
@@ -113,7 +113,7 @@ public func createImageSource(uri: String): ImageSource {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(uri: String, options: SourceOptions): ImageSource {
@@ -139,7 +139,7 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(fd: Int32): ImageSource {
@@ -160,7 +160,7 @@ public func createImageSource(fd: Int32): ImageSource {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
@@ -180,7 +180,7 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(buf: Array<UInt8>): ImageSource {
@@ -206,7 +206,7 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageSource {
@@ -234,7 +234,7 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOptions = SourceOptions(0)): ImageSource {
@@ -252,7 +252,7 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class ImageSource <: RemoteDataLite {
@@ -263,7 +263,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public prop supportedFormats: Array<String> {
@@ -311,7 +311,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980137 - Invalid media operation.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getFrameCount(): UInt32 {
@@ -329,7 +329,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getImageInfo(index!: UInt32 = 0): ImageInfo {
@@ -365,7 +365,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980135 - The EXIF value is invalid.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = ImagePropertyOptions()): String {
@@ -397,7 +397,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980146 - The EXIF data failed to be written to the file.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func modifyImageProperty(key: PropertyKey, value: String): Unit {
@@ -422,7 +422,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func updateData(buf: Array<UInt8>, isFinished: Bool, offset: UInt32, length: UInt32): Unit {
@@ -443,7 +443,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
@@ -478,7 +478,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980174 - The DMA memory data is abnormal.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap> {
@@ -511,7 +511,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980149 - Invalid MIME type for the image source.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func getDelayTimeList(): Array<Int32> {
@@ -532,7 +532,7 @@ public class ImageSource <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public func release(): Unit {

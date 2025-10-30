@@ -27,7 +27,7 @@ import ohos.business_exception.BusinessException
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum PixelMapFormat {
@@ -36,7 +36,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Unknown
@@ -48,7 +48,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Rgb565
@@ -60,7 +60,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Rgba8888
@@ -72,7 +72,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Bgra8888
@@ -83,7 +83,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Rgb888
@@ -94,7 +94,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Alpha8
@@ -106,7 +106,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     RgbaF16
@@ -117,7 +117,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Nv21
@@ -128,7 +128,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Nv12
@@ -139,7 +139,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Rgba1010102
@@ -150,7 +150,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YcbcrP010
@@ -161,7 +161,7 @@ public enum PixelMapFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YcrcbP010
@@ -210,7 +210,7 @@ public enum PixelMapFormat {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum AlphaType {
@@ -219,7 +219,7 @@ public enum AlphaType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Unknown
@@ -229,7 +229,7 @@ public enum AlphaType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Opaque
@@ -239,7 +239,7 @@ public enum AlphaType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Premul
@@ -250,7 +250,7 @@ public enum AlphaType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     UnPremul
@@ -283,7 +283,7 @@ public enum AlphaType {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum ScaleMode {
@@ -292,7 +292,7 @@ public enum ScaleMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FitTargetSize
@@ -303,7 +303,7 @@ public enum ScaleMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CenterCrop
@@ -324,7 +324,7 @@ public enum ScaleMode {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum ImageFormat {
@@ -333,7 +333,7 @@ public enum ImageFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Ycbcr422Sp
@@ -343,7 +343,7 @@ public enum ImageFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Jpeg
@@ -374,7 +374,7 @@ public enum ImageFormat {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public enum ComponentType {
@@ -383,7 +383,7 @@ public enum ComponentType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     YuvY
@@ -393,7 +393,7 @@ public enum ComponentType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     YuvU
@@ -403,7 +403,7 @@ public enum ComponentType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     YuvV
@@ -413,7 +413,7 @@ public enum ComponentType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     Jpeg
@@ -446,7 +446,7 @@ public enum ComponentType {
  */
 @Derive[Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum PropertyKey <: ToString {
@@ -455,7 +455,7 @@ public enum PropertyKey <: ToString {
      *
      */
     | @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ImageWidth
@@ -465,7 +465,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ImageLength
@@ -475,7 +475,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     BitsPerSample
@@ -485,7 +485,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ImageDescription
@@ -495,7 +495,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Make
@@ -505,7 +505,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Model
@@ -515,7 +515,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Orientation
@@ -525,7 +525,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DateTime
@@ -535,7 +535,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PhotoMode
@@ -545,7 +545,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExposureTime
@@ -555,7 +555,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FNumber
@@ -565,7 +565,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsLatitudeRef
@@ -575,7 +575,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsLatitude
@@ -585,7 +585,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsLongitudeRef
@@ -595,7 +595,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsLongitude
@@ -605,7 +605,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsTimeStamp
@@ -615,7 +615,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDateStamp
@@ -625,7 +625,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsoSpeedRatings
@@ -635,7 +635,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SensitivityType
@@ -645,7 +645,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     StandardOutputSensitivity
@@ -655,7 +655,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     RecommendedExposureIndex
@@ -665,7 +665,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsoSpeed
@@ -675,7 +675,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DateTimeOriginal
@@ -685,7 +685,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ApertureValue
@@ -695,7 +695,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExposureBiasValue
@@ -705,7 +705,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     MeteringMode
@@ -715,7 +715,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     LightSource
@@ -725,7 +725,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Flash
@@ -735,7 +735,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalLength
@@ -745,7 +745,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneFoodConf
@@ -755,7 +755,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneStageConf
@@ -765,7 +765,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneBlueSkyConf
@@ -775,7 +775,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneGreenPlantConf
@@ -785,7 +785,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneBeachConf
@@ -795,7 +795,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneSnowConf
@@ -805,7 +805,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneSunsetConf
@@ -815,7 +815,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneFlowersConf
@@ -825,7 +825,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneNightConf
@@ -835,7 +835,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneTextConf
@@ -845,7 +845,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceCount
@@ -855,7 +855,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CaptureMode
@@ -865,7 +865,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     RollAngle
@@ -875,7 +875,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PitchAngle
@@ -885,7 +885,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PhysicalAperture
@@ -895,7 +895,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocusMode
@@ -905,7 +905,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     UserComment
@@ -915,7 +915,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PixelXDimension
@@ -925,7 +925,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PixelYDimension
@@ -935,7 +935,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneType
@@ -945,7 +945,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     WhiteBalance
@@ -955,7 +955,7 @@ public enum PropertyKey <: ToString {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalLengthIn35mmFilm
@@ -967,7 +967,7 @@ public enum PropertyKey <: ToString {
      * @throws IllegalArgumentException - The type is not supported yet.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func toString(): String {
@@ -1035,7 +1035,7 @@ public enum PropertyKey <: ToString {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum DecodingDynamicRange {
@@ -1044,7 +1044,7 @@ public enum DecodingDynamicRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Auto
@@ -1054,7 +1054,7 @@ public enum DecodingDynamicRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Sdr
@@ -1064,7 +1064,7 @@ public enum DecodingDynamicRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Hdr
@@ -1089,7 +1089,7 @@ public enum DecodingDynamicRange {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum PackingDynamicRange {
@@ -1098,7 +1098,7 @@ public enum PackingDynamicRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Auto
@@ -1108,7 +1108,7 @@ public enum PackingDynamicRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Sdr

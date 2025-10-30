@@ -29,7 +29,7 @@ import std.sync.Mutex
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraInput <: RemoteDataLite {
@@ -53,7 +53,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func open(): Unit {
@@ -74,7 +74,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func open(isSecureEnabled: Bool): UInt64 {
@@ -92,7 +92,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func close(): Unit {
@@ -116,7 +116,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
@@ -156,7 +156,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
@@ -195,7 +195,7 @@ public class CameraInput <: RemoteDataLite {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice): Unit {

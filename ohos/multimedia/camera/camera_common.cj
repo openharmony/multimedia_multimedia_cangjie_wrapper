@@ -79,7 +79,7 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class Rect {
@@ -88,7 +88,7 @@ public class Rect {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var topLeftX: Float64
@@ -97,7 +97,7 @@ public class Rect {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var topLeftY: Float64
@@ -106,7 +106,7 @@ public class Rect {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var width: Float64
@@ -115,7 +115,7 @@ public class Rect {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var height: Float64
@@ -134,7 +134,7 @@ public class Rect {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum TorchMode {
@@ -143,7 +143,7 @@ public enum TorchMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Off
@@ -153,7 +153,7 @@ public enum TorchMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     On
@@ -163,7 +163,7 @@ public enum TorchMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Auto
@@ -194,7 +194,7 @@ public enum TorchMode {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum ImageRotation {
@@ -203,7 +203,7 @@ public enum ImageRotation {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Rotation0
@@ -213,7 +213,7 @@ public enum ImageRotation {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Rotation90
@@ -223,7 +223,7 @@ public enum ImageRotation {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Rotation180
@@ -233,7 +233,7 @@ public enum ImageRotation {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Rotation270
@@ -266,7 +266,7 @@ public enum ImageRotation {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum CameraStatus {
@@ -275,7 +275,7 @@ public enum CameraStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraStatusAppear
@@ -285,7 +285,7 @@ public enum CameraStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraStatusDisappear
@@ -295,7 +295,7 @@ public enum CameraStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraStatusAvailable
@@ -305,7 +305,7 @@ public enum CameraStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraStatusUnavailable
@@ -327,7 +327,7 @@ public enum CameraStatus {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class TorchStatusInfo {
@@ -336,7 +336,7 @@ public class TorchStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let isTorchAvailable: Bool
@@ -345,7 +345,7 @@ public class TorchStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let isTorchActive: Bool
@@ -354,7 +354,7 @@ public class TorchStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let torchLevel: Float64
@@ -371,7 +371,7 @@ public class TorchStatusInfo {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class FrameRateRange {
@@ -380,7 +380,7 @@ public class FrameRateRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let min: Int32
@@ -389,7 +389,7 @@ public class FrameRateRange {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let max: Int32
@@ -405,7 +405,7 @@ public class FrameRateRange {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class Size {
@@ -414,7 +414,7 @@ public class Size {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var width: UInt32
@@ -423,7 +423,7 @@ public class Size {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var height: UInt32
@@ -441,7 +441,7 @@ class ProfileImpl {}
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public open class Profile {
@@ -450,7 +450,7 @@ public open class Profile {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let format: CameraFormat
@@ -459,7 +459,7 @@ public open class Profile {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let size: Size
@@ -477,7 +477,7 @@ public open class Profile {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class VideoProfile <: Profile {
@@ -486,7 +486,7 @@ public class VideoProfile <: Profile {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let frameRateRange: FrameRateRange
@@ -503,7 +503,7 @@ public class VideoProfile <: Profile {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum MetadataObjectType {
@@ -512,7 +512,7 @@ public enum MetadataObjectType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FaceDetection
@@ -538,7 +538,7 @@ public enum MetadataObjectType {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraOutputCapability {
@@ -547,7 +547,7 @@ public class CameraOutputCapability {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let previewProfiles: Array<Profile>
@@ -556,7 +556,7 @@ public class CameraOutputCapability {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let photoProfiles: Array<Profile>
@@ -565,7 +565,7 @@ public class CameraOutputCapability {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let videoProfiles: Array<VideoProfile>
@@ -574,7 +574,7 @@ public class CameraOutputCapability {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let supportedMetadataObjectTypes: Array<MetadataObjectType>
@@ -594,7 +594,7 @@ public class CameraOutputCapability {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FoldStatus {
@@ -603,7 +603,7 @@ public enum FoldStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     NonFoldable
@@ -613,7 +613,7 @@ public enum FoldStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Expanded
@@ -623,7 +623,7 @@ public enum FoldStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Folded
@@ -644,7 +644,7 @@ public enum FoldStatus {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class FoldStatusInfo {
@@ -653,7 +653,7 @@ public class FoldStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let supportedCameras: Array<CameraDevice>
@@ -662,7 +662,7 @@ public class FoldStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let foldStatus: FoldStatus
@@ -682,7 +682,7 @@ public class FoldStatusInfo {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum ConnectionType {
@@ -691,7 +691,7 @@ public enum ConnectionType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraConnectionBuiltIn
@@ -701,7 +701,7 @@ public enum ConnectionType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraConnectionUsbPlugin
@@ -711,7 +711,7 @@ public enum ConnectionType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraConnectionRemote
@@ -742,7 +742,7 @@ public enum ConnectionType {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum CameraFormat {
@@ -751,7 +751,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatYcbcrP010
@@ -761,7 +761,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatYcrcbP010
@@ -771,7 +771,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatHeic
@@ -781,7 +781,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatJpeg
@@ -791,7 +791,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatYuv420Sp
@@ -801,7 +801,7 @@ public enum CameraFormat {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraFormatRgba8888
@@ -837,7 +837,7 @@ public enum CameraFormat {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraDevice {
@@ -846,7 +846,7 @@ public class CameraDevice {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraId: String
@@ -855,7 +855,7 @@ public class CameraDevice {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraPosition: CameraPosition
@@ -864,7 +864,7 @@ public class CameraDevice {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraType: CameraType
@@ -873,7 +873,7 @@ public class CameraDevice {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let connectionType: ConnectionType
@@ -882,7 +882,7 @@ public class CameraDevice {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraOrientation: UInt32
@@ -902,7 +902,7 @@ public class CameraDevice {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CameraStatusInfo {
@@ -911,7 +911,7 @@ public class CameraStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var camera: CameraDevice
@@ -920,7 +920,7 @@ public class CameraStatusInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var status: CameraStatus
@@ -939,7 +939,7 @@ public class CameraStatusInfo {
  */
 @Derive[Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum CameraEvents {
@@ -947,7 +947,7 @@ public enum CameraEvents {
      * camera error event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraError
@@ -956,7 +956,7 @@ public enum CameraEvents {
      * camera status event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraStatus
@@ -965,7 +965,7 @@ public enum CameraEvents {
      * fold status change event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FoldStatusChange
@@ -974,7 +974,7 @@ public enum CameraEvents {
      * torch status change event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     TorchStatusChange
@@ -983,7 +983,7 @@ public enum CameraEvents {
      * frame start event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FrameStart
@@ -992,7 +992,7 @@ public enum CameraEvents {
      * frame end event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FrameEnd
@@ -1001,7 +1001,7 @@ public enum CameraEvents {
      * capture start withInfo event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CaptureStartWithInfo
@@ -1010,7 +1010,7 @@ public enum CameraEvents {
      * frame shutter event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FrameShutter
@@ -1019,7 +1019,7 @@ public enum CameraEvents {
      * capture end event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CaptureEnd
@@ -1028,7 +1028,7 @@ public enum CameraEvents {
      * frame shutter end event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FrameShutterEnd
@@ -1037,7 +1037,7 @@ public enum CameraEvents {
      * capture ready event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CaptureReady
@@ -1046,7 +1046,7 @@ public enum CameraEvents {
      * estimated capture duration event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     EstimatedCaptureDuration
@@ -1055,7 +1055,7 @@ public enum CameraEvents {
      * metadata objects available event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     MetadataObjectsAvailable
@@ -1064,7 +1064,7 @@ public enum CameraEvents {
      * focus state change event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateChange
@@ -1073,7 +1073,7 @@ public enum CameraEvents {
      * smooth zoom info available event.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     SmoothZoomInfoAvailable
@@ -1112,7 +1112,7 @@ public enum CameraEvents {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum CameraPosition {
@@ -1121,7 +1121,7 @@ public enum CameraPosition {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraPositionUnspecified
@@ -1131,7 +1131,7 @@ public enum CameraPosition {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraPositionBack
@@ -1141,7 +1141,7 @@ public enum CameraPosition {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraPositionFront
@@ -1172,7 +1172,7 @@ public enum CameraPosition {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum CameraType {
@@ -1181,7 +1181,7 @@ public enum CameraType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraTypeDefault
@@ -1191,7 +1191,7 @@ public enum CameraType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraTypeWideAngle
@@ -1201,7 +1201,7 @@ public enum CameraType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraTypeUltraWide
@@ -1211,7 +1211,7 @@ public enum CameraType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraTypeTelephoto
@@ -1221,7 +1221,7 @@ public enum CameraType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraTypeTrueDepth
@@ -1256,7 +1256,7 @@ public enum CameraType {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum SceneMode {
@@ -1265,7 +1265,7 @@ public enum SceneMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     NormalPhoto
@@ -1275,7 +1275,7 @@ public enum SceneMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     NormalVideo
@@ -1285,7 +1285,7 @@ public enum SceneMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     SecurePhoto
@@ -1316,7 +1316,7 @@ public enum SceneMode {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum QualityLevel {
@@ -1325,7 +1325,7 @@ public enum QualityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     QualityLevelHigh
@@ -1335,7 +1335,7 @@ public enum QualityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     QualityLevelMedium
@@ -1345,7 +1345,7 @@ public enum QualityLevel {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     QualityLevelLow
@@ -1366,7 +1366,7 @@ public enum QualityLevel {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class Location {
@@ -1375,7 +1375,7 @@ public class Location {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var latitude: Float64
@@ -1384,7 +1384,7 @@ public class Location {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var longitude: Float64
@@ -1393,7 +1393,7 @@ public class Location {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var altitude: Float64
@@ -1402,7 +1402,7 @@ public class Location {
      * Location constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public init(latitude: Float64, longitude: Float64, altitude: Float64) {
@@ -1421,7 +1421,7 @@ public class Location {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class PhotoCaptureSetting {
@@ -1430,7 +1430,7 @@ public class PhotoCaptureSetting {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var quality: QualityLevel
@@ -1439,7 +1439,7 @@ public class PhotoCaptureSetting {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var rotation: ImageRotation
@@ -1448,7 +1448,7 @@ public class PhotoCaptureSetting {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var location: ?Location
@@ -1459,7 +1459,7 @@ public class PhotoCaptureSetting {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var mirror: Bool
@@ -1468,7 +1468,7 @@ public class PhotoCaptureSetting {
      * PhotoCaptureSetting constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public init(
@@ -1490,7 +1490,7 @@ public class PhotoCaptureSetting {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum VideoCodecType {
@@ -1499,7 +1499,7 @@ public enum VideoCodecType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Avc
@@ -1509,7 +1509,7 @@ public enum VideoCodecType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Hevc
@@ -1529,7 +1529,7 @@ public enum VideoCodecType {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CaptureStartInfo {
@@ -1538,7 +1538,7 @@ public class CaptureStartInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var captureId: Int32
@@ -1547,7 +1547,7 @@ public class CaptureStartInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var time: Int64
@@ -1563,7 +1563,7 @@ public class CaptureStartInfo {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class FrameShutterInfo {
@@ -1572,7 +1572,7 @@ public class FrameShutterInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var captureId: Int32
@@ -1581,7 +1581,7 @@ public class FrameShutterInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var timestamp: Int64
@@ -1597,7 +1597,7 @@ public class FrameShutterInfo {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class CaptureEndInfo {
@@ -1606,7 +1606,7 @@ public class CaptureEndInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var captureId: Int32
@@ -1615,7 +1615,7 @@ public class CaptureEndInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var frameCount: Int32
@@ -1631,7 +1631,7 @@ public class CaptureEndInfo {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class FrameShutterEndInfo {
@@ -1640,7 +1640,7 @@ public class FrameShutterEndInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var captureId: Int32
@@ -1657,7 +1657,7 @@ public class FrameShutterEndInfo {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum PreconfigType {
@@ -1666,7 +1666,7 @@ public enum PreconfigType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Preconfig720p
@@ -1676,7 +1676,7 @@ public enum PreconfigType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Preconfig1080p
@@ -1686,7 +1686,7 @@ public enum PreconfigType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Preconfig4k
@@ -1696,7 +1696,7 @@ public enum PreconfigType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     PreconfigHighQuality
@@ -1731,7 +1731,7 @@ public enum PreconfigType {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum PreconfigRatio {
@@ -1740,7 +1740,7 @@ public enum PreconfigRatio {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     PreconfigRatio_1_1
@@ -1750,7 +1750,7 @@ public enum PreconfigRatio {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     PreconfigRatio_4_3
@@ -1760,7 +1760,7 @@ public enum PreconfigRatio {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     PreconfigRatio_16_9
