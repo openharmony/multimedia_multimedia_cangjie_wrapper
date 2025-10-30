@@ -17,10 +17,10 @@
 
 package ohos.multimedia.image
 
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.business_exception.*
-import ohos.callback_invoke.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback0Param}
+import ohos.business_exception.BusinessException
+import ohos.callback_invoke.Callback0Argument
 
 foreign {
     func FfiOHOSReceiverGetSize(id: Int64, retVal: CPointer<CSize>): UInt32

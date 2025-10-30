@@ -17,9 +17,9 @@
 
 package ohos.multimedia.image
 
-import ohos.graphics.color_space_manager.*
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.graphics.color_space_manager.ColorSpaceManager
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
 import ohos.business_exception.BusinessException
 
 const BASE_MEDIA_ERR: Int32 = 62980096

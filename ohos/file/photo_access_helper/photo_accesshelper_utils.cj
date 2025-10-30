@@ -18,12 +18,12 @@
 package ohos.file.photo_access_helper
 
 import ohos.business_exception.{ UNIVERSAL_ERROR_MAP, BusinessException }
-import ohos.data.data_share_predicates.*
-import ohos.ffi.*
-import ohos.hilog.*
-import ohos.labels.*
+import ohos.data.data_share_predicates.DataSharePredicates
+import ohos.ffi.{SUCCESS_CODE, toArrayCString}
+import ohos.hilog.HilogChannel
+import ohos.labels.APILevel
 
-import std.collection.*
+import std.collection.HashMap
 import std.deriving.Derive
 
 let PHOTO_ACCESS_HELPER_LOG = HilogChannel(0, 0xD002B71, "CJ-Photo_AccessHelper")
