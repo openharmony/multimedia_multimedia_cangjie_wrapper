@@ -17,7 +17,7 @@
 
 package ohos.multimedia.camera
 
-import ohos.ffi.*
+import ohos.ffi.{cArr2cjArr, CArrI32}
 
 foreign {
     // CameraManager

@@ -17,9 +17,9 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.multimedia.image.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
+import ohos.multimedia.image.{Size, PixelMap}
 import ohos.business_exception.BusinessException
 
 /**

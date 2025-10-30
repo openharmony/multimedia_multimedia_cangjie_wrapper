@@ -18,8 +18,8 @@
 package ohos.multimedia.camera
 
 import ohos.graphics.color_space_manager.ColorSpace
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{CArrFloat32, CArrI32, RemoteDataLite, cArr2cjArr}
 import ohos.business_exception.BusinessException
 
 import std.deriving.Derive
