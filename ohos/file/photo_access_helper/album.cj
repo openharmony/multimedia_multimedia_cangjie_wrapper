@@ -25,7 +25,7 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class AbsAlbum <: RemoteDataLite{
@@ -37,7 +37,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumType: AlbumType {
@@ -54,7 +54,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumSubtype: AlbumSubtype {
@@ -71,7 +71,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public mut prop albumName: String {
@@ -97,7 +97,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop albumUri: String {
@@ -116,7 +116,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop count: Int32 {
@@ -130,7 +130,7 @@ public open class AbsAlbum <: RemoteDataLite{
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop coverUri: String {
@@ -156,7 +156,7 @@ public open class AbsAlbum <: RemoteDataLite{
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -181,7 +181,7 @@ class AbsAlbumImpl {}
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class Album <: AbsAlbum {
@@ -198,7 +198,7 @@ public class Album <: AbsAlbum {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop imageCount: Int32 {
@@ -212,7 +212,7 @@ public class Album <: AbsAlbum {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]  
     public prop videoCount: Int32 {
@@ -231,7 +231,7 @@ public class Album <: AbsAlbum {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

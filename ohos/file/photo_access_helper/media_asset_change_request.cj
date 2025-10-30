@@ -27,7 +27,7 @@ import ohos.business_exception.BusinessException
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public interface MediaChangeRequest {}
@@ -37,7 +37,7 @@ public interface MediaChangeRequest {}
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
@@ -59,7 +59,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public init(asset: PhotoAsset) {
@@ -84,7 +84,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createImageAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
@@ -111,7 +111,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
@@ -139,7 +139,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public static func createAssetRequest(context: UIAbilityContext, photoType: PhotoType, extension: String,
@@ -171,7 +171,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -195,7 +195,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -215,7 +215,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAsset(): PhotoAsset {
@@ -238,7 +238,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func setTitle(title: String): Unit {
@@ -259,7 +259,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -282,7 +282,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addResource(resourceType: ResourceType, fileUri: String): Unit {
@@ -305,7 +305,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addResource(resourceType: ResourceType, data: Array<Byte>): Unit {
@@ -322,7 +322,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func saveCameraPhoto(): Unit {
@@ -337,7 +337,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func discardCameraPhoto(): Unit {

@@ -27,7 +27,7 @@ import ohos.business_exception.BusinessException
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoAsset <: RemoteDataLite {
@@ -36,7 +36,7 @@ public class PhotoAsset <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop uri: String {
@@ -55,7 +55,7 @@ public class PhotoAsset <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop photoType: PhotoType {
@@ -72,7 +72,7 @@ public class PhotoAsset <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public prop displayName: String {
@@ -105,7 +105,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func get(member: String): MemberType {
@@ -133,7 +133,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 14000014 - The provided member must be a property name of PhotoKey.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func set(member: String, value: String): Unit {
@@ -160,7 +160,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -182,7 +182,7 @@ public class PhotoAsset <: RemoteDataLite {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

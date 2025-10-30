@@ -29,7 +29,7 @@ import std.sync.Mutex
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class PhotoOutput <: RemoteDataLite & CameraOutput {
@@ -62,7 +62,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func release(): Unit {
@@ -77,7 +77,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func capture(): Unit {
@@ -94,7 +94,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func capture(setting: PhotoCaptureSetting): Unit {
@@ -115,7 +115,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isMovingPhotoSupported(): Bool {
@@ -135,7 +135,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.MICROPHONE",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
@@ -151,7 +151,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func isMirrorSupported(): Bool {
@@ -174,7 +174,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func enableMirror(enabled: Bool): Unit {
@@ -188,7 +188,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @returns { Array<VideoCodecType> } An array of supported video codec types for moving photo.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getSupportedMovingPhotoVideoCodecTypes(): Array<VideoCodecType> {
@@ -202,7 +202,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func setMovingPhotoVideoCodecType(codecType: VideoCodecType): Unit {
@@ -217,7 +217,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getActiveProfile(): Profile {
@@ -236,7 +236,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func getPhotoRotation(deviceDegree: Int32): ImageRotation {
@@ -259,7 +259,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
@@ -292,7 +292,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
@@ -329,7 +329,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
@@ -367,7 +367,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
@@ -404,7 +404,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -469,7 +469,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
@@ -502,7 +502,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
@@ -523,7 +523,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
@@ -543,7 +543,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
@@ -564,7 +564,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
@@ -584,7 +584,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
@@ -607,7 +607,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
@@ -627,7 +627,7 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public func off(eventType: CameraEvents): Unit {

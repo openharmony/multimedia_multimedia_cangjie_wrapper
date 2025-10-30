@@ -86,7 +86,7 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
  * the offset and length are correct.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.Core"
 ]
 public class AVFileDescriptor {
@@ -95,7 +95,7 @@ public class AVFileDescriptor {
      * is responsible to close the file descriptor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var fd: Int32
@@ -105,7 +105,7 @@ public class AVFileDescriptor {
      * the offset is zero.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var offset: Int64
@@ -115,7 +115,7 @@ public class AVFileDescriptor {
      * rest of bytes in the file from the offset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public var length: Int64
@@ -124,7 +124,7 @@ public class AVFileDescriptor {
      * AVFileDescriptor constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public init(
@@ -142,7 +142,7 @@ public class AVFileDescriptor {
  * Defines the format parameters of the video thumbnail to be obtained.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public class PixelMapParams {
@@ -151,7 +151,7 @@ public class PixelMapParams {
      * video. Otherwise, the returned thumbnail will not be scaled.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public var width: Int32
@@ -161,7 +161,7 @@ public class PixelMapParams {
      * video. Otherwise, the returned thumbnail will not be scaled.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public var height: Int32
@@ -170,7 +170,7 @@ public class PixelMapParams {
      * PixelMapParams constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public init(width!: Int32 = -1, height!: Int32 = -1) {
@@ -184,7 +184,7 @@ public class PixelMapParams {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public enum AVImageQueryOptions {
@@ -192,7 +192,7 @@ public enum AVImageQueryOptions {
      * The key frame at or next to the specified time is selected.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryNextSync
@@ -202,7 +202,7 @@ public enum AVImageQueryOptions {
      * The key frame at or prior to the specified time is selected.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryPreviousSync
@@ -212,7 +212,7 @@ public enum AVImageQueryOptions {
      * The key frame closest to the specified time is selected.
      */    
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryClosestSync
@@ -222,7 +222,7 @@ public enum AVImageQueryOptions {
      * The frame (not necessarily a key frame) closest to the specified time is selected.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     AvImageQueryClosest

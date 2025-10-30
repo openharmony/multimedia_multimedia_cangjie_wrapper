@@ -41,7 +41,7 @@ foreign {
  * @throws { BusinessException } 5400101 - No memory.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public func createAVImageGenerator(): AVImageGenerator {
@@ -59,7 +59,7 @@ public func createAVImageGenerator(): AVImageGenerator {
  * you must use createAVImageGenerator to create an AVImageGenerator instance.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
 ]
 public class AVImageGenerator <: RemoteDataLite {
@@ -77,7 +77,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @return { AVFileDescriptor } Returns the Media file descriptor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public mut prop fdSrc: AVFileDescriptor {
@@ -109,7 +109,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @throws { BusinessException } 5400101 - No memory.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param: PixelMapParams): PixelMap {
@@ -127,7 +127,7 @@ public class AVImageGenerator <: RemoteDataLite {
      * @throws { BusinessException } 5400102 - Operation not allowed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public func release(): Unit {

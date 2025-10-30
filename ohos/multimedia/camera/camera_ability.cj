@@ -92,7 +92,7 @@ struct CPoint {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class Point {
@@ -101,7 +101,7 @@ public class Point {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var x: Float64
@@ -111,7 +111,7 @@ public class Point {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var y: Float64
@@ -120,7 +120,7 @@ public class Point {
      * Point constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public init(x: Float64, y: Float64) {
@@ -144,7 +144,7 @@ public class Point {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum ExposureMode {
@@ -153,7 +153,7 @@ public enum ExposureMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeLocked
@@ -163,7 +163,7 @@ public enum ExposureMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeAuto
@@ -173,7 +173,7 @@ public enum ExposureMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeContinuousAuto
@@ -205,7 +205,7 @@ public enum ExposureMode {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface AutoExposureQuery {
@@ -217,7 +217,7 @@ public interface AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isExposureModeSupported(aeMode: ExposureMode): Bool {
@@ -238,7 +238,7 @@ public interface AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureBiasRange(): Array<Float64> {
@@ -258,7 +258,7 @@ public interface AutoExposureQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface AutoExposure <: AutoExposureQuery {
@@ -269,7 +269,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureMode(): ExposureMode {
@@ -289,7 +289,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setExposureMode(aeMode: ExposureMode): Unit {
@@ -308,7 +308,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getMeteringPoint(): Point {
@@ -327,7 +327,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setMeteringPoint(point: Point): Unit {
@@ -347,7 +347,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setExposureBias(exposureBias: Float64): Unit {
@@ -366,7 +366,7 @@ public interface AutoExposure <: AutoExposureQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getExposureValue(): Float64 {
@@ -384,7 +384,7 @@ public interface AutoExposure <: AutoExposureQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ColorManagementQuery {
@@ -395,7 +395,7 @@ public interface ColorManagementQuery {
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getSupportedColorSpaces(): Array<ColorSpace> {
@@ -424,7 +424,7 @@ public interface ColorManagementQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ColorManagement <: ColorManagementQuery {
@@ -438,7 +438,7 @@ public interface ColorManagement <: ColorManagementQuery {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setColorSpace(colorSpace: ColorSpace): Unit {
@@ -457,7 +457,7 @@ public interface ColorManagement <: ColorManagementQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getActiveColorSpace(): ColorSpace {
@@ -477,7 +477,7 @@ public interface ColorManagement <: ColorManagementQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FlashMode {
@@ -486,7 +486,7 @@ public enum FlashMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeClose
@@ -496,7 +496,7 @@ public enum FlashMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeOpen
@@ -506,7 +506,7 @@ public enum FlashMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeAuto
@@ -516,7 +516,7 @@ public enum FlashMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FlashModeAlwaysOpen
@@ -550,7 +550,7 @@ public enum FlashMode {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface FlashQuery {
@@ -561,7 +561,7 @@ public interface FlashQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func hasFlash(): Bool {
@@ -582,7 +582,7 @@ public interface FlashQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isFlashModeSupported(flashMode: FlashMode): Bool {
@@ -602,7 +602,7 @@ public interface FlashQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Flash <: FlashQuery {
@@ -613,7 +613,7 @@ public interface Flash <: FlashQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFlashMode(flashMode: FlashMode): Unit {
@@ -631,7 +631,7 @@ public interface Flash <: FlashQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFlashMode(): FlashMode {
@@ -651,7 +651,7 @@ public interface Flash <: FlashQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FocusState {
@@ -660,7 +660,7 @@ public enum FocusState {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateScan
@@ -670,7 +670,7 @@ public enum FocusState {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateFocused
@@ -680,7 +680,7 @@ public enum FocusState {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusStateUnfocused
@@ -713,7 +713,7 @@ public enum FocusState {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum FocusMode {
@@ -722,7 +722,7 @@ public enum FocusMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeManual
@@ -732,7 +732,7 @@ public enum FocusMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeContinuousAuto
@@ -742,7 +742,7 @@ public enum FocusMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeAuto
@@ -752,7 +752,7 @@ public enum FocusMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FocusModeLocked
@@ -786,7 +786,7 @@ public enum FocusMode {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface FocusQuery {
@@ -798,7 +798,7 @@ public interface FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isFocusModeSupported(afMode: FocusMode): Bool {
@@ -817,7 +817,7 @@ public interface FocusQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Focus <: FocusQuery {
@@ -828,7 +828,7 @@ public interface Focus <: FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFocusMode(afMode: FocusMode): Unit {
@@ -844,7 +844,7 @@ public interface Focus <: FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocusMode(): FocusMode {
@@ -863,7 +863,7 @@ public interface Focus <: FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setFocusPoint(point: Point): Unit {
@@ -882,7 +882,7 @@ public interface Focus <: FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocusPoint(): Point {
@@ -901,7 +901,7 @@ public interface Focus <: FocusQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getFocalLength(): Float64 {
@@ -920,7 +920,7 @@ public interface Focus <: FocusQuery {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum VideoStabilizationMode {
@@ -929,7 +929,7 @@ public enum VideoStabilizationMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Off
@@ -939,7 +939,7 @@ public enum VideoStabilizationMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Low
@@ -949,7 +949,7 @@ public enum VideoStabilizationMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Middle
@@ -959,7 +959,7 @@ public enum VideoStabilizationMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     High
@@ -970,7 +970,7 @@ public enum VideoStabilizationMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Auto
@@ -1006,7 +1006,7 @@ public enum VideoStabilizationMode {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface StabilizationQuery {
@@ -1018,7 +1018,7 @@ public interface StabilizationQuery {
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func isVideoStabilizationModeSupported(vsMode: VideoStabilizationMode): Bool {
@@ -1038,7 +1038,7 @@ public interface StabilizationQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Stabilization <: StabilizationQuery {
@@ -1049,7 +1049,7 @@ public interface Stabilization <: StabilizationQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getActiveVideoStabilizationMode(): VideoStabilizationMode {
@@ -1070,7 +1070,7 @@ public interface Stabilization <: StabilizationQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setVideoStabilizationMode(mode: VideoStabilizationMode): Unit {
@@ -1088,7 +1088,7 @@ public interface Stabilization <: StabilizationQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public class SmoothZoomInfo {
@@ -1097,7 +1097,7 @@ public class SmoothZoomInfo {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var duration: Int32
@@ -1117,7 +1117,7 @@ public class SmoothZoomInfo {
  */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public enum SmoothZoomMode {
@@ -1126,7 +1126,7 @@ public enum SmoothZoomMode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     Normal
@@ -1154,7 +1154,7 @@ public enum SmoothZoomMode {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface ZoomQuery {
@@ -1165,7 +1165,7 @@ public interface ZoomQuery {
      * @throws { BusinessException } 7400103 - Session not config, only throw in session usage.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getZoomRatioRange(): Array<Float64> {
@@ -1185,7 +1185,7 @@ public interface ZoomQuery {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface Zoom <: ZoomQuery {
@@ -1196,7 +1196,7 @@ public interface Zoom <: ZoomQuery {
      * @throws { BusinessException } 7400103 - Session not config.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setZoomRatio(zoomRatio: Float64): Unit {
@@ -1215,7 +1215,7 @@ public interface Zoom <: ZoomQuery {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func getZoomRatio(): Float64 {
@@ -1234,7 +1234,7 @@ public interface Zoom <: ZoomQuery {
      * @param { SmoothZoomMode } mode - Smooth zoom mode.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setSmoothZoom(targetRatio: Float64, mode: SmoothZoomMode): Unit {
@@ -1252,7 +1252,7 @@ public interface Zoom <: ZoomQuery {
      * @param { Float64 } targetRatio - Target zoom ratio.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func setSmoothZoom(targetRatio: Float64): Unit {

@@ -24,7 +24,7 @@ import ohos.labels.APILevel
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Camera.Core"
 ]
 public interface CameraOutput {
@@ -34,7 +34,7 @@ public interface CameraOutput {
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     func release(): Unit

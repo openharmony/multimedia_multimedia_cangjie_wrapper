@@ -54,7 +54,7 @@ foreign {
  * unspecified; 2.Incorrect parameter types.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver {
@@ -73,7 +73,7 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public class ImageReceiver <: RemoteDataLite {
@@ -83,7 +83,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop size: Size {
@@ -103,7 +103,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop capacity: Int32 {
@@ -123,7 +123,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public prop format: ImageFormat {
@@ -153,7 +153,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func getReceivingSurfaceId(): String {
@@ -176,7 +176,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func readLatestImage(): Image {
@@ -194,7 +194,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func readNextImage(): Image {
@@ -212,7 +212,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @param { Callback0Argument } callback - Callback used to return image.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func on(eventType: ReceiveType, callback: Callback0Argument): Unit {
@@ -229,7 +229,7 @@ public class ImageReceiver <: RemoteDataLite {
      * @param { ReceiveType } eventType - Type of the event to unlisten for.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func off(eventType: ReceiveType): Unit {}
@@ -239,7 +239,7 @@ public class ImageReceiver <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     public func release(): Unit {
@@ -253,7 +253,7 @@ public class ImageReceiver <: RemoteDataLite {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
 ]
 public enum ReceiveType {
@@ -262,7 +262,7 @@ public enum ReceiveType {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
     ]
     ImageArrival

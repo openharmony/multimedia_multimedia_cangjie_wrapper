@@ -26,7 +26,7 @@ import ohos.business_exception.BusinessException
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
@@ -47,7 +47,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public init(album: Album) {
@@ -69,7 +69,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAlbum(): Album {
@@ -92,7 +92,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func setAlbumName(name: String): Unit {
@@ -112,7 +112,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func addAssets(assets: Array<PhotoAsset>): Unit {
@@ -133,7 +133,7 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func removeAssets(assets: Array<PhotoAsset>): Unit {

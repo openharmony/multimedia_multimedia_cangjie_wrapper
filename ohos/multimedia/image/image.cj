@@ -40,7 +40,7 @@ foreign {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public class Image <: RemoteDataLite {
@@ -50,7 +50,7 @@ public class Image <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop clipRect: Region {
@@ -70,7 +70,7 @@ public class Image <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop size: Size {
@@ -90,7 +90,7 @@ public class Image <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public prop format: Int32 {
@@ -121,7 +121,7 @@ public class Image <: RemoteDataLite {
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func getComponent(componentType: ComponentType): Component {
@@ -145,7 +145,7 @@ public class Image <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public func release(): Unit {
