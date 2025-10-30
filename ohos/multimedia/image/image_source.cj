@@ -17,9 +17,9 @@
 
 package ohos.multimedia.image
 
-import ohos.ffi.*
+import ohos.ffi.{RemoteDataLite, RetDataUI32, RetDataI64U32, CArrI32, CArrString, CArrI64, releaseFFIData}
 import ohos.resource_manager.RawFileDescriptor
-import ohos.labels.*
+import ohos.labels.APILevel
 import ohos.business_exception.BusinessException
 
 foreign {

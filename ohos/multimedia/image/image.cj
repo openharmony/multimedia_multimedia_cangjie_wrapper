@@ -17,8 +17,8 @@
 
 package ohos.multimedia.image
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, safeMalloc}
 import ohos.business_exception.BusinessException
 
 foreign {

@@ -17,8 +17,8 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, CArrI64, toArrayCString, cjArr2CArr}
 import ohos.business_exception.BusinessException
 
 /**

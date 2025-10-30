@@ -18,7 +18,7 @@
 package ohos.multimedia.image
 
 import std.deriving.Derive
-import ohos.labels.*
+import ohos.labels.APILevel
 import ohos.business_exception.BusinessException
 
 /**

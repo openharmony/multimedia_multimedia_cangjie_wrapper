@@ -17,13 +17,13 @@
 
 package ohos.multimedia.media
 
-import ohos.ffi.*
+import ohos.ffi.SUCCESS_CODE
 import ohos.hilog.HilogChannel
-import ohos.business_exception.*
+import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 import ohos.labels.APILevel
 
 import std.deriving.Derive
-import std.collection.*
+import std.collection.HashMap
 
 const LOG_CORE: UInt32 = 3
 const LOG_DOMAIN_PLAYER: UInt32 = 0xD002B2B
