@@ -213,6 +213,9 @@ public enum AlbumSubtype {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     static func parse(value: Int32): AlbumSubtype {
         match (value) {
             case 1 => UserGeneric
@@ -266,6 +269,9 @@ public enum AlbumType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     static func parse(value: Int32): AlbumType {
         match (value) {
             case 0 => User
@@ -837,6 +843,9 @@ public enum NotifyType {
     NotifyAlbumRemoveAsset
     | ...
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     static func parse(value: Int32): NotifyType {
         match (value) {
             case 0 => NotifyAdd
@@ -1357,6 +1366,9 @@ public enum PhotoType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     static func parse(value: Int32): PhotoType {
         match (value) {
             case 1 => Image
@@ -1413,6 +1425,9 @@ public enum MemberType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     func getNumber(): Int64 {
         match (this) {
             case Int64Value(v) => v
@@ -1420,6 +1435,9 @@ public enum MemberType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     func getString(): String {
         match (this) {
             case StringValue(v) => v
@@ -1427,6 +1445,9 @@ public enum MemberType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     func getBool(): Bool {
         match (this) {
             case BoolValue(v) => v

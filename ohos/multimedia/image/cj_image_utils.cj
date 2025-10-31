@@ -105,10 +105,10 @@ func checkAndThrow(errCode: UInt32, handle!: () -> Unit = {=>}): Unit {
 }
 
 const INIT_ABNORMAL_ERROR: Int32 = 62980104
-const DISCARDED_ERROR: UInt32 = 401
 const ERR_PARAMETER_ERROR: Int32 = 62980115
 
 func convertErrCode(errCode: UInt32): UInt32 {
+    const DISCARDED_ERROR: UInt32 = 401
     if (errCode == DISCARDED_ERROR) {
         return UInt32(ERR_PARAMETER_ERROR)
     }

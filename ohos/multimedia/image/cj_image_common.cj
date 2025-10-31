@@ -407,6 +407,9 @@ public class DecodingOptions {
             desiredDynamicRange.value)
     }
 
+    /*
+     * @throws { BusinessException } 62980115 - Invalid rotate. / Invalid desiredPixelFormat.
+     */
     func parseDecodeOptions() {
         if (rotate < 0 || rotate > 360) {
             throw BusinessException(ERR_PARAMETER_ERROR, "Invalid rotate ${rotate}")
