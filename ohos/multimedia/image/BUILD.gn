@@ -34,6 +34,7 @@ ohos_cangjie_shared_library("ohos.multimedia.image") {
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "global_cangjie_wrapper:ohos.resource_manager",
+    "global_cangjie_wrapper:ohos.raw_file_descriptor",
     "graphic_cangjie_wrapper:ohos.graphics.color_space_manager",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
