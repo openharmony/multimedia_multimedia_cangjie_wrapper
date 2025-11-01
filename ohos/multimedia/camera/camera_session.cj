@@ -245,6 +245,9 @@ public interface Session {
     }
 }
 
+/*
+ * @throws { BusinessException } 7400101 - Parameter error.
+ */
 func getCameraOutputId(cameraOutput: CameraOutput): Int64 {
     (cameraOutput as RemoteDataLite)?.getID() ?? throw BusinessException(7400101, "Parameter error.")
 }

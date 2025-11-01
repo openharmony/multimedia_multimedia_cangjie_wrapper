@@ -190,6 +190,9 @@ public enum ExposureMode {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): ExposureMode {
         return match (value) {
             case 0 => ExposureModeLocked
@@ -534,6 +537,9 @@ public enum FlashMode {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): FlashMode {
         return match (value) {
             case 0 => FlashModeClose
@@ -697,6 +703,9 @@ public enum FocusState {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): FocusState {
         return match (value) {
             case 0 => FocusStateScan
@@ -770,6 +779,9 @@ public enum FocusMode {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): FocusMode {
         return match (value) {
             case 0 => FocusModeManual
@@ -989,6 +1001,9 @@ public enum VideoStabilizationMode {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): VideoStabilizationMode {
         return match (value) {
             case 0 => Off
@@ -1141,6 +1156,9 @@ public enum SmoothZoomMode {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): SmoothZoomMode {
         return match (value) {
             case 0 => Normal

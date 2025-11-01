@@ -84,6 +84,7 @@ foreign {
  * @param { String } uri - Image source URI.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
@@ -111,6 +112,7 @@ public func createImageSource(uri: String): ImageSource {
  * @param { SourceOptions } options - The config of Image source.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
@@ -178,6 +180,7 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
@@ -204,6 +207,7 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @param { SourceOptions } options - The config of Image source.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",

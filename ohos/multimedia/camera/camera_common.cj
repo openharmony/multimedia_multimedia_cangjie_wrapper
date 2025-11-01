@@ -169,6 +169,9 @@ public enum TorchMode {
     Auto
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32) {
         match (val) {
             case 0 => Off
@@ -249,6 +252,9 @@ public enum ImageRotation {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32) {
         match (val) {
             case 0 => Rotation0
@@ -311,6 +317,9 @@ public enum CameraStatus {
     CameraStatusUnavailable
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32) {
         match (val) {
             case 0 => CameraStatusAppear
@@ -525,6 +534,9 @@ public enum MetadataObjectType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32): MetadataObjectType {
         match (val) {
             case 0 => MetadataObjectType.FaceDetection
@@ -629,6 +641,9 @@ public enum FoldStatus {
     Folded
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32): FoldStatus {
         match (val) {
             case 0 => NonFoldable
@@ -717,6 +732,9 @@ public enum ConnectionType {
     CameraConnectionRemote
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32): ConnectionType {
         match (val) {
             case 0 => CameraConnectionBuiltIn
@@ -819,6 +837,9 @@ public enum CameraFormat {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(val: Int32): CameraFormat {
         match (val) {
             case 2002 => CameraFormatYcrcbP010
@@ -1082,7 +1103,7 @@ public enum CameraEvents {
     /**
      * Obtaining the string value of CameraEvents.
      *
-     * @throws IllegalArgumentException - The type is not supported.
+     * @throws { BusinessException } 7400101 - The type is not supported.
      */
     func toString(): String {
         return match (this) {
@@ -1147,6 +1168,9 @@ public enum CameraPosition {
     CameraPositionFront
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(code: Int32): CameraPosition {
         match (code) {
             case 0 => CameraPositionUnspecified
@@ -1227,6 +1251,9 @@ public enum CameraType {
     CameraTypeTrueDepth
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(code: Int32): CameraType {
         match (code) {
             case 0 => CameraTypeDefault
@@ -1291,6 +1318,9 @@ public enum SceneMode {
     SecurePhoto
     | ...
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(code: Int32): SceneMode {
         match (code) {
             case 1 => NormalPhoto
@@ -1714,6 +1744,9 @@ public enum PreconfigType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): PreconfigType {
         return match (value) {
             case 0 => Preconfig720p
@@ -1777,6 +1810,9 @@ public enum PreconfigRatio {
         }
     }
 
+    /*
+     * @throws { BusinessException } 7401001 - Parameter error.
+     */
     static func parse(value: Int32): PreconfigRatio {
         return match (value) {
             case 0 => PreconfigRatio_1_1
@@ -1787,6 +1823,9 @@ public enum PreconfigRatio {
     }
 }
 
+/*
+ * @throws { BusinessException } 7400201 - Camera service fatal error.
+ */
 func offAll(idClassInfo: IdClassInfo, callbackList: ArrayList<(CallbackObject, Int64)>, onOffMutex: Mutex,
     offAllFunc: CFunc<(Int64) -> Int32>): Unit {
     synchronized(onOffMutex) {

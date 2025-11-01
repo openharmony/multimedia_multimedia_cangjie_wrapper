@@ -183,6 +183,9 @@ struct PhotoAssetMember {
         let boolValue: Bool
     ) {}
 
+    /*
+     * @throws { BusinessException } 13900020 - Parameter error.
+     */
     func toMemberType(): MemberType {
         match (memberType) {
             case 0 => Int64Value(intValue)
