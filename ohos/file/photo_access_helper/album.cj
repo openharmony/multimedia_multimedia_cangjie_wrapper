@@ -157,7 +157,7 @@ public open class AbsAlbum <: RemoteDataLite{
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.READ_IMAGEVIDEO",
+        permission: "ohos.permission.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
@@ -232,7 +232,7 @@ public class Album <: AbsAlbum {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func commitModify(): Unit {

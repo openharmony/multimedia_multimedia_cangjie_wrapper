@@ -105,7 +105,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.READ_IMAGEVIDEO",
+        permission: "ohos.permission.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
@@ -130,7 +130,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.READ_IMAGEVIDEO",
+        permission: "ohos.permission.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetResult {
@@ -163,7 +163,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.READ_IMAGEVIDEO",
+        permission: "ohos.permission.READ_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
@@ -336,7 +336,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.WRITE_IMAGEVIDEO",
+        permission: "ohos.permission.WRITE_IMAGEVIDEO",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public func applyChanges(mediaChangeRequest: MediaChangeRequest): Unit {
