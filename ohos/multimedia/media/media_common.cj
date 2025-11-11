@@ -235,7 +235,7 @@ public enum AVImageQueryOptions {
             case AvImageQueryPreviousSync => 1
             case AvImageQueryClosestSync => 2
             case AvImageQueryClosest => 3
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 }
