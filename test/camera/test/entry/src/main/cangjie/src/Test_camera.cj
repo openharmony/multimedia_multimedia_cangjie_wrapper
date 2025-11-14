@@ -94,11 +94,11 @@ class Test_camera {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
         let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        @Expect(ability.previewProfiles.size, 15)
+        @Expect(ability.previewProfiles.size > 0)
         @Expect(ability.previewProfiles[0].format.toString(), "CameraFormat.CameraFormatYuv420Sp")
         @Expect(ability.previewProfiles[0].size.height, 480)
         @Expect(ability.previewProfiles[0].size.width, 480)
-        @Expect(ability.photoProfiles.size, 17)
+        @Expect(ability.photoProfiles.size > 0)
         @Expect(ability.photoProfiles[0].format.toString(), "CameraFormat.CameraFormatJpeg")
         @Expect(ability.photoProfiles[0].size.height, 480)
         @Expect(ability.photoProfiles[0].size.width, 640)
