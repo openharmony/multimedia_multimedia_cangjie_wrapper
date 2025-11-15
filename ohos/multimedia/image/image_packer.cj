@@ -59,7 +59,6 @@ foreign {
 
 /**
  * ImagePacker instance.
- *
  */
 @!APILevel[
     since: "22",
@@ -77,13 +76,13 @@ public class ImagePacker <: RemoteDataLite {
     /**
      * Supported image formats.
      *
-     * @type { Array<String> } Return the supported image formats
      * @throws { BusinessException } 62980098 - Failed to malloc memory.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true
     ]
     public prop supportedFormats: Array<String> {
         get() {
@@ -97,9 +96,9 @@ public class ImagePacker <: RemoteDataLite {
     /**
      * Compresses or packs an image.
      *
-     * @param { ImageSource } source Image to be processed.
-     * @param { PackingOption } option Option for image packing.
-     * @returns { Array<UInt8> } Return the compressed or packed data.
+     * @param { ImageSource } source - Image to be processed.
+     * @param { PackingOption } options - Option for image packing.
+     * @returns { Array<UInt8> } Used to return the compressed or packed data.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
@@ -116,7 +115,9 @@ public class ImagePacker <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true,
+        workerthread: true
     ]
     public func packToData(source: ImageSource, options: PackingOption): Array<UInt8> {
         let cOption = CPackingOptionV2(options)
@@ -132,9 +133,9 @@ public class ImagePacker <: RemoteDataLite {
     /**
      * Compresses or packs an image.
      *
-     * @param { PixelMap } source PixelMap to be processed.
-     * @param { PackingOption } option Option for image packing.
-     * @returns { Array<UInt8> } Return the compressed or packed data.
+     * @param { PixelMap } source - PixelMap to be processed.
+     * @param { PackingOption } options - Option for image packing.
+     * @returns { Array<UInt8> } Used to return the compressed or packed data.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
@@ -151,7 +152,9 @@ public class ImagePacker <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true,
+        workerthread: true
     ]
     public func packToData(source: PixelMap, options: PackingOption): Array<UInt8> {
         let cOption = CPackingOptionV2(options)
@@ -180,9 +183,9 @@ public class ImagePacker <: RemoteDataLite {
     /**
      * Compresses or packs an image into a file.
      *
-     * @param { ImageSource } source Image to be processed.
-     * @param { Int32 } fd ID of a file descriptor.
-     * @param { PackingOption } options Options for image packing.
+     * @param { ImageSource } source - Image to be processed.
+     * @param { Int32 } fd - ID of a file descriptor.
+     * @param { PackingOption } options - Options for image packing.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
@@ -199,7 +202,9 @@ public class ImagePacker <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true,
+        workerthread: true
     ]
     public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): Unit {
         let cOption = CPackingOptionV2(options)
@@ -209,11 +214,11 @@ public class ImagePacker <: RemoteDataLite {
     }
 
     /**
-     * Compresses or packs an image into a file and uses a callback to return the result.
+     * Compresses or packs an image into a file.
      *
-     * @param { PixelMap } source PixelMap to be processed.
-     * @param { Int32 } fd ID of a file descriptor.
-     * @param { PackingOption } options Options for image packing.
+     * @param { PixelMap } source - PixelMap to be processed.
+     * @param { Int32 } fd - ID of a file descriptor.
+     * @param { PackingOption } options - Options for image packing.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980101 - The image data is abnormal.
@@ -230,7 +235,9 @@ public class ImagePacker <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true,
+        workerthread: true
     ]
     public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Unit {
         let cOption = CPackingOptionV2(options)
@@ -241,11 +248,11 @@ public class ImagePacker <: RemoteDataLite {
 
     /**
      * Releases an ImagePacker instance
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker"
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        workerthread: true
     ]
     public func release(): Unit {
         unsafe { FFiOHOSImagePackerRelease(getID()) }

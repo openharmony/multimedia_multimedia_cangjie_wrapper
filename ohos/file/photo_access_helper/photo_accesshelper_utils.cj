@@ -141,7 +141,6 @@ func checkRet(errCode: Int32, funcName: String) {
 
 /**
  * Enumerate the album subtypes.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -151,49 +150,44 @@ func checkRet(errCode: Int32, funcName: String) {
 public enum AlbumSubtype {
     /**
      * Generic user-created albums.
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     UserGeneric
-
+    |
     /**
      * Favorite album, which assets are marked as favorite.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Favorite
-
+    |
     /**
      * Video album, which contains all video assets.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Video
-
+    |
     /**
      * Image album
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Image
-
+    |
     /**
      * Any album
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -230,7 +224,6 @@ public enum AlbumSubtype {
 
 /**
  * Enumerates the album types.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -240,19 +233,17 @@ public enum AlbumSubtype {
 public enum AlbumType {
     /**
      * User album.
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     User
-
+    |
     /**
      * System album.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -283,7 +274,6 @@ public enum AlbumType {
 
 /**
  * Defines the options for fetching media files.
- *
  */
 @!APILevel[
     since: "22",
@@ -292,7 +282,6 @@ public enum AlbumType {
 public class FetchOptions {
     /**
      * Indicates the members to query.
-     *
      */
     @!APILevel[
         since: "22",
@@ -302,7 +291,6 @@ public class FetchOptions {
 
     /**
      * Predicates that specify the fetch criteria.
-     *
      */
     @!APILevel[
         since: "22",
@@ -312,6 +300,9 @@ public class FetchOptions {
 
     /**
      * Create fetchOptions instance.
+     *
+     * @param {Array<String>} fetchColumns - indicates the members to query.
+     * @param {DataSharePredicates} predicates - indicates specify the fetch criteria.
      */
     @!APILevel[
         since: "22",
@@ -332,7 +323,6 @@ public class FetchOptions {
 
 /**
  * Enumerates the PhotoAsset types.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -342,27 +332,26 @@ public class FetchOptions {
 public enum PhotoSubtype {
     /**
      * Default Photo Type
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Default
+    |
     /**
      * Moving Photo Type
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     MovingPhoto
+    |
     /**
      * Burst Photo Type
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -383,7 +372,6 @@ public enum PhotoSubtype {
 
 /**
  * Enumerates the asset delivery modes.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -393,29 +381,26 @@ public enum PhotoSubtype {
 public enum DeliveryMode {
     /**
      * Fast mode.
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     FastMode
-
+    |
     /**
      * High-quality mode.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     HighQualityMode
-
+    |
     /**
      * Balance mode.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -435,50 +420,45 @@ public enum DeliveryMode {
 }
 
 /**
- * PhotoViewMIMETypes represents the type of media resource that photo picker selects.
- *
+ * PhotoViewMimeTypes represents the type of media resource that photo picker selects.
  */
 @Derive[ToString, Equatable]
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
-public enum PhotoViewMIMETypes {
+public enum PhotoViewMimeTypes {
     /**
-     * IMAGE_TYPE indicates that the selected media resources are images.
-     *
+     * ImageType indicates that the selected media resources are images.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     ImageType
-
+    |
     /**
-     * VIDEO_TYPE indicates that the selected media resources are videos.
-     *
+     * VideoType indicates that the selected media resources are videos.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     VideoType
-
+    |
     /**
-     * IMAGE_VIDEO_TYPE indicates that the selected media resources are images and videos.
-     *
+     * ImageVideoType indicates that the selected media resources are images and videos.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     ImageVideoType
-
+    |
     /**
-     * MOVING_PHOTO_IMAGE_TYPE indicates that the selected media resources are moving photos.
-     *
+     * MovingPhotoImageType indicates that the selected media resources are moving photos.
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -500,7 +480,6 @@ public enum PhotoViewMIMETypes {
 
 /**
  * Enumerates the types of recommended images.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -509,100 +488,90 @@ public enum PhotoViewMIMETypes {
 ]
 public enum RecommendationType {
     /**
-     * QR_OR_BAR_CODE indicates that QR code or barcode photos can be recommended
-     *
+     * QrOrBarCode indicates that QR code or barcode photos can be recommended
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     QrOrBarCode
-
+    |
     /**
-     * QR_CODE indicates that QR code photos can be recommended
-     *
+     * QrCode indicates that QR code photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     QrCode
-
+    |
     /**
-     * BAR_CODE indicates that barcode photos can be recommended
-     *
+     * BarCode indicates that barcode photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     BarCode
-
+    |
     /**
-     * ID_CARD indicates that QR code or barcode photos can be recommended
-     *
+     * IdCard indicates that QR code or barcode photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     IdCard
-
+    |
     /**
-     * PROFILE_PICTURE indicates that profile picture photos can be recommended
-     *
+     * ProfilePicture indicates that profile picture photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     ProfilePicture
-
+    |
     /**
-     * PASSPORT indicates that passport photos can be recommended
-     *
+     * PassPort indicates that passport photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    PassPort
-
+    Passport
+    |
     /**
-     * BANK_CARD indicates that bank card photos can be recommended
-     *
+     * BankCard indicates that bank card photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     BankCard
-
+    |
     /**
-     * DRIVER_LICENSE indicates that driver license photos can be recommended
-     *
+     * DriverLicense indicates that driver license photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DriverLicense
-
+    |
     /**
-     * DRIVING_LICENSE indicates that driving license photos can be recommended
-     *
+     * DrivingLicense indicates that driving license photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DrivingLicense
-
+    |
     /**
-     * FEATURED_SINGLE_PORTRAIT indicates that featured single portrait photos can be recommended
-     *
+     * FeaturedSinglePortrait indicates that featured single portrait photos can be recommended
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -617,7 +586,7 @@ public enum RecommendationType {
                 case BarCode => 3
                 case IdCard => 4
                 case ProfilePicture => 5
-                case PassPort => 6
+                case Passport => 6
                 case BankCard => 7
                 case DriverLicense => 8
                 case DrivingLicense => 9
@@ -630,7 +599,6 @@ public enum RecommendationType {
 
 /**
  * Enumerates the formats for displaying media assets.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -639,20 +607,18 @@ public enum RecommendationType {
 ]
 public enum DynamicRangeType {
     /**
-     * Standard dynamic range (SDR).
-     *
+     * Standard dynamic range (Sdr).
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Sdr
-
+    |
     /**
-     * High dynamic range (HDR).
-     *
+     * High dynamic range (Hdr).
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -662,7 +628,6 @@ public enum DynamicRangeType {
 
 /**
  * Enumerates the types of the resources to write.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -672,19 +637,17 @@ public enum DynamicRangeType {
 public enum ResourceType {
     /**
      * Image resource
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     ImageResource
-
+    |
     /**
      * Video resource
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -704,7 +667,6 @@ public enum ResourceType {
 
 /**
  * Config to create photo asset
- *
  */
 @!APILevel[
     since: "22",
@@ -713,7 +675,6 @@ public enum ResourceType {
 public class PhotoCreationConfig {
     /**
      * Extension of the asset
-     *
      */
     @!APILevel[
         since: "22",
@@ -723,7 +684,6 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo type of the asset to create, include image or video
-     *
      */
     @!APILevel[
         since: "22",
@@ -733,7 +693,6 @@ public class PhotoCreationConfig {
 
     /**
      * Title of the asset
-     *
      */
     @!APILevel[
         since: "22",
@@ -743,7 +702,6 @@ public class PhotoCreationConfig {
 
     /**
      * Specify photo subtype of the asset to create, include default or moving_photo
-     *
      */
     @!APILevel[
         since: "22",
@@ -753,6 +711,11 @@ public class PhotoCreationConfig {
 
     /**
      * Create PhotoCreationConfig instance
+     *
+     * @param { String } fileNameExtension - indicates extension of the asset.
+     * @param { PhotoType } photoType - indicates indicates specify photo type of the asset to create, include image or video.
+     * @param { String } [title] - indicates title of the asset.
+     * @param { PhotoSubtype } [subtype] - indicates specify photo subtype of the asset to create, include default or moving_photo.
      */
     @!APILevel[
         since: "22",
@@ -784,7 +747,6 @@ public class PhotoCreationConfig {
 
 /**
  * Enumeration types of data change.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -794,49 +756,44 @@ public class PhotoCreationConfig {
 public enum NotifyType {
     /**
      * Data(assets or albums) have been newly created
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     NotifyAdd
-
+    |
     /**
      * Data(assets or albums) have been modified
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     NotifyUpdate
-
+    |
     /**
      * Data(assets or albums) have been removed
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     NotifyRemove
-
+    |
     /**
      * Assets have been added to an album.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     NotifyAlbumAddAsset
-
+    |
     /**
      * Assets have been removed from an album.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -860,7 +817,6 @@ public enum NotifyType {
 
 /**
  * Defines the change data
- *
  */
 @!APILevel[
     since: "22",
@@ -869,7 +825,6 @@ public enum NotifyType {
 public class ChangeData {
     /**
      * The NotifyType of ChangeData
-     *
      */
     @!APILevel[
         since: "22",
@@ -879,7 +834,6 @@ public class ChangeData {
 
     /**
      * The changed uris
-     *
      */
     @!APILevel[
         since: "22",
@@ -889,7 +843,6 @@ public class ChangeData {
 
     /**
      * Change details of the asset uris to an album.
-     *
      */
     @!APILevel[
         since: "22",
@@ -906,7 +859,6 @@ public class ChangeData {
 
 /**
  * Options for creating an image or video asset.
- *
  */
 @!APILevel[
     since: "22",
@@ -915,7 +867,6 @@ public class ChangeData {
 public class CreateOptions {
     /**
      * Title of the asset
-     *
      */
     @!APILevel[
         since: "22",
@@ -925,7 +876,6 @@ public class CreateOptions {
 
     /**
      * Specify subtype of the asset to create
-     *
      */
     @!APILevel[
         since: "22",
@@ -935,6 +885,9 @@ public class CreateOptions {
 
     /**
      * Create CreateOptions instance
+     *
+     * @param { String } [title] - indicates title of the asset.
+     * @param { PhotoSubtype } [subtype] - indicates specify subtype of the asset to create.
      */
     @!APILevel[
         since: "22",
@@ -948,7 +901,6 @@ public class CreateOptions {
 
 /**
  * Options to request media asset
- *
  */
 @!APILevel[
     since: "22",
@@ -957,7 +909,6 @@ public class CreateOptions {
 public class RequestOptions {
     /**
      * Indicates the delivery mode
-     *
      */
     @!APILevel[
         since: "22",
@@ -976,7 +927,6 @@ public class RequestOptions {
 
 /**
  * Enumeration of photo asset members
- *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -985,217 +935,198 @@ public class RequestOptions {
 ]
 public enum PhotoKeys <: ToString {
     /**
-     * Asset uri, read only
-     *
+     * Asset uri
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Uri
-
+    |
     /**
-     * Photo type of the asset, read only
-     *
+     * Photo type of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     PhotoType
-
+    |
     /**
-     * Asset name, read only
-     *
+     * Asset name
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DisplayName
-
+    |
     /**
-     * Size of the asset, read only
-     *
+     * Size of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Size
-
+    |
     /**
-     * Creation date of the asset, read only
-     *
+     * Creation date of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DateAdded
-
+    |
     /**
-     * Modified date of the asset, read only
-     *
+     * Modified date of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DateModified
-
+    |
     /**
-     * Duration of video files, read only
-     *
+     * Duration of video files
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Duration
-
+    |
     /**
-     * Width of the image asset, read only
-     *
+     * Width of the image asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Width
-
+    |
     /**
-     * Height of the image asset, read only
-     *
+     * Height of the image asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Height
-
+    |
     /**
-     * Date taken of the asset, read only
-     *
+     * Date taken of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DateTaken
-
+    |
     /**
-     * Orientation of the image asset, read only
-     *
+     * Orientation of the image asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Orientation
-
+    |
     /**
-     * Favorite state of the asset, read only
-     *
+     * Favorite state of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Favorite
-
+    |
     /**
      * Title of the asset
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Title
-
+    |
     /**
-     * Creation time of the asset in milliseconds, read only
-     *
+     * Creation time of the asset in milliseconds
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DateAddedMs
-
+    |
     /**
-     * Modified time of the asset in milliseconds, read only
-     *
+     * Modified time of the asset in milliseconds
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DateModifiedMs
-
+    |
     /**
-     * Photo subtype of the asset, read only
-     *
+     * Photo subtype of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     PhotoSubtype
-
+    |
     /**
-     * Dynamic range type of the asset, read only
-     *
+     * Dynamic range type of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DynamicRangeType
-
+    |
     /**
-     * Cover position of the asset, read only
-     *
+     * Cover position of the asset
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     CoverPosition
-
+    |
     /**
-     * Unique UUID of the burst photos, read only
+     * Unique uuid of the burst photos
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     BurstKey
-
+    |
     /**
-     * Width and height information of lcd picture, read only
-     *
+     * Width and height information of lcd picture
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     LcdSize
-
+    |
     /**
-     * Width and height information of thumbnail picture, read only
-     *
+     * Width and height information of thumbnail picture
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    ThmSize
+    ThumbnailSize
     | ...
 
     /**
-     * Obtaining the string value of enum
+     * Converts the PhotoKeys to its string representation.
+     * @returns A string representation of the PhotoKeys.
      */
     @!APILevel[
         since: "22",
@@ -1223,7 +1154,7 @@ public enum PhotoKeys <: ToString {
             case CoverPosition => 'cover_position'
             case BurstKey => 'burst_key'
             case LcdSize => 'lcd_size'
-            case ThmSize => 'thumb_size'
+            case ThumbnailSize => 'thumb_size'
             case _ => throw BusinessException(13900020, "Parameter error.")
         }
     }
@@ -1231,7 +1162,6 @@ public enum PhotoKeys <: ToString {
 
 /**
  * Enumeration uris for registerChange.
- *
  */
 @Derive[Equatable]
 @!APILevel[
@@ -1241,19 +1171,17 @@ public enum PhotoKeys <: ToString {
 public enum DefaultChangeUri <: ToString {
     /**
      * Uri for default PhotoAsset, use with forDescendant{true}, will receive all PhotoAsset's change notifications
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DefaultPhotoUri
-
+    |
     /**
      * Uri for default Album, use with forDescendant{true}, will receive all Album's change notifications
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -1261,7 +1189,8 @@ public enum DefaultChangeUri <: ToString {
     | ...
 
     /**
-     * Obtaining the string value of enum
+     * Converts the DefaultChangeUri to its string representation.
+     * @returns A string representation of the DefaultChangeUri.
      */
     @!APILevel[
         since: "22",
@@ -1288,19 +1217,17 @@ public enum DefaultChangeUri <: ToString {
 public enum AlbumKeys <: ToString {
     /**
      * URI of the album.
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Uri
-
-     /**
+    |
+    /**
      * Name of the album.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -1308,7 +1235,8 @@ public enum AlbumKeys <: ToString {
     | ...
 
     /**
-     * Obtaining the string value of enum
+     * Converts the AlbumKeys to its string representation.
+     * @returns A string representation of the AlbumKeys.
      */
     @!APILevel[
         since: "22",
@@ -1327,7 +1255,6 @@ class BaseSelectOptionsImpl {}
 
 /**
  * Enumerates media file types.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1337,19 +1264,17 @@ class BaseSelectOptionsImpl {}
 public enum PhotoType {
     /**
      * Image asset
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Image
-
+    |
     /**
      * Video asset
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
@@ -1380,7 +1305,6 @@ public enum PhotoType {
 
 /**
  * Indicates the type of photo asset member.
- *
  */
 @!APILevel[
     since: "22",
@@ -1389,27 +1313,26 @@ public enum PhotoType {
 public enum MemberType {
     /**
      * Indicates the type of photo asset member.
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Int64Value(Int64)
+    |
     /**
      * Indicates the type of photo asset member.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     StringValue(String)
+    |
     /**
      * Indicates the type of photo asset member.
-     *
      */
-    | @!APILevel[
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]

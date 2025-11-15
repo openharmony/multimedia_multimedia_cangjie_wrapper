@@ -26,7 +26,6 @@ import std.sync.Mutex
 
 /**
  * Video output object.
- *
  */
 @!APILevel[
     since: "22",
@@ -55,7 +54,9 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         let errCode = unsafe { FfiCameraVideoOutputRelease(this.getID()) }
@@ -70,7 +71,9 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func start(): Unit {
         unsafe {
@@ -86,7 +89,9 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func stop(): Unit {
         unsafe {
@@ -103,7 +108,8 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getSupportedFrameRates(): Array<FrameRateRange> {
         unsafe {
@@ -128,7 +134,8 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func setFrameRate(minFps: Int32, maxFps: Int32): Unit {
         let errCode = unsafe { FfiCameraVideoOutputSetFrameRate(getID(), minFps, maxFps) }
@@ -143,7 +150,8 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getActiveFrameRate(): FrameRateRange {
         unsafe {
@@ -162,7 +170,8 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getActiveProfile(): VideoProfile {
         unsafe {
@@ -183,7 +192,8 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getVideoRotation(deviceDegree: Int32): ImageRotation {
         unsafe {
@@ -202,12 +212,12 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -282,12 +292,12 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -305,12 +315,13 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
      * Unsubscribes all callbacks from the event specified by the param.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func off(eventType: CameraEvents): Unit {
         match (eventType) {

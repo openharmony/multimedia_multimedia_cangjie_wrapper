@@ -24,7 +24,6 @@ import ohos.business_exception.BusinessException
 
 /**
  * Defines the interface of media change request.
- *
  */
 @!APILevel[
     since: "22",
@@ -34,7 +33,6 @@ public interface MediaChangeRequest {}
 
 /**
  * Defines the class of media asset change request.
- *
  */
 @!APILevel[
     since: "22",
@@ -51,16 +49,13 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Constructor used to initialize an asset change request.
-     *
      * @param { PhotoAsset } asset - Assets to change.
-     * @returns { MediaAssetChangeRequest } Returns a MediaAssetChangeRequest instance
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public init(asset: PhotoAsset) {
         super(
@@ -74,18 +69,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Creates an image asset change request.
-     *
-     * @param { Context } context - Context of the ability instance.
+     * @param { UIAbilityContext } context - Context of the ability instance.
      * @param { String } fileUri - Data source of the image asset, which is specified by a URI in the application sandbox directory.
-     * @returns { MediaAssetChangeRequest } - Returns a MediaAssetChangeRequest instance
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @returns { MediaAssetChangeRequest } Returns a MediaAssetChangeRequest instance
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public static func createImageAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
         var id = -1
@@ -101,18 +94,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Creates a video asset change request.
-     *
-     * @param { Context } context - Context of the ability instance.
+     * @param { UIAbilityContext } context - Context of the ability instance.
      * @param { String } fileUri - Data source of the video asset, which is specified by a URI in the application sandbox directory.
-     * @returns { MediaAssetChangeRequest } - Returns a MediaAssetChangeRequest instance
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @returns { MediaAssetChangeRequest } Returns a MediaAssetChangeRequest instance
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: String): MediaAssetChangeRequest {
         var id = -1
@@ -128,19 +119,17 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Create an asset change request based on the file type and filename extension.
-     *
-     * @param { Context } context - Context of the ability instance.
-     * @param { PhotoType } photoType - Type of the file to create, which can be IMAGE or VIDEO.
+     * @param { UIAbilityContext } context - Context of the ability instance.
+     * @param { PhotoType } photoType - Type of the file to create, which can be image or video.
      * @param { String } extension - File name extension, for example, 'jpg'.
-     * @param { CreateOptions } [options] - Options for creating the image or video asset, for example, {title: 'testPhoto'}.
-     * @returns { MediaAssetChangeRequest } - Returns a MediaAssetChangeRequest instance
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @param { CreateOptions } [options] - Options for creating the image or video asset.
+     * @returns { MediaAssetChangeRequest } Returns a MediaAssetChangeRequest instance
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public static func createAssetRequest(context: UIAbilityContext, photoType: PhotoType, extension: String,
         options!: CreateOptions = CreateOptions(title: "", subtype: Default)): MediaAssetChangeRequest {
@@ -161,19 +150,18 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
-     *
-     * @param { Context } context - Context of the ability instance.
+     * Deletes media assets.
+     * @param { UIAbilityContext } context - Context of the ability instance.
      * @param { Array<PhotoAsset> } assets - Array of assets to delete.
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func deleteAssets(context: UIAbilityContext, assets: Array<PhotoAsset>): Unit {
         let idArr = Array<Int64>(assets.size, {i => assets[i].getID()})
@@ -184,20 +172,19 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     }
 
     /**
-     * Deletes media assets. This API uses a promise to return the result. The deleted assets are moved to the trash.
-     *
-     * @param { Context } context - Context of the ability instance.
-     * @param { Array<string> } assets - URIs of the media files to delete.
+     * Deletes media assets.
+     * @param { UIAbilityContext } context - Context of the ability instance.
+     * @param { Array<String> } assets - URIs of the media files to delete.
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000002 - The uri format is incorrect or does not exist.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func deleteAssets(context: UIAbilityContext, assets: Array<String>): Unit {
         let cArr = unsafe { toArrayCString(assets) }
@@ -208,15 +195,13 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Obtains the asset in this asset change request.
-     *
      * @returns { PhotoAsset } Returns the PhotoAsset object in this change request.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func getAsset(): PhotoAsset {
         var errCode = 0i32
@@ -231,15 +216,13 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Sets the media asset title.
-     *
      * @param { String } title - Title to set.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func setTitle(title: String): Unit {
         try (ctitle = unsafe { LibC.mallocCString(title).asResource() }) {
@@ -250,18 +233,17 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Obtains the handler used for writing a file to cache.
-     *
      * @returns { Int32 } Returns the write cache handler
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getWriteCacheHandler(): Int32 {
         var errCode = 0i32
@@ -272,18 +254,16 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Adds a resource using fileUri.
-     *
      * @param { ResourceType } resourceType - Type of the resource to add.
      * @param { String } fileUri - Data source of the resource to be added, which is specified by a URI in the application sandbox directory.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900002 - The file corresponding to the URI is not in the app sandbox.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func addResource(resourceType: ResourceType, fileUri: String): Unit {
         try (uri = unsafe { LibC.mallocCString(fileUri).asResource() }) {
@@ -296,17 +276,15 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Adds a resource using ArrayBuffer data.
-     *
      * @param { ResourceType } resourceType - Type of the resource to add.
      * @param { Array<Byte> } data - Data of the resource to add.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func addResource(resourceType: ResourceType, data: Array<Byte>): Unit {
         let arr = CArrUI8(unsafe { cjArr2CArr(data) }, data.size)
@@ -317,13 +295,13 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Saves the photo taken by the camera.
-     *
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func saveCameraPhoto(): Unit {
         let errCode = unsafe { FfiMediaAssetChangeRequestImplSaveCameraPhoto(getID()) }
@@ -332,13 +310,13 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Discards the photo taken by the camera.
-     *
      * @throws { BusinessException } 14000011 - Internal system error
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func discardCameraPhoto(): Unit {
         let errCode = unsafe { FfiMediaAssetChangeRequestImplDiscardCameraPhoto(getID()) }

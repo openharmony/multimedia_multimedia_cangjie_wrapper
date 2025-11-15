@@ -238,7 +238,7 @@ class Test_image {
         pMap.flip(true, false)
         let region = Region(Size(100, 100), 0, 0)
         pMap.crop(region)
-        let alphaPixelMap = pMap.createAlphaPixelmap()
+        let alphaPixelMap = pMap.createAlphaPixelMap()
         var colorSpaceManager = create(AdobeRgb1998)
         alphaPixelMap.setColorSpace(colorSpaceManager)
         let colorSpace1 = alphaPixelMap.getColorSpace()
@@ -366,7 +366,7 @@ class Test_image {
         @Expect(GpsLatitude.toString(), "GPSLatitude")
         @Expect(GpsLongitudeRef.toString(), "GPSLongitudeRef")
         @Expect(GpsLongitude.toString(), "GPSLongitude")
-        @Expect(GpsTimeStamp.toString(), "GPSTimeStamp")
+        @Expect(GpsTimestamp.toString(), "GPSTimeStamp")
         @Expect(GpsDateStamp.toString(), "GPSDateStamp")
         @Expect(IsoSpeedRatings.toString(), "ISOSpeedRatings")
         @Expect(SensitivityType.toString(), "SensitivityType")
@@ -509,7 +509,7 @@ class Test_image {
             GpsLatitude,
             GpsLongitudeRef,
             GpsLongitude,
-            GpsTimeStamp,
+            GpsTimestamp,
             GpsDateStamp,
             IsoSpeedRatings,
             SensitivityType,

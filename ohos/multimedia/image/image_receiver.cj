@@ -45,9 +45,10 @@ foreign {
 /**
  * Creates an ImageReceiver instance.
  *
- * @param { Size } size - Size of the image.
- * @param { ImageFormat } format - Format of the image.
- * @param { Int32 } capacity - Maximum number of images that can be accessed at the same time.
+ * @param { Size } size - The default Size in pixels of the Images that this receiver will produce.
+ * @param { ImageFormat } format - The format of the Image that this receiver will produce. This must be one of the
+ * ImageFormat constants.
+ * @param { Int32 } capacity - The maximum number of images the user will want to access simultaneously.
  * @returns { ImageReceiver } Returns the ImageReceiver instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left
@@ -55,7 +56,8 @@ foreign {
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+    syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+    throwexception: true
 ]
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver {
     if (format != ImageFormat.Jpeg) {
@@ -70,7 +72,6 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
 
 /**
  * Image receiver object.
- *
  */
 @!APILevel[
     since: "22",
@@ -84,7 +85,8 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true
     ]
     public prop size: Size {
         get() {
@@ -104,7 +106,8 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true
     ]
     public prop capacity: Int32 {
         get() {
@@ -124,7 +127,8 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true
     ]
     public prop format: ImageFormat {
         get() {
@@ -154,7 +158,9 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true,
+        workerthread: true
     ]
     public func getReceivingSurfaceId(): String {
         let retData = unsafe {
@@ -177,7 +183,9 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true,
+        workerthread: true
     ]
     public func readLatestImage(): Image {
         let res = unsafe { FfiOHOSReadLatestImage(getID()) }
@@ -195,7 +203,9 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        throwexception: true,
+        workerthread: true
     ]
     public func readNextImage(): Image {
         let res = unsafe { FfiOHOSReadNextImage(getID()) }
@@ -230,17 +240,18 @@ public class ImageReceiver <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        workerthread: true
     ]
     public func off(eventType: ReceiveType): Unit {}
 
     /**
      * Release image receiver instance.
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageReceiver"
+        syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
+        workerthread: true
     ]
     public func release(): Unit {
         unsafe { FfiOHOSReceiverRelease(getID()) }
@@ -250,7 +261,6 @@ public class ImageReceiver <: RemoteDataLite {
 
 /**
  * Enum of callback.
- *
  */
 @!APILevel[
     since: "22",
@@ -259,7 +269,6 @@ public class ImageReceiver <: RemoteDataLite {
 public enum ReceiveType {
     /**
      * imageArrival.
-     *
      */
     @!APILevel[
         since: "22",

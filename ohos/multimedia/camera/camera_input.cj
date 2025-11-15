@@ -26,7 +26,6 @@ import std.sync.Mutex
 
 /**
  * Camera input object.
- *
  */
 @!APILevel[
     since: "22",
@@ -54,7 +53,9 @@ public class CameraInput <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func open(): Unit {
         unsafe {
@@ -75,7 +76,9 @@ public class CameraInput <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func open(isSecureEnabled: Bool): UInt64 {
         var secureSeqId: UInt64 = 0
@@ -93,7 +96,9 @@ public class CameraInput <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func close(): Unit {
         unsafe {
@@ -111,13 +116,13 @@ public class CameraInput <: RemoteDataLite {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -151,13 +156,13 @@ public class CameraInput <: RemoteDataLite {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the camera input errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the camera input errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -191,12 +196,12 @@ public class CameraInput <: RemoteDataLite {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { CameraDevice } camera - Camera device.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, camera: CameraDevice): Unit {
         match (eventType) {

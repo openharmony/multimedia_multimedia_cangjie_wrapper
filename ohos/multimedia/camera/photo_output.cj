@@ -26,7 +26,6 @@ import std.sync.Mutex
 
 /**
  * Photo output object.
- *
  */
 @!APILevel[
     since: "22",
@@ -63,7 +62,9 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         let errCode = unsafe { FfiCameraPhotoOutputRelease(this.getID()) }
@@ -78,7 +79,9 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func capture(): Unit {
         let errCode = unsafe { FfiCameraPhotoOutputCapture(getID()) }
@@ -95,7 +98,9 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func capture(setting: PhotoCaptureSetting): Unit {
         let (cLocation, isLocationNone) = if (let Some(v) <- setting.location) {
@@ -116,7 +121,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func isMovingPhotoSupported(): Bool {
         var errCode: Int32 = 0
@@ -128,7 +134,6 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     /**
      * Enable moving photo.
      *
-     * @permission ohos.permission.MICROPHONE
      * @param { Bool } enabled - Target state for moving photo.
      * @throws { BusinessException } 201 - permission denied.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
@@ -137,7 +142,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     @!APILevel[
         since: "22",
         permission: "ohos.permission.MICROPHONE",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func enableMovingPhoto(enabled: Bool): Unit {
         let errCode = unsafe { FfiCameraPhotoOutputEnableMovingPhoto(getID(), enabled) }
@@ -145,14 +151,15 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Determine whether video mirror is supported.
+     * Check whether to support mirror photo.
      *
      * @returns { Bool } Is the mirror supported.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func isMirrorSupported(): Bool {
         var errCode: Int32 = 0
@@ -175,7 +182,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func enableMirror(enabled: Bool): Unit {
         let errCode = unsafe { FfiCameraPhotoOutputEnableMirror(getID(), enabled) }
@@ -203,7 +211,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func setMovingPhotoVideoCodecType(codecType: VideoCodecType): Unit {
         let errCode = unsafe { FfiCameraPhotoOutputSetMovingPhotoVideoCodecType(getID(), codecType.getValue()) }
@@ -218,7 +227,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getActiveProfile(): Profile {
         var errCode: Int32 = 0
@@ -237,7 +247,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getPhotoRotation(deviceDegree: Int32): ImageRotation {
         var errCode: Int32 = 0
@@ -255,12 +266,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
         match (eventType) {
@@ -288,12 +299,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
         match (eventType) {
@@ -325,12 +336,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
         match (eventType) {
@@ -363,12 +374,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end
      * information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
         match (eventType) {
@@ -400,12 +411,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -463,14 +474,14 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * within the callback method of on().
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<Int32> } callback - Callback used to notify the estimated capture duration (in
+     * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration (in
      * milliseconds).
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
         match (eventType) {
@@ -498,12 +509,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureStartInfo> } callback - Callback used to get the capture start info.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit {
         match (eventType) {
@@ -519,12 +530,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterInfo> } callback - Callback used to get the frame shutter information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit {
         match (eventType) {
@@ -539,12 +550,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<CaptureEndInfo> } callback - Callback used to get the capture end information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit {
         match (eventType) {
@@ -560,12 +571,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FrameShutterEndInfo> } callback - Callback used to get the frame shutter end
      * information.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit {
         match (eventType) {
@@ -580,12 +591,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to notice capture ready.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -603,12 +614,12 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<Float64> } callback - Callback used to notify the estimated capture duration (in
      * milliseconds).
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit {
         match (eventType) {
@@ -623,12 +634,13 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
      * Unsubscribes all callbacks from the event specified by the param.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func off(eventType: CameraEvents): Unit {
         match (eventType) {

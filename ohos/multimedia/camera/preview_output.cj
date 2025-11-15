@@ -26,7 +26,6 @@ import std.sync.Mutex
 
 /**
  * Preview output object.
- *
  */
 @!APILevel[
     since: "22",
@@ -55,7 +54,9 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         let errCode = unsafe { FfiCameraPreviewOutputRelease(this.getID()) }
@@ -70,7 +71,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getSupportedFrameRates(): Array<FrameRateRange> {
         var errCode: Int32 = 0
@@ -93,7 +95,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func setFrameRate(minFps: Int32, maxFps: Int32): Unit {
         let errCode = unsafe { FfiCameraPreviewOutputSetFrameRate(getID(), minFps, maxFps) }
@@ -108,7 +111,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getActiveFrameRate(): FrameRateRange {
         var errCode: Int32 = 0
@@ -125,7 +129,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getActiveProfile(): Profile {
         var errCode: Int32 = 0
@@ -144,7 +149,8 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func getPreviewRotation(displayRotation: Int32): ImageRotation {
         var errCode: Int32 = 0
@@ -157,13 +163,14 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * Sets the preview rotation angle.
      *
      * @param { ImageRotation } previewRotation - Preview display rotation angle.
-     * @param { Bool } isDisplayLocked - TRUE means the display is locked, if not set, the default is FALSE.
+     * @param { Bool } [isDisplayLocked] - TRUE means the display is locked, if not set, the default is FALSE.
      * @throws { BusinessException } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func setPreviewRotation(previewRotation: ImageRotation, isDisplayLocked!: Bool = false): Unit {
         let errCode = unsafe {
@@ -179,12 +186,12 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -253,12 +260,12 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback0Argument } callback - Callback used to return the result.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
         match (eventType) {
@@ -276,12 +283,13 @@ public class PreviewOutput <: RemoteDataLite & CameraOutput {
      * Unsubscribes all callbacks from the event specified by the param.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func off(eventType: CameraEvents): Unit {
         match (eventType) {

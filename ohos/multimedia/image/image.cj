@@ -37,7 +37,6 @@ foreign {
 
 /**
  * Provides basic image operations, including obtaining image information, and reading and writing image data.
- *
  */
 @!APILevel[
     since: "22",
@@ -51,7 +50,8 @@ public class Image <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true
     ]
     public prop clipRect: Region {
         get() {
@@ -71,7 +71,8 @@ public class Image <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true
     ]
     public prop size: Size {
         get() {
@@ -91,7 +92,8 @@ public class Image <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true
     ]
     public prop format: Int32 {
         get() {
@@ -122,7 +124,9 @@ public class Image <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getComponent(componentType: ComponentType): Component {
         unsafe {
@@ -142,11 +146,11 @@ public class Image <: RemoteDataLite {
 
     /**
      * Release current image to receive another.
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        workerthread: true
     ]
     public func release(): Unit {
         unsafe { FfiOHOSImageRelease(getID()) }

@@ -123,6 +123,11 @@ public class AVFileDescriptor {
 
     /**
      * AVFileDescriptor constructor.
+     * @param { Int32 } fd - The file descriptor of audio or video source from file system.
+     * @param { Int64 } [offset] - The offset into the file where the data to be read, in bytes. By default,
+     * the offset is zero.
+     * @param { Int64 } [length] - The length in bytes of the data to be read. By default, the length is the
+     * rest of bytes in the file from the offset.
      */
     @!APILevel[
         since: "22",
@@ -169,6 +174,8 @@ public class PixelMapParams {
 
     /**
      * PixelMapParams constructor.
+     * @param { Int32 } [width] - Width of the thumbnail.The default value is -1.
+     * @param { Int32 } [height] - Height of the thumbnail.The default value is -1.
      */
     @!APILevel[
         since: "22",
@@ -182,6 +189,9 @@ public class PixelMapParams {
 
 /**
  * Enumerates the relationship between the video frame and the time at which the video thumbnail is obtained.
+ *
+ * The time passed in for obtaining the thumbnail may be different from the time of the video frame for which
+ * the thumbnail is actually obtained. Therefore, you need to specify their relationship.
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -211,7 +221,7 @@ public enum AVImageQueryOptions {
 
     /**
      * The key frame closest to the specified time is selected.
-     */    
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"

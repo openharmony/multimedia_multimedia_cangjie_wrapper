@@ -23,7 +23,6 @@ import ohos.business_exception.BusinessException
 
 /**
  * Defines the class of media album change request.
- *
  */
 @!APILevel[
     since: "22",
@@ -40,15 +39,13 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * The constructor to create a MediaAlbumChangeRequest instance.
-     *
      * @param { Album } album - Specify which album to change
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public init(album: Album) {
         super(
@@ -62,15 +59,13 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Obtains the album in the current album change request.
-     *
-     * @returns { Album } - Returns the album
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @returns { Album } Returns the album
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func getAlbum(): Album {
         var errCode = 0i32
@@ -85,15 +80,13 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Sets the album name.
-     *
      * @param { String } name - Album name to set.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func setAlbumName(name: String): Unit {
         try (albumName = unsafe { LibC.mallocCString(name).asResource() }) {
@@ -104,16 +97,14 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Add assets to the album.
-     *
      * @param { Array<PhotoAsset> } assets - Array of assets to add.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func addAssets(assets: Array<PhotoAsset>): Unit {
         let idArr = Array<Int64>(assets.size, {i => assets[i].getID()})
@@ -125,16 +116,14 @@ public class MediaAlbumChangeRequest <: RemoteDataLite & MediaChangeRequest {
 
     /**
      * Removes assets from the album.
-     *
      * @param { Array<PhotoAsset> } assets - Array of assets to remove.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      * @throws { BusinessException } 14000016 - Operation Not Support
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func removeAssets(assets: Array<PhotoAsset>): Unit {
         let idArr = Array<Int64>(assets.size, {i => assets[i].getID()})
