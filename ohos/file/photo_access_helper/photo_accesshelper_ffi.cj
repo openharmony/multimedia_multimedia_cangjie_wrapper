@@ -258,6 +258,9 @@ struct CPhotoCreationConfigs {
         var size: Int64
     ) {}
 
+    /**
+    * @throws { BusinessException } 13900011 - Out of memory.
+    */
     init(param: Array<PhotoCreationConfig>) {
         unsafe {
             var res: CPointer<CPhotoCreationConfig> = safeMalloc<CPhotoCreationConfig>(count: param.size)
@@ -270,7 +273,7 @@ struct CPhotoCreationConfigs {
                         res.read(j).free()
                     }
                     LibC.free(res)
-                    throw e
+                    throw BusinessException(13900011, "Out of memory.")
                 }
             }
             head = res
@@ -298,6 +301,9 @@ struct FfiBundleInfo {
         var appId: CString
     ) {}
 
+    /**
+    * @throws { BusinessException } 13900011 - Out of memory.
+    */
     init(cjBundleName: String, cjAppName: String, cjAppId: String) {
         unsafe {
             bundleName = CString(CPointer())
@@ -311,7 +317,7 @@ struct FfiBundleInfo {
                 LibC.free(bundleName)
                 LibC.free(appName)
                 LibC.free(appId)
-                throw e
+                throw BusinessException(13900011, "Out of memory")
             }
         }
     }

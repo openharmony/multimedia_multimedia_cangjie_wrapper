@@ -728,6 +728,9 @@ public class PhotoCreationConfig {
         this.subtype = subtype
     }
 
+    /**
+    * @throws { BusinessException } 13900011 - Out of memory.
+    */
     func toCPhotoCreationConfig(): CPhotoCreationConfig {
         var cFileNameExtension: CString = CString(CPointer())
         var cTitle: CString = CString(CPointer())
@@ -738,7 +741,7 @@ public class PhotoCreationConfig {
             } catch (e: Exception) {
                 LibC.free(cFileNameExtension)
                 LibC.free(cTitle)
-                throw e
+                throw BusinessException(13900011, "Out of memory")
             }
             CPhotoCreationConfig(cTitle, cFileNameExtension, photoType.value, subtype.value)
         }
