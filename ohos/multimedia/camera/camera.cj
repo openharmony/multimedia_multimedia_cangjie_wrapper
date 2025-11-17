@@ -30,7 +30,8 @@ import ohos.labels.APILevel
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Camera.Core"
+    syscap: "SystemCapability.Multimedia.Camera.Core",
+    throwexception: true
 ]
 public func getCameraManager(context: UIAbilityContext): CameraManager {
     return CameraManager()

@@ -35,14 +35,15 @@ foreign {
 }
 
 /**
- * Creates an AVImageGenerator instance. The API can be used to obtain a video thumbnail.
- *
- * @return { AVImageGenerator } Returns the AVImageGenerator instance.
+ * Creates an AVImageGenerator instance.
+ * @returns { AVImageGenerator } Returns the AVImageGenerator instance.
  * @throws { BusinessException } 5400101 - No memory.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+    syscap: "SystemCapability.Multimedia.Media.AVImageGenerator",
+    throwexception: true,
+    workerthread: true
 ]
 public func createAVImageGenerator(): AVImageGenerator {
     let id = unsafe {
@@ -72,13 +73,14 @@ public class AVImageGenerator <: RemoteDataLite {
     }
 
     /**
-     * Media file descriptor, which specifies the data source.
-     *
-     * @return { AVFileDescriptor } Returns the Media file descriptor.
+     * Media file descriptor, which specifies the data source. 
+     * @throws { BusinessException } 5400101 - No memory.
+     * @throws { BusinessException } 5400102 - Operation not allowed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor",
+        throwexception: true
     ]
     public mut prop fdSrc: AVFileDescriptor {
         get() {
@@ -100,17 +102,23 @@ public class AVImageGenerator <: RemoteDataLite {
     }
 
     /**
-     * Obtains a video thumbnail. This API uses a promise to return the result.
-     *
-     * @param { Int64 } timeUs - Time of the video for which a thumbnail is to be obtained, in μs.
-     * @param { AVImageQueryOptions } options - Relationship between the time passed in and the video frame.
-     * @param { PixelMapParams } param - Format parameters of the thumbnail to be obtained.
-     * @returns { PixelMap } Promise used to return the video thumbnail.
+     * It will decode the given video resource. Then fetch a picture
+     * at @timeUs according the given @options and @param .
+     * @param { Int64 } timeUs - The time expected to fetch picture from the video resource.
+     * The unit is microsecond(us).
+     * @param { AVImageQueryOptions } options - The time options about the relationship
+     * between the given timeUs and a key frame, see @AVImageQueryOptions .
+     * @param { PixelMapParams } param - The output pixel map format params, see @PixelMapParams .
+     * @returns { PixelMap } Returns the PixelMap instance.
      * @throws { BusinessException } 5400101 - No memory.
+     * @throws { BusinessException } 5400102 - Operation not allowed.
+     * @throws { BusinessException } 5400106 - Unsupported format.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator",
+        throwexception: true,
+        workerthread: true
     ]
     public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param: PixelMapParams): PixelMap {
         let cParam = CPixelMapParams(param)
@@ -122,13 +130,14 @@ public class AVImageGenerator <: RemoteDataLite {
     }
 
     /**
-     * Releases this AVImageGenerator instance. 
-     * 
-     * @throws { BusinessException } 5400102 - Operation not allowed.
+     * Releases this AVImageGenerator instance.
+     * @throws { BusinessException } 5400101 - No memory.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
+        syscap: "SystemCapability.Multimedia.Media.AVImageGenerator",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         let errCode = unsafe { FfiAVImageGeneratorRelease(getID()) }

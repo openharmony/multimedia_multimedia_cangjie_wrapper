@@ -26,7 +26,6 @@ import std.sync.Mutex
 
 /**
  * Session object.
- *
  */
 @!APILevel[
     since: "22",
@@ -41,7 +40,8 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     func beginConfig(): Unit {
         unsafe {
@@ -58,7 +58,9 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     func commitConfig(): Unit {
         unsafe {
@@ -99,7 +101,8 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     func addInput(cameraInput: CameraInput): Unit {
         unsafe {
@@ -119,7 +122,8 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     func removeInput(cameraInput: CameraInput): Unit {
         unsafe {
@@ -163,7 +167,8 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     func addOutput(cameraOutput: CameraOutput): Unit {
         unsafe {
@@ -184,7 +189,8 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     func removeOutput(cameraOutput: CameraOutput): Unit {
         unsafe {
@@ -203,7 +209,9 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     func start(): Unit {
         unsafe {
@@ -219,7 +227,9 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     func stop(): Unit {
         unsafe {
@@ -235,7 +245,9 @@ public interface Session {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     func release(): Unit {
         unsafe {
@@ -263,7 +275,6 @@ func getCameraOutputType(cameraOutput: CameraOutput): Int32 {
 
 /**
  * Photo session object.
- *
  */
 @!APILevel[
     since: "22",
@@ -290,17 +301,18 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
     /**
      * Gets whether the choosed preconfig type can be used to configure photo session.
-     * Must choose preconfig type from {@link PreconfigType}.
+     * Must choose preconfig type from PreconfigType.
      *
      * @param { PreconfigType } preconfigType - preconfig type.
-     * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
-     *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}.
+     * @param { PreconfigRatio } [preconfigRatio] - the aspect ratio of surface for preconfig,
+     *                                            default value PRECONFIG_RATIO_4_3.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_4_3): Bool {
         return canPreconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
@@ -308,16 +320,17 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
     /**
      * Configure photo session with the preconfig type.
-     * Must choose preconfig type from {@link PreconfigType}.
+     * Must choose preconfig type from PreconfigType.
      *
      * @param { PreconfigType } preconfigType - preconfig type.
-     * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
-     *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_4_3}
+     * @param { PreconfigRatio } [preconfigRatio] - the aspect ratio of surface for preconfig,
+     *                                            default value PRECONFIG_RATIO_4_3
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func preconfig(
         preconfigType: PreconfigType,
@@ -334,7 +347,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * within the callback method of on().
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      */
     @!APILevel[
         since: "22",
@@ -348,7 +361,7 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Unsubscribes from error events.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      */
     @!APILevel[
         since: "22",
@@ -426,11 +439,11 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Unsubscribes all callbacks from the event specified by the param.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        workerthread: true
     ]
     public func off(eventType: CameraEvents): Unit {
         let errCode = match (eventType) {
@@ -445,7 +458,6 @@ public class PhotoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
 /**
  * Video session object.
- *
  */
 @!APILevel[
     since: "22",
@@ -472,17 +484,18 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
     /**
      * Gets whether the choosed preconfig type can be used to configure video session.
-     * Must choose preconfig type from {@link PreconfigType}.
+     * Must choose preconfig type from PreconfigType.
      *
      * @param { PreconfigType } preconfigType - preconfig type.
-     * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
-     *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
+     * @param { PreconfigRatio } [preconfigRatio] - the aspect ratio of surface for preconfig,
+     *                                            default value PRECONFIG_RATIO_16_9.
      * @returns { Bool } Whether the choosed preconfig type can be used.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func canPreconfig(preconfigType: PreconfigType, preconfigRatio!: PreconfigRatio = PreconfigRatio_16_9): Bool {
         return canPreconfig0((this as RemoteDataLite).getOrThrow().getID(), preconfigType, preconfigRatio)
@@ -490,16 +503,17 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
 
     /**
      * Configure video session with the preconfig type.
-     * Must choose preconfig type from {@link PreconfigType}.
+     * Must choose preconfig type from PreconfigType.
      *
      * @param { PreconfigType } preconfigType - preconfig type.
-     * @param { PreconfigRatio } preconfigRatio - the aspect ratio of surface for preconfig,
-     *                                            default value {@link PreconfigRatio#PRECONFIG_RATIO_16_9}.
+     * @param { PreconfigRatio } [preconfigRatio] - the aspect ratio of surface for preconfig,
+     *                                            default value PRECONFIG_RATIO_16_9.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func preconfig(
         preconfigType: PreconfigType,
@@ -516,13 +530,13 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * within the callback method of on().
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException>} callback - Callback used to get the capture session errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback0Argument): Unit {
         onError0(errorCallbackManager, eventType, callback)
@@ -532,13 +546,13 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Unsubscribes from error events.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @param { Callback1Argument<BusinessException> } callback - Callback used to get the capture session errors.
-     * @throws { BusinessException } 401 - The parameter check failed.
+     * @param { Callback0Argument } callback - Callback used to get the capture session errors.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback0Argument): Unit {
         offError0(errorCallbackManager, eventType, callback)
@@ -553,12 +567,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
         onFocus0(focusStateChangeCallbackManager, eventType, callback)
@@ -569,12 +583,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<FocusState> } callback - Callback used to get the capture focus state change.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit {
         offFocus0(focusStateChangeCallbackManager, eventType, callback)
@@ -589,12 +603,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
         onSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
@@ -605,12 +619,12 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      *
      * @param { CameraEvents } eventType - Event type.
      * @param { Callback1Argument<SmoothZoomInfo> } callback - Callback used to get the zoom info.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
     ]
     public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit {
         offSmoothZoom0(smoothZoomCallbackManager, eventType, callback)
@@ -620,12 +634,13 @@ public class VideoSession <: RemoteDataLite & Session & Flash & AutoExposure & F
      * Unsubscribes all callbacks from the event specified by the param.
      *
      * @param { CameraEvents } eventType - Event type.
-     * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 7400201 - Camera service fatal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func off(eventType: CameraEvents): Unit {
         let errCode = match (eventType) {

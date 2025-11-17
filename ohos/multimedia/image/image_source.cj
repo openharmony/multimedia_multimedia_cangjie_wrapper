@@ -84,11 +84,11 @@ foreign {
  * @param { String } uri - Image source URI.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(uri: String): ImageSource {
     unsafe {
@@ -112,11 +112,11 @@ public func createImageSource(uri: String): ImageSource {
  * @param { SourceOptions } options - The config of Image source.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(uri: String, options: SourceOptions): ImageSource {
     unsafe {
@@ -142,7 +142,8 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource 
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(fd: Int32): ImageSource {
     unsafe {
@@ -163,7 +164,8 @@ public func createImageSource(fd: Int32): ImageSource {
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
     unsafe {
@@ -180,11 +182,11 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource {
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(buf: Array<UInt8>): ImageSource {
     unsafe {
@@ -206,12 +208,13 @@ public func createImageSource(buf: Array<UInt8>): ImageSource {
  *
  * @param { Array<UInt8> } buf - The buffer of the image.
  * @param { SourceOptions } options - The config of Image source.
+ * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
- * @throws { BusinessException } 62980115 - Invalid image parameter.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageSource {
     unsafe {
@@ -232,14 +235,15 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
 /**
  * Creates an ImageSource instance based on the raw file descriptor.
  *
- * @param { resourceManager.RawFileDescriptor } rawfile - The raw file descriptor of the image.
- * @param { SourceOptions } options - The config of Image source.
+ * @param { RawFileDescriptor } rawfile - The raw file descriptor of the image.
+ * @param { SourceOptions } [options] - The config of Image source.
  * @returns { ImageSource } Returns the ImageSource instance.
  * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    syscap: "SystemCapability.Multimedia.Image.ImageSource",
+    throwexception: true
 ]
 public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOptions = SourceOptions(0)): ImageSource {
     unsafe {
@@ -253,7 +257,6 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
 
 /**
  * ImageSource instance.
- *
  */
 @!APILevel[
     since: "22",
@@ -268,7 +271,8 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true
     ]
     public prop supportedFormats: Array<String> {
         get() {
@@ -300,7 +304,7 @@ public class ImageSource <: RemoteDataLite {
     /**
      * Obtains the count of frame in an image.
      *
-     * @returns { UInt32> } An instance used to return the number.
+     * @returns { UInt32 } Used to return the number.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
@@ -316,7 +320,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func getFrameCount(): UInt32 {
         let cvalue = unsafe { FfiOHOSGetFrameCount(getID()) }
@@ -325,16 +331,18 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Get image information from image source synchronously.
+     * Get image information from image source.
      *
-     * @param { UInt32 } index Sequence number of an image. If this parameter is not specified,
-     *  the default value 0 is used.
-     * @returns { ImageInfo } An instance used to return the image information.
+     * @param { UInt32 } [index] - Sequence number of an image. If this parameter is not specified,
+     * the default value 0 is used.
+     * @returns { ImageInfo } Return the image information.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func getImageInfo(index!: UInt32 = 0): ImageInfo {
         unsafe {
@@ -353,6 +361,9 @@ public class ImageSource <: RemoteDataLite {
      * Obtains the value of a property in an image with the specified index. This method return the property value in a
      * string.
      *
+     * @param { PropertyKey } key - Name of the property whose value is to be obtained.
+     * @param { ImagePropertyOptions } [options] - Index of the image.
+     * @returns { String } Return the property value.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980103 - The image data is not supported.
@@ -370,7 +381,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = ImagePropertyOptions()): String {
         unsafe {
@@ -390,8 +403,10 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Modify the value of a property in an image with the specified key. 
+     * Modify the value of a property in an image with the specified key.
      *
+     * @param { PropertyKey } key - Name of the property whose value is to be modified.
+     * @param { String } value - The value to be set to property.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left
      * unspecified; 2.Incorrect parameter types.
@@ -402,7 +417,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func modifyImageProperty(key: PropertyKey, value: String): Unit {
         unsafe {
@@ -419,15 +436,17 @@ public class ImageSource <: RemoteDataLite {
     /**
      * Update the data in the incremental ImageSource.
      *
-     * @param { Array<UInt8> } buf The data to be updated.
-     * @param { Bool } isFinished If is it finished.
-     * @param { UInt32 } value The offset of data.
-     * @param { UInt32 } length The length fo buf.
+     * @param { Array<UInt8> } buf - The data to be updated.
+     * @param { Bool } isFinished - If is it finished.
+     * @param { UInt32 } offset - The offset of data.
+     * @param { UInt32 } length - The length fo buf.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func updateData(buf: Array<UInt8>, isFinished: Bool, offset: UInt32, length: UInt32): Unit {
         unsafe {
@@ -440,15 +459,16 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Create a PixelMap object based on image decoding parameters synchronously.
+     * Create a PixelMap object based on image decoding parameters.
      *
-     * @param { DecodingOptions } options Image decoding parameters.
-     * @returns { PixelMap } An instance used to return the PixelMap object.
+     * @param { DecodingOptions } [options] - Image decoding parameters.
+     * @returns { PixelMap } Return the PixelMap object.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true
     ]
     public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
         unsafe {
@@ -460,9 +480,11 @@ public class ImageSource <: RemoteDataLite {
 
     /**
      * Creates a PixelMap array based on image decoding parameters.
+     * For animated images such as GIF and WebP, this interface returns the image data of each frame.
+     * For static images, it returns a single frame of image data.
      *
-     * @param { DecodingOptions } options Image decoding parameters.
-     * @returns { Array<PixelMap> } An instance used to return the PixelMap array.
+     * @param { DecodingOptions } [options] - Image decoding parameters.
+     * @returns { Array<PixelMap> } Return the PixelMap array.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980099 - The shared memory data is abnormal.
@@ -483,7 +505,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap> {
         unsafe {
@@ -501,7 +525,7 @@ public class ImageSource <: RemoteDataLite {
     /**
      * Obtains the array of delay time in an image. 
      *
-     * @returns { Array<UInt32> } An instance used to return the array.
+     * @returns { Array<Int32> } Return the array.
      * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
      * 2. Decoding process exception. 3. Insufficient memory.
      * @throws { BusinessException } 62980102 - Failed to malloc memory.
@@ -516,7 +540,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func getDelayTimeList(): Array<Int32> {
         unsafe {
@@ -537,7 +563,9 @@ public class ImageSource <: RemoteDataLite {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         unsafe {

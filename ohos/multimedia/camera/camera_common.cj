@@ -76,7 +76,6 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 
 /**
  * Rectangle definition.
- *
  */
 @!APILevel[
     since: "22",
@@ -85,7 +84,6 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
 public class Rect {
     /**
      * X coordinator of top left point.
-     *
      */
     @!APILevel[
         since: "22",
@@ -94,7 +92,6 @@ public class Rect {
     public var topLeftX: Float64
     /**
      * Y coordinator of top left point.
-     *
      */
     @!APILevel[
         since: "22",
@@ -103,7 +100,6 @@ public class Rect {
     public var topLeftY: Float64
     /**
      * Width of this rectangle.
-     *
      */
     @!APILevel[
         since: "22",
@@ -112,7 +108,6 @@ public class Rect {
     public var width: Float64
     /**
      * Height of this rectangle.
-     *
      */
     @!APILevel[
         since: "22",
@@ -130,7 +125,6 @@ public class Rect {
 
 /**
  * Enum for torch mode.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -140,7 +134,6 @@ public class Rect {
 public enum TorchMode {
     /**
      * The device torch is always off.
-     *
      */
     @!APILevel[
         since: "22",
@@ -150,7 +143,6 @@ public enum TorchMode {
     |
     /**
      * The device torch is always on.
-     *
      */
     @!APILevel[
         since: "22",
@@ -160,7 +152,6 @@ public enum TorchMode {
     |
     /**
      * The device continuously monitors light levels and uses the torch when necessary.
-     *
      */
     @!APILevel[
         since: "22",
@@ -193,7 +184,6 @@ public enum TorchMode {
 
 /**
  * Enumerates the image rotation angles.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -203,7 +193,6 @@ public enum TorchMode {
 public enum ImageRotation {
     /**
      * The capture image rotates 0 degrees.
-     *
      */
     @!APILevel[
         since: "22",
@@ -213,7 +202,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 90 degrees.
-     *
      */
     @!APILevel[
         since: "22",
@@ -223,7 +211,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 180 degrees.
-     *
      */
     @!APILevel[
         since: "22",
@@ -233,7 +220,6 @@ public enum ImageRotation {
     |
     /**
      * The capture image rotates 270 degrees.
-     *
      */
     @!APILevel[
         since: "22",
@@ -268,7 +254,6 @@ public enum ImageRotation {
 
 /**
  * Enum for camera status.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -278,7 +263,6 @@ public enum ImageRotation {
 public enum CameraStatus {
     /**
      * Appear status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -288,7 +272,6 @@ public enum CameraStatus {
     |
     /**
      * Disappear status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -298,7 +281,6 @@ public enum CameraStatus {
     |
     /**
      * Available status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -308,7 +290,6 @@ public enum CameraStatus {
     |
     /**
      * Unavailable status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -333,7 +314,6 @@ public enum CameraStatus {
 
 /**
  * Torch status info.
- *
  */
 @!APILevel[
     since: "22",
@@ -342,7 +322,6 @@ public enum CameraStatus {
 public class TorchStatusInfo {
     /**
      * is torch available
-     *
      */
     @!APILevel[
         since: "22",
@@ -350,8 +329,8 @@ public class TorchStatusInfo {
     ]
     public let isTorchAvailable: Bool
     /**
-     * is torch active
-     *
+     * Whether the flashlight is activated or not. True means the flashlight is activated, false means the flashlight
+     * is not activated.
      */
     @!APILevel[
         since: "22",
@@ -359,8 +338,7 @@ public class TorchStatusInfo {
     ]
     public let isTorchActive: Bool
     /**
-     * the current torch brightness level.
-     *
+     * Flashlight brightness level, value range is [0,1], the closer to 1, the brighter it is.
      */
     @!APILevel[
         since: "22",
@@ -377,7 +355,6 @@ public class TorchStatusInfo {
 
 /**
  * Frame rate range.
- *
  */
 @!APILevel[
     since: "22",
@@ -386,7 +363,6 @@ public class TorchStatusInfo {
 public class FrameRateRange {
     /**
      * Min frame rate.
-     *
      */
     @!APILevel[
         since: "22",
@@ -395,7 +371,6 @@ public class FrameRateRange {
     public let min: Int32
     /**
      * Max frame rate.
-     *
      */
     @!APILevel[
         since: "22",
@@ -411,7 +386,6 @@ public class FrameRateRange {
 
 /**
  * Size parameter.
- *
  */
 @!APILevel[
     since: "22",
@@ -419,8 +393,7 @@ public class FrameRateRange {
 ]
 public class Size {
     /**
-     * Height.
-     *
+     * Width.
      */
     @!APILevel[
         since: "22",
@@ -428,8 +401,7 @@ public class Size {
     ]
     public var width: UInt32
     /**
-     * Width.
-     *
+     * Height.
      */
     @!APILevel[
         since: "22",
@@ -447,7 +419,6 @@ class ProfileImpl {}
 
 /**
  * Profile for camera streams.
- *
  */
 @!APILevel[
     since: "22",
@@ -456,7 +427,6 @@ class ProfileImpl {}
 public open class Profile {
     /**
      * Camera format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -464,8 +434,7 @@ public open class Profile {
     ]
     public let format: CameraFormat
     /**
-     * Picture size.
-     *
+     * Resolution. The settings are the width and height of the camera's resolution, not the width and height of the actual output image.
      */
     @!APILevel[
         since: "22",
@@ -483,7 +452,6 @@ public open class Profile {
 
 /**
  * Video profile.
- *
  */
 @!APILevel[
     since: "22",
@@ -492,7 +460,6 @@ public open class Profile {
 public class VideoProfile <: Profile {
     /**
      * Frame rate in unit fps (frames per second).
-     *
      */
     @!APILevel[
         since: "22",
@@ -508,7 +475,6 @@ public class VideoProfile <: Profile {
 
 /**
  * Metadata object type.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -518,7 +484,6 @@ public class VideoProfile <: Profile {
 public enum MetadataObjectType {
     /**
      * Face detection type.
-     *
      */
     @!APILevel[
         since: "22",
@@ -547,7 +512,6 @@ public enum MetadataObjectType {
 
 /**
  * Camera output capability.
- *
  */
 @!APILevel[
     since: "22",
@@ -556,7 +520,6 @@ public enum MetadataObjectType {
 public class CameraOutputCapability {
     /**
      * Preview profiles.
-     *
      */
     @!APILevel[
         since: "22",
@@ -565,7 +528,6 @@ public class CameraOutputCapability {
     public let previewProfiles: Array<Profile>
     /**
      * Photo profiles.
-     *
      */
     @!APILevel[
         since: "22",
@@ -574,7 +536,6 @@ public class CameraOutputCapability {
     public let photoProfiles: Array<Profile>
     /**
      * Video profiles.
-     *
      */
     @!APILevel[
         since: "22",
@@ -583,7 +544,6 @@ public class CameraOutputCapability {
     public let videoProfiles: Array<VideoProfile>
     /**
      * All the supported metadata Object Types.
-     *
      */
     @!APILevel[
         since: "22",
@@ -602,7 +562,6 @@ public class CameraOutputCapability {
 
 /**
  * Enum for fold status.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -612,7 +571,6 @@ public class CameraOutputCapability {
 public enum FoldStatus {
     /**
      * Non-foldable status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -622,7 +580,6 @@ public enum FoldStatus {
     |
     /**
      * Expanded status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -632,7 +589,6 @@ public enum FoldStatus {
     |
     /**
      * Folded status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -656,7 +612,6 @@ public enum FoldStatus {
 
 /**
  * Fold status info.
- *
  */
 @!APILevel[
     since: "22",
@@ -665,7 +620,6 @@ public enum FoldStatus {
 public class FoldStatusInfo {
     /**
      * Gets supported camera devices under the current fold status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -674,7 +628,6 @@ public class FoldStatusInfo {
     public let supportedCameras: Array<CameraDevice>
     /**
      * Current fold status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -693,7 +646,6 @@ public class FoldStatusInfo {
 
 /**
  * Enum for camera connection type.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -703,7 +655,6 @@ public class FoldStatusInfo {
 public enum ConnectionType {
     /**
      * Built-in camera.
-     *
      */
     @!APILevel[
         since: "22",
@@ -713,7 +664,6 @@ public enum ConnectionType {
     |
     /**
      * Camera connected using USB
-     *
      */
     @!APILevel[
         since: "22",
@@ -723,7 +673,6 @@ public enum ConnectionType {
     |
     /**
      * Remote camera
-     *
      */
     @!APILevel[
         since: "22",
@@ -756,7 +705,6 @@ public enum ConnectionType {
 
 /**
  * Enum for camera format type.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -766,7 +714,6 @@ public enum ConnectionType {
 public enum CameraFormat {
     /**
      * YCBCR P010 Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -776,7 +723,6 @@ public enum CameraFormat {
     |
     /**
      * YCRCB P010 Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -786,7 +732,6 @@ public enum CameraFormat {
     |
     /**
      * HEIC Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -796,7 +741,6 @@ public enum CameraFormat {
     |
     /**
      * JPEG Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -806,7 +750,6 @@ public enum CameraFormat {
     |
     /**
      * YUV 420 Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -816,7 +759,6 @@ public enum CameraFormat {
     |
     /**
      * RGBA 8888 Format.
-     *
      */
     @!APILevel[
         since: "22",
@@ -855,7 +797,6 @@ public enum CameraFormat {
 
 /**
  * Camera device object.
- *
  */
 @!APILevel[
     since: "22",
@@ -864,7 +805,6 @@ public enum CameraFormat {
 public class CameraDevice {
     /**
      * Camera ID attribute.
-     *
      */
     @!APILevel[
         since: "22",
@@ -873,7 +813,6 @@ public class CameraDevice {
     public let cameraId: String
     /**
      * Camera position attribute.
-     *
      */
     @!APILevel[
         since: "22",
@@ -882,7 +821,6 @@ public class CameraDevice {
     public let cameraPosition: CameraPosition
     /**
      * Camera type attribute.
-     *
      */
     @!APILevel[
         since: "22",
@@ -891,7 +829,6 @@ public class CameraDevice {
     public let cameraType: CameraType
     /**
      * Camera connection type attribute.
-     *
      */
     @!APILevel[
         since: "22",
@@ -899,8 +836,7 @@ public class CameraDevice {
     ]
     public let connectionType: ConnectionType
     /**
-     * Camera sensor orientation attribute.
-     *
+     * The camera mounting angle, which does not change with screen rotation, takes values from 0° to 360° in degrees.
      */
     @!APILevel[
         since: "22",
@@ -919,8 +855,7 @@ public class CameraDevice {
 }
 
 /**
- * Camera status info.
- *
+ * An instance of the interface returned by the camera manager's callback that represents camera state information.
  */
 @!APILevel[
     since: "22",
@@ -929,7 +864,6 @@ public class CameraDevice {
 public class CameraStatusInfo {
     /**
      * Camera instance.
-     *
      */
     @!APILevel[
         since: "22",
@@ -938,7 +872,6 @@ public class CameraStatusInfo {
     public var camera: CameraDevice
     /**
      * Current camera status.
-     *
      */
     @!APILevel[
         since: "22",
@@ -965,7 +898,7 @@ public class CameraStatusInfo {
 ]
 public enum CameraEvents {
     /**
-     * camera error event.
+     * CameraError enum value.
      */
     @!APILevel[
         since: "22",
@@ -974,7 +907,7 @@ public enum CameraEvents {
     CameraError
     |
     /**
-     * camera status event.
+     * CameraStatus enum value
      */
     @!APILevel[
         since: "22",
@@ -983,7 +916,7 @@ public enum CameraEvents {
     CameraStatus
     |
     /**
-     * fold status change event.
+     * FoldStatusChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -992,7 +925,7 @@ public enum CameraEvents {
     FoldStatusChange
     |
     /**
-     * torch status change event.
+     * TorchStatusChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -1001,7 +934,7 @@ public enum CameraEvents {
     TorchStatusChange
     |
     /**
-     * frame start event.
+     * FrameStart enum value.
      */
     @!APILevel[
         since: "22",
@@ -1010,7 +943,7 @@ public enum CameraEvents {
     FrameStart
     |
     /**
-     * frame end event.
+     * FrameEnd enum value.
      */
     @!APILevel[
         since: "22",
@@ -1019,7 +952,7 @@ public enum CameraEvents {
     FrameEnd
     |
     /**
-     * capture start withInfo event.
+     * CaptureStartWithInfo enum value.
      */
     @!APILevel[
         since: "22",
@@ -1028,7 +961,7 @@ public enum CameraEvents {
     CaptureStartWithInfo
     |
     /**
-     * frame shutter event.
+     * FrameShutter enum value.
      */
     @!APILevel[
         since: "22",
@@ -1037,7 +970,7 @@ public enum CameraEvents {
     FrameShutter
     |
     /**
-     * capture end event.
+     * CaptureEnd enum value.
      */
     @!APILevel[
         since: "22",
@@ -1046,7 +979,7 @@ public enum CameraEvents {
     CaptureEnd
     |
     /**
-     * frame shutter end event.
+     * FrameShutterEnd enum value.
      */
     @!APILevel[
         since: "22",
@@ -1055,7 +988,7 @@ public enum CameraEvents {
     FrameShutterEnd
     |
     /**
-     * capture ready event.
+     * CaptureReady enum value.
      */
     @!APILevel[
         since: "22",
@@ -1064,7 +997,7 @@ public enum CameraEvents {
     CaptureReady
     |
     /**
-     * estimated capture duration event.
+     * EstimatedCaptureDuration enum value.
      */
     @!APILevel[
         since: "22",
@@ -1073,7 +1006,7 @@ public enum CameraEvents {
     EstimatedCaptureDuration
     |
     /**
-     * metadata objects available event.
+     * MetadataObjectsAvailable enum value.
      */
     @!APILevel[
         since: "22",
@@ -1082,7 +1015,7 @@ public enum CameraEvents {
     MetadataObjectsAvailable
     |
     /**
-     * focus state change event.
+     * FocusStateChange enum value.
      */
     @!APILevel[
         since: "22",
@@ -1091,7 +1024,7 @@ public enum CameraEvents {
     FocusStateChange
     |
     /**
-     * smooth zoom info available event.
+     * SmoothZoomInfoAvailable enum value.
      */
     @!APILevel[
         since: "22",
@@ -1129,7 +1062,6 @@ public enum CameraEvents {
 
 /**
  * Enum for camera position.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1139,7 +1071,6 @@ public enum CameraEvents {
 public enum CameraPosition {
     /**
      * Unspecified position.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1149,7 +1080,6 @@ public enum CameraPosition {
     |
     /**
      * Back position.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1159,7 +1089,6 @@ public enum CameraPosition {
     |
     /**
      * Front position.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1192,7 +1121,6 @@ public enum CameraPosition {
 
 /**
  * Enum for camera type.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1202,7 +1130,6 @@ public enum CameraPosition {
 public enum CameraType {
     /**
      * Default camera type
-     *
      */
     @!APILevel[
         since: "22",
@@ -1212,7 +1139,6 @@ public enum CameraType {
     |
     /**
      * Wide camera
-     *
      */
     @!APILevel[
         since: "22",
@@ -1222,7 +1148,6 @@ public enum CameraType {
     |
     /**
      * Ultra wide camera
-     *
      */
     @!APILevel[
         since: "22",
@@ -1232,7 +1157,6 @@ public enum CameraType {
     |
     /**
      * Telephoto camera
-     *
      */
     @!APILevel[
         since: "22",
@@ -1242,7 +1166,6 @@ public enum CameraType {
     |
     /**
      * True depth camera
-     *
      */
     @!APILevel[
         since: "22",
@@ -1279,7 +1202,6 @@ public enum CameraType {
 
 /**
  * Enumerates the camera scene modes.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1289,7 +1211,6 @@ public enum CameraType {
 public enum SceneMode {
     /**
      * Normal photo mode.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1299,7 +1220,6 @@ public enum SceneMode {
     |
     /**
      * Normal video mode.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1309,7 +1229,6 @@ public enum SceneMode {
     |
     /**
      * Secure camera mode.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1342,7 +1261,6 @@ public enum SceneMode {
 
 /**
  * Enumerates the image quality levels.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1352,7 +1270,6 @@ public enum SceneMode {
 public enum QualityLevel {
     /**
      * High image quality.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1362,7 +1279,6 @@ public enum QualityLevel {
     |
     /**
      * Medium image quality.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1372,7 +1288,6 @@ public enum QualityLevel {
     |
     /**
      * Low image quality.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1393,7 +1308,6 @@ public enum QualityLevel {
 
 /**
  * Photo capture location
- *
  */
 @!APILevel[
     since: "22",
@@ -1402,7 +1316,6 @@ public enum QualityLevel {
 public class Location {
     /**
      * Latitude.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1411,7 +1324,6 @@ public class Location {
     public var latitude: Float64
     /**
      * Longitude.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1420,7 +1332,6 @@ public class Location {
     public var longitude: Float64
     /**
      * Altitude.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1430,6 +1341,10 @@ public class Location {
 
     /**
      * Location constructor.
+     *
+     * @param { Float64 } latitude - Latitude.
+     * @param { Float64 } longitude - Longitude.
+     * @param { Float64 } altitude - Altitude.
      */
     @!APILevel[
         since: "22",
@@ -1448,7 +1363,6 @@ public class Location {
 
 /**
  * Photo capture options to set.
- *
  */
 @!APILevel[
     since: "22",
@@ -1457,7 +1371,6 @@ public class Location {
 public class PhotoCaptureSetting {
     /**
      * Photo image quality.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1466,7 +1379,6 @@ public class PhotoCaptureSetting {
     public var quality: QualityLevel
     /**
      * Photo rotation.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1475,7 +1387,6 @@ public class PhotoCaptureSetting {
     public var rotation: ImageRotation
     /**
      * Photo location.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1486,7 +1397,6 @@ public class PhotoCaptureSetting {
      * Mirror enable switch (default off).
      * It is necessary to utilize the function isMirrorSupported to ascertain whether it is supported
      * prior to its implementation.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1496,6 +1406,11 @@ public class PhotoCaptureSetting {
 
     /**
      * PhotoCaptureSetting constructor.
+     *
+     * @param { QualityLevel } quality - Photo image quality.
+     * @param { ImageRotation } rotation - Photo rotation.
+     * @param { ?Location } location - Photo location.
+     * @param { Bool } mirror - Mirror enable switch (default off).
      */
     @!APILevel[
         since: "22",
@@ -1516,7 +1431,6 @@ public class PhotoCaptureSetting {
 
 /**
  * Enumerates the camera video codec type.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1526,7 +1440,6 @@ public class PhotoCaptureSetting {
 public enum VideoCodecType {
     /**
      * Video encoding type AVC.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1536,7 +1449,6 @@ public enum VideoCodecType {
     |
     /**
      * Video encoding type HEVC.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1556,7 +1468,6 @@ public enum VideoCodecType {
 
 /**
  * Capture start info.
- *
  */
 @!APILevel[
     since: "22",
@@ -1565,7 +1476,6 @@ public enum VideoCodecType {
 public class CaptureStartInfo {
     /**
      * Capture id.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1574,7 +1484,6 @@ public class CaptureStartInfo {
     public var captureId: Int32
     /**
      * Time(in milliseconds) is the shutter time for the photo.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1590,7 +1499,6 @@ public class CaptureStartInfo {
 
 /**
  * Frame shutter callback info.
- *
  */
 @!APILevel[
     since: "22",
@@ -1599,7 +1507,6 @@ public class CaptureStartInfo {
 public class FrameShutterInfo {
     /**
      * Capture id.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1608,7 +1515,6 @@ public class FrameShutterInfo {
     public var captureId: Int32
     /**
      * Timestamp for frame.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1624,7 +1530,6 @@ public class FrameShutterInfo {
 
 /**
  * Capture end info.
- *
  */
 @!APILevel[
     since: "22",
@@ -1633,7 +1538,6 @@ public class FrameShutterInfo {
 public class CaptureEndInfo {
     /**
      * Capture id.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1642,7 +1546,6 @@ public class CaptureEndInfo {
     public var captureId: Int32
     /**
      * Frame count.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1658,7 +1561,6 @@ public class CaptureEndInfo {
 
 /**
  * Frame shutter end callback info.
- *
  */
 @!APILevel[
     since: "22",
@@ -1667,7 +1569,6 @@ public class CaptureEndInfo {
 public class FrameShutterEndInfo {
     /**
      * Capture id.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1683,7 +1584,6 @@ public class FrameShutterEndInfo {
 /**
  * Types of preconfig, which used to configure session conveniently.
  * Preconfig type contains common use cases of camera output.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1693,7 +1593,6 @@ public class FrameShutterEndInfo {
 public enum PreconfigType {
     /**
      * 720P output for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1703,7 +1602,6 @@ public enum PreconfigType {
     |
     /**
      * 1080P output for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1713,7 +1611,6 @@ public enum PreconfigType {
     |
     /**
      * 4K output for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1723,7 +1620,6 @@ public enum PreconfigType {
     |
     /**
      * high quality output for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1760,7 +1656,6 @@ public enum PreconfigType {
 
 /**
  * The aspect ratios of preconfig, which used to configure session conveniently.
- *
  */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -1770,7 +1665,6 @@ public enum PreconfigType {
 public enum PreconfigRatio {
     /**
      * Aspect ratio 1:1 for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1780,7 +1674,6 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 4:3 for preconfig.
-     *
      */
     @!APILevel[
         since: "22",
@@ -1790,7 +1683,6 @@ public enum PreconfigRatio {
     |
     /**
      * Aspect ratio 16:9 for preconfig.
-     *
      */
     @!APILevel[
         since: "22",

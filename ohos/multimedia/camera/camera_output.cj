@@ -21,7 +21,6 @@ import ohos.labels.APILevel
 
 /**
  * Camera output object.
- *
  */
 @!APILevel[
     since: "22",
@@ -35,7 +34,9 @@ public interface CameraOutput {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true,
+        workerthread: true
     ]
     func release(): Unit
 }

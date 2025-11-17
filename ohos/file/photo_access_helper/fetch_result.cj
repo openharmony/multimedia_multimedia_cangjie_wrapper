@@ -22,7 +22,6 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Provides APIs to manage the file retrieval result.
- *
  */
 @!APILevel[
     since: "22",
@@ -35,13 +34,13 @@ public open class FetchResult <: RemoteDataLite {
 
     /**
      * Release the fetch result.
-     *
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func close(): Unit {
         unsafe { FfiFetchResultClose(myDataId) }
@@ -50,16 +49,14 @@ public open class FetchResult <: RemoteDataLite {
 
     /**
      * Obtains the total number of objects in the fetch result.
-     *
-     * @returns { Int32 } Returns the total number of objects in the fetch result.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @returns { Int32 } Total number of objects.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func getCount(): Int32 {
         var errCode = 0i32
@@ -73,14 +70,14 @@ public open class FetchResult <: RemoteDataLite {
     /**
      * Checks whether the result set points to the last row.
      * You need to check whether the object is the last one before calling getNextObject.
-     *
-     * @returns { Bool } Returns true if the fetch result points to the last row; returns false otherwise.
+     * @returns { Bool } Whether the object is the last one in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func isAfterLast(): Bool {
         var errCode = 0i32
@@ -98,7 +95,6 @@ class FetchResultImpl {}
 
 /**
  * Provides APIs to manage the file retrieval album result.
- *
  */
 @!APILevel[
     since: "22",
@@ -115,14 +111,15 @@ public class AlbumResult <: FetchResult {
 
     /**
      * Obtains the first object in the fetch result.
-     *
      * @returns { Album } Returns the first Album object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getFirstObject(): Album {
         var errCode = 0i32
@@ -135,16 +132,17 @@ public class AlbumResult <: FetchResult {
 
     /**
      * Obtains the next object in the fetch result.
-     * Before calling this method, you must use isAfterLast() to check whether the current position is the last row
+     * Before using this API, you must use isAfterLast() to check whether the current position is the end of the result set.
      * in the fetch result. This method only works when the current position is not the last row.
-     *
      * @returns { Album } Returns the next Album object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getNextObject(): Album {
         var errCode = 0i32
@@ -156,15 +154,16 @@ public class AlbumResult <: FetchResult {
     }
 
     /**
-     * Obtains the last object in the fetch result
-     *
-     * @returns { Album } Returns the last Album object in the fetch result.
+     * Obtains the last object asset in the fetch result.
+     * @returns { Album } Returns the last Album object
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getLastObject(): Album {
         var errCode = 0i32
@@ -177,15 +176,16 @@ public class AlbumResult <: FetchResult {
 
     /**
      * Obtains the object with the specified index in the result set.
-     *
-     * @param { Int32 } index - The index of the album in the fetch result.
+     * @param { Int32 } index - Index of the file asset to obtain. The value starts from 0.
      * @returns { Album } Returns the Album object at the specified index.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getObjectByPosition(index: Int32): Album {
         var errCode = 0i32
@@ -198,14 +198,15 @@ public class AlbumResult <: FetchResult {
 
     /**
      * Obtains all objects in the fetch result.
-     *
      * @returns { Array<Album> } Returns an array containing all Album objects in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAllObjects(): Array<Album> {
         var errCode = 0i32
@@ -222,8 +223,7 @@ public class AlbumResult <: FetchResult {
 }
 
 /**
- * Provides APIs to manage the file retrieval photoasset result.
- *
+ * Defines information about the images or videos selected.
  */
 @!APILevel[
     since: "22",
@@ -240,14 +240,15 @@ public class PhotoAssetResult <: FetchResult {
 
     /**
      * Obtains the first object in the fetch result.
-     *
      * @returns { PhotoAsset } Returns the first PhotoAsset object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getFirstObject(): PhotoAsset {
         var errCode = 0i32
@@ -260,16 +261,17 @@ public class PhotoAssetResult <: FetchResult {
 
     /**
      * Obtains the next object in the fetch result.
-     * Before calling this method, you must use isAfterLast() to check whether the current position is the last row
+     * Before using this API, you must use isAfterLast() to check whether the current position is the end of the result set.
      * in the fetch result. This method only works when the current position is not the last row.
-     *
      * @returns { PhotoAsset } Returns the next PhotoAsset object in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getNextObject(): PhotoAsset {
         var errCode = 0i32
@@ -281,15 +283,16 @@ public class PhotoAssetResult <: FetchResult {
     }
 
     /**
-     * Obtains the last object in the fetch result
-     *
-     * @returns { PhotoAsset } Returns the last PhotoAsset object in the fetch result.
+     * Obtains the last object asset in the fetch result.
+     * @returns { PhotoAsset } Returns the last PhotoAsset object
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getLastObject(): PhotoAsset {
         var errCode = 0i32
@@ -302,15 +305,16 @@ public class PhotoAssetResult <: FetchResult {
 
     /**
      * Obtains the object with the specified index in the result set.
-     *
-     * @param { Int32 } index - The index of the photo asset in the fetch result.
+     * @param { Int32 } index - Index of the file asset to obtain. The value starts from 0.
      * @returns { PhotoAsset } Returns the PhotoAsset object at the specified index.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getObjectByPosition(index: Int32): PhotoAsset {
         var errCode = 0i32
@@ -323,14 +327,15 @@ public class PhotoAssetResult <: FetchResult {
 
     /**
      * Obtains all objects in the fetch result.
-     *
      * @returns { Array<PhotoAsset> } Returns an array containing all PhotoAsset objects in the fetch result.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAllObjects(): Array<PhotoAsset> {
         var errCode = 0i32

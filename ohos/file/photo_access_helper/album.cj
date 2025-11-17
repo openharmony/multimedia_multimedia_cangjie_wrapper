@@ -22,7 +22,6 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Defines the abstract interface of albums.
- *
  */
 @!APILevel[
     since: "22",
@@ -34,7 +33,6 @@ public open class AbsAlbum <: RemoteDataLite{
     }
     /**
      * Album type
-     *
      */
     @!APILevel[
         since: "22",
@@ -51,7 +49,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album subtype
-     *
      */
     @!APILevel[
         since: "22",
@@ -68,7 +65,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album name.
-     *
      */
     @!APILevel[
         since: "22",
@@ -94,7 +90,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Album uri.
-     *
      */
     @!APILevel[
         since: "22",
@@ -113,7 +108,6 @@ public open class AbsAlbum <: RemoteDataLite{
     
     /**
      * Number of assets in the album
-     *
      */
     @!APILevel[
         since: "22",
@@ -127,7 +121,6 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Cover uri for the album
-     *
      */
     @!APILevel[
         since: "22",
@@ -146,11 +139,8 @@ public open class AbsAlbum <: RemoteDataLite{
 
     /**
      * Fetch assets in an album.
-     *
      * @param { FetchOptions } options - Fetch options.
      * @returns { PhotoAssetResult } Returns the fetch result
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -158,7 +148,9 @@ public open class AbsAlbum <: RemoteDataLite{
     @!APILevel[
         since: "22",
         permission: "ohos.permission.READ_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
         var errCode = 0i32
@@ -178,7 +170,6 @@ class AbsAlbumImpl {}
 
 /**
  * Defines the album.
- *
  */
 @!APILevel[
     since: "22",
@@ -195,7 +186,6 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of image assets in the album
-     *
      */
     @!APILevel[
         since: "22",
@@ -209,12 +199,11 @@ public class Album <: AbsAlbum {
 
     /**
      * Number of video assets in the album
-     *
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]  
+    ]
     public prop videoCount: Int32 {
         get() {
             unsafe { FfiPhotoAlbumGetVideoCount(getID()) }
@@ -223,9 +212,6 @@ public class Album <: AbsAlbum {
 
     /**
      * Modify metadata for the album
-     *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -233,7 +219,9 @@ public class Album <: AbsAlbum {
     @!APILevel[
         since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func commitModify(): Unit {
         var errCode = 0i32

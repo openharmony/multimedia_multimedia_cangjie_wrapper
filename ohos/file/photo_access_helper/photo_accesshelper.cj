@@ -31,15 +31,15 @@ import ohos.data.data_share_predicates.DataSharePredicates
 
 const INVALID_ARGUMENT_ERROR: Int32 = 13900020
 /**
- * Returns an instance of PhotoAccessHelper
- *
- * @param { Context } context - The context that initiates the request.
- * @returns { PhotoAccessHelper } Returns the PhotoAccessHelper instance.
+ * Obtains a PhotoAccessHelper instance for accessing and modifying media files in the album.
+ * @param { UIAbilityContext } context - Context of the ability instance.
+ * @returns { PhotoAccessHelper } Instance of PhotoAccessHelper
  * @throws { BusinessException } 13900020 - Invalid argument
  */
 @!APILevel[
     since: "22",
-    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+    throwexception: true
 ]
 public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
     unsafe {
@@ -53,7 +53,6 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper {
 
 /**
  * Helper functions to access photos and albums.
- *
  */
 @!APILevel[
     since: "22",
@@ -74,16 +73,17 @@ public class PhotoAccessHelper <: RemoteDataLite {
     }
 
     /**
-     * Release PhotoAccessHelper instance
+     * Releases this PhotoAccessHelper instance.
+     * Call this API when the APIs of the PhotoAccessHelper instance are no longer used.
      *
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         var errCode = 0i32
@@ -96,9 +96,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
 
     /**
      * Fetch photo assets
-     *
      * @param { FetchOptions } options - Options for fetching the image and video assets.
-     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
+     * @returns { PhotoAssetResult } Returns the fetch result.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -106,7 +105,9 @@ public class PhotoAccessHelper <: RemoteDataLite {
     @!APILevel[
         since: "22",
         permission: "ohos.permission.READ_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAssets(options: FetchOptions): PhotoAssetResult {
         var errCode = 0i32
@@ -121,17 +122,18 @@ public class PhotoAccessHelper <: RemoteDataLite {
 
     /**
      * Fetch a group of burst assets
-     *
      * @param { String } burstKey - UUID of a set of burst photos (BURST_KEY of PhotoKeys). The value is a string of 36 characters.
      * @param { FetchOptions } options - Options for fetching the burst photos.
-     * @returns { Promise<FetchResult<PhotoAsset>> } Returns the fetch result.
+     * @returns { PhotoAssetResult } Returns the fetch result.
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 14000011 - Internal system error
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.READ_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetResult {
         unsafe {
@@ -150,13 +152,10 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Obtains albums based on the specified options and album type.
      * Before the operation, ensure that the albums to obtain exist.
-     *
      * @param { AlbumType } albumType - Type of the album.
      * @param { AlbumSubtype } subtype - Album subtype.
      * @param { FetchOptions } [options] - Options for fetching the albums.
-     * @returns { Promise<FetchResult<Album>> } - Returns the fetch result
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @returns { AlbumResult } Returns the fetch result
      * @throws { BusinessException } 201 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      * @throws { BusinessException } 14000011 - System inner fail
@@ -164,7 +163,9 @@ public class PhotoAccessHelper <: RemoteDataLite {
     @!APILevel[
         since: "22",
         permission: "ohos.permission.READ_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
         options!: FetchOptions = FetchOptions(["uri", "album_name"], DataSharePredicates())): AlbumResult {
@@ -180,25 +181,23 @@ public class PhotoAccessHelper <: RemoteDataLite {
 
     /**
      * Registers listening for the specified URI. This API uses a callback to return the result.
-     *
      * @param { String } uri - URI of the photo asset, URI of the album, or DefaultChangeUri.
-     * @param { boolean } forChildUris - Whether to perform fuzzy listening.
+     * @param { Bool } forChildUris - Whether to perform fuzzy listening.
      * If uri is the URI of an album, the value true means to listen for the changes of the files in the album;
      * the value false means to listen for the changes of the album only.
      * If uri is the URI of a photoAsset, there is no difference between true and false for forChildUris.
      * If uri is DefaultChangeUri, forChildUris must be set to true. If forChildUris is false,
      * the URI cannot be found and no message can be received.
-     * @param { Callback<ChangeData> } callback - Callback used to return the ChangeData.
+     * @param { Callback1Argument<ChangeData> } callback - Callback used to return the ChangeData.
      * Multiple callback listeners can be registered for a URI.
      * You can use unRegisterChange to unregister all listeners for the URI or a specified callback listener.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func registerChange(uri: String, forChildUris: Bool, callback: Callback1Argument<ChangeData>): Unit {
         synchronized(onOffMutex) {
@@ -229,19 +228,17 @@ public class PhotoAccessHelper <: RemoteDataLite {
     /**
      * Unregisters listening for the specified URI. Multiple callbacks can be registered for a URI for listening.
      * You can use this API to unregister the listening of the specified callbacks or all callbacks.
-     *
      * @param { String } uri - URI of the photo asset, URI of the album, or DefaultChangeUri.
-     * @param { Callback<ChangeData> } [callback] - The callback function to unregister.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @param { ?Callback1Argument<ChangeData> } [callback] - The callback function to unregister.
      * @throws { BusinessException } 13900012 - Permission denied
      * @throws { BusinessException } 13900020 - Invalid argument
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
-    public func unRegisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
+    public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
         synchronized(onOffMutex) {
             let flag: Bool = match (callback) {
                 case Some(v) => true
@@ -255,14 +252,14 @@ public class PhotoAccessHelper <: RemoteDataLite {
                             let item = callbackList[idx]
                             if (refEq(callback.getOrThrow(), item[0]) && item[1] == uri) {
                                 FfiPhotoAccessHelperUnRegisterChange(getID(), cUri.value, item[2], inout errCode)
-                                checkRet(errCode, "unRegisterChange")
+                                checkRet(errCode, "unregisterChange")
                                 callbackList.remove(at: idx)
                                 return
                             }
                         }
                     } else {
                         FfiPhotoAccessHelperUnRegisterChange(getID(), cUri.value, -1, inout errCode)
-                        checkRet(errCode, "unRegisterChange")
+                        checkRet(errCode, "unregisterChange")
                         callbackList.removeIf({item => item[1] == uri})
                     }
                 }
@@ -288,17 +285,15 @@ public class PhotoAccessHelper <: RemoteDataLite {
 
     /**
      * Create a save dialog to save photos
-     *
-     * @param { Array<string> } srcFileUris - List of the file uris to be saved
+     * @param { Array<String> } srcFileUris - List of the file uris to be saved
      * @param { Array<PhotoCreationConfig> } photoCreationConfigs - List of the photo asset creation configs
-     * @returns { Promise<Array<string>> } - Returns the media library file uri list to application which has been authorized
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @param { Callback1Argument<Array<String>> } callback - Callback used to returns the media library file uri list to application which has been authorized
      * @throws { BusinessException } 14000011 - Internal system error
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
     ]
     public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationConfigs: Array<PhotoCreationConfig>,
         callback: Callback1Argument<Array<String>>): Unit {
@@ -327,17 +322,16 @@ public class PhotoAccessHelper <: RemoteDataLite {
 
     /**
      * Applies media changes.
-     *
      * @param { MediaChangeRequest } mediaChangeRequest - Request for asset changes or album changes.
      * @throws { BusinessException } 201 - Permission denied
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 14000011 - System inner fail
      */
     @!APILevel[
         since: "22",
         permission: "ohos.permission.WRITE_IMAGEVIDEO",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func applyChanges(mediaChangeRequest: MediaChangeRequest): Unit {
         match (mediaChangeRequest) {

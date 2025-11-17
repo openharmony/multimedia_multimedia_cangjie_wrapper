@@ -148,7 +148,7 @@ class Test_photoAccesshelper {
                 PhotoKeys.CoverPosition.toString(),
                 PhotoKeys.BurstKey.toString(),
                 PhotoKeys.LcdSize.toString(),
-                PhotoKeys.ThmSize.toString(),
+                PhotoKeys.ThumbnailSize.toString(),
                 PhotoKeys.Uri.toString(),
                 PhotoKeys.PhotoType.toString(),
                 PhotoKeys.DisplayName.toString(),
@@ -463,8 +463,8 @@ class Test_photoAccesshelper {
             firstPhotoAsset.commitModify()
             firstPhotoAsset.set("title", title)
             firstPhotoAsset.commitModify()
-            photoAccessHelper.unRegisterChange(firstPhotoAsset.uri, callback: callback2)
-            photoAccessHelper.unRegisterChange(firstPhotoAsset.uri)
+            photoAccessHelper.unregisterChange(firstPhotoAsset.uri, callback: callback2)
+            photoAccessHelper.unregisterChange(firstPhotoAsset.uri)
             @Expect(NotifyType.NotifyAdd != NotifyType.NotifyRemove)
             @Expect(NotifyType.NotifyAlbumAddAsset != NotifyType.NotifyAlbumRemoveAsset)
         } catch (e: Exception) {
@@ -766,9 +766,9 @@ class Test_photoAccesshelper {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_enum_RecommendationType(): Unit {
-        let arr1: Array<RecommendationType> = [QrOrBarCode, QrCode, BarCode, IdCard, ProfilePicture, PassPort, BankCard,
+        let arr1: Array<RecommendationType> = [QrOrBarCode, QrCode, BarCode, IdCard, ProfilePicture, Passport, BankCard,
             DriverLicense, DrivingLicense, FeaturedSinglePortrait]
-        let arr2: Array<RecommendationType> = [QrOrBarCode, QrCode, BarCode, IdCard, ProfilePicture, PassPort, BankCard,
+        let arr2: Array<RecommendationType> = [QrOrBarCode, QrCode, BarCode, IdCard, ProfilePicture, Passport, BankCard,
             DriverLicense, DrivingLicense, FeaturedSinglePortrait]
         let strArr: Array<String> = [
             "RecommendationType.QrOrBarCode",
@@ -776,7 +776,7 @@ class Test_photoAccesshelper {
             "RecommendationType.BarCode",
             "RecommendationType.IdCard",
             "RecommendationType.ProfilePicture",
-            "RecommendationType.PassPort",
+            "RecommendationType.Passport",
             "RecommendationType.BankCard",
             "RecommendationType.DriverLicense",
             "RecommendationType.DrivingLicense",
@@ -833,7 +833,7 @@ class Test_photoAccesshelper {
             PhotoKeys.CoverPosition,
             PhotoKeys.BurstKey,
             PhotoKeys.LcdSize,
-            PhotoKeys.ThmSize
+            PhotoKeys.ThumbnailSize
         ]
         let strArr: Array<String> = [
             "uri",
@@ -962,17 +962,17 @@ class Test_photoAccesshelper {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_auto_enum_PhotoViewMIMETypes() {
-        let arr1: Array<PhotoViewMIMETypes> = [
+        let arr1: Array<PhotoViewMimeTypes> = [
             ImageType,
             VideoType,
             ImageVideoType,
             MovingPhotoImageType
         ]
         let arrStr: Array<String> = [
-            "PhotoViewMIMETypes.ImageType",
-            "PhotoViewMIMETypes.VideoType",
-            "PhotoViewMIMETypes.ImageVideoType",
-            "PhotoViewMIMETypes.MovingPhotoImageType"
+            "PhotoViewMimeTypes.ImageType",
+            "PhotoViewMimeTypes.VideoType",
+            "PhotoViewMimeTypes.ImageVideoType",
+            "PhotoViewMimeTypes.MovingPhotoImageType"
         ]
         for (i in 0..arr1.size) {
             @Expect(arr1[i] == arr1[i])
@@ -1086,7 +1086,7 @@ class Test_photoAccesshelper {
                         "onCallback1. ChangeData: type = ${arg.notifyType.toString()}, uris.size: ${arg.uris.size}, extraUris.size = ${arg.extraUris.size}")
                 })
             myPhotoAccessHelper.registerChange("test_uri", false, callback1)
-            myPhotoAccessHelper.unRegisterChange("test_uri")
+            myPhotoAccessHelper.unregisterChange("test_uri")
             myPhotoAccessHelper.release()
         } catch (e: Exception) {
             myPhotoAccessHelper.release()
