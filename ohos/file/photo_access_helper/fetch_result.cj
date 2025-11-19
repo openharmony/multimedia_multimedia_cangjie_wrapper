@@ -33,21 +33,6 @@ public open class FetchResult <: RemoteDataLite {
     }
 
     /**
-     * Release the fetch result.
-     * @throws { BusinessException } 13900020 - Invalid argument
-     * @throws { BusinessException } 14000011 - System inner fail
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
-        throwexception: true
-    ]
-    public func close(): Unit {
-        unsafe { FfiFetchResultClose(myDataId) }
-        releaseFFIData(myDataId)
-    }
-
-    /**
      * Obtains the total number of objects in the fetch result.
      * @returns { Int32 } Total number of objects.
      * @throws { BusinessException } 13900020 - Invalid argument
@@ -86,6 +71,21 @@ public open class FetchResult <: RemoteDataLite {
             checkRet(errCode, "[FetchResult] isAfterLast")
             return ret
         }
+    }
+
+    /**
+     * Release the fetch result.
+     * @throws { BusinessException } 13900020 - Invalid argument
+     * @throws { BusinessException } 14000011 - System inner fail
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true
+    ]
+    public func close(): Unit {
+        unsafe { FfiFetchResultClose(myDataId) }
+        releaseFFIData(myDataId)
     }
 
     private let impl_: FetchResultImpl = FetchResultImpl()

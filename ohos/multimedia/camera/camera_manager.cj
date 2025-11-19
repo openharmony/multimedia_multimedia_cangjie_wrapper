@@ -52,76 +52,6 @@ public class CameraManager <: RemoteDataLite {
     }
 
     /**
-     * Queries whether the current camera is muted.
-     *
-     * @returns { Bool } Is camera muted.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func isCameraMuted(): Bool {
-        return unsafe { FfiCameraManagerIsCameraMuted() }
-    }
-
-    /**
-     * Check if a specifies torch mode is supported.
-     * @param { TorchMode } mode - torch mode.
-     * @returns { Bool } is torch mode supported.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func isTorchModeSupported(mode: TorchMode): Bool {
-        return unsafe { FfiCameraManagerIsTorchModeSupported(mode.getValue()) }
-    }
-
-    /**
-     * Check if the device has a torch.
-     *
-     * @returns { Bool } this value that specifies whether the device has a torch.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func isTorchSupported(): Bool {
-        return unsafe { FfiCameraManagerIsTorchSupported() }
-    }
-
-    /**
-     * Get current torch mode.
-     *
-     * @returns { TorchMode } torch mode.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public func getTorchMode(): TorchMode {
-        let mode: Int32 = unsafe { FfiCameraManagerGetTorchMode() }
-        return TorchMode.parse(mode)
-    }
-
-    /**
-     * Set torch mode to the device.
-     *
-     * @param { TorchMode } mode - torch mode.
-     * @throws { BusinessException } 7400102 - Operation not allowed.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core",
-        throwexception: true
-    ]
-    public func setTorchMode(mode: TorchMode): Unit {
-        let errCode = unsafe { FfiCameraManagerSetTorchMode(mode.getValue()) }
-        successOrThrow(errCode)
-    }
-
-    /**
      * Gets the supported camera device objects and return the results synchronously.
      *
      * @returns { Array<CameraDevice> } An array of supported cameras.
@@ -187,6 +117,19 @@ public class CameraManager <: RemoteDataLite {
         } finally {
             ret.free()
         }
+    }
+
+    /**
+     * Queries whether the current camera is muted.
+     *
+     * @returns { Bool } Is camera muted.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func isCameraMuted(): Bool {
+        return unsafe { FfiCameraManagerIsCameraMuted() }
     }
 
     /**
@@ -493,43 +436,6 @@ public class CameraManager <: RemoteDataLite {
     }
 
     /**
-     * Registers a listener for flashlight state changes to get flashlight state change by registering
-     * a callback function. This API uses an asynchronous callback to return the result.
-     *
-     * Description: Currently, it is not allowed to use off() to unregister the callback
-     * within the callback method of on().
-     *
-     * @param { CameraEvents } eventType - Event type
-     * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core",
-        throwexception: true
-    ]
-    public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.TorchStatusChange => ()
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-        synchronized(torchStatusMutex) {
-            let callbackList = torchStatusList
-            if (findCallbackObject(callbackList, callback)) {
-                CAMERA_LOG.error("CameraManager on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = {value: CTorchStatusInfo => callback.invoke(None, value.toTorchStatusInfo())}
-                let lambdaData = Callback1Param<CTorchStatusInfo, Unit>(wrapper)
-                let errCode = FfiCameraManagerOnTorchStatusChange(getID(), lambdaData.getID())
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-        }
-    }
-
-    /**
      * Unsubscribes from camera status change event callback.
      *
      * @param { CameraEvents } eventType - Event type.
@@ -570,26 +476,6 @@ public class CameraManager <: RemoteDataLite {
     }
 
     /**
-     * Unsubscribes torch status change event callback.
-     *
-     * @param { CameraEvents } eventType - Event type
-     * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core",
-        throwexception: true
-    ]
-    public func off(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
-        match (eventType) {
-            case CameraEvents.TorchStatusChange => off(IdClassInfo(this.getID(), "CameraManager"), torchStatusList,
-                torchStatusMutex, callback, FfiCameraManagerOffTorchStatusChange)
-            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-    }
-
-    /**
      * Unsubscribes callback.
      *
      * @param { CameraEvents } eventType - Event type
@@ -609,6 +495,120 @@ public class CameraManager <: RemoteDataLite {
                 foldStatusList, foldStatusMutex, FfiCameraManagerOffAllFoldStatusChanged)
             case CameraEvents.TorchStatusChange => offAll(IdClassInfo(this.getID(), "CameraManager"),
                 torchStatusList, torchStatusMutex, FfiCameraManagerOffAllTorchStatusChange)
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+        }
+    }
+
+    /**
+     * Check if the device has a torch.
+     *
+     * @returns { Bool } this value that specifies whether the device has a torch.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func isTorchSupported(): Bool {
+        return unsafe { FfiCameraManagerIsTorchSupported() }
+    }
+
+    /**
+     * Check if a specifies torch mode is supported.
+     * @param { TorchMode } mode - torch mode.
+     * @returns { Bool } is torch mode supported.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func isTorchModeSupported(mode: TorchMode): Bool {
+        return unsafe { FfiCameraManagerIsTorchModeSupported(mode.getValue()) }
+    }
+
+    /**
+     * Get current torch mode.
+     *
+     * @returns { TorchMode } torch mode.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public func getTorchMode(): TorchMode {
+        let mode: Int32 = unsafe { FfiCameraManagerGetTorchMode() }
+        return TorchMode.parse(mode)
+    }
+
+    /**
+     * Set torch mode to the device.
+     *
+     * @param { TorchMode } mode - torch mode.
+     * @throws { BusinessException } 7400102 - Operation not allowed.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func setTorchMode(mode: TorchMode): Unit {
+        let errCode = unsafe { FfiCameraManagerSetTorchMode(mode.getValue()) }
+        successOrThrow(errCode)
+    }
+
+    /**
+     * Registers a listener for flashlight state changes to get flashlight state change by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     *
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().
+     *
+     * @param { CameraEvents } eventType - Event type
+     * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.TorchStatusChange => ()
+            case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+        }
+        synchronized(torchStatusMutex) {
+            let callbackList = torchStatusList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("CameraManager on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {value: CTorchStatusInfo => callback.invoke(None, value.toTorchStatusInfo())}
+                let lambdaData = Callback1Param<CTorchStatusInfo, Unit>(wrapper)
+                let errCode = FfiCameraManagerOnTorchStatusChange(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
+    /**
+     * Unsubscribes torch status change event callback.
+     *
+     * @param { CameraEvents } eventType - Event type
+     * @param { Callback1Argument<TorchStatusInfo> } callback - Callback used to return the torch status change
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func off(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit {
+        match (eventType) {
+            case CameraEvents.TorchStatusChange => off(IdClassInfo(this.getID(), "CameraManager"), torchStatusList,
+                torchStatusMutex, callback, FfiCameraManagerOffTorchStatusChange)
             case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
         }
     }

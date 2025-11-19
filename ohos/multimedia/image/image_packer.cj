@@ -73,24 +73,17 @@ public class ImagePacker <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
-    /**
-     * Supported image formats.
-     *
-     * @throws { BusinessException } 62980098 - Failed to malloc memory.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
-        throwexception: true
-    ]
-    public prop supportedFormats: Array<String> {
-        get() {
-            let cValue = unsafe { FfiOHOSImagePackerGetSupportedFormats(getID()) }
-            checkAndThrow(UInt32(cValue.code))
-            let arr = cValue.getDataAndFree()
-            return arr
+    func parsePackingRes(cValue: RetDataCArrUI8): Array<UInt8> {
+        checkAndThrow(UInt32(cValue.code))
+        let cArray = cValue.data
+        if (cArray.head.isNull()) {
+            return []
         }
+        let array = Array<UInt8>(cArray.size, repeat: 0)
+        for (i in 0..cArray.size) {
+            array[i] = unsafe { cArray.head.read(i) }
+        }
+        return array
     }
 
     /**
@@ -165,19 +158,6 @@ public class ImagePacker <: RemoteDataLite {
         } finally {
             unsafe { LibC.free(cValue.data.head) }
         }
-    }
-
-    func parsePackingRes(cValue: RetDataCArrUI8): Array<UInt8> {
-        checkAndThrow(UInt32(cValue.code))
-        let cArray = cValue.data
-        if (cArray.head.isNull()) {
-            return []
-        }
-        let array = Array<UInt8>(cArray.size, repeat: 0)
-        for (i in 0..cArray.size) {
-            array[i] = unsafe { cArray.head.read(i) }
-        }
-        return array
     }
 
     /**
@@ -257,6 +237,26 @@ public class ImagePacker <: RemoteDataLite {
     public func release(): Unit {
         unsafe { FFiOHOSImagePackerRelease(getID()) }
         releaseFFIData(getID())
+    }
+
+    /**
+     * Supported image formats.
+     *
+     * @throws { BusinessException } 62980098 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImagePacker",
+        throwexception: true
+    ]
+    public prop supportedFormats: Array<String> {
+        get() {
+            let cValue = unsafe { FfiOHOSImagePackerGetSupportedFormats(getID()) }
+            checkAndThrow(UInt32(cValue.code))
+            let arr = cValue.getDataAndFree()
+            return arr
+        }
     }
 }
 

@@ -73,28 +73,6 @@ public class PhotoAccessHelper <: RemoteDataLite {
     }
 
     /**
-     * Releases this PhotoAccessHelper instance.
-     * Call this API when the APIs of the PhotoAccessHelper instance are no longer used.
-     *
-     * @throws { BusinessException } 13900020 - Invalid argument
-     * @throws { BusinessException } 14000011 - System inner fail
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func release(): Unit {
-        var errCode = 0i32
-        unsafe {
-            FfiPhotoAccessHelperRelease(getID(), inout errCode)
-            checkRet(errCode, "release")
-        }
-        releaseFFIData(myDataId)
-    }
-
-    /**
      * Fetch photo assets
      * @param { FetchOptions } options - Options for fetching the image and video assets.
      * @returns { PhotoAssetResult } Returns the fetch result.
@@ -318,6 +296,28 @@ public class PhotoAccessHelper <: RemoteDataLite {
                 cSrcFileUris.free()
             }
         }
+    }
+
+    /**
+     * Releases this PhotoAccessHelper instance.
+     * Call this API when the APIs of the PhotoAccessHelper instance are no longer used.
+     *
+     * @throws { BusinessException } 13900020 - Invalid argument
+     * @throws { BusinessException } 14000011 - System inner fail
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func release(): Unit {
+        var errCode = 0i32
+        unsafe {
+            FfiPhotoAccessHelperRelease(getID(), inout errCode)
+            checkRet(errCode, "release")
+        }
+        releaseFFIData(myDataId)
     }
 
     /**

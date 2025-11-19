@@ -263,35 +263,6 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class ImageSource <: RemoteDataLite {
-    /**
-     * Supported image formats.
-     *
-     * @throws { BusinessException } 62980102 - Failed to malloc memory.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true
-    ]
-    public prop supportedFormats: Array<String> {
-        get() {
-            unsafe {
-                var errCode: UInt32 = 0
-                let cArr = FfiOHOSGetSupportedFormats(getID(), inout errCode)
-                checkAndThrow(errCode)
-                let cp = cArr.head
-                let size = cArr.size
-                let arr = Array<String>(size, repeat: "")
-                for (i in 0..size) {
-                    arr[i] = cp.read(i).toString()
-                }
-                cArr.free()
-                return arr
-            }
-        }
-    }
-
     protected init(id: Int64) {
         super(id)
         IMAGE_LOG.info("[ImageSource] construct success")
@@ -299,6 +270,131 @@ public class ImageSource <: RemoteDataLite {
 
     ~init() {
         releaseFFIData(myDataId)
+    }
+
+    /**
+     * Get image information from image source.
+     *
+     * @param { UInt32 } [index] - Sequence number of an image. If this parameter is not specified,
+     * the default value 0 is used.
+     * @returns { ImageInfo } Return the image information.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func getImageInfo(index!: UInt32 = 0): ImageInfo {
+        unsafe {
+            var errCode: UInt32 = 0
+            let cimage = FfiOHOSImageSourceGetImageInfoV2(getID(), index, inout errCode)
+            checkAndThrow(errCode)
+            try {
+                return cimage.toImageInfo()
+            } finally {
+                cimage.free()
+            }
+        }
+    }
+
+    /**
+     * Create a PixelMap object based on image decoding parameters.
+     *
+     * @param { DecodingOptions } [options] - Image decoding parameters.
+     * @returns { PixelMap } Return the PixelMap object.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true
+    ]
+    public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
+        unsafe {
+            let cValue: RetDataI64U32 = FfiOHOSImageSourceCreatePixelMapV2(getID(), options.index, options.getValue())
+            checkAndThrow(cValue.code)
+            return PixelMap(cValue.data)
+        }
+    }
+
+    /**
+     * Creates a PixelMap array based on image decoding parameters.
+     * For animated images such as GIF and WebP, this interface returns the image data of each frame.
+     * For static images, it returns a single frame of image data.
+     *
+     * @param { DecodingOptions } [options] - Image decoding parameters.
+     * @returns { Array<PixelMap> } Return the PixelMap array.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980099 - The shared memory data is abnormal.
+     * @throws { BusinessException } 62980101 - The image data is abnormal.
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980103 - The image data is not supported.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error
+     * occurs during the process of checking size.
+     * @throws { BusinessException } 62980109 - Failed to crop the image.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980137 - Invalid media operation.
+     * @throws { BusinessException } 62980173 - The DMA memory does not exist.
+     * @throws { BusinessException } 62980174 - The DMA memory data is abnormal.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap> {
+        unsafe {
+            var errCode: UInt32 = 0
+            let cArr = FfiOHOSImageSourceCreatePixelMapListV2(getID(), options.index, options.getValue(), inout errCode)
+            checkAndThrow(errCode)
+            let data = cArr.head
+            let size = cArr.size
+            let pmArr = Array<PixelMap>(size, {i => PixelMap(data.read(i))})
+            LibC.free(data)
+            return pmArr
+        }
+    }
+
+    /**
+     * Obtains the array of delay time in an image. 
+     *
+     * @returns { Array<Int32> } Return the array.
+     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
+     * 2. Decoding process exception. 3. Insufficient memory.
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980110 - The image source data is incorrect.
+     * @throws { BusinessException } 62980111 - The image source data is incomplete.
+     * @throws { BusinessException } 62980115 - Invalid image parameter.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
+     * @throws { BusinessException } 62980122 - Failed to decode the image header.
+     * @throws { BusinessException } 62980149 - Invalid MIME type for the image source.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func getDelayTimeList(): Array<Int32> {
+        unsafe {
+            var errCode: UInt32 = 0
+            let cArr = FfiOHOSImageSourceGetDelayTime(getID(), inout errCode)
+            checkAndThrow(errCode)
+            let data = cArr.head
+            let arr = Array<Int32>(cArr.size, {i => data.read(i)})
+            LibC.free(data)
+            return arr
+        }
     }
 
     /**
@@ -328,33 +424,6 @@ public class ImageSource <: RemoteDataLite {
         let cvalue = unsafe { FfiOHOSGetFrameCount(getID()) }
         checkAndThrow(cvalue.code)
         return cvalue.data
-    }
-
-    /**
-     * Get image information from image source.
-     *
-     * @param { UInt32 } [index] - Sequence number of an image. If this parameter is not specified,
-     * the default value 0 is used.
-     * @returns { ImageInfo } Return the image information.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func getImageInfo(index!: UInt32 = 0): ImageInfo {
-        unsafe {
-            var errCode: UInt32 = 0
-            let cimage = FfiOHOSImageSourceGetImageInfoV2(getID(), index, inout errCode)
-            checkAndThrow(errCode)
-            try {
-                return cimage.toImageInfo()
-            } finally {
-                cimage.free()
-            }
-        }
     }
 
     /**
@@ -459,104 +528,6 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Create a PixelMap object based on image decoding parameters.
-     *
-     * @param { DecodingOptions } [options] - Image decoding parameters.
-     * @returns { PixelMap } Return the PixelMap object.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true
-    ]
-    public func createPixelMap(options!: DecodingOptions = DecodingOptions()): PixelMap {
-        unsafe {
-            let cValue: RetDataI64U32 = FfiOHOSImageSourceCreatePixelMapV2(getID(), options.index, options.getValue())
-            checkAndThrow(cValue.code)
-            return PixelMap(cValue.data)
-        }
-    }
-
-    /**
-     * Creates a PixelMap array based on image decoding parameters.
-     * For animated images such as GIF and WebP, this interface returns the image data of each frame.
-     * For static images, it returns a single frame of image data.
-     *
-     * @param { DecodingOptions } [options] - Image decoding parameters.
-     * @returns { Array<PixelMap> } Return the PixelMap array.
-     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
-     * 2. Decoding process exception. 3. Insufficient memory.
-     * @throws { BusinessException } 62980099 - The shared memory data is abnormal.
-     * @throws { BusinessException } 62980101 - The image data is abnormal.
-     * @throws { BusinessException } 62980102 - Failed to malloc memory.
-     * @throws { BusinessException } 62980103 - The image data is not supported.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @throws { BusinessException } 62980106 - The image data is too large. This status code is thrown when an error
-     * occurs during the process of checking size.
-     * @throws { BusinessException } 62980109 - Failed to crop the image.
-     * @throws { BusinessException } 62980111 - The image source data is incomplete.
-     * @throws { BusinessException } 62980115 - Invalid image parameter.
-     * @throws { BusinessException } 62980116 - Failed to decode the image.
-     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
-     * @throws { BusinessException } 62980137 - Invalid media operation.
-     * @throws { BusinessException } 62980173 - The DMA memory does not exist.
-     * @throws { BusinessException } 62980174 - The DMA memory data is abnormal.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap> {
-        unsafe {
-            var errCode: UInt32 = 0
-            let cArr = FfiOHOSImageSourceCreatePixelMapListV2(getID(), options.index, options.getValue(), inout errCode)
-            checkAndThrow(errCode)
-            let data = cArr.head
-            let size = cArr.size
-            let pmArr = Array<PixelMap>(size, {i => PixelMap(data.read(i))})
-            LibC.free(data)
-            return pmArr
-        }
-    }
-
-    /**
-     * Obtains the array of delay time in an image. 
-     *
-     * @returns { Array<Int32> } Return the array.
-     * @throws { BusinessException } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
-     * 2. Decoding process exception. 3. Insufficient memory.
-     * @throws { BusinessException } 62980102 - Failed to malloc memory.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @throws { BusinessException } 62980110 - The image source data is incorrect.
-     * @throws { BusinessException } 62980111 - The image source data is incomplete.
-     * @throws { BusinessException } 62980115 - Invalid image parameter.
-     * @throws { BusinessException } 62980116 - Failed to decode the image.
-     * @throws { BusinessException } 62980118 - Failed to create the image plugin.
-     * @throws { BusinessException } 62980122 - Failed to decode the image header.
-     * @throws { BusinessException } 62980149 - Invalid MIME type for the image source.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func getDelayTimeList(): Array<Int32> {
-        unsafe {
-            var errCode: UInt32 = 0
-            let cArr = FfiOHOSImageSourceGetDelayTime(getID(), inout errCode)
-            checkAndThrow(errCode)
-            let data = cArr.head
-            let arr = Array<Int32>(cArr.size, {i => data.read(i)})
-            LibC.free(data)
-            return arr
-        }
-    }
-
-    /**
      * Releases an ImageSource instance.
      *
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
@@ -572,6 +543,35 @@ public class ImageSource <: RemoteDataLite {
             let ret = FfiOHOSRelease(getID())
             checkAndThrow(ret)
             releaseFFIData(getID())
+        }
+    }
+
+    /**
+     * Supported image formats.
+     *
+     * @throws { BusinessException } 62980102 - Failed to malloc memory.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true
+    ]
+    public prop supportedFormats: Array<String> {
+        get() {
+            unsafe {
+                var errCode: UInt32 = 0
+                let cArr = FfiOHOSGetSupportedFormats(getID(), inout errCode)
+                checkAndThrow(errCode)
+                let cp = cArr.head
+                let size = cArr.size
+                let arr = Array<String>(size, repeat: "")
+                for (i in 0..size) {
+                    arr[i] = cp.read(i).toString()
+                }
+                cArr.free()
+                return arr
+            }
         }
     }
 }

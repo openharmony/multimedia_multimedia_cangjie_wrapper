@@ -18,7 +18,7 @@
 package ohos.multimedia.image
 
 import std.deriving.Derive
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.business_exception.BusinessException
 
 /**
@@ -38,6 +38,9 @@ public enum PixelMapFormat {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Unknown
+    |
+    @!Hide
+    Argb8888
     |
     /**
      * Indicates that each pixel is stored on 16 bits. Only the R, G, and B components are encoded
@@ -149,6 +152,9 @@ public enum PixelMapFormat {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YcrcbP010
+    |
+    @!Hide
+    Astc4x4
     | ...
 
     func getValue(): Int32 {
@@ -418,15 +424,35 @@ public enum ComponentType {
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
 public enum PropertyKey <: ToString {
-    |
     /**
-     * Image width.
+     * The number of bits per image component. In this standard each component of the image is 8 bits, so the value for 
+     * this tag is 8. In JPEG compressed data a JPEG marker is used instead of this tag.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
-    ImageWidth
+    BitsPerSample
+    |
+    /**
+     * Image orientation.
+     * 1. "Top-left"       - The image is not rotated.
+     * 2. "Top-right"      - The image is mirrored horizontally.
+     * 3. "Bottom-right"   - The image is rotated 180 degrees.
+     * 4. "Bottom-left"    - The image is mirrored vertically.
+     * 5. "Left-top"       - The image is mirrored horizontally, then rotated 270 degrees clockwise.
+     * 6. "Right-top"      - The image is rotated 90 degrees clockwise.
+     * 7. "Right-bottom"   - The image is mirrored horizontally, then rotated 90 degrees clockwise.
+     * 8. "Left-bottom"    - The image is rotated 270 degrees clockwise.
+     * If an undefined value is read, the result will be "Unknown Value <number>".
+     * When retrieving the Orientation property, the value is returned as a string.
+     * When setting the Orientation property, both numeric values (1–8) and string labels are supported.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    Orientation
     |
     /**
      * Image length.
@@ -438,14 +464,129 @@ public enum PropertyKey <: ToString {
     ImageLength
     |
     /**
-     * The number of bits per image component. In this standard each component of the image is 8 bits, so the value for 
-     * this tag is 8. In JPEG compressed data a JPEG marker is used instead of this tag.
+     * Image width.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
-    BitsPerSample
+    ImageWidth
+    |
+    /**
+     * GPS latitude. The latitude is expressed as three RATIONAL values giving the degrees, minutes, and
+     * seconds, respectively. If latitude is expressed as degrees, minutes and seconds, a typical format 
+     * would be dd/1,mm/1,ss/1. When degrees and minutes are used and, for example, fractions of minutes
+     * are given up to two decimal places, the format would be dd/1,mmmm/100,0/1.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsLatitude
+    |
+    /**
+     * GPS longitude. The longitude is expressed as three RATIONAL values giving the degrees, minutes, and
+     * seconds, respectively. If longitude is expressed as degrees, minutes and seconds, a typical format 
+     * would be dd/1,mm/1,ss/1. When degrees and minutes are used and, for example, fractions of minutes
+     * are given up to two decimal places, the format would be dd/1,mmmm/100,0/1.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsLongitude
+    |
+    /**
+     * GPS latitude reference. For example, N indicates north latitude and S indicates south latitude.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsLatitudeRef
+    |
+    /**
+     * GPS longitude reference. For example, E indicates east longitude and W indicates west longitude.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsLongitudeRef
+    |
+    /**
+     * The date and time when the original image data was generated. For a DSC the date and time the picture was taken
+     * are recorded. The format is "YYYY:MM:DD HH:MM:SS" with time shown in 24-hour format.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    DateTimeOriginal
+    |
+    /**
+     * Exposure time
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    ExposureTime
+    |
+    /**
+     * Scene type
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    SceneType
+    |
+    /**
+     * Indicates the ISO Speed and ISO Latitude of the camera or input device as specified in ISO 12232.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    IsoSpeedRatings
+    |
+    /**
+     * Aperture value, such as f/1.8.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    FNumber
+    |
+    /**
+     * The date and time of image creation. In this standard it is the date and time the file was changed. The format
+     * is "YYYY:MM:DD HH:MM:SS" with time shown in 24-hour format.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    DateTime
+    |
+    /**
+     * GPS time stamp
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsTimestamp
+    |
+    /**
+     * GPS date stamp
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    GpsDateStamp
     |
     /**
      * Image description
@@ -475,36 +616,6 @@ public enum PropertyKey <: ToString {
     Model
     |
     /**
-     * Image orientation.
-     * 1. "Top-left"       - The image is not rotated.
-     * 2. "Top-right"      - The image is mirrored horizontally.
-     * 3. "Bottom-right"   - The image is rotated 180 degrees.
-     * 4. "Bottom-left"    - The image is mirrored vertically.
-     * 5. "Left-top"       - The image is mirrored horizontally, then rotated 270 degrees clockwise.
-     * 6. "Right-top"      - The image is rotated 90 degrees clockwise.
-     * 7. "Right-bottom"   - The image is mirrored horizontally, then rotated 90 degrees clockwise.
-     * 8. "Left-bottom"    - The image is rotated 270 degrees clockwise.
-     * If an undefined value is read, the result will be "Unknown Value <number>".
-     * When retrieving the Orientation property, the value is returned as a string.
-     * When setting the Orientation property, both numeric values (1–8) and string labels are supported.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    Orientation
-    |
-    /**
-     * The date and time of image creation. In this standard it is the date and time the file was changed. The format
-     * is "YYYY:MM:DD HH:MM:SS" with time shown in 24-hour format.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    DateTime
-    |
-    /**
      * Photo mode
      */
     @!APILevel[
@@ -512,93 +623,6 @@ public enum PropertyKey <: ToString {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PhotoMode
-    |
-    /**
-     * Exposure time
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    ExposureTime
-    |
-    /**
-     * Aperture value, such as f/1.8.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    FNumber
-    |
-    /**
-     * GPS latitude reference. For example, N indicates north latitude and S indicates south latitude.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsLatitudeRef
-    |
-    /**
-     * GPS latitude. The latitude is expressed as three RATIONAL values giving the degrees, minutes, and
-     * seconds, respectively. If latitude is expressed as degrees, minutes and seconds, a typical format 
-     * would be dd/1,mm/1,ss/1. When degrees and minutes are used and, for example, fractions of minutes
-     * are given up to two decimal places, the format would be dd/1,mmmm/100,0/1.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsLatitude
-    |
-    /**
-     * GPS longitude reference. For example, E indicates east longitude and W indicates west longitude.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsLongitudeRef
-    |
-    /**
-     * GPS longitude. The longitude is expressed as three RATIONAL values giving the degrees, minutes, and
-     * seconds, respectively. If longitude is expressed as degrees, minutes and seconds, a typical format 
-     * would be dd/1,mm/1,ss/1. When degrees and minutes are used and, for example, fractions of minutes
-     * are given up to two decimal places, the format would be dd/1,mmmm/100,0/1.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsLongitude
-    |
-    /**
-     * GPS time stamp
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsTimestamp
-    |
-    /**
-     * GPS date stamp
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    GpsDateStamp
-    |
-    /**
-     * Indicates the ISO Speed and ISO Latitude of the camera or input device as specified in ISO 12232.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    IsoSpeedRatings
     |
     /**
      * Sensitivity type
@@ -635,16 +659,6 @@ public enum PropertyKey <: ToString {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsoSpeed
-    |
-    /**
-     * The date and time when the original image data was generated. For a DSC the date and time the picture was taken
-     * are recorded. The format is "YYYY:MM:DD HH:MM:SS" with time shown in 24-hour format.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    DateTimeOriginal
     |
     /**
      * The lens aperture. The unit is the APEX(Additive System of Photographic Exposure) value.
@@ -699,6 +713,87 @@ public enum PropertyKey <: ToString {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalLength
+    |
+    /**
+     * User comment
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    UserComment
+    |
+    /**
+     * Pixel x dimension
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    PixelXDimension
+    |
+    /**
+     * Pixel y dimension
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    PixelYDimension
+    |
+    /**
+     * White balance
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    WhiteBalance
+    |
+    /**
+     * Focal length in 35mm film
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    FocalLengthIn35mmFilm
+    |
+    /**
+     * Capture mode
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    CaptureMode
+    |
+    /**
+     * Physical aperture
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    PhysicalAperture
+    |
+    /**
+     * Roll Angle
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    RollAngle
+    |
+    /**
+     * Pitch Angle
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    PitchAngle
     |
     /**
      * Capture Scene: Food
@@ -800,42 +895,6 @@ public enum PropertyKey <: ToString {
     FaceCount
     |
     /**
-     * Capture mode
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    CaptureMode
-    |
-    /**
-     * Roll Angle
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    RollAngle
-    |
-    /**
-     * Pitch Angle
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    PitchAngle
-    |
-    /**
-     * Physical aperture
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    PhysicalAperture
-    |
-    /**
      * Focus Mode
      */
     @!APILevel[
@@ -844,59 +903,392 @@ public enum PropertyKey <: ToString {
     ]
     FocusMode
     |
-    /**
-     * User comment
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    UserComment
+    @!Hide
+    Compression
     |
-    /**
-     * Pixel x dimension
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    PixelXDimension
+    @!Hide
+    PhotometricInterpretation
     |
-    /**
-     * Pixel y dimension
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    PixelYDimension
+    @!Hide
+    StripOffsets
     |
-    /**
-     * Scene type
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    SceneType
+    @!Hide
+    SamplesPerPixel
     |
-    /**
-     * White balance
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    WhiteBalance
+    @!Hide
+    RowsPerStrip
     |
-    /**
-     * Focal length in 35mm film
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    FocalLengthIn35mmFilm
+    @!Hide
+    StripByteCounts
+    |
+    @!Hide
+    XResolution
+    |
+    @!Hide
+    YResolution
+    |
+    @!Hide
+    PlanarConfiguration
+    |
+    @!Hide
+    ResolutionUnit
+    |
+    @!Hide
+    TransferFunction
+    |
+    @!Hide
+    Software
+    |
+    @!Hide
+    Artist
+    |
+    @!Hide
+    WhitePoint
+    |
+    @!Hide
+    PrimaryChromaticities
+    |
+    @!Hide
+    YCbCrCoefficients
+    |
+    @!Hide
+    YCbCrSubSampling
+    |
+    @!Hide
+    YCbCrPositioning
+    |
+    @!Hide
+    ReferenceBlackWhite
+    |
+    @!Hide
+    Copyright
+    |
+    @!Hide
+    JpegInterchangeFormat
+    |
+    @!Hide
+    JpegInterchangeFormatLength
+    |
+    @!Hide
+    ExposureProgram
+    |
+    @!Hide
+    SpectralSensitivity
+    |
+    @!Hide
+    Oecf
+    |
+    @!Hide
+    ExifVersion
+    |
+    @!Hide
+    DateTimeDigitized
+    |
+    @!Hide
+    ComponentsConfiguration
+    |
+    @!Hide
+    ShutterSpeedValue
+    |
+    @!Hide
+    BrightnessValue
+    |
+    @!Hide
+    MaxApertureValue
+    |
+    @!Hide
+    SubjectDistance
+    |
+    @!Hide
+    SubjectArea
+    |
+    @!Hide
+    MakerNote
+    |
+    @!Hide
+    SubsecTime
+    |
+    @!Hide
+    SubsecTimeOriginal
+    |
+    @!Hide
+    SubsecTimeDigitized
+    |
+    @!Hide
+    FlashpixVersion
+    |
+    @!Hide
+    ColorSpace
+    |
+    @!Hide
+    RelatedSoundFile
+    |
+    @!Hide
+    FlashEnergy
+    |
+    @!Hide
+    SpatialFrequencyResponse
+    |
+    @!Hide
+    FocalPlaneXResolution
+    |
+    @!Hide
+    FocalPlaneYResolution
+    |
+    @!Hide
+    FocalPlaneResolutionUnit
+    |
+    @!Hide
+    SubjectLocation
+    |
+    @!Hide
+    ExposureIndex
+    |
+    @!Hide
+    SensingMethod
+    |
+    @!Hide
+    FileSource
+    |
+    @!Hide
+    CfaPattern
+    |
+    @!Hide
+    CustomRendered
+    |
+    @!Hide
+    ExposureMode
+    |
+    @!Hide
+    DigitalZoomRatio
+    |
+    @!Hide
+    SceneCaptureType
+    |
+    @!Hide
+    GainControl
+    |
+    @!Hide
+    Contrast
+    |
+    @!Hide
+    Saturation
+    |
+    @!Hide
+    Sharpness
+    |
+    @!Hide
+    DeviceSettingDescription
+    |
+    @!Hide
+    SubjectDistanceRange
+    |
+    @!Hide
+    ImageUniqueId
+    |
+    @!Hide
+    GpsVersionId
+    |
+    @!Hide
+    GpsAltitudeRef
+    |
+    @!Hide
+    GpsAltitude
+    |
+    @!Hide
+    GpsSatellites
+    |
+    @!Hide
+    GpsStatus
+    |
+    @!Hide
+    GpsMeasureMode
+    |
+    @!Hide
+    GpsDop
+    |
+    @!Hide
+    GpsSpeedRef
+    |
+    @!Hide
+    GpsSpeed
+    |
+    @!Hide
+    GpsTrackRef
+    |
+    @!Hide
+    GpsTrack
+    |
+    @!Hide
+    GpsImgDirectionRef
+    |
+    @!Hide
+    GpsImgDirection
+    |
+    @!Hide
+    GpsMapDatum
+    |
+    @!Hide
+    GpsDestLatitudeRef
+    |
+    @!Hide
+    GpsDestLatitude
+    |
+    @!Hide
+    GpsDestLongitudeRef
+    |
+    @!Hide
+    GpsDestLongitude
+    |
+    @!Hide
+    GpsDestBearingRef
+    |
+    @!Hide
+    GpsDestBearing
+    |
+    @!Hide
+    GpsDestDistanceRef
+    |
+    @!Hide
+    GpsDestDistance
+    |
+    @!Hide
+    GpsProcessingMethod
+    |
+    @!Hide
+    GpsAreaInformation
+    |
+    @!Hide
+    GpsDifferential
+    |
+    @!Hide
+    BodySerialNumber
+    |
+    @!Hide
+    CameraOwnerName
+    |
+    @!Hide
+    CompositeImage
+    |
+    @!Hide
+    CompressedBitsPerPixel
+    |
+    @!Hide
+    DngVersion
+    |
+    @!Hide
+    DefaultCropSize
+    |
+    @!Hide
+    Gamma
+    |
+    @!Hide
+    IsoSpeedLatitudeyyy
+    |
+    @!Hide
+    IsoSpeedLatitudezzz
+    |
+    @!Hide
+    LensMake
+    |
+    @!Hide
+    LensModel
+    |
+    @!Hide
+    LensSerialNumber
+    |
+    @!Hide
+    LensSpecification
+    |
+    @!Hide
+    NewSubfileType
+    |
+    @!Hide
+    OffsetTime
+    |
+    @!Hide
+    OffsetTimeDigitized
+    |
+    @!Hide
+    OffsetTimeOriginal
+    |
+    @!Hide
+    SourceExposureTimesOfCompositeImage
+    |
+    @!Hide
+    SourceImageNumberOfCompositeImage
+    |
+    @!Hide
+    SubfileType
+    |
+    @!Hide
+    GpsHPositioningError
+    |
+    @!Hide
+    PhotographicSensitivity
+    |
+    @!Hide
+    BurstNumber
+    |
+    @!Hide
+    FaceConf
+    |
+    @!Hide
+    FaceLeyeCenter
+    |
+    @!Hide
+    FaceMouthCenter
+    |
+    @!Hide
+    FacePointer
+    |
+    @!Hide
+    FaceRect
+    |
+    @!Hide
+    FaceReyeCenter
+    |
+    @!Hide
+    FaceSmileScore
+    |
+    @!Hide
+    FaceVersion
+    |
+    @!Hide
+    FrontCamera
+    |
+    @!Hide
+    ScenePointer
+    |
+    @!Hide
+    SceneVersion
+    |
+    @!Hide
+    IsXmageSupported
+    |
+    @!Hide
+    XmageMode
+    |
+    @!Hide
+    XmageLeft
+    |
+    @!Hide
+    XmageTop
+    |
+    @!Hide
+    XmageRight
+    |
+    @!Hide
+    XmageBottom
+    |
+    @!Hide
+    CloudEnhancementMode
+    |
+    @!Hide
+    WindSnapshotMode
+    |
+    @!Hide
+    GifLoopCount
     | ...
 
     /**

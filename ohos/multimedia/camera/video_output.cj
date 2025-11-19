@@ -47,6 +47,63 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
         releaseFFIData(myDataId)
     }
 
+    func onFrameStart(callback: Callback0Argument): Unit {
+        synchronized(frameStartMutex) {
+            let callbackList = frameStartCallbackList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {=> callback.invoke(None)}
+                let lambdaData = Callback0Param(wrapper)
+                let errCode = FfiCameraVideoOutputOnFrameStart(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
+    func onFrameEnd(callback: Callback0Argument): Unit {
+        synchronized(frameEndMutex) {
+            let callbackList = frameEndCallbackList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {=> callback.invoke(None)}
+                let lambdaData = Callback0Param(wrapper)
+                let errCode = FfiCameraVideoOutputOnFrameEnd(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
+    func onError(callback: Callback0Argument): Unit {
+        synchronized(errorMutex) {
+            let callbackList = errorCallbackList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = { value: Int32 =>
+                    if (value == SUCCESS_CODE) {
+                        callback.invoke(None)
+                    } else {
+                        callback.invoke(BusinessException(value, getErrorMsg(value)))
+                    }
+                }
+                let lambdaData = Callback1Param<Int32, Unit>(wrapper)
+                let errCode = FfiCameraVideoOutputOnError(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
     /**
      * Release output instance.
      *
@@ -163,26 +220,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
     }
 
     /**
-     * Gets the current preconfig type if you had already call preconfig interface.
-     *
-     * @returns { VideoProfile } The current preconfig type.
-     * @throws { BusinessException } 7400201 - Camera service fatal error.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core",
-        throwexception: true
-    ]
-    public func getActiveProfile(): VideoProfile {
-        unsafe {
-            var errCode: Int32 = 0
-            let cVideoProfile = FfiCameraVideoOutputGetActiveProfile(getID(), inout errCode)
-            successOrThrow(errCode)
-            return cVideoProfile.toVideoProfile()
-        }
-    }
-
-    /**
      * Gets the video rotation angle.
      *
      * @param { Int32 } deviceDegree - The current device rotation degree.
@@ -225,63 +262,6 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
             case CameraEvents.FrameEnd => onFrameEnd(callback)
             case CameraEvents.CameraError => onError(callback)
             case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
-        }
-    }
-
-    func onFrameStart(callback: Callback0Argument): Unit {
-        synchronized(frameStartMutex) {
-            let callbackList = frameStartCallbackList
-            if (findCallbackObject(callbackList, callback)) {
-                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = {=> callback.invoke(None)}
-                let lambdaData = Callback0Param(wrapper)
-                let errCode = FfiCameraVideoOutputOnFrameStart(getID(), lambdaData.getID())
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-        }
-    }
-
-    func onFrameEnd(callback: Callback0Argument): Unit {
-        synchronized(frameEndMutex) {
-            let callbackList = frameEndCallbackList
-            if (findCallbackObject(callbackList, callback)) {
-                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = {=> callback.invoke(None)}
-                let lambdaData = Callback0Param(wrapper)
-                let errCode = FfiCameraVideoOutputOnFrameEnd(getID(), lambdaData.getID())
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
-        }
-    }
-
-    func onError(callback: Callback0Argument): Unit {
-        synchronized(errorMutex) {
-            let callbackList = errorCallbackList
-            if (findCallbackObject(callbackList, callback)) {
-                CAMERA_LOG.error("VideoOutput on failed: ${paramError("callback object", "different")}")
-                return
-            }
-            unsafe {
-                let wrapper = { value: Int32 =>
-                    if (value == SUCCESS_CODE) {
-                        callback.invoke(None)
-                    } else {
-                        callback.invoke(BusinessException(value, getErrorMsg(value)))
-                    }
-                }
-                let lambdaData = Callback1Param<Int32, Unit>(wrapper)
-                let errCode = FfiCameraVideoOutputOnError(getID(), lambdaData.getID())
-                successOrThrow(errCode)
-                callbackList.add((callback, lambdaData.getID()))
-            }
         }
     }
 
@@ -332,6 +312,26 @@ public class VideoOutput <: RemoteDataLite & CameraOutput {
             case CameraEvents.CameraError => offAll(IdClassInfo(this.getID(), "VideoOutput"), errorCallbackList,
                 errorMutex, FfiCameraVideoOutputOffAllError)
             case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+        }
+    }
+
+    /**
+     * Gets the current preconfig type if you had already call preconfig interface.
+     *
+     * @returns { VideoProfile } The current preconfig type.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func getActiveProfile(): VideoProfile {
+        unsafe {
+            var errCode: Int32 = 0
+            let cVideoProfile = FfiCameraVideoOutputGetActiveProfile(getID(), inout errCode)
+            successOrThrow(errCode)
+            return cVideoProfile.toVideoProfile()
         }
     }
 }

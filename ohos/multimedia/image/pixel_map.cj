@@ -168,47 +168,6 @@ public class PixelMap <: RemoteDataLite {
     }
 
     /**
-     * Is it stride Alignment.
-     *
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core",
-        throwexception: true
-    ]
-    public prop isStrideAlignment: Bool {
-        get() {
-            unsafe {
-                var errCode: UInt32 = 0
-                let res = FfiOHOSGetIsStrideAlignment(getID(), inout errCode)
-                checkAndThrow(errCode)
-                return res
-            }
-        }
-    }
-
-    /**
-     * Releases this PixelMap object.
-     *
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func release(): Unit {
-        unsafe {
-            let ret = FfiOHOSPixelMapRelease(getID())
-            checkAndThrow(ret)
-            releaseFFIData(getID())
-        }
-        IMAGE_LOG.info("[PixelMap] ffi release success")
-    }
-
-    /**
      * Reads image pixel map data and writes the data to an Array.
      *
      * @param { Array<UInt8> } dst - A buffer to which the image pixel map data will be written.
@@ -224,6 +183,56 @@ public class PixelMap <: RemoteDataLite {
         unsafe {
             var arrPtr = acquireArrayRawData(dst)
             let ret = FfiOHOSReadPixelsToBuffer(getID(), UInt64(dst.size), arrPtr.pointer)
+            releaseArrayRawData(arrPtr)
+            checkAndThrow(ret)
+        }
+    }
+
+    /**
+     * Reads image pixel map data in an area. This method return the data read.
+     *
+     * @param { PositionArea } area - Area from which the image pixel map data will be read.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func readPixels(area: PositionArea): Unit {
+        unsafe {
+            let arrPtr = acquireArrayRawData(area.pixels)
+            let ret = FfiOHOSReadPixels(
+                getID(),
+                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
+                    arrPtr.pointer)
+            )
+            releaseArrayRawData(arrPtr)
+            checkAndThrow(ret)
+        }
+    }
+
+    /**
+     * Writes image pixel map data to the specified area.
+     *
+     * @param { PositionArea } area - Area to which the image pixel map data will be written.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func writePixels(area: PositionArea): Unit {
+        unsafe {
+            let arrPtr = acquireArrayRawData(area.pixels)
+            let ret = FfiOHOSWritePixels(
+                getID(),
+                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
+                    arrPtr.pointer)
+            )
             releaseArrayRawData(arrPtr)
             checkAndThrow(ret)
         }
@@ -355,6 +364,26 @@ public class PixelMap <: RemoteDataLite {
     }
 
     /**
+     * Obtains new pixel map with alpha information. 
+     *
+     * @returns { PixelMap } Return the new image pixel map.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true
+    ]
+    public func createAlphaPixelMap(): PixelMap {
+        unsafe {
+            var errCode: UInt32 = 0
+            let id = FfiOHOSCreateAlphaPixelMap(getID(), inout errCode)
+            checkAndThrow(errCode)
+            return PixelMap(id)
+        }
+    }
+
+    /**
      * Image zoom in width and height.
      *
      * @param { Float32 } x - The zoom value of width.
@@ -453,72 +482,25 @@ public class PixelMap <: RemoteDataLite {
     }
 
     /**
-     * Writes image pixel map data to the specified area.
+     * Get color space of pixel map.
      *
-     * @param { PositionArea } area - Area to which the image pixel map data will be written.
+     * @returns { ColorSpaceManager } Return the ColorSpaceManager.
+     * @throws { BusinessException } 62980101 - If the image data abnormal.
+     * @throws { BusinessException } 62980103 - If the image data unsupport.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func writePixels(area: PositionArea): Unit {
-        unsafe {
-            let arrPtr = acquireArrayRawData(area.pixels)
-            let ret = FfiOHOSWritePixels(
-                getID(),
-                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
-                    arrPtr.pointer)
-            )
-            releaseArrayRawData(arrPtr)
-            checkAndThrow(ret)
-        }
-    }
-
-    /**
-     * Reads image pixel map data in an area. This method return the data read.
-     *
-     * @param { PositionArea } area - Area from which the image pixel map data will be read.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core",
-        throwexception: true,
-        workerthread: true
-    ]
-    public func readPixels(area: PositionArea): Unit {
-        unsafe {
-            let arrPtr = acquireArrayRawData(area.pixels)
-            let ret = FfiOHOSReadPixels(
-                getID(),
-                CPositionArea(UInt64(area.pixels.size), area.offset, area.stride, area.region.toExternal(),
-                    arrPtr.pointer)
-            )
-            releaseArrayRawData(arrPtr)
-            checkAndThrow(ret)
-        }
-    }
-
-    /**
-     * Obtains new pixel map with alpha information. 
-     *
-     * @returns { PixelMap } Return the new image pixel map.
-     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 62980115 - If the image parameter invalid.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core",
         throwexception: true
     ]
-    public func createAlphaPixelMap(): PixelMap {
+    public func getColorSpace(): ColorSpaceManager {
         unsafe {
             var errCode: UInt32 = 0
-            let id = FfiOHOSCreateAlphaPixelMap(getID(), inout errCode)
+            let colorSpaceId = FfiOHOSPixelMapGetColorSpace(getID(), inout errCode)
             checkAndThrow(errCode)
-            return PixelMap(id)
+            return ColorSpaceManager(colorSpaceId)
         }
     }
 
@@ -546,25 +528,23 @@ public class PixelMap <: RemoteDataLite {
     }
 
     /**
-     * Get color space of pixel map.
+     * Is it stride Alignment.
      *
-     * @returns { ColorSpaceManager } Return the ColorSpaceManager.
-     * @throws { BusinessException } 62980101 - If the image data abnormal.
-     * @throws { BusinessException } 62980103 - If the image data unsupport.
      * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
-     * @throws { BusinessException } 62980115 - If the image parameter invalid.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core",
         throwexception: true
     ]
-    public func getColorSpace(): ColorSpaceManager {
-        unsafe {
-            var errCode: UInt32 = 0
-            let colorSpaceId = FfiOHOSPixelMapGetColorSpace(getID(), inout errCode)
-            checkAndThrow(errCode)
-            return ColorSpaceManager(colorSpaceId)
+    public prop isStrideAlignment: Bool {
+        get() {
+            unsafe {
+                var errCode: UInt32 = 0
+                let res = FfiOHOSGetIsStrideAlignment(getID(), inout errCode)
+                checkAndThrow(errCode)
+                return res
+            }
         }
     }
 
@@ -589,5 +569,25 @@ public class PixelMap <: RemoteDataLite {
             let ret = FfiOHOSPixelMapApplyColorSpace(getID(), targetColorSpace.getID())
             checkAndThrow(ret)
         }
+    }
+
+    /**
+     * Releases this PixelMap object.
+     *
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func release(): Unit {
+        unsafe {
+            let ret = FfiOHOSPixelMapRelease(getID())
+            checkAndThrow(ret)
+            releaseFFIData(getID())
+        }
+        IMAGE_LOG.info("[PixelMap] ffi release success")
     }
 }

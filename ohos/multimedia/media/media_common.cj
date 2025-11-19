@@ -20,7 +20,7 @@ package ohos.multimedia.media
 import ohos.ffi.SUCCESS_CODE
 import ohos.hilog.HilogChannel
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 
 import std.deriving.Derive
 import std.collection.HashMap
@@ -80,6 +80,19 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
         AV_PLAYER_LOG.error("${className} ${funcName} failed: ${getErrorMsg(errorCode)}")
         throw BusinessException(errorCode, "${getErrorMsg(errorCode)}")
     }
+}
+
+@!Hide
+internal enum PixelFormat {
+    @!Hide
+    Rgb565
+    |
+    @!Hide
+    Rgba8888
+    |
+    @!Hide
+    Rgb888
+    | ...
 }
 
 /**
@@ -171,6 +184,12 @@ public class PixelMapParams {
         syscap: "SystemCapability.Multimedia.Media.AVImageGenerator"
     ]
     public var height: Int32
+
+    @!Hide
+    internal var colorFormat: PixelFormat = PixelFormat.Rgba8888
+
+    @!Hide
+    internal var autoFlip: Bool = false
 
     /**
      * PixelMapParams constructor.
