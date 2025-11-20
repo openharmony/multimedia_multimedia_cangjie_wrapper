@@ -240,31 +240,41 @@ public class PhotoAccessHelper <: RemoteDataLite {
     ]
     public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
         synchronized(onOffMutex) {
-            let flag: Bool = match (callback) {
-                case Some(v) => true
-                case None => false
-            }
-            var errCode = 0i32
-            unsafe {
-                try (cUri = LibC.mallocCString(uri).asResource()) {
-                    if (flag) {
-                        for (idx in 0..callbackList.size) {
-                            let item = callbackList[idx]
-                            if (refEq(callback.getOrThrow(), item[0]) && item[1] == uri) {
-                                FfiPhotoAccessHelperUnRegisterChange(getID(), cUri.value, item[2], inout errCode)
-                                checkRet(errCode, "unregisterChange")
-                                callbackList.remove(at: idx)
-                                return
-                            }
-                        }
-                    } else {
-                        FfiPhotoAccessHelperUnRegisterChange(getID(), cUri.value, -1, inout errCode)
-                        checkRet(errCode, "unregisterChange")
-                        callbackList.removeIf({item => item[1] == uri})
-                    }
-                }
+            handleUnregisterChange(uri, callback)
+        }
+    }
+
+    private func handleUnregisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
+        let flag: Bool = match (callback) {
+            case Some(v) => true
+            case None => false
+        }
+        var errCode = 0i32
+        try (cUri = LibC.mallocCString(uri).asResource()) {
+            if (flag) {
+                handleUnregisterWithCallback(uri, cUri.value, callback.getOrThrow(), errCode)
+            } else {
+                handleUnregisterWithoutCallback(uri, cUri.value, errCode)
             }
         }
+    }
+
+    private func handleUnregisterWithCallback(uri: String, cUriValue: CString, callback: Callback1Argument<ChangeData>, errCode: Int32): Unit {
+        for (idx in 0..callbackList.size) {
+            let item = callbackList[idx]
+            if (refEq(callback, item[0]) && item[1] == uri) {
+                unsafe { FfiPhotoAccessHelperUnRegisterChange(getID(), cUriValue, item[2], inout errCode) }
+                checkRet(errCode, "unregisterChange")
+                callbackList.remove(at: idx)
+                return
+            }
+        }
+    }
+
+    private func handleUnregisterWithoutCallback(uri: String, cUriValue: CString, errCode: Int32): Unit {
+        unsafe { FfiPhotoAccessHelperUnRegisterChange(getID(), cUriValue, -1, inout errCode) }
+        checkRet(errCode, "unregisterChange")
+        callbackList.removeIf({item => item[1] == uri})
     }
 
     func getSelfBundleInfo(): FfiBundleInfo {
