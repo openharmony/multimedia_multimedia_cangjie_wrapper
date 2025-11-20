@@ -17,7 +17,7 @@
 
 package ohos.multimedia.image
 
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.ffi.{RemoteDataLite, releaseFFIData, safeMalloc}
 import ohos.business_exception.BusinessException
 
@@ -103,6 +103,13 @@ public class Image <: RemoteDataLite {
                 checkAndThrow(result)
                 return ret
             }
+        }
+    }
+
+    @!Hide
+    internal prop timestamp: Int64 {
+        get() {
+            throw Exception("Not support")
         }
     }
 

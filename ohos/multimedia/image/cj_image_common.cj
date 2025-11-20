@@ -18,8 +18,31 @@
 package ohos.multimedia.image
 
 import ohos.graphics.color_space_manager.ColorSpaceManager
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.business_exception.BusinessException
+
+@!Hide
+internal enum ResolutionQuality {
+    @!Hide
+    Low
+    |
+    @!Hide
+    Medium
+    |
+    @!Hide
+    High
+    | ...
+}
+
+@!Hide
+internal enum CropAndScaleStrategy {
+    @!Hide
+    ScaleFirst
+    |
+    @!Hide
+    CropFirst
+    | ...
+}
 
 /**
  * Describes image information.
@@ -170,22 +193,13 @@ public class SourceOptions {
 ]
 public class InitializationOptions {
     /**
-     * PixelMap expected alpha type.
+     * PixelMap size.
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
-    public var alphaType: AlphaType
-
-    /**
-     * Editable or not.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public var editable: Bool
+    public var size: Size
 
     /**
      * PixelMap source format.
@@ -206,6 +220,24 @@ public class InitializationOptions {
     public var pixelFormat: PixelMapFormat
 
     /**
+     * Editable or not.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    public var editable: Bool
+
+    /**
+     * PixelMap expected alpha type.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    public var alphaType: AlphaType
+
+    /**
      * PixelMap expected scaling effect.
      */
     @!APILevel[
@@ -213,15 +245,6 @@ public class InitializationOptions {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public var scaleMode: ScaleMode
-
-    /**
-     * PixelMap size.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public var size: Size
 
     /**
      * InitializationOptions constructor.
@@ -263,6 +286,14 @@ public class InitializationOptions {
     syscap: "SystemCapability.Multimedia.Image.ImageSource"
 ]
 public class DecodingOptions {
+    /**
+     * Number of image frames.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource"
+    ]
+    public var index: UInt32
     /**
      * Sampling ratio of the image pixel map.
      */
@@ -319,15 +350,6 @@ public class DecodingOptions {
     public var desiredPixelFormat: PixelMapFormat
 
     /**
-     * Number of image frames.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource"
-    ]
-    public var index: UInt32
-
-    /**
      * The density for image pixel map.
      */
     @!APILevel[
@@ -353,6 +375,12 @@ public class DecodingOptions {
         syscap: "SystemCapability.Multimedia.Image.ImageSource"
     ]
     public var desiredDynamicRange: DecodingDynamicRange
+
+    @!Hide
+    internal var resolutionQuality: ?ResolutionQuality = Option<ResolutionQuality>.None
+
+    @!Hide
+    internal var cropAndScaleStrategy: ?CropAndScaleStrategy = Option<CropAndScaleStrategy>.None
 
     /**
      * DecodingOptions constructor.

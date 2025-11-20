@@ -18,7 +18,7 @@
 package ohos.multimedia.camera
 
 import ohos.graphics.color_space_manager.ColorSpace
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.ffi.{CArrFloat32, CArrI32, RemoteDataLite, cArr2cjArr}
 import ohos.business_exception.BusinessException
 
@@ -173,6 +173,9 @@ public enum ExposureMode {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     ExposureModeContinuousAuto
+    |
+    @!Hide
+    ExposureModeManual
     | ...
 
     prop value: Int32 {

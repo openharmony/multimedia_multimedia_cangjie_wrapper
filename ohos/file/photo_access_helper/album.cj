@@ -17,8 +17,18 @@
 
 package ohos.file.photo_access_helper
 
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import ohos.ffi.{RemoteDataLite, releaseFFIData}
+
+@!Hide
+internal enum CoverUriSource {
+    @!Hide
+    DefaultCover
+    |
+    @!Hide
+    ManualCover
+    | ...
+}
 
 /**
  * Defines the abstract interface of albums.
@@ -136,6 +146,26 @@ public open class AbsAlbum <: RemoteDataLite{
             }
         }
     }
+    @!Hide
+    internal prop lpath: String {
+        get() {
+            throw Exception("Not supported")
+        }
+    }
+
+    @!Hide
+    internal prop coverUriSource: CoverUriSource {
+        get() {
+            throw Exception("Not supported")
+        }
+    }
+
+    @!Hide
+    internal prop uploadStatus: Bool {
+        get() {
+            throw Exception("Not supported")
+        }
+    }
 
     /**
      * Fetch assets in an album.
@@ -207,6 +237,20 @@ public class Album <: AbsAlbum {
     public prop videoCount: Int32 {
         get() {
             unsafe { FfiPhotoAlbumGetVideoCount(getID()) }
+        }
+    }
+
+    @!Hide
+    internal prop dateAdded: Int64 {
+        get() {
+            throw Exception("Not supported")
+        }
+    }
+
+    @!Hide
+    internal prop dateModified: Int64 {
+        get() {
+            throw Exception("Not supported")
         }
     }
 

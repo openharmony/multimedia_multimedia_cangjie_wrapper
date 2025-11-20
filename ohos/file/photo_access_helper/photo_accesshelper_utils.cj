@@ -21,7 +21,7 @@ import ohos.business_exception.{ UNIVERSAL_ERROR_MAP, BusinessException }
 import ohos.data.data_share_predicates.DataSharePredicates
 import ohos.ffi.{SUCCESS_CODE, toArrayCString}
 import ohos.hilog.HilogChannel
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 
 import std.collection.HashMap
 import std.deriving.Derive
@@ -139,6 +139,35 @@ func checkRet(errCode: Int32, funcName: String) {
     }
 }
 
+@!Hide
+internal enum SourceMode {
+    @!Hide
+    OriginalMode
+    |
+    @!Hide
+    EditedMode
+    | ...
+}
+
+@!Hide
+internal enum CompatibleMode {
+    @!Hide
+    OriginalFormatMode
+    |
+    @!Hide
+    CompatibleFormatMode
+    | ...
+}
+
+@!Hide
+internal class SharedPhotoAsset {}
+
+@!Hide
+internal class SharedAlbumAsset {}
+
+@!Hide
+internal class MediaAssetProgressHandler {}
+
 /**
  * Enumerate the album subtypes.
  */
@@ -175,6 +204,18 @@ public enum AlbumSubtype {
     ]
     Video
     |
+    @!Hide
+    Hidden
+    |
+    @!Hide
+    Trash
+    |
+    @!Hide
+    Screenshot
+    |
+    @!Hide
+    Camera
+    |
     /**
      * Image album
      */
@@ -183,6 +224,36 @@ public enum AlbumSubtype {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Image
+    |
+    @!Hide
+    CloudEnhancement
+    |
+    @!Hide
+    SourceGeneric
+    |
+    @!Hide
+    Classify
+    |
+    @!Hide
+    GeographyLocation
+    |
+    @!Hide
+    GeographyCity
+    |
+    @!Hide
+    ShootingMode
+    |
+    @!Hide
+    Portrait
+    |
+    @!Hide
+    GroupPhoto
+    |
+    @!Hide
+    Highlight
+    |
+    @!Hide
+    HighlightSuggestions
     |
     /**
      * Any album
@@ -248,6 +319,12 @@ public enum AlbumType {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     System
+    |
+    @!Hide
+    Source
+    |
+    @!Hide
+    Smart
     | ...
 
     protected prop value: Int32 {
@@ -339,6 +416,9 @@ public enum PhotoSubtype {
     ]
     Default
     |
+    @!Hide
+    Screenshot
+    |
     /**
      * Moving Photo Type
      */
@@ -356,6 +436,9 @@ public enum PhotoSubtype {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     Burst
+    |
+    @!Hide
+    Spatial3dgs
     | ...
 
     protected prop value: Int32 {
@@ -576,6 +659,9 @@ public enum RecommendationType {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     FeaturedSinglePortrait
+    |
+    @!Hide
+    ColorStylePhoto
     | ...
 
     prop value: Int32 {
@@ -652,6 +738,15 @@ public enum ResourceType {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     VideoResource
+    |
+    @!Hide
+    PhotoProxy
+    |
+    @!Hide
+    PrivateMovingPhotoResource
+    |
+    @!Hide
+    PrivateMovingPhotoMetadata
     | ...
 
     prop value: Int32 {
@@ -674,6 +769,15 @@ public enum ResourceType {
 ]
 public class PhotoCreationConfig {
     /**
+     * Title of the asset
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var title: String
+
+    /**
      * Extension of the asset
      */
     @!APILevel[
@@ -690,15 +794,6 @@ public class PhotoCreationConfig {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var photoType: PhotoType
-
-    /**
-     * Title of the asset
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
-    ]
-    public var title: String
 
     /**
      * Specify photo subtype of the asset to create, include default or moving_photo
@@ -853,6 +948,15 @@ public class ChangeData {
     ]
     public var extraUris: Array<String>
 
+    @!Hide
+    internal var sharedPhotoAssets: Array<SharedPhotoAsset> = Array<SharedPhotoAsset>()
+
+    @!Hide
+    internal var sharedAlbumAssets: Array<SharedAlbumAsset> = Array<SharedAlbumAsset>()
+
+    @!Hide
+    internal var sharedExtraPhotoAssets: Array<SharedPhotoAsset> = Array<SharedPhotoAsset>()
+
     protected ChangeData(notifyType: NotifyType, uris: Array<String>, extraUris: Array<String>) {
         this.notifyType = notifyType
         this.uris = uris
@@ -918,6 +1022,15 @@ public class RequestOptions {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var deliveryMode: DeliveryMode
+
+    @!Hide
+    internal var sourceMode: ?SourceMode = Option<SourceMode>.None
+
+    @!Hide
+    internal var compatibleMode: CompatibleMode = CompatibleMode.OriginalFormatMode
+
+    @!Hide
+    internal var mediaAssetProgressHandler: ?MediaAssetProgressHandler = Option<MediaAssetProgressHandler>.None
 
     init(deliveryMode: DeliveryMode) {
         this.deliveryMode = deliveryMode
@@ -1054,6 +1167,33 @@ public enum PhotoKeys <: ToString {
     ]
     Title
     |
+    @!Hide
+    Position
+    |
+    @!Hide
+    DateTrashed
+    |
+    @!Hide
+    Hidden
+    |
+    @!Hide
+    UserComment
+    |
+    @!Hide
+    CameraShotKey
+    |
+    @!Hide
+    DateYear
+    |
+    @!Hide
+    DateMonth
+    |
+    @!Hide
+    DateDay
+    |
+    @!Hide
+    Pending
+    |
     /**
      * Creation time of the asset in milliseconds
      */
@@ -1072,6 +1212,9 @@ public enum PhotoKeys <: ToString {
     ]
     DateModifiedMs
     |
+    @!Hide
+    DateTrashedMs
+    |
     /**
      * Photo subtype of the asset
      */
@@ -1080,6 +1223,9 @@ public enum PhotoKeys <: ToString {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     PhotoSubtype
+    |
+    @!Hide
+    MovingPhotoEffectMode
     |
     /**
      * Dynamic range type of the asset
@@ -1108,6 +1254,9 @@ public enum PhotoKeys <: ToString {
     ]
     BurstKey
     |
+    @!Hide
+    ThumbnailReady
+    |
     /**
      * Width and height information of lcd picture
      */
@@ -1125,6 +1274,54 @@ public enum PhotoKeys <: ToString {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     ThumbnailSize
+    |
+    @!Hide
+    DetailTime
+    |
+    @!Hide
+    DateTakenMs
+    |
+    @!Hide
+    CeAvailable
+    |
+    @!Hide
+    SupportedWatermarkType
+    |
+    @!Hide
+    ThumbnailVisible
+    |
+    @!Hide
+    IsCeAuto
+    |
+    @!Hide
+    OwnerAlbumId
+    |
+    @!Hide
+    IsRecentShow
+    |
+    @!Hide
+    MediaSuffix
+    |
+    @!Hide
+    SumSize
+    |
+    @!Hide
+    ExifRotate
+    |
+    @!Hide
+    HasApplink
+    |
+    @!Hide
+    Applink
+    |
+    @!Hide
+    HdrMode
+    |
+    @!Hide
+    CloudId
+    |
+    @!Hide
+    ExistCompatibleDuplicate
     | ...
 
     /**
@@ -1189,6 +1386,9 @@ public enum DefaultChangeUri <: ToString {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     DefaultAlbumUri
+    |
+    @!Hide
+    DefaultHiddenAlbumUri
     | ...
 
     /**
@@ -1235,6 +1435,21 @@ public enum AlbumKeys <: ToString {
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     AlbumName
+    |
+    @!Hide
+    AlbumLpath
+    |
+    @!Hide
+    BundleName
+    |
+    @!Hide
+    DateModified
+    |
+    @!Hide
+    CoverUriSource
+    |
+    @!Hide
+    UploadStatus
     | ...
 
     /**

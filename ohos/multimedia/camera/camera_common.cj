@@ -24,7 +24,7 @@ import ohos.callback_invoke.CallbackObject
 import std.collection.{HashMap, ArrayList}
 import std.sync.Mutex
 import std.deriving.Derive
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 
 const LOG_DOMAIN: UInt32 = 0xD002B00
 let CAMERA_LOG = HilogChannel(0, LOG_DOMAIN, "CJ-Camera")
@@ -72,6 +72,22 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
         }
     }
     return false
+}
+
+@!Hide
+internal class DepthProfile {}
+
+@!Hide
+internal enum HostDeviceType {
+    @!Hide
+    UnknownType
+    |
+    @!Hide
+    Phone
+    |
+    @!Hide
+    Tablet
+    | ...
 }
 
 /**
@@ -393,14 +409,6 @@ public class FrameRateRange {
 ]
 public class Size {
     /**
-     * Width.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    public var width: UInt32
-    /**
      * Height.
      */
     @!APILevel[
@@ -408,6 +416,14 @@ public class Size {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public var height: UInt32
+    /**
+     * Width.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public var width: UInt32
 
     init(width: UInt32, height: UInt32) {
         this.width = width
@@ -490,6 +506,27 @@ public enum MetadataObjectType {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     FaceDetection
+    |
+    @!Hide
+    HumanBody
+    |
+    @!Hide
+    CatFace
+    |
+    @!Hide
+    CatBody
+    |
+    @!Hide
+    DogFace
+    |
+    @!Hide
+    DogBody
+    |
+    @!Hide
+    SalientDetection
+    |
+    @!Hide
+    BarCodeDetection
     | ...
 
     func getValue(): Int32 {
@@ -542,6 +579,8 @@ public class CameraOutputCapability {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let videoProfiles: Array<VideoProfile>
+    @!Hide
+    internal let depthProfiles: Array<DepthProfile> = Array<DepthProfile>()
     /**
      * All the supported metadata Object Types.
      */
@@ -713,6 +752,39 @@ public enum ConnectionType {
 ]
 public enum CameraFormat {
     /**
+     * RGBA 8888 Format.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    CameraFormatRgba8888
+    |
+    @!Hide
+    CameraFormatDng
+    |
+    @!Hide
+    CameraFormatDngXdraw
+    |
+    /**
+     * YUV 420 Format.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    CameraFormatYuv420Sp
+    |
+    /**
+     * JPEG Format.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    CameraFormatJpeg
+    |
+    /**
      * YCBCR P010 Format.
      */
     @!APILevel[
@@ -739,32 +811,11 @@ public enum CameraFormat {
     ]
     CameraFormatHeic
     |
-    /**
-     * JPEG Format.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    CameraFormatJpeg
+    @!Hide
+    CameraFormatDepth16
     |
-    /**
-     * YUV 420 Format.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    CameraFormatYuv420Sp
-    |
-    /**
-     * RGBA 8888 Format.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Multimedia.Camera.Core"
-    ]
-    CameraFormatRgba8888
+    @!Hide
+    CameraFormatDepth32
     | ...
 
     func getValue(): Int32 {
@@ -835,6 +886,10 @@ public class CameraDevice {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let connectionType: ConnectionType
+    @!Hide
+    internal let hostDeviceName: String = ""
+    @!Hide
+    internal let hostDeviceType: HostDeviceType = HostDeviceType.UnknownType
     /**
      * The camera mounting angle, which does not change with screen rotation, takes values from 0° to 360° in degrees.
      */
@@ -843,6 +898,10 @@ public class CameraDevice {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraOrientation: UInt32
+    @!Hide
+    internal let isRetractable: ?Bool = Option<Bool>.None
+    @!Hide
+    internal let lensEquivalentFocalLength: ?Array<Int32> = Option<Array<Int32>>.None
 
     init(cameraId: String, cameraPosition: CameraPosition, cameraType: CameraType, connectionType: ConnectionType,
         cameraOrientation: UInt32) {
@@ -1095,6 +1154,9 @@ public enum CameraPosition {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     CameraPositionFront
+    |
+    @!Hide
+    CameraPositionFoldInner
     | ...
 
     /*
@@ -1227,6 +1289,33 @@ public enum SceneMode {
     ]
     NormalVideo
     |
+    @!Hide
+    PortraitPhoto
+    |
+    @!Hide
+    NightPhoto
+    |
+    @!Hide
+    ProfessionalPhoto
+    |
+    @!Hide
+    ProfessionalVideo
+    |
+    @!Hide
+    SlowMotionVideo
+    |
+    @!Hide
+    MacroPhoto
+    |
+    @!Hide
+    MacroVideo
+    |
+    @!Hide
+    LightPaintingPhoto
+    |
+    @!Hide
+    HighResolutionPhoto
+    |
     /**
      * Secure camera mode.
      */
@@ -1235,6 +1324,21 @@ public enum SceneMode {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     SecurePhoto
+    |
+    @!Hide
+    QuickShotPhoto
+    |
+    @!Hide
+    ApertureVideo
+    |
+    @!Hide
+    PanoramaPhoto
+    |
+    @!Hide
+    TimeLapsePhoto
+    |
+    @!Hide
+    FluorescencePhoto
     | ...
 
     /*
