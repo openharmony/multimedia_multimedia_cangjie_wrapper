@@ -240,7 +240,7 @@ public class PhotoAccessHelper <: RemoteDataLite {
     ]
     public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeData> = None): Unit {
         synchronized(onOffMutex) {
-            handleUnregisterChange(uri, callback)
+            handleUnregisterChange(uri, callback: callback)
         }
     }
 
@@ -249,17 +249,19 @@ public class PhotoAccessHelper <: RemoteDataLite {
             case Some(v) => true
             case None => false
         }
-        var errCode = 0i32
-        try (cUri = LibC.mallocCString(uri).asResource()) {
-            if (flag) {
-                handleUnregisterWithCallback(uri, cUri.value, callback.getOrThrow(), errCode)
-            } else {
-                handleUnregisterWithoutCallback(uri, cUri.value, errCode)
+        unsafe {
+            try (cUri = LibC.mallocCString(uri).asResource()) {
+                if (flag) {
+                    handleUnregisterWithCallback(uri, cUri.value, callback.getOrThrow())
+                } else {
+                    handleUnregisterWithoutCallback(uri, cUri.value)
+                }
             }
         }
     }
 
-    private func handleUnregisterWithCallback(uri: String, cUriValue: CString, callback: Callback1Argument<ChangeData>, errCode: Int32): Unit {
+    private func handleUnregisterWithCallback(uri: String, cUriValue: CString, callback: Callback1Argument<ChangeData>): Unit {
+        var errCode = 0i32
         for (idx in 0..callbackList.size) {
             let item = callbackList[idx]
             if (refEq(callback, item[0]) && item[1] == uri) {
@@ -271,7 +273,8 @@ public class PhotoAccessHelper <: RemoteDataLite {
         }
     }
 
-    private func handleUnregisterWithoutCallback(uri: String, cUriValue: CString, errCode: Int32): Unit {
+    private func handleUnregisterWithoutCallback(uri: String, cUriValue: CString): Unit {
+        var errCode = 0i32
         unsafe { FfiPhotoAccessHelperUnRegisterChange(getID(), cUriValue, -1, inout errCode) }
         checkRet(errCode, "unregisterChange")
         callbackList.removeIf({item => item[1] == uri})
