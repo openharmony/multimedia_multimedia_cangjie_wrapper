@@ -60,6 +60,12 @@
       "inner_kits": [
         {
           "name": "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image"
+        },
+        {
+            "name": "//foundation/multimedia/multimedia_cangjie_wrapper:copy_sdk_multimedia_cangjie_libs"
+        },
+        {
+            "name": "//foundation/multimedia/multimedia_cangjie_wrapper:copy_sdk_multimedia_cangjie_libs_kit"
         }
       ],
       "test": []
