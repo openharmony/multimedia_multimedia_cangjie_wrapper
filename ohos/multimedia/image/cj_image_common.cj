@@ -261,7 +261,7 @@ public class InitializationOptions {
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     public init(size: Size, alphaType!: AlphaType = AlphaType.Premul, editable!: Bool = false, srcPixelFormat!: PixelMapFormat = PixelMapFormat.Bgra8888,
-        pixelFormat!: PixelMapFormat = PixelMapFormat.Bgra8888, scaleMode!: ScaleMode = ScaleMode.FitTargetSize) {
+        pixelFormat!: PixelMapFormat = PixelMapFormat.Rgba8888, scaleMode!: ScaleMode = ScaleMode.FitTargetSize) {
         this.alphaType = alphaType
         this.editable = editable
         this.srcPixelFormat = srcPixelFormat
