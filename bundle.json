@@ -12,17 +12,7 @@
   "component": {
     "name": "multimedia_cangjie_wrapper",
     "subsystem": "multimedia",
-    "syscap": [
-      "SystemCapability.Multimedia.Image.Core",
-      "SystemCapability.Multimedia.Image.ImageSource",
-      "SystemCapability.Multimedia.Image.ImagePacker",
-      "SystemCapability.Multimedia.Image.ImageReceiver",
-      "SystemCapability.Multimedia.Image.ImageCreator",
-      "SystemCapability.FileManagement.PhotoAccessHelper.Core",
-      "SystemCapability.Multimedia.Media.AVImageGenerator",
-      "SystemCapability.Multimedia.Media.Core",
-      "SystemCapability.Multimedia.Camera.Core"
-    ],
+    "syscap": [],
     "features": [],
     "adapted_system_type": [
       "standard"
