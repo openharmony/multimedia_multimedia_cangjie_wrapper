@@ -41,7 +41,7 @@ import ohos.callback_invoke.*
 
 let colors: Array<UInt8> = Array<UInt8>(96, repeat: 0)
 let pixelMap = createPixelMap(colors,
-    InitializationOptions(Size(4, 6), editable: true, pixelFormat: Rgba8888))
+    InitializationOptions(Size(4, 6), editable: true))
 let imageSource = createImageSource(hw)
 let sourceOption = SourceOptions(0, sourcePixelFormat: Bgra8888)
 
@@ -441,8 +441,7 @@ class Test_image {
     @Tag[APILevel22, TestLevel0]
     func test_createPremultipliedPixelMap_error(): Unit {
         let color = Array<UInt8>(0, repeat: 0)
-        let opts = InitializationOptions(Size(2, 2), editable: true, pixelFormat: Rgba8888,
-            alphaType: UnPremul)
+        let opts = InitializationOptions(Size(2, 2), editable: true, alphaType: UnPremul)
         try {
             let srcPixelmap = createPixelMap(color, opts)
         } catch (e: BusinessException) {
