@@ -94,7 +94,9 @@ class Test_camera {
         let device = getCameraManager().getSupportedCameras()[0]
         let mode = getCameraManager().getSupportedSceneModes(device)[0]
         try {
-            getCameraManager().getSupportedOutputCapability(device, mode)
+            let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+            @Expect(ability.previewProfiles.size > 0)
+            @Expect(ability.photoProfiles.size > 0)
         } catch (e: BusinessException) {
             loggerInfo("Test_CameraManager_GetSupportedOutputCapability: Exception ${e.code}: ${e.message}")
             @Expect(false)
