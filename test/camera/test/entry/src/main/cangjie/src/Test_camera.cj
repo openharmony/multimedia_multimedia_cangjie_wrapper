@@ -1062,7 +1062,10 @@ class Test_camera {
         photoSession.commitConfig()
         photoSession.start()
         try {
-            photoOutput.getActiveProfile()
+            let profile = photoOutput.getActiveProfile()	
+            @Expect(profile.format, CameraFormat.CameraFormatJpeg)
+            @Expect(profile.size.height, ability.photoProfiles[0].size.height)
+            @Expect(profile.size.width, ability.photoProfiles[0].size.width)
         } catch (e: BusinessException) {
             loggerInfo("Test_PhotoOutput_GetActiveProfile: Exception ${e.code}: ${e.message}")
             @Expect(false)
@@ -1351,7 +1354,12 @@ class Test_camera {
         videoSession.addOutput(videoOutput)
         videoSession.commitConfig()
         try {
-            videoOutput.getActiveProfile()
+            let profile = videoOutput.getActiveProfile()	
+            @Expect(profile.format, CameraFormat.CameraFormatYuv420Sp)	
+            @Expect(profile.size.width, ability.videoProfiles[0].size.width)	
+            @Expect(profile.size.height, ability.videoProfiles[0].size.height)	
+            @Expect(profile.frameRateRange.min, 1)	
+            @Expect(profile.frameRateRange.max, 30)
         } catch (e: BusinessException) {
             loggerInfo("Test_VideoOutput_GetActiveProfile: Exception ${e.code}: ${e.message}")
             @Expect(false)
