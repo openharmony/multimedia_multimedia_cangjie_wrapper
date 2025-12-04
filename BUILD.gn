@@ -18,7 +18,8 @@ multimedia_cangjie_wrapper_packages_ohos = [
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image",
-    "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia"
+    "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia",
+    "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/audio:ohos.multimedia.audio"
 ]
 multimedia_cangjie_wrapper_packages_kit = [
     "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
