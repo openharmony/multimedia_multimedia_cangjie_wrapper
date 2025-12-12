@@ -903,776 +903,1166 @@ public enum PropertyKey <: ToString {
     ]
     FocusMode
     |
+    /**
+     * The scheme used for image compression.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Compression
     |
+    /**
+     * Pixel composition, such as RGB or YCbCr.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PhotometricInterpretation
     |
+    /**
+     * For each strip, the byte offset of that strip.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     StripOffsets
     |
+    /**
+     * The number of components per pixel. As the standard applies to both RGB and YCbCr images, the tag value is set
+     * to 3. For JPEG-compressed images, this tag is replaced by corresponding JPEG markers.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SamplesPerPixel
     |
+    /**
+     * The number of rows per strip of image data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     RowsPerStrip
     |
+    /**
+     * The total number of bytes in each strip of image data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     StripByteCounts
     |
+    /**
+     * The image resolution in the width direction.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XResolution
     |
+    /**
+     * The image resolution in the height direction.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YResolution
     |
+    /**
+     * Indicates whether pixel components are recorded in a chunky or planar format.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PlanarConfiguration
     |
+    /**
+     * The unit used to measure XResolution and YResolution.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ResolutionUnit
     |
+    /**
+     * The transfer function for the image, typically used for color correction.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     TransferFunction
     |
+    /**
+     * The name and version of the software used to generate the image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Software
     |
+    /**
+     * The name of the person who created the image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Artist
     |
+    /**
+     * The chromaticity of the white point of the image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     WhitePoint
     |
+    /**
+     * The chromaticity of the primary colors of the image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PrimaryChromaticities
     |
+    /**
+     * The matrix coefficients for transformation from RGB to YCbCr image data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YCbCrCoefficients
     |
+    /**
+     * The sampling ratio of chrominance components to the luminance component.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YCbCrSubSampling
     |
+    /**
+     * The position of chrominance components in relation to the luminance component.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     YCbCrPositioning
     |
+    /**
+     * The reference black point value and reference white point value.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ReferenceBlackWhite
     |
+    /**
+     * Copyright information for the image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Copyright
     |
+    /**
+     * The offset to the start byte (SOI) of JPEG compressed thumbnail data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     JpegInterchangeFormat
     |
+    /**
+     * The number of bytes of JPEG compressed thumbnail data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     JpegInterchangeFormatLength
     |
+    /**
+     * The class of the program used by the camera to set exposure when the picture is taken.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExposureProgram
     |
+    /**
+     * Indicates the spectral sensitivity of each channel of the camera used.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SpectralSensitivity
     |
+    /**
+     * Indicates the Opto-Electric Conversion Function (OECF) specified in ISO 14524.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Oecf
     |
+    /**
+     * The version of the Exif standard supported.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExifVersion
     |
+    /**
+     * The date and time when the image was stored as digital data. If, for example, an image was captured by DSC and
+     * at the same time the file was recorded, then the DateTimeOriginal and DateTimeDigitized will have the same
+     * contents. The format is "YYYY:MM:DD HH:MM:SS" with time shown in 24-hour format.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DateTimeDigitized
     |
+    /**
+     * Information specific to compressed data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ComponentsConfiguration
     |
+    /**
+     * The shutter speed, expressed as an APEX (Additive System of Photographic Exposure) value.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ShutterSpeed
     |
+    /**
+     * The brightness value of the image, in APEX units.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     BrightnessValue
     |
+    /**
+     * The smallest F number of lens.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     MaxApertureValue
     |
+    /**
+     * The distance to the subject, measured in meters.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubjectDistance
     |
+    /**
+     * This tag indicate the location and area of the main subject in the overall scene.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubjectArea
     |
+    /**
+     * A tag for manufacturers of Exif/DCF writers to record any desired information.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     MakerNote
     |
+    /**
+     * A tag for record fractions of seconds for the DateTime tag.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubsecTime
     |
+    /**
+     * A tag used to record fractions of seconds for the DateTimeOriginal tag.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubsecTimeOriginal
     |
+    /**
+     * A tag used to record fractions of seconds for the DateTimeDigitized tag.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubsecTimeDigitized
     |
+    /**
+     * This tag denotes the Flashpix format version supported by an FPXR file, enhancing device compatibility.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FlashpixVersion
     |
+    /**
+     * The color space information tag, often recorded as the color space specifier.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ColorSpace
     |
+    /**
+     * The name of an audio file related to the image data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     RelatedSoundFile
     |
+    /**
+     * Strobe energy at image capture, in BCPS.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FlashEnergy
     |
+    /**
+     * Camera or input device spatial frequency table.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SpatialFrequencyResponse
     |
+    /**
+     * Pixels per FocalPlaneResolutionUnit in the image width.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalPlaneXResolution
     |
+    /**
+     * Pixels per FocalPlaneResolutionUnit in the image height.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalPlaneYResolution
     |
+    /**
+     * Unit for measuring FocalPlaneXResolution and FocalPlaneYResolution.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FocalPlaneResolutionUnit
     |
+    /**
+     * Location of the main subject, relative to the left edge.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubjectLocation
     |
+    /**
+     * Selected exposure index at capture.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExposureIndex
     |
+    /**
+     * Image sensor type on the camera.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SensingMethod
     |
+    /**
+     * Indicates the image source.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FileSource
     |
+    /**
+     * Color filter array (CFA) geometric pattern of the image sensor.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CfaPattern
     |
+    /**
+     * Indicates special processing on image data.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CustomRendered
     |
+    /**
+     * Exposure mode set when the image was shot.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ExposureMode
     |
+    /**
+     * Digital zoom ratio at the time of capture.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DigitalZoomRatio
     |
+    /**
+     * Type of scene captured.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneCaptureType
     |
+    /**
+     * Degree of overall image gain adjustment.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GainControl
     |
+    /**
+     * Direction of contrast processing applied by the camera.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Contrast
     |
+    /**
+     * Direction of saturation processing applied by the camera.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Saturation
     |
+    /**
+     * The direction of sharpness processing applied by the camera.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Sharpness
     |
+    /**
+     * Information on picture-taking conditions for a specific camera model.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DeviceSettingDescription
     |
+    /**
+     * Indicates the distance range to the subject.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubjectDistanceRange
     |
+    /**
+     * An identifier uniquely assigned to each image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ImageUniqueId
     |
+    /**
+     * The version of the GPSInfoIFD.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsVersionId
     |
+    /**
+     * Reference altitude used for GPS altitude.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsAltitudeRef
     |
+    /**
+     * The altitude based on the reference in GPSAltitudeRef.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsAltitude
     |
+    /**
+     * The GPS satellites used for measurements.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsSatellites
     |
+    /**
+     * The status of the GPS receiver when the image is recorded.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsStatus
     |
+    /**
+     * The GPS measurement mode.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsMeasureMode
     |
+    /**
+     * The GPS DOP (data degree of precision).
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDop
     |
+    /**
+     * The unit used to express the GPS receiver speed of movement.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsSpeedRef
     |
+    /**
+     * The speed of GPS receiver movement.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsSpeed
     |
+    /**
+     * The reference for giving the direction of GPS receiver movement.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsTrackRef
     |
+    /**
+     * The direction of GPS receiver movement.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsTrack
     |
+    /**
+     * The reference for the image's direction.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsImgDirectionRef
     |
+    /**
+     * The direction of the image when captured.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsImgDirection
     |
+    /**
+     * Geodetic survey data used by the GPS receiver.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsMapDatum
     |
+    /**
+     * Indicates the latitude reference of the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestLatitudeRef
     |
+    /**
+     * The latitude of the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestLatitude
     |
+    /**
+     * Indicates the longitude reference of the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestLongitudeRef
     |
+    /**
+     * The longitude of the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestLongitude
     |
+    /**
+     * The reference for the bearing to the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestBearingRef
     |
+    /**
+     * The bearing to the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestBearing
     |
+    /**
+     * The measurement unit for the distance to the target point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestDistanceRef
     |
+    /**
+     * The distance to the destination point.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDestDistance
     |
+    /**
+     * A character string recording the name of the method used for location finding.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsProcessingMethod
     |
+    /**
+     * A character string recording the name of the GPS area.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsAreaInformation
     |
+    /**
+     * This field denotes if differential correction was applied to GPS data, crucial for precise location accuracy.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsDifferential
     |
+    /**
+     * The serial number of the camera body.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     BodySerialNumber
     |
+    /**
+     * The name of the camera owner.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CameraOwnerName
     |
+    /**
+     * Indicates whether the image is a composite image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CompositeImage
     |
+    /**
+     * The compression mode used for a compressed image, in unit bits per pixel.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CompressedBitsPerPixel
     |
+    /**
+     * The DNGVersion tag encodes the four-tier version number for DNG specification compliance.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DngVersion
     |
+    /**
+     * DefaultCropSize specifies the final image size in raw coordinates, accounting for extra edge pixels.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     DefaultCropSize
     |
+    /**
+     * Indicates the value of coefficient gamma.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     Gamma
     |
+    /**
+     * The tag indicate the ISO speed latitude yyy value of the camera or input device that is defined in ISO 12232.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsoSpeedLatitudeyyy
     |
+    /**
+     * The tag indicate the ISO speed latitude zzz value of the camera or input device that is defined in ISO 12232.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsoSpeedLatitudezzz
     |
+    /**
+     * The manufacturer of the lens.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     LensMake
     |
+    /**
+     * The model name of the lens.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     LensModel
     |
+    /**
+     * The serial number of the lens.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     LensSerialNumber
     |
+    /**
+     * Specifications of the lens used.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     LensSpecification
     |
+    /**
+     * This tag provides a broad description of the data type in this subfile.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     NewSubfileType
     |
+    /**
+     * This tag records the UTC offset for the DateTime tag, ensuring accurate timestamps regardless of location.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     OffsetTime
     |
+    /**
+     * This tag records the UTC offset when the image was digitized, aiding in accurate timestamp adjustment.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     OffsetTimeDigitized
     |
+    /**
+     * This tag records the UTC offset when the original image was created, crucial for time-sensitive applications.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     OffsetTimeOriginal
     |
+    /**
+     * Exposure times of source images for a composite image, such as 1/33 sec.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SourceExposureTimesOfCompositeImage
     |
+    /**
+     * The number of source images used for a composite image.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SourceImageNumberOfCompositeImage
     |
+    /**
+     * This deprecated tag indicates the data type in this subfile. Use NewSubfileType instead.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SubfileType
     |
+    /**
+     * This tag indicates horizontal positioning errors in meters.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GpsHPositioningError
     |
+    /**
+     * This tag indicates the sensitivity of the camera or input device when the image was shot.
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     PhotographicSensitivity
     |
+    /**
+     * Burst Number
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     BurstNumber
     |
+    /**
+     * Face Conf
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceConf
     |
+    /**
+     * Face Leye Center
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceLeyeCenter
     |
+    /**
+     * Face Mouth Center
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceMouthCenter
     |
+    /**
+     * Face Pointer
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FacePointer
     |
+    /**
+     * Face Rect
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceRect
     |
+    /**
+     * Face Reye Center
+     */ 
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceReyeCenter
     |
+    /**
+     * Face Smile Score
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceSmileScore
     |
+    /**
+     * Face Version
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FaceVersion
     |
+    /**
+     * Front Camera
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     FrontCamera
     |
+    /**
+     * Scene Pointer
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     ScenePointer
     |
+    /**
+     * Scene Version
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     SceneVersion
     |
+    /**
+     * Is Xmage Supported
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     IsXmageSupported
     |
+    /**
+     * Xmage Mode
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XmageMode
     |
+    /**
+     * Xmage X1 Coordinate
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XmageLeft
     |
+    /**
+     * Xmage Y1 Coordinate
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XmageTop
     |
+    /**
+     * Xmage X2 Coordinate
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XmageRight
     |
+    /**
+     * Xmage Y2 Coordinate
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     XmageBottom
     |
+    /**
+     * Cloud Enhancement Mode
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     CloudEnhancementMode
     |
+    /**
+     * Wind Snapshot Mode
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     WindSnapshotMode
     |
+    /**
+     * GIF LOOP COUNT
+     */
     @!APILevel[
-        since: "22",
+        since: "24",
         syscap: "SystemCapability.Multimedia.Image.Core"
     ]
     GifLoopCount

@@ -21,9 +21,9 @@ import ohos.app.ability.ui_ability.UIAbilityContext
 import ohos.business_exception.{AsyncCallback, BusinessException}
 
 /**
- * PhotoViewPicker Object
- *
- */
+* Provides APIs for the user to select images and videos.
+* Before using the APIs of PhotoViewPicker, you need to create a PhotoViewPicker instance.
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -31,6 +31,9 @@ import ohos.business_exception.{AsyncCallback, BusinessException}
 public class PhotoViewPicker {
     let context: UIAbilityContext
 
+    /**
+     * A constructor used to create a PhotoViewPicker instance. This constructor is recommended.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -45,7 +48,7 @@ public class PhotoViewPicker {
      * @param { PhotoSelectOptions } [option] - represents the options provided in select mode.
      * @returns { PhotoSelectResult } Returns the uris for the selected files.
      * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * 2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900042 - Unknown error
      */
     @!APILevel[
