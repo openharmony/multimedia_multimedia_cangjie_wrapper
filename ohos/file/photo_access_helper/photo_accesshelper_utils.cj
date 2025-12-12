@@ -1597,47 +1597,77 @@ public enum MemberType {
 
 class BaseSelectOptionsImpl{}
 
+/**
+* Class BaseSelectOptions, which is extracted from class PhotoSelectOptions
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class BaseSelectOptions {
+    /**
+     * The Type of the file in the picker window.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var mimeType: PhotoViewMimeTypes
 
+    /**
+     * Maximum number of images for a single selection.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var maxSelectNumber: Int32
 
+    /**
+     * Support taking photos.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var isPhotoTakingSupported: Bool
 
+    /**
+     * Support search.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var isSearchSupported: Bool
 
+    /**
+     * The recommendation options when use recommendation photo function.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var recommendationOptions: RecommendationOptions
 
+    /**
+     * The uri for the preselected files.
+     * Move from class PhotoSelectOptions to it's base class BaseSelectOptions
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var preselectedUris: Array<String>
 
+    /**
+     * Support preview in single selection mode or not
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -1669,23 +1699,35 @@ public open class BaseSelectOptions {
     }
 }
 
+/**
+* PhotoSelectOptions extends base class BaseSelectOptions
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoSelectOptions <: BaseSelectOptions {
+    /**
+     * Support editing photos.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var isEditSupported: Bool
 
+    /**
+     * Support select original photo or not
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var isOriginalSupported: Bool
 
+    /**
+     * SubWindow name
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -1723,23 +1765,40 @@ public class PhotoSelectOptions <: BaseSelectOptions {
     }
 }
 
+/**
+* Defines information about the images or videos selected.
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoSelectResult {
+    /**
+     * URIs of the images or videos selected. The URI array can be used only by calling photoAccessHelper.getAssets with temporary authorization.
+     * For details about how to use the media file URI, see Using a Media File URI.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var photoUris: Array<String>
 
+    /**
+     * Whether the selected media asset is the original image.
+     * The value true means that the selected media asset is the original image, and false means the opposite.
+     * The default value is false.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var isOriginalPhoto: Bool
 
+    /**
+     * The constructor to create a PhotoSelectResult instance.
+     * @param { Array<String> } photoUris - URIs of the images or videos selected. 
+     * @param { Bool } isOriginalPhoto - Whether the selected media asset is the original image.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -1750,22 +1809,39 @@ public class PhotoSelectResult {
     }
 }
 
+/**
+* Defines the image recommendation options.
+* The image recommendation feature depends on the image data analysis capability, which varies with devices.
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class RecommendationOptions {
+    /**
+     * Type of the recommended image.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var recommendationType: ?RecommendationType
+
+    /**
+     * Text based on which images are recommended.
+     * If both recommendationType and textContextInfo are set, textContextInfo takes precedence over recommendationType.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var textContextInfo: ?TextContextInfo
 
+    /**
+     * The constructor to create a RecommendationOptions instance.
+     * @param { ?RecommendationType } recommendationType - Type of the recommended image.
+     * @param { ?TextContextInfo } textContextInfo - Text based on which images are recommended.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -1776,17 +1852,28 @@ public class RecommendationOptions {
     }
 }
 
+/**
+* Represents the text information about the recommended images.
+*/
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class TextContextInfo {
+    /**
+     * Text based on which images are recommended.
+     * The text cannot exceed 250 characters. The default value is an empty string.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
     public var text: String
 
+    /**
+     * The constructor to create a TextContextInfo instance.
+     * @param { String } recommendationType - Text based on which images are recommended.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
