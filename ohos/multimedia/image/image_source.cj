@@ -17,10 +17,11 @@
 
 package ohos.multimedia.image
 
-import ohos.ffi.{RemoteDataLite, RetDataUI32, RetDataI64U32, CArrI32, CArrString, CArrI64, releaseFFIData}
+import ohos.ffi.{RemoteDataLite, RetDataUI32, RetDataI64U32, CArrI32, CArrString, CArrI64, releaseFFIData, safeMalloc}
 import ohos.resource_manager.RawFileDescriptor
 import ohos.labels.APILevel
 import ohos.business_exception.BusinessException
+import std.collection.HashMap
 
 foreign {
     func FfiOHOSCreateImageSourceByPath(uri: CString, errCode: CPointer<UInt32>): Int64
@@ -573,5 +574,60 @@ public class ImageSource <: RemoteDataLite {
                 return arr
             }
         }
+    }
+
+    /**
+     * Obtains the value of properties in an image. This method uses a promise to return the property values in array
+     * of records.
+     *
+     * @param { key: Array<PropertyKey> } key - Name of the properties whose value is to be obtained.
+     * @returns { Array<(PropertyKey, String)> } Array of Records instance used to return the
+     * property values. If the operation fails, the null is returned.
+     * @throws { BusinessException } 401 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed;
+     * @throws { BusinessException } 62980096 - The operation failed.
+     * @throws { BusinessException } 62980110 - The image source data is incorrect.
+     * @throws { BusinessException } 62980113 - Unknown image format.
+     * @throws { BusinessException } 62980116 - Failed to decode the image.
+     * @syscap SystemCapability.Multimedia.Image.ImageSource
+     * @crossplatform
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true
+    ]
+    public func getImageProperties(key: Array<PropertyKey>): HashMap<PropertyKey, ?String> {
+        if (key.size == 0) {
+            return HashMap<PropertyKey, ?String>()
+        }
+        let keyPointer = safeMalloc<CString>(count: key.size)
+        var i = 0i64
+        try {
+            for (it in key) {
+                unsafe { keyPointer.write(i, LibC.mallocCString(it.toString())) }
+                i++
+            }
+        } catch (e: Exception) {
+            for (j in 0..i) {
+                unsafe { LibC.free(keyPointer.read(j)) }
+            }
+            unsafe { LibC.free(keyPointer) }
+            throw e
+        }
+
+        let cKey = CArrString(keyPointer, key.size)
+        let valuePointer = try {
+            safeMalloc<CString>(count: key.size)
+        } catch (e: Exception) {
+            cKey.free()
+            throw e
+        }
+        let errCode = unsafe { FfiImageImageSourceImplGetImageProperties(getID(), cKey, valuePointer) }
+        cKey.free()
+        checkAndThrow(errCode, handle: unsafe { {=> LibC.free(valuePointer)} })
+        let cValue = CArrString(valuePointer, key.size)
+        let value = cValue.toStringArray()
+        cValue.free()
+        return HashMap<PropertyKey, ?String>(key.size, {i => (key[i], Some(value[i]))})
     }
 }

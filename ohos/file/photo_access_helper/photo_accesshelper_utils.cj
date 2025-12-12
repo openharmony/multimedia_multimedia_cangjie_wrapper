@@ -1469,8 +1469,6 @@ public enum AlbumKeys <: ToString {
     }
 }
 
-class BaseSelectOptionsImpl {}
-
 /**
  * Enumerates media file types.
  */
@@ -1594,5 +1592,206 @@ public enum MemberType {
             case BoolValue(v) => v
             case _ => throw BusinessException(13900020, "Parameter error.")
         }
+    }
+}
+
+class BaseSelectOptionsImpl{}
+
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public open class BaseSelectOptions {
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var mimeType: PhotoViewMimeTypes
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var maxSelectNumber: Int32
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isPhotoTakingSupported: Bool
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isSearchSupported: Bool
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var recommendationOptions: RecommendationOptions
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var preselectedUris: Array<String>
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isPreviewForSingleSelectionSupported: Bool
+
+    private var baseSelectOptionsImpl: BaseSelectOptionsImpl = BaseSelectOptionsImpl()
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public init(
+        mimeType!: PhotoViewMimeTypes = ImageVideoType,
+        maxSelectNumber!: Int32 = 50,
+        isPhotoTakingSupported!: Bool = true,
+        isSearchSupported!: Bool = true,
+        recommendationOptions!: RecommendationOptions = RecommendationOptions(),
+        preselectedUris!: Array<String> = Array<String>(),
+        isPreviewForSingleSelectionSupported!: Bool = true
+    ) {
+        this.mimeType = mimeType
+        this.maxSelectNumber = maxSelectNumber
+        this.isPhotoTakingSupported = isPhotoTakingSupported
+        this.isSearchSupported = isSearchSupported
+        this.recommendationOptions = recommendationOptions
+        this.preselectedUris = preselectedUris
+        this.isPreviewForSingleSelectionSupported = isPreviewForSingleSelectionSupported
+    }
+}
+
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public class PhotoSelectOptions <: BaseSelectOptions {
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isEditSupported: Bool
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isOriginalSupported: Bool
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var subWindowName: ?String
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public init(
+        mimeType!: PhotoViewMimeTypes = ImageVideoType,
+        maxSelectNumber!: Int32 = 50,
+        isPhotoTakingSupported!: Bool = true,
+        isSearchSupported!: Bool = true,
+        recommendationOptions!: RecommendationOptions = RecommendationOptions(),
+        preselectedUris!: Array<String> = Array<String>(),
+        isPreviewForSingleSelectionSupported!: Bool = true,
+        isEditSupported!: Bool = true,
+        isOriginalSupported!: Bool = false,
+        subWindowName!: ?String = None
+    ) {
+        super(
+            mimeType: mimeType,
+            maxSelectNumber: maxSelectNumber,
+            isPhotoTakingSupported: isPhotoTakingSupported,
+            isSearchSupported: isSearchSupported,
+            recommendationOptions: recommendationOptions,
+            preselectedUris: preselectedUris,
+            isPreviewForSingleSelectionSupported: isPreviewForSingleSelectionSupported
+        )
+        this.isEditSupported = isEditSupported
+        this.isOriginalSupported = isOriginalSupported
+        this.subWindowName = subWindowName
+    }
+}
+
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public class PhotoSelectResult {
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var photoUris: Array<String>
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var isOriginalPhoto: Bool
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public init(photoUris: Array<String>, isOriginalPhoto: Bool) {
+        this.photoUris = photoUris
+        this.isOriginalPhoto = isOriginalPhoto
+    }
+}
+
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public class RecommendationOptions {
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var recommendationType: ?RecommendationType
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var textContextInfo: ?TextContextInfo
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public init(recommendationType!: ?RecommendationType = None, textContextInfo!: ?TextContextInfo = None) {
+        this.recommendationType = recommendationType
+        this.textContextInfo = textContextInfo
+    }
+}
+
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public class TextContextInfo {
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var text: String
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public init(text!: String = "") {
+        this.text = text
     }
 }

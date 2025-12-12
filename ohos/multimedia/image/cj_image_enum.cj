@@ -418,7 +418,7 @@ public enum ComponentType {
  * Enumerates exchangeable image file format (Exif) information types of an image. This enumeration follows the EXIF
  * standard. Please refer to the EXIF specification for more details.
  */
-@Derive[Equatable]
+@Derive[Equatable, Hashable]
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
@@ -903,391 +903,778 @@ public enum PropertyKey <: ToString {
     ]
     FocusMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Compression
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     PhotometricInterpretation
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     StripOffsets
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SamplesPerPixel
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     RowsPerStrip
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     StripByteCounts
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XResolution
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     YResolution
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     PlanarConfiguration
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ResolutionUnit
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     TransferFunction
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Software
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Artist
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     WhitePoint
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     PrimaryChromaticities
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     YCbCrCoefficients
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     YCbCrSubSampling
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     YCbCrPositioning
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ReferenceBlackWhite
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Copyright
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     JpegInterchangeFormat
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     JpegInterchangeFormatLength
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ExposureProgram
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SpectralSensitivity
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Oecf
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ExifVersion
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     DateTimeDigitized
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ComponentsConfiguration
     |
-    @!Hide
-    ShutterSpeedValue
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    ShutterSpeed
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     BrightnessValue
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     MaxApertureValue
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubjectDistance
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubjectArea
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     MakerNote
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubsecTime
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubsecTimeOriginal
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubsecTimeDigitized
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FlashpixVersion
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ColorSpace
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     RelatedSoundFile
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FlashEnergy
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SpatialFrequencyResponse
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FocalPlaneXResolution
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FocalPlaneYResolution
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FocalPlaneResolutionUnit
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubjectLocation
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ExposureIndex
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SensingMethod
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FileSource
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CfaPattern
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CustomRendered
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ExposureMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     DigitalZoomRatio
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SceneCaptureType
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GainControl
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Contrast
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Saturation
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Sharpness
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     DeviceSettingDescription
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubjectDistanceRange
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ImageUniqueId
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsVersionId
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsAltitudeRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsAltitude
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsSatellites
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsStatus
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsMeasureMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDop
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsSpeedRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsSpeed
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsTrackRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsTrack
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsImgDirectionRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsImgDirection
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsMapDatum
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestLatitudeRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestLatitude
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestLongitudeRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestLongitude
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestBearingRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestBearing
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestDistanceRef
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDestDistance
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsProcessingMethod
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsAreaInformation
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsDifferential
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     BodySerialNumber
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CameraOwnerName
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CompositeImage
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CompressedBitsPerPixel
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     DngVersion
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     DefaultCropSize
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     Gamma
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     IsoSpeedLatitudeyyy
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     IsoSpeedLatitudezzz
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     LensMake
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     LensModel
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     LensSerialNumber
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     LensSpecification
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     NewSubfileType
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     OffsetTime
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     OffsetTimeDigitized
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     OffsetTimeOriginal
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SourceExposureTimesOfCompositeImage
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SourceImageNumberOfCompositeImage
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SubfileType
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GpsHPositioningError
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     PhotographicSensitivity
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     BurstNumber
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceConf
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceLeyeCenter
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceMouthCenter
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FacePointer
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceRect
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceReyeCenter
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceSmileScore
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FaceVersion
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     FrontCamera
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     ScenePointer
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     SceneVersion
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     IsXmageSupported
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XmageMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XmageLeft
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XmageTop
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XmageRight
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     XmageBottom
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     CloudEnhancementMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     WindSnapshotMode
     |
-    @!Hide
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
     GifLoopCount
     | ...
 
@@ -1301,35 +1688,106 @@ public enum PropertyKey <: ToString {
     ]
     public func toString(): String {
         match (this) {
+            case NewSubfileType => "NewSubfileType"
+            case SubfileType => "SubfileType"
             case ImageWidth => "ImageWidth"
             case ImageLength => "ImageLength"
             case BitsPerSample => "BitsPerSample"
+            case Compression => "Compression"
+            case PhotometricInterpretation => "PhotometricInterpretation"
             case ImageDescription => "ImageDescription"
             case Make => "Make"
             case Model => "Model"
+            case StripOffsets => "StripOffsets"
             case Orientation => "Orientation"
+            case SamplesPerPixel => "SamplesPerPixel"
+            case RowsPerStrip => "RowsPerStrip"
+            case StripByteCounts => "StripByteCounts"
+            case XResolution => "XResolution"
+            case YResolution => "YResolution"
+            case PlanarConfiguration => "PlanarConfiguration"
+            case ResolutionUnit => "ResolutionUnit"
+            case TransferFunction => "TransferFunction"
+            case Software => "Software"
             case DateTime => "DateTime"
+            case Artist => "Artist"
+            case WhitePoint => "WhitePoint"
+            case PrimaryChromaticities => "PrimaryChromaticities"
             case PhotoMode => "PhotoMode"
+            case JpegInterchangeFormat => "JPEGInterchangeFormat"
+            case JpegInterchangeFormatLength => "JPEGInterchangeFormatLength"
+            case YCbCrCoefficients => "YCbCrCoefficients"
+            case YCbCrSubSampling => "YCbCrSubSampling"
+            case YCbCrPositioning => "YCbCrPositioning"
+            case ReferenceBlackWhite => "ReferenceBlackWhite"
+            case Copyright => "Copyright"
             case ExposureTime => "ExposureTime"
             case FNumber => "FNumber"
+            case ExposureProgram => "ExposureProgram"
+            case SpectralSensitivity => "SpectralSensitivity"
+            case GpsVersionId => "GPSVersionID"
             case GpsLatitudeRef => "GPSLatitudeRef"
             case GpsLatitude => "GPSLatitude"
             case GpsLongitudeRef => "GPSLongitudeRef"
             case GpsLongitude => "GPSLongitude"
+            case GpsAltitudeRef => "GPSAltitudeRef"
+            case GpsAltitude => "GPSAltitude"
             case GpsTimestamp => "GPSTimeStamp"
+            case GpsSatellites => "GPSSatellites"
+            case GpsStatus => "GPSStatus"
+            case GpsMeasureMode => "GPSMeasureMode"
+            case GpsDop => "GPSDOP"
+            case GpsSpeedRef => "GPSSpeedRef"
+            case GpsSpeed => "GPSSpeed"
+            case GpsTrackRef => "GPSTrackRef"
+            case GpsTrack => "GPSTrack"
+            case GpsImgDirectionRef => "GPSImgDirectionRef"
+            case GpsImgDirection => "GPSImgDirection"
+            case GpsMapDatum => "GPSMapDatum"
+            case GpsDestLatitudeRef => "GPSDestLatitudeRef"
+            case GpsDestLatitude => "GPSDestLatitude"
+            case GpsDestLongitudeRef => "GPSDestLongitudeRef"
+            case GpsDestLongitude => "GPSDestLongitude"
+            case GpsDestBearingRef => "GPSDestBearingRef"
+            case GpsDestBearing => "GPSDestBearing"
+            case GpsDestDistanceRef => "GPSDestDistanceRef"
+            case GpsDestDistance => "GPSDestDistance"
+            case GpsProcessingMethod => "GPSProcessingMethod"
+            case GpsAreaInformation => "GPSAreaInformation"
             case GpsDateStamp => "GPSDateStamp"
+            case GpsDifferential => "GPSDifferential"
+            case GpsHPositioningError => "GPSHPositioningError"
             case IsoSpeedRatings => "ISOSpeedRatings"
+            case PhotographicSensitivity => "PhotographicSensitivity"
+            case Oecf => "OECF"
             case SensitivityType => "SensitivityType"
             case StandardOutputSensitivity => "StandardOutputSensitivity"
             case RecommendedExposureIndex => "RecommendedExposureIndex"
             case IsoSpeed => "ISOSpeedRatings"
+            case IsoSpeedLatitudeyyy => "ISOSpeedLatitudeyyy"
+            case IsoSpeedLatitudezzz => "ISOSpeedLatitudezzz"
+            case ExifVersion => "ExifVersion"
             case DateTimeOriginal => "DateTimeOriginal"
+            case DateTimeDigitized => "DateTimeDigitized"
+            case OffsetTime => "OffsetTime"
+            case OffsetTimeOriginal => "OffsetTimeOriginal"
+            case OffsetTimeDigitized => "OffsetTimeDigitized"
+            case ComponentsConfiguration => "ComponentsConfiguration"
+            case CompressedBitsPerPixel => "CompressedBitsPerPixel"
+            case ShutterSpeed => "ShutterSpeedValue"
             case ApertureValue => "ApertureValue"
+            case BrightnessValue => "BrightnessValue"
             case ExposureBiasValue => "ExposureBiasValue"
+            case MaxApertureValue => "MaxApertureValue"
+            case SubjectDistance => "SubjectDistance"
             case MeteringMode => "MeteringMode"
             case LightSource => "LightSource"
             case Flash => "Flash"
             case FocalLength => "FocalLength"
+            case SubjectArea => "SubjectArea"
+            case MakerNote => "MakerNote"
+            case ScenePointer => "HwMnoteScenePointer"
+            case SceneVersion => "HwMnoteSceneVersion"
             case SceneFoodConf => "HwMnoteSceneFoodConf"
             case SceneStageConf => "HwMnoteSceneStageConf"
             case SceneBlueSkyConf => "HwMnoteSceneBlueSkyConf"
@@ -1340,18 +1798,76 @@ public enum PropertyKey <: ToString {
             case SceneFlowersConf => "HwMnoteSceneFlowersConf"
             case SceneNightConf => "HwMnoteSceneNightConf"
             case SceneTextConf => "HwMnoteSceneTextConf"
+            case FacePointer => "HwMnoteFacePointer"
+            case FaceVersion => "HwMnoteFaceVersion"
             case FaceCount => "HwMnoteFaceCount"
+            case FaceConf => "HwMnoteFaceConf"
+            case FaceSmileScore => "HwMnoteFaceSmileScore"
+            case FaceRect => "HwMnoteFaceRect"
+            case FaceLeyeCenter => "HwMnoteFaceLeyeCenter"
+            case FaceReyeCenter => "HwMnoteFaceReyeCenter"
+            case FaceMouthCenter => "HwMnoteFaceMouthCenter"
             case CaptureMode => "HwMnoteCaptureMode"
+            case BurstNumber => "HwMnoteBurstNumber"
+            case FrontCamera => "HwMnoteFrontCamera"
             case RollAngle => "HwMnoteRollAngle"
             case PitchAngle => "HwMnotePitchAngle"
             case PhysicalAperture => "HwMnotePhysicalAperture"
             case FocusMode => "HwMnoteFocusMode"
             case UserComment => "UserComment"
+            case SubsecTime => "SubsecTime"
+            case SubsecTimeOriginal => "SubsecTimeOriginal"
+            case SubsecTimeDigitized => "SubsecTimeDigitized"
+            case FlashpixVersion => "FlashpixVersion"
+            case ColorSpace => "ColorSpace"
             case PixelXDimension => "PixelXDimension"
             case PixelYDimension => "PixelYDimension"
+            case RelatedSoundFile => "RelatedSoundFile"
+            case FlashEnergy => "FlashEnergy"
+            case SpatialFrequencyResponse => "SpatialFrequencyResponse"
+            case FocalPlaneXResolution => "FocalPlaneXResolution"
+            case FocalPlaneYResolution => "FocalPlaneYResolution"
+            case FocalPlaneResolutionUnit => "FocalPlaneResolutionUnit"
+            case SubjectLocation => "SubjectLocation"
+            case ExposureIndex => "ExposureIndex"
+            case SensingMethod => "SensingMethod"
+            case FileSource => "FileSource"
             case SceneType => "SceneType"
+            case CfaPattern => "CFAPattern"
+            case CustomRendered => "CustomRendered"
+            case ExposureMode => "ExposureMode"
             case WhiteBalance => "WhiteBalance"
+            case DigitalZoomRatio => "DigitalZoomRatio"
             case FocalLengthIn35mmFilm => "FocalLengthIn35mmFilm"
+            case SceneCaptureType => "SceneCaptureType"
+            case GainControl => "GainControl"
+            case Contrast => "Contrast"
+            case Saturation => "Saturation"
+            case Sharpness => "Sharpness"
+            case DeviceSettingDescription => "DeviceSettingDescription"
+            case SubjectDistanceRange => "SubjectDistanceRange"
+            case ImageUniqueId => "ImageUniqueID"
+            case CameraOwnerName => "CameraOwnerName"
+            case BodySerialNumber => "BodySerialNumber"
+            case LensSpecification => "LensSpecification"
+            case LensMake => "LensMake"
+            case LensModel => "LensModel"
+            case LensSerialNumber => "LensSerialNumber"
+            case CompositeImage => "CompositeImage"
+            case SourceImageNumberOfCompositeImage => "SourceImageNumberOfCompositeImage"
+            case SourceExposureTimesOfCompositeImage => "SourceExposureTimesOfCompositeImage"
+            case Gamma => "Gamma"
+            case DngVersion => "DNGVersion"
+            case DefaultCropSize => "DefaultCropSize"
+            case GifLoopCount => "GIFLoopCount"
+            case IsXmageSupported => "HwMnoteIsXmageSupported"
+            case XmageMode => "HwMnoteXmageMode"
+            case XmageLeft => "HwMnoteXmageLeft"
+            case XmageTop => "HwMnoteXmageTop"
+            case XmageRight => "HwMnoteXmageRight"
+            case XmageBottom => "HwMnoteXmageBottom"
+            case CloudEnhancementMode => "HwMnoteCloudEnhancementMode"
+            case WindSnapshotMode => "HwMnoteWindSnapshotMode"
             case _ => throw BusinessException(62980115, "Parameter error.")
         }
     }
