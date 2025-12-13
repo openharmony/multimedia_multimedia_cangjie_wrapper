@@ -16,11 +16,13 @@ import("//build/templates/cangjie/cjc.gni")
 multimedia_cangjie_wrapper_packages_ohos = [
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/camera:ohos.multimedia.camera",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/file/photo_access_helper:ohos.file.photo_access_helper",
+    "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/avsession:ohos.multimedia.avsession",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/media:ohos.multimedia.media",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia/image:ohos.multimedia.image",
     "//foundation/multimedia/multimedia_cangjie_wrapper/ohos/multimedia:ohos.multimedia"
 ]
 multimedia_cangjie_wrapper_packages_kit = [
+    "//foundation/multimedia/multimedia_cangjie_wrapper/kit/AVSessionKit:kit.AVSessionKit",
     "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
     "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaLibraryKit:kit.MediaLibraryKit",
     "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:kit.CameraKit",
