@@ -40,6 +40,10 @@ ohos_cangjie_shared_library("ohos.multimedia.camera") {
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
+  cj_deps = [
+    "../../multimedia/image:ohos.multimedia.image"
+  ]
+
   external_deps = [ "camera_framework:cj_camera_ffi" ]
 
   subsystem_name = "multimedia"
