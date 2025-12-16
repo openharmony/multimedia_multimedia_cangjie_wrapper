@@ -15,10 +15,8 @@
 
 package ohos.multimedia.media
 
-import ohos.multimedia.image.PixelMap
-import ohos.labels.*
-import ohos.ffi.*
-import ohos.base.*
+import ohos.labels.APILevel
+import ohos.ffi.{SUCCESS_CODE, RemoteDataLite, releaseFFIData}
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 import ohos.callback_invoke.Callback3ArgumentWithReturn
 
@@ -43,7 +41,8 @@ foreign {
 @!APILevel[
     since: "24",
     syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor",
-    throwexception: true
+    throwexception: true,
+    workerthread: true
 ]
 public func createAVMetadataExtractor(): AVMetadataExtractor {
     let id = unsafe {
@@ -91,8 +90,7 @@ public class AVMetadataExtractor <: RemoteDataLite {
      */
     @!APILevel[
         since: "24",
-        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor",
-        throwexception: true
+        syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor"
     ]
     public var fdSrc: AVFileDescriptor
 
@@ -106,7 +104,8 @@ public class AVMetadataExtractor <: RemoteDataLite {
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor",
-        throwexception: true
+        throwexception: true,
+        workerthread: true
     ]
     public func fetchMetadata(): AVMetadata {
         var data = CMetaAVMetadata()
@@ -127,7 +126,8 @@ public class AVMetadataExtractor <: RemoteDataLite {
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.Multimedia.Media.AVMetadataExtractor",
-        throwexception: true
+        throwexception: true,
+        workerthread: true
     ]
     public func release(): Unit {
         let errCode = unsafe { FfiAVMetadataExtractorRelease(getID()) }

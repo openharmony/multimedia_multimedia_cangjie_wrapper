@@ -15,16 +15,11 @@
 
 package ohos.multimedia.media
 
-import ohos.ffi.*
-import ohos.base.*
-import std.deriving.*
-import std.core.*
+import ohos.ffi.{safeMalloc, SUCCESS_CODE, RemoteDataLite, releaseFFIData}
 import ohos.hilog.HilogChannel
-import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
-import ohos.labels.{APILevel, Hide}
-import ohos.file.photo_access_helper
+import ohos.business_exception.BusinessException
+import ohos.labels.APILevel
 import std.collection.HashMap
-import ohos.callback_invoke.*
 
 const LOG_DOMAIN_AVRECODER: UInt32 = 0xD002B2C
 const COMMON_ERROR: Int32 = -1
@@ -475,8 +470,6 @@ public func createAVRecorder(): AVRecorder {
     syscap: "SystemCapability.Multimedia.Media.AVRecorder"
 ]
 public class AVRecorder <: RemoteDataLite {
-    // let callbackMap = HashMap<AVRecorderCallbackType, CallbackObject>()
-
     protected init(id: Int64) {
         super(id)
     }
@@ -551,6 +544,27 @@ public class AVRecorder <: RemoteDataLite {
     ]
     public func start(): Unit {
         let ret = unsafe { FfiOHOSMediaAVRecorderStart(getID()) }
+        if (ret != SUCCESS_CODE) {
+            throw BusinessException(ret, getErrorMsg(ret))
+        }
+        return
+    }
+
+    /**
+     * Stop AVRecorder, it will to stopped state.
+     *
+     * @throws { BusinessException } 5400102 - Operate not permit.
+     * @throws { BusinessException } 5400103 - IO error.
+     * @throws { BusinessException } 5400105 - Service died.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Media.AVRecorder",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func stop(): Unit {
+        let ret = unsafe { FfiOHOSMediaAVRecorderStop(getID()) }
         if (ret != SUCCESS_CODE) {
             throw BusinessException(ret, getErrorMsg(ret))
         }
