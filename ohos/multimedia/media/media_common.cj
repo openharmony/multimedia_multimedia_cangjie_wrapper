@@ -503,6 +503,11 @@ public class AVMetadata {
     ]
     public var title: String
     /**
+     * Description of the media asset.
+     */
+    @!Hide
+    internal var description: ?String  = Option<String>.None
+    /**
      * If the media contains video, this key retrieves its height.
      */
     @!APILevel[
@@ -845,7 +850,7 @@ public class AVRecorderProfile {
         since: "24",
         syscap: "SystemCapability.Multimedia.Media.AVRecorder"
     ]
-    public AVRecorderProfile(fileFormat: ContainerFormatType, audioBitrate!: Int32 = 48000, audioChannels!: Int32 = 2,
+    public init(fileFormat: ContainerFormatType, audioBitrate!: Int32 = 48000, audioChannels!: Int32 = 2,
         audioCodec!: String = "", audioSampleRate!: Int32 = 48000, videoBitrate!: Int32 = 48000,
         videoCodec!: String = "", videoFrameWidth!: Int32 = -1, videoFrameHeight!: Int32 = -1,
         videoFrameRate!: Int32 = 30, isHdr!: Bool = false, enableTemporalScale!: Bool = false) {
