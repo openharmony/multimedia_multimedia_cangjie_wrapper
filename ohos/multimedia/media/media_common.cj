@@ -340,7 +340,7 @@ public enum AudioSourceType {
             case AudioSourceTypeVoiceCommunication => 7
             case AudioSourceTypeVoiceMessage => 10
             case AudioSourceTypeCamcorder => 13
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -352,7 +352,7 @@ public enum AudioSourceType {
             case 7 => AudioSourceTypeVoiceCommunication
             case 10 => AudioSourceTypeVoiceMessage
             case 13 => AudioSourceTypeCamcorder
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1018,7 +1018,7 @@ public enum ContainerFormatType {
             case CftMpeg4A => "m4a"
             case CftMp3 => "mp3"
             case CftWav => "wav"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1028,7 +1028,7 @@ public enum ContainerFormatType {
             case "m4a" => CftMpeg4A
             case "mp3" => CftMp3
             case "wav" => CftWav
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1072,7 +1072,7 @@ public enum FileGenerationMode {
         match (this) {
             case AppCreate => 0
             case AutoCreateCameraScene => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1080,7 +1080,7 @@ public enum FileGenerationMode {
         match (val) {
             case 0 => AppCreate
             case 1 => AutoCreateCameraScene
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1123,7 +1123,7 @@ public enum VideoSourceType {
         match (this) {
             case VideoSourceTypeSurfaceYuv => 0
             case VideoSourceTypeSurfaceEs => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1131,7 +1131,7 @@ public enum VideoSourceType {
         match (val) {
             case 0 => VideoSourceTypeSurfaceYuv
             case 1 => VideoSourceTypeSurfaceEs
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1215,7 +1215,7 @@ public enum HdrType {
         match (this) {
             case AvHdrTypeNone => 0
             case AvHdrTypeVivid => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 
@@ -1223,7 +1223,7 @@ public enum HdrType {
         match (val) {
             case 0 => AvHdrTypeNone
             case 1 => AvHdrTypeVivid
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(5400106, "The type is not supported.")
         }
     }
 

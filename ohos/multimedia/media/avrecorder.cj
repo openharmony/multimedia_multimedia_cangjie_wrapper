@@ -85,7 +85,7 @@ struct CHashStrPair {
             } catch (e: Exception) {
                 LibC.free(this.key)
                 LibC.free(this.value)
-                throw e
+                throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
             }
         }
     }
@@ -125,7 +125,7 @@ struct CHashStrArr {
                 unsafe { res.read(i).free() }
             }
             unsafe { LibC.free(res) }
-            throw e
+            throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
         }
         this.headers = res
         this.size = headers.size
@@ -194,7 +194,7 @@ struct CAVRecorderProfile {
                 LibC.free(fileFormat)
                 LibC.free(audioCodec)
                 LibC.free(videoCodec)
-                throw e
+                throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
             }
         }
     }
@@ -306,7 +306,7 @@ struct CAVMetadata {
                 this.isValid = true
             } catch (e: Exception) {
                 freeAll()
-                throw e
+                throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
             }
         }
     }
@@ -397,7 +397,7 @@ struct CAVRecorderConfig {
             this.maxDuration = recorderConfig.maxDuration
         } catch (e: Exception) {
             free()
-            throw e
+            throw BusinessException(MEDIA_MEMORY_ERROR, "No memory.")
         }
     }
 
