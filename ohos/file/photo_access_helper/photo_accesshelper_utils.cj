@@ -133,9 +133,14 @@ func getErrorMsg(code: Int32): String {
 }
 
 func checkRet(errCode: Int32, funcName: String) {
-    if (errCode != SUCCESS_CODE) {
-        PHOTO_ACCESS_HELPER_LOG.error("${funcName} failed: ${getErrorMsg(errCode)}")
-        throw BusinessException(errCode, getErrorMsg(errCode))
+    let code = if (errCode == 401) {
+        INVALID_ARGUMENT_ERROR
+    } else {
+        errCode
+    }
+    if (code != SUCCESS_CODE) {
+        PHOTO_ACCESS_HELPER_LOG.error("${funcName} failed: ${getErrorMsg(code)}")
+        throw BusinessException(code, getErrorMsg(code))
     }
 }
 
@@ -1839,8 +1844,8 @@ public class RecommendationOptions {
 
     /**
      * The constructor to create a RecommendationOptions instance.
-     * @param { ?RecommendationType } recommendationType - Type of the recommended image.
-     * @param { ?TextContextInfo } textContextInfo - Text based on which images are recommended.
+     * @param { ?RecommendationType } [ recommendationType ] - Type of the recommended image.
+     * @param { ?TextContextInfo } [ textContextInfo ]- Text based on which images are recommended.
      */
     @!APILevel[
         since: "24",
@@ -1862,7 +1867,6 @@ public class RecommendationOptions {
 public class TextContextInfo {
     /**
      * Text based on which images are recommended.
-     * The text cannot exceed 250 characters. The default value is an empty string.
      */
     @!APILevel[
         since: "24",
@@ -1872,7 +1876,8 @@ public class TextContextInfo {
 
     /**
      * The constructor to create a TextContextInfo instance.
-     * @param { String } recommendationType - Text based on which images are recommended.
+     * @param { String } [ text ] - Text based on which images are recommended.
+     * The text cannot exceed 250 characters. The default value is an empty string.
      */
     @!APILevel[
         since: "24",

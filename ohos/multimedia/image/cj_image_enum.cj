@@ -2070,7 +2070,7 @@ public enum PropertyKey <: ToString {
 
     /**
      * Converts the PropertyKey to its string representation.
-     * @returns A string representation of the PropertyKey.
+     * @returns { String } Returns a string representation of the PropertyKey.
      */
     @!APILevel[
         since: "22",

@@ -33,21 +33,22 @@ public class PhotoViewPicker {
 
     /**
      * A constructor used to create a PhotoViewPicker instance. This constructor is recommended.
+     * @param { UIAbilityContext } context - Context of the ability instance.
      */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public init(gcontext: UIAbilityContext) {
-        context = gcontext
+    public init(context: UIAbilityContext) {
+        this.context = context
     }
 
     /**
      * Pull up the photo picker based on the selection mode.
      *
-     * @param { PhotoSelectOptions } [option] - represents the options provided in select mode.
+     * @param { PhotoSelectOptions } [ option ] - represents the options provided in select mode.
      * @returns { PhotoSelectResult } Returns the uris for the selected files.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException } 13900020 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * 2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessException } 13900042 - Unknown error
      */
