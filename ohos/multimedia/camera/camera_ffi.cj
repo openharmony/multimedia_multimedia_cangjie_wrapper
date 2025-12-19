@@ -18,6 +18,7 @@
 package ohos.multimedia.camera
 
 import ohos.ffi.{cArr2cjArr, CArrI32}
+import std.collection.ArrayList
 
 foreign {
     // CameraManager
@@ -374,12 +375,16 @@ struct CCameraOutputCapability {
     ) {}
 
     func toCameraOutputCapability(): CameraOutputCapability {
-        let supportedMetadataObjectTypesArr = unsafe {
-            Array<MetadataObjectType>(supportedMetadataObjectTypes.size,
-                {i => MetadataObjectType.parse(supportedMetadataObjectTypes.head.read(i))})
+        let supportedMetadataObjectTypesArr = ArrayList<MetadataObjectType>()
+        for (i in 0..supportedMetadataObjectTypes.size) {
+            let supportedMetadataObjectType = unsafe { supportedMetadataObjectTypes.head.read(i) }
+            if (supportedMetadataObjectType == 1) {
+                continue
+            }
+            supportedMetadataObjectTypesArr.add(MetadataObjectType.parse(supportedMetadataObjectType))
         }
         let result = CameraOutputCapability(previewProfiles.toArray(), photoProfiles.toArray(), videoProfiles.toArray(),
-            supportedMetadataObjectTypesArr)
+            supportedMetadataObjectTypesArr.toArray())
         return result
     }
 
