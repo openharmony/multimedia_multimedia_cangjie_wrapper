@@ -344,7 +344,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Unsubscribes from period reached events.
-     * @param { CallbackObject } [ callback ] - Callback invoked when the event is triggered.
+     * @param { ?CallbackObject } [ callback ] - Callback invoked when the event is triggered.
      */
     @!APILevel[
         since: "24",
@@ -385,7 +385,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Unsubscribes from the mark reached events.
-     * @param { CallbackObject } [ callback ] - Callback invoked when the event is triggered.
+     * @param { ?CallbackObject } [ callback ] - Callback invoked when the event is triggered.
      */
     @!APILevel[
         since: "24",
@@ -427,7 +427,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Unsubscribes to audio capturer change events.
-     * @param { CallbackObject } [ callback ] - Callback invoked for the audio capturer change event.
+     * @param { ?CallbackObject } [ callback ] - Callback invoked for the audio capturer change event.
      */
     @!APILevel[
         since: "24",
@@ -472,7 +472,7 @@ public class AudioCapturer <: RemoteDataLite {
 
      /**
      * Unsubscribes input device change event callback.
-     * @param { CallbackObject } [ callback ] - Callback used in subscribe.
+     * @param { ?CallbackObject } [ callback ] - Callback used in subscribe.
      */
     @!APILevel[ 
         since: "24",
@@ -514,7 +514,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Unsubscribes audio data callback.
-     * @param { CallbackObject } [ callback ] - Callback used in subscribe.
+     * @param { ?CallbackObject } [ callback ] - Callback used in subscribe.
      */
     @!APILevel[
         since: "24",
@@ -592,7 +592,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Unsubscribes audio state change event callback.
-     * @param { CallbackObject } [ callback ] - Callback invoked when state change.
+     * @param { ?CallbackObject } [ callback ] - Callback invoked when state change.
      */
     @!APILevel[
         since: "24",

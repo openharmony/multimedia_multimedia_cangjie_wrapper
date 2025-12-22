@@ -131,7 +131,7 @@ public class AudioRoutingManager <: RemoteDataLite {
 
     /**
      * UnSubscribes to  events.
-     * @param { CallbackObject } [ callback ] - Callback invoked when the event is triggered.
+     * @param { ?CallbackObject } [ callback ] - Callback invoked when the event is triggered.
      */
     @!APILevel[
         since: "24",
