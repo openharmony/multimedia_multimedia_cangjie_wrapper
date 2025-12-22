@@ -442,7 +442,7 @@ struct CAVRecorderConfig {
 /**
  * Creates an AVRecorder instance.
  *
- * @returns { AVRecorder } An instance used to return AVRecorder instance if the operation is successful.
+ * @returns { AVRecorder } Returns an instance used to return AVRecorder instance if the operation is successful.
  * @throws { BusinessException } 5400101 - No memory.
  */
 @!APILevel[
@@ -506,7 +506,7 @@ public class AVRecorder <: RemoteDataLite {
     /**
      * Obtains the surface required for recording.
      *
-     * @returns { String } - return the input surface id in string.
+     * @returns { String } Returns the input surface id in string.
      * @throws { BusinessException } 5400102 - Operate not permit.
      * @throws { BusinessException } 5400103 - IO error.
      * @throws { BusinessException } 5400105 - Service died.

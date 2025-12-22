@@ -560,31 +560,31 @@ public class AVMetadata {
     /**
      * AVMetadata Constructor.
      *
-     * @param { String } [album] - The metadata to retrieve the information about the album title of the media source.
-     * @param { String } [albumArtist] - The metadata to retrieve the information about the performer or
+     * @param { String } [ album ] - The metadata to retrieve the information about the album title of the media source.
+     * @param { String } [ albumArtist ] - The metadata to retrieve the information about the performer or
      * artist associated with the media source.
-     * @param { String } [artist] - The metadata to retrieve the information about the artist of the media source.
-     * @param { String } [author] - The metadata to retrieve the information about the author of the media source.
-     * @param { String } [dateTime] - The metadata to retrieve the information about the created time of the media source.
-     * @param { String } [dateTimeFormat] - The metadata to retrieve the information about the created or modified time
+     * @param { String } [ artist ] - The metadata to retrieve the information about the artist of the media source.
+     * @param { String } [ author ] - The metadata to retrieve the information about the author of the media source.
+     * @param { String } [ dateTime ] - The metadata to retrieve the information about the created time of the media source.
+     * @param { String } [ dateTimeFormat ] - The metadata to retrieve the information about the created or modified time
      * with the specific date format of the media source.
-     * @param { String } [composer] - The metadata to retrieve the information about the composer of the media source.
-     * @param { String } [duration] - The metadata to retrieve the playback duration of the media source.
-     * @param { String } [genre] - The metadata to retrieve the content type or genre of the data source.
-     * @param { String } [hasAudio] - If this value exists the media contains audio content.
-     * @param { String } [hasVideo] - If this value exists the media contains video content.
-     * @param { String } [mimeType] - The metadata to retrieve the mime type of the media source. Some
+     * @param { String } [ composer ] - The metadata to retrieve the information about the composer of the media source.
+     * @param { String } [ duration ] - The metadata to retrieve the playback duration of the media source.
+     * @param { String } [ genre ] - The metadata to retrieve the content type or genre of the data source.
+     * @param { String } [ hasAudio ] - If this value exists the media contains audio content.
+     * @param { String } [ hasVideo ] - If this value exists the media contains video content.
+     * @param { String } [ mimeType ] - The metadata to retrieve the mime type of the media source. Some
      * example mime types include: "video/mp4", "audio/mp4", "audio/amr-wb".
-     * @param { String } [trackCount] - The metadata to retrieve the number of tracks, such as audio, video,
+     * @param { String } [ trackCount ] - The metadata to retrieve the number of tracks, such as audio, video,
      * text, in the media source, such as a mp4 or 3gpp file.
-     * @param { String } [sampleRate] - It is the audio sample rate, if available.
-     * @param { String } [title] - The metadata to retrieve the media source title.
-     * @param { String } [videoHeight] - If the media contains video, this key retrieves its height.
-     * @param { String } [videoWidth] - If the media contains video, this key retrieves its width.
-     * @param { String } [videoOrientation] - The metadata to retrieve the information about the video orientation.
-     * @param { HdrType } [hdrType] - HDR type of the media asset.
-     * @param { Location } [location] - Geographical location of the media asset.
-     * @param { HashMap<String, String> } [customInfo] - Custom key-value mappings obtained from moov.meta.list.
+     * @param { String } [ sampleRate ] - It is the audio sample rate, if available.
+     * @param { String } [ title ] - The metadata to retrieve the media source title.
+     * @param { String } [ videoHeight ] - If the media contains video, this key retrieves its height.
+     * @param { String } [ videoWidth ] - If the media contains video, this key retrieves its width.
+     * @param { String } [ videoOrientation ] - The metadata to retrieve the information about the video orientation.
+     * @param { HdrType } [ hdrType ] - HDR type of the media asset.
+     * @param { Location } [ location ] - Geographical location of the media asset.
+     * @param { HashMap<String, String> } [ customInfo ] - Custom key-value mappings obtained from moov.meta.list.
      */
     @!APILevel[
         since: "24",
@@ -695,11 +695,11 @@ public class AVRecorderConfig {
      *
      * @param { AVRecorderProfile } profile - Recording profile. This parameter is mandatory.
      * @param { String } url - File output uri, support a kind of uri now. format like: "fd://" + "context".
-     * @param { AudioSourceType } [audioSourceType] - Type of the audio source to record. This parameter is mandatory for audio recording.
-     * @param { VideoSourceType } [videoSourceType] - Type of the video source to record. This parameter is mandatory for video recording.
-     * @param { FileGenerationMode } [fileGenerationMode] - Mode for creating the file, which is used together with on('photoAssetAvailable').
-     * @param { AVMetadata } [metadata] - Metadata. For details, see AVMetadata.
-     * @param { Int32 } [maxDuration] - Maximum recording duration, in seconds. The value range is [1, 2^31-1].
+     * @param { AudioSourceType } [ audioSourceType ] - Type of the audio source to record. This parameter is mandatory for audio recording.
+     * @param { VideoSourceType } [ videoSourceType ] - Type of the video source to record. This parameter is mandatory for video recording.
+     * @param { FileGenerationMode } [ fileGenerationMode ] - Mode for creating the file.
+     * @param { AVMetadata } [ metadata ] - Metadata. For details, see AVMetadata.
+     * @param { Int32 } [ maxDuration ] - Maximum recording duration, in seconds. The value range is [1, 2^31-1].
      */
     @!APILevel[
         since: "24",
@@ -831,19 +831,19 @@ public class AVRecorderProfile {
      * AVRecorderProfile Constructor.
      *
      * @param { ContainerFormatType } fileFormat - Indicates the output file format.
-     * @param { Int32 } [audioBitrate] - Indicates the audio bitrate.
-     * @param { Int32 } [audioChannels] - Indicates the number of audio channels.
-     * @param { String } [audioCodec] - Audio encoding format. This parameter is mandatory for audio recording. Currently, AUDIO_AAC, AUDIO_MP3,
+     * @param { Int32 } [ audioBitrate ] - Indicates the audio bitrate.
+     * @param { Int32 } [ audioChannels ] - Indicates the number of audio channels.
+     * @param { String } [ audioCodec ] - Audio encoding format. This parameter is mandatory for audio recording. Currently, AUDIO_AAC, AUDIO_MP3,
      * AUDIO_G711MU, AUDIO_AMR_NB, and AUDIO_AMR_WB are supported.
-     * @param { Int32 } [audioSampleRate] - Indicates the audio sampling rate.
-     * @param { Int32 } [videoBitrate] - Video encoding bit rate. This parameter is mandatory for video recording. The value range is [10000 - 100000000].
-     * @param { String } [videoCodec] - Video encoding format. This parameter is mandatory for video recording. Currently, VIDEO_AVC is supported.
-     * @param { Int32 } [videoFrameWidth] - Width of a video frame. This parameter is mandatory for video recording. The value range is [176 - 4096].
-     * @param { Int32 } [videoFrameHeight] - Height of a video frame. This parameter is mandatory for video recording. The value range is [144 - 4096].
-     * @param { Int32 } [videoFrameRate] - Video frame rate. This parameter is mandatory for video recording. The value range is [1 - 60].
-     * @param { Bool } [isHdr] - HDR encoding. This parameter is optional for video recording. The default value is false, and there is no
+     * @param { Int32 } [ audioSampleRate ] - Indicates the audio sampling rate.
+     * @param { Int32 } [ videoBitrate ] - Video encoding bit rate. This parameter is mandatory for video recording. The value range is [10000 - 100000000].
+     * @param { String } [ videoCodec ] - Video encoding format. This parameter is mandatory for video recording. Currently, VIDEO_AVC is supported.
+     * @param { Int32 } [ videoFrameWidth ] - Width of a video frame. This parameter is mandatory for video recording. The value range is [176 - 4096].
+     * @param { Int32 } [ videoFrameHeight ] - Height of a video frame. This parameter is mandatory for video recording. The value range is [144 - 4096].
+     * @param { Int32 } [ videoFrameRate ] - Video frame rate. This parameter is mandatory for video recording. The value range is [1 - 60].
+     * @param { Bool } [ isHdr ] - HDR encoding. This parameter is optional for video recording. The default value is false, and there is no
      * requirement on the encoding format. When isHdr is set to true, the encoding format must be video/hevc.
-     * @param { Bool } [enableTemporalScale] - Whether temporal layered encoding is supported. This parameter is optional for video recording. The default value
+     * @param { Bool } [ enableTemporalScale ] - Whether temporal layered encoding is supported. This parameter is optional for video recording. The default value
      * is false. If this parameter is set to true, some frames in the video output streams can be skipped without being encoded.
      */
     @!APILevel[
@@ -965,6 +965,8 @@ public class CodecMimeType {
         syscap: "SystemCapability.Multimedia.Media.Core"
     ]
     public static const AUDIO_G711MU: String = "audio/g711mu"
+
+    init() {}
 }
 
 /**

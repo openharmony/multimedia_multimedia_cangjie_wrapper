@@ -35,7 +35,7 @@ foreign {
 /**
  * Creates an AVMetadataExtractor instance. 
  *
- * @returns { AVMetadataExtractor } An instance used to return AVMetadataExtractor instance
+ * @returns { AVMetadataExtractor } Returns an instance used to return AVMetadataExtractor instance
  * @throws { BusinessException } 5400101 - No memory.
  */
 @!APILevel[
@@ -97,7 +97,7 @@ public class AVMetadataExtractor <: RemoteDataLite {
     /**
      * It will extract the resource to fetch media meta data info.
      *
-     * @returns { AVMetadata } A instance used to return when fetchMetadata completed.
+     * @returns { AVMetadata } Returns an instance used to return when fetchMetadata completed.
      * @throws { BusinessException } 5400102 - Operation not allowed.
      * @throws { BusinessException } 5400106 - Unsupported format.
      */
