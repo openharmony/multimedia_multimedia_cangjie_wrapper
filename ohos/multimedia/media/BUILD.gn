@@ -20,6 +20,8 @@ ohos_cangjie_shared_library("ohos.multimedia.media") {
     "avimage_generator.cj",
     "media_common.cj",
     "media_ffi.cj",
+    "avrecorder.cj",
+    "avmetadata_extractor.cj"
   ]
 
   cj_deps = [
