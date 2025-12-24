@@ -17,7 +17,7 @@
 
 package ohos.multimedia.image
 
-import ohos.ffi.{RemoteDataLite, RetDataUI32, RetDataI64U32, CArrI32, CArrString, CArrI64, releaseFFIData, safeMalloc}
+import ohos.ffi.{RemoteDataLite, RetDataUI32, RetDataI64U32, CArrI32, CArrString, CArrI64, releaseFFIData, safeMalloc, cjArr2CArr}
 import ohos.resource_manager.RawFileDescriptor
 import ohos.labels.APILevel
 import ohos.business_exception.BusinessException
@@ -577,19 +577,15 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
-     * Obtains the value of properties in an image. This method uses a promise to return the property values in array
-     * of records.
+     * Obtains the value of properties in an image.
      *
-     * @param { key: Array<PropertyKey> } key - Name of the properties whose value is to be obtained.
-     * @returns { Array<(PropertyKey, String)> } Array of Records instance used to return the
-     * property values. If the operation fails, the null is returned.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed;
+     * @param { Array<PropertyKey> } key - Name of the properties whose value is to be obtained.
+     * @returns { HashMap<PropertyKey, ?String> } Returns a hash map containing attribute values. If the operation fails, return null.
      * @throws { BusinessException } 62980096 - The operation failed.
      * @throws { BusinessException } 62980110 - The image source data is incorrect.
      * @throws { BusinessException } 62980113 - Unknown image format.
+     * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed;
      * @throws { BusinessException } 62980116 - Failed to decode the image.
-     * @syscap SystemCapability.Multimedia.Image.ImageSource
-     * @crossplatform
      */
     @!APILevel[
         since: "24",
@@ -600,21 +596,9 @@ public class ImageSource <: RemoteDataLite {
         if (key.size == 0) {
             return HashMap<PropertyKey, ?String>()
         }
-        let keyPointer = safeMalloc<CString>(count: key.size)
-        var i = 0i64
-        try {
-            for (it in key) {
-                unsafe { keyPointer.write(i, LibC.mallocCString(it.toString())) }
-                i++
-            }
-        } catch (e: Exception) {
-            for (j in 0..i) {
-                unsafe { LibC.free(keyPointer.read(j)) }
-            }
-            unsafe { LibC.free(keyPointer) }
-            throw e
-        }
 
+        let keyPointer = unsafe { cjArr2CArr<String, CString>(Array<String>(key.size, {i => key[i].toString()}),
+            {str => LibC.mallocCString(str)}, {cstr => LibC.free(cstr)}) }
         let cKey = CArrString(keyPointer, key.size)
         let valuePointer = try {
             safeMalloc<CString>(count: key.size)
