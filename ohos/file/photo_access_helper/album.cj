@@ -38,7 +38,7 @@ internal enum CoverUriSource {
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class AbsAlbum <: RemoteDataLite{
-    protected init(id: Int64) {
+    internal init(id: Int64) {
         super(id)
     }
     /**
