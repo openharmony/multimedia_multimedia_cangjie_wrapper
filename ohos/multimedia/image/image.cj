@@ -164,3 +164,7 @@ public class Image <: RemoteDataLite {
         releaseFFIData(getID())
     }
 }
+
+protected func createImage(id: Int64): Image {
+    Image(id)
+}

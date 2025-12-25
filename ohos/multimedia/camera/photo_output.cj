@@ -23,6 +23,7 @@ import ohos.callback_invoke.{CallbackObject, Callback0Argument, Callback1Argumen
 import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback0Param, Callback1Param, SUCCESS_CODE}
 import std.collection.ArrayList
 import std.sync.Mutex
+import ohos.multimedia.image.createImage
 
 /**
  * Photo output object.
@@ -46,6 +47,8 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
     let estimatedCaptureDurationMutex = Mutex()
     let errorList = ArrayList<(CallbackObject, Int64)>()
     let errorMutex = Mutex()
+    let photoAvailableList = ArrayList<(CallbackObject, Int64)>()
+    let photoAvailableMutex = Mutex()
 
     init(id: Int64) {
         super(id)
@@ -585,6 +588,58 @@ public class PhotoOutput <: RemoteDataLite & CameraOutput {
             case CameraEvents.CameraError => offAll(IdClassInfo(this.getID(), "PhotoOutput"), errorList,
                 errorMutex, FfiCameraPhotoOutputOffAllError)
             case _ => throw BusinessException(ERR_PARAMETER_ERROR, getErrorMsg(ERR_PARAMETER_ERROR))
+        }
+    }
+
+    /**
+     * Registers a listener for full quality chart uploads to get the result by registering
+     * a callback function. This API uses an asynchronous callback to return the result.
+     * 
+     * Description: Currently, it is not allowed to use off() to unregister the callback
+     * within the callback method of on().   
+     *
+     * @param { Callback1Argument<Photo> } callback - Callback used to get the Photo.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func onPhotoAvailable(callback: Callback1Argument<Photo>): Unit {
+        synchronized(photoAvailableMutex) {
+            let callbackList = photoAvailableList
+            if (findCallbackObject(callbackList, callback)) {
+                CAMERA_LOG.error("PhotoOutput on failed: ${paramError("callback object", "different")}")
+                return
+            }
+            unsafe {
+                let wrapper = {id: Int64 => callback.invoke(None, Photo(createImage(id)))}
+                let lambdaData = Callback1Param<Int64, Unit>(wrapper)
+                let errCode = FfiCameraPhotoOutputOnPhotoAvailable(getID(), lambdaData.getID())
+                successOrThrow(errCode)
+                callbackList.add((callback, lambdaData.getID()))
+            }
+        }
+    }
+
+    /**
+     * Unsubscribes photo available event callback.
+     *
+     * @param { ?Callback1Argument<Photo> } [ callback ] - Callback used to get the Photo.
+     * @throws { BusinessException } 7400201 - Camera service fatal error.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Camera.Core",
+        throwexception: true
+    ]
+    public func offPhotoAvailable(callback!: ?Callback1Argument<Photo> = None): Unit {
+        match (callback) {
+            case Some(cb) => off(IdClassInfo(this.getID(), "PhotoOutput"), photoAvailableList,
+                photoAvailableMutex, cb, FfiCameraPhotoOutputOffPhotoAvailable)
+            case None => offAll(IdClassInfo(this.getID(), "PhotoOutput"), photoAvailableList,
+                photoAvailableMutex, FfiCameraPhotoOutputOffAllPhotoAvailable)
         }
     }
 

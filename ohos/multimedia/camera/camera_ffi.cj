@@ -160,6 +160,12 @@ foreign {
 
     func FfiCameraPhotoOutputOffAllError(id: Int64): Int32
 
+    func FfiCameraPhotoOutputOnPhotoAvailable(id: Int64, callbackId: Int64): Int32
+
+    func FfiCameraPhotoOutputOffPhotoAvailable(id: Int64, callbackId: Int64): Int32
+
+    func FfiCameraPhotoOutputOffAllPhotoAvailable(id: Int64): Int32
+
     func FfiCameraPhotoOutputRelease(id: Int64): Int32
 
     // // PreviewOutput

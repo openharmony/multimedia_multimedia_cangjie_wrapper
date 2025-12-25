@@ -25,6 +25,7 @@ import std.collection.{HashMap, ArrayList}
 import std.sync.Mutex
 import std.deriving.Derive
 import ohos.labels.{APILevel, Hide}
+import ohos.multimedia.image.Image
 
 const LOG_DOMAIN: UInt32 = 0xD002B00
 let CAMERA_LOG = HilogChannel(0, LOG_DOMAIN, "CJ-Camera")
@@ -88,6 +89,28 @@ internal enum HostDeviceType {
     @!Hide
     Tablet
     | ...
+}
+
+/**
+ * Photo object
+ */
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.Multimedia.Camera.Core"
+]
+public class Photo {
+    /**
+     * Main image.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
+    public var mainImage: Image
+
+    init(mainImage: Image) {
+        this.mainImage = mainImage
+    }
 }
 
 /**
@@ -507,7 +530,13 @@ public enum MetadataObjectType {
     ]
     FaceDetection
     |
-    @!Hide
+    /**
+     * Human body detection type.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Camera.Core"
+    ]
     HumanBody
     |
     @!Hide
@@ -532,6 +561,7 @@ public enum MetadataObjectType {
     func getValue(): Int32 {
         match (this) {
             case MetadataObjectType.FaceDetection => 0
+            case MetadataObjectType.HumanBody => 1
             case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
@@ -542,6 +572,7 @@ public enum MetadataObjectType {
     static func parse(val: Int32): MetadataObjectType {
         match (val) {
             case 0 => MetadataObjectType.FaceDetection
+            case 1 => MetadataObjectType.HumanBody
             case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
