@@ -106,7 +106,7 @@ public class Image <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop timestamp: Int64 {
         get() {
             throw Exception("Not support")

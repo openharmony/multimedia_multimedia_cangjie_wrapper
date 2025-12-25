@@ -20,12 +20,12 @@ package ohos.file.photo_access_helper
 import ohos.labels.{APILevel, Hide}
 import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum CoverUriSource {
-    @!Hide
+    @!Hide[isChecked: true]
     DefaultCover
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ManualCover
     | ...
 }
@@ -146,21 +146,21 @@ public open class AbsAlbum <: RemoteDataLite{
             }
         }
     }
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop lpath: String {
         get() {
             throw Exception("Not supported")
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop coverUriSource: CoverUriSource {
         get() {
             throw Exception("Not supported")
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop uploadStatus: Bool {
         get() {
             throw Exception("Not supported")
@@ -240,14 +240,14 @@ public class Album <: AbsAlbum {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop dateAdded: Int64 {
         get() {
             throw Exception("Not supported")
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal prop dateModified: Int64 {
         get() {
             throw Exception("Not supported")

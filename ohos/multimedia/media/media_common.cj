@@ -82,15 +82,15 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
     }
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum PixelFormat {
-    @!Hide
+    @!Hide[isChecked: true]
     Rgb565
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Rgba8888
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Rgb888
     | ...
 }
@@ -185,10 +185,10 @@ public class PixelMapParams {
     ]
     public var height: Int32
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var colorFormat: PixelFormat = PixelFormat.Rgba8888
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var autoFlip: Bool = false
 
     /**
