@@ -981,3 +981,41 @@ protected struct CPackingOptionV2 {
         unsafe { LibC.free(this.format) }
     }
 }
+
+/**
+ * Describes area information in an image.
+ */
+public class UnsafePositionArea {
+
+    /**
+     * A pointer to a buffer from which image data will be read.
+     */
+    public let pixels: CPointer<UInt8>
+
+    /**
+     * The length of the source buffer in bytes.
+     */
+    public let pixelLen: Int64
+
+    /**
+     * Describes area information in an image.
+     */
+    public let area: PositionArea
+
+    /**
+     * UnsafePositionArea constructor.
+     *
+     * @param { CPointer<UInt8> } sourceDensity - A pointer to a buffer from which image data will be read.
+     * @param { Int64 } sourcePixelFormat - The length of the source buffer in bytes.
+     * @param { PositionArea } sourceSize - Describes area information in an image.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    public init(pixels: CPointer<UInt8>, pixelLen: Int64, area: PositionArea) {
+        this.pixels = pixels
+        this.pixelLen = pixelLen
+        this.area = area
+    }
+}

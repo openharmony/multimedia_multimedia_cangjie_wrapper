@@ -590,4 +590,68 @@ public class PixelMap <: RemoteDataLite {
         }
         IMAGE_LOG.info("[PixelMap] ffi release success")
     }
+
+    /**
+     * Reads image data in an Array and writes the data to a PixelMap object. 
+     *
+     * @param { CPointer<UInt8> } src - A buffer from which the image data will be read.
+     * @param { Int64 } srcLen - The length of the source buffer in bytes.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public unsafe func writeBufferToPixels(src: CPointer<UInt8>, srcLen: Int64): Unit {
+        let ret = FfiOHOSWriteBufferToPixels(getID(), src, UInt64(srcLen))
+        checkAndThrow(ret)
+    }
+
+    /**
+     * Writes image pixel map data to the specified area.
+     *
+     * @param { UnsafePositionArea } area - Area to which the image pixel map data will be written.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.Core",
+        throwexception: true,
+        workerthread: true
+    ]
+    public unsafe func writePixels(area: UnsafePositionArea): Unit {
+        unsafe {
+            let ret = FfiOHOSWritePixels(
+                getID(),
+                CPositionArea(UInt64(area.pixelLen), area.area.offset, area.area.stride, area.area.region.toExternal(),
+                    area.pixels)
+            )
+            checkAndThrow(ret)
+        }
+    }
+}
+
+/**
+ * Create pixelmap by data buffer.
+ *
+ * @param { CPointer<UInt8> } colors - A buffer from which the image data will be read.
+ * @param { Int64 } colorLen - The length of the source buffer in bytes.
+ * @param { InitializationOptions } options - Initialization options for pixelmap.
+ * @returns { PixelMap } Return the PixelMap object.
+ * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+ * @throws { BusinessException } 62980115 - Parameter error. Possible causes: 1.Mandatory parameters are left
+ * unspecified.
+ * 2.Incorrect parameter types. 3.Parameter verification failed.
+ */
+public unsafe func createPixelMap(colors: CPointer<UInt8>, colorLen: Int64, options: InitializationOptions): PixelMap {
+    if (colorLen == 0) {
+        throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
+    }
+    let id = FfiOHOSCreatePixelMapV2(colors, UInt32(colorLen), options.toExternal())
+    if (id <= 0) {
+        throw BusinessException(INIT_ABNORMAL_ERROR, "Image initialization abnormal.")
+    }
+    return PixelMap(id)
 }

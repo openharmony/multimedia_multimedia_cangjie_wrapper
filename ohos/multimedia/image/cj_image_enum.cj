@@ -2060,6 +2060,7 @@ public enum PropertyKey <: ToString {
     |
     /**
      * GIF LOOP COUNT
+     * If infinite loop returns 0, other values represent the number of loops
      */
     @!APILevel[
         since: "24",
