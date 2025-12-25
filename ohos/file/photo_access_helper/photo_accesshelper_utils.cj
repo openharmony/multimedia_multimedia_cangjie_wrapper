@@ -1845,7 +1845,7 @@ public class RecommendationOptions {
     /**
      * The constructor to create a RecommendationOptions instance.
      * @param { ?RecommendationType } [ recommendationType ] - Type of the recommended image.
-     * @param { ?TextContextInfo } [ textContextInfo ]- Text based on which images are recommended.
+     * @param { ?TextContextInfo } [ textContextInfo ] - Text based on which images are recommended.
      */
     @!APILevel[
         since: "24",
