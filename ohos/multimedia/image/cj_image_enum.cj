@@ -39,7 +39,7 @@ public enum PixelMapFormat {
     ]
     Unknown
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Argb8888
     |
     /**
@@ -153,7 +153,7 @@ public enum PixelMapFormat {
     ]
     YcrcbP010
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Astc4x4
     | ...
 
@@ -903,391 +903,391 @@ public enum PropertyKey <: ToString {
     ]
     FocusMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Compression
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PhotometricInterpretation
     |
-    @!Hide
+    @!Hide[isChecked: true]
     StripOffsets
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SamplesPerPixel
     |
-    @!Hide
+    @!Hide[isChecked: true]
     RowsPerStrip
     |
-    @!Hide
+    @!Hide[isChecked: true]
     StripByteCounts
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XResolution
     |
-    @!Hide
+    @!Hide[isChecked: true]
     YResolution
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PlanarConfiguration
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ResolutionUnit
     |
-    @!Hide
+    @!Hide[isChecked: true]
     TransferFunction
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Software
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Artist
     |
-    @!Hide
+    @!Hide[isChecked: true]
     WhitePoint
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PrimaryChromaticities
     |
-    @!Hide
+    @!Hide[isChecked: true]
     YCbCrCoefficients
     |
-    @!Hide
+    @!Hide[isChecked: true]
     YCbCrSubSampling
     |
-    @!Hide
+    @!Hide[isChecked: true]
     YCbCrPositioning
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ReferenceBlackWhite
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Copyright
     |
-    @!Hide
+    @!Hide[isChecked: true]
     JpegInterchangeFormat
     |
-    @!Hide
+    @!Hide[isChecked: true]
     JpegInterchangeFormatLength
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExposureProgram
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SpectralSensitivity
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Oecf
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExifVersion
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateTimeDigitized
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ComponentsConfiguration
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ShutterSpeedValue
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BrightnessValue
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MaxApertureValue
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubjectDistance
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubjectArea
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MakerNote
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubsecTime
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubsecTimeOriginal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubsecTimeDigitized
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FlashpixVersion
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ColorSpace
     |
-    @!Hide
+    @!Hide[isChecked: true]
     RelatedSoundFile
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FlashEnergy
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SpatialFrequencyResponse
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FocalPlaneXResolution
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FocalPlaneYResolution
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FocalPlaneResolutionUnit
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubjectLocation
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExposureIndex
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SensingMethod
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FileSource
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CfaPattern
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CustomRendered
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExposureMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DigitalZoomRatio
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SceneCaptureType
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GainControl
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Contrast
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Saturation
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Sharpness
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DeviceSettingDescription
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubjectDistanceRange
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ImageUniqueId
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsVersionId
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsAltitudeRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsAltitude
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsSatellites
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsStatus
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsMeasureMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDop
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsSpeedRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsSpeed
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsTrackRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsTrack
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsImgDirectionRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsImgDirection
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsMapDatum
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestLatitudeRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestLatitude
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestLongitudeRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestLongitude
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestBearingRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestBearing
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestDistanceRef
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDestDistance
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsProcessingMethod
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsAreaInformation
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsDifferential
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BodySerialNumber
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraOwnerName
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CompositeImage
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CompressedBitsPerPixel
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DngVersion
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DefaultCropSize
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Gamma
     |
-    @!Hide
+    @!Hide[isChecked: true]
     IsoSpeedLatitudeyyy
     |
-    @!Hide
+    @!Hide[isChecked: true]
     IsoSpeedLatitudezzz
     |
-    @!Hide
+    @!Hide[isChecked: true]
     LensMake
     |
-    @!Hide
+    @!Hide[isChecked: true]
     LensModel
     |
-    @!Hide
+    @!Hide[isChecked: true]
     LensSerialNumber
     |
-    @!Hide
+    @!Hide[isChecked: true]
     LensSpecification
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NewSubfileType
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OffsetTime
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OffsetTimeDigitized
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OffsetTimeOriginal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SourceExposureTimesOfCompositeImage
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SourceImageNumberOfCompositeImage
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubfileType
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GpsHPositioningError
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PhotographicSensitivity
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BurstNumber
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceConf
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceLeyeCenter
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceMouthCenter
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FacePointer
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceRect
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceReyeCenter
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceSmileScore
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FaceVersion
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FrontCamera
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ScenePointer
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SceneVersion
     |
-    @!Hide
+    @!Hide[isChecked: true]
     IsXmageSupported
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XmageMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XmageLeft
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XmageTop
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XmageRight
     |
-    @!Hide
+    @!Hide[isChecked: true]
     XmageBottom
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CloudEnhancementMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     WindSnapshotMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GifLoopCount
     | ...
 

@@ -21,25 +21,25 @@ import ohos.graphics.color_space_manager.ColorSpaceManager
 import ohos.labels.{APILevel, Hide}
 import ohos.business_exception.BusinessException
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum ResolutionQuality {
-    @!Hide
+    @!Hide[isChecked: true]
     Low
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Medium
     |
-    @!Hide
+    @!Hide[isChecked: true]
     High
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum CropAndScaleStrategy {
-    @!Hide
+    @!Hide[isChecked: true]
     ScaleFirst
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CropFirst
     | ...
 }
@@ -376,10 +376,10 @@ public class DecodingOptions {
     ]
     public var desiredDynamicRange: DecodingDynamicRange
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var resolutionQuality: ?ResolutionQuality = Option<ResolutionQuality>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var cropAndScaleStrategy: ?CropAndScaleStrategy = Option<CropAndScaleStrategy>.None
 
     /**
