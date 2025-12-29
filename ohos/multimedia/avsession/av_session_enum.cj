@@ -119,7 +119,7 @@ public enum ProtocolType {
     ]
     TypeLocal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     TypeCastPlusMirror
     |
     /**
@@ -142,7 +142,7 @@ public enum ProtocolType {
     ]
     TypeDlna
     |
-    @!Hide
+    @!Hide[isChecked: true]
     TypeCastPlusAudio
     | ...
 

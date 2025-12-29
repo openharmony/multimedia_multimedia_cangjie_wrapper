@@ -138,7 +138,7 @@ public class AVMetadata {
     ]
     public var mediaImage: ?ValueType
 
-    @!Hide
+    @!Hide[isChecked: true]
     protected let bundleIcon: ?PixelMap = None
 
     /**
@@ -177,7 +177,7 @@ public class AVMetadata {
     ]
     public var lyric: ?String
 
-    @!Hide
+    @!Hide[isChecked: true]
     protected let singleLyricText: ?String = None
 
     /**
