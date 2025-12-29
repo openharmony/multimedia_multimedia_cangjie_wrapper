@@ -18,8 +18,8 @@
 package ohos.file.photo_access_helper
 
 import ohos.labels.APILevel
-import ohos.ffi.{RemoteDataLite, releaseFFIData, RetDataCArrString, SUCCESS_CODE,
-    cjArr2CArr, CArrI64, toArrayCString, Callback1Param}
+import ohos.ffi.{RemoteDataLite, releaseFFIData, RetDataCArrString,
+    toArrayCString, Callback1Param}
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.{Callback1Argument, CallbackObject}
 import ohos.bundle.bundle_manager.{BundleManager, BundleInfo, BundleFlag}
