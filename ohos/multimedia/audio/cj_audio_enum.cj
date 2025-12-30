@@ -178,6 +178,7 @@ public enum AudioChannel {
 
 /**
  * Audio AudioChannel Layout
+ * A 64-bit integer indicates that the appearance and order of the speakers for recording or playback.
  */
 @!APILevel[
     since: "24",
@@ -1139,7 +1140,7 @@ public enum AudioState {
 ]
 public enum DeviceFlag {
     /**
-     * None devices.
+     * Output devices.
      */
     @!APILevel[
         since: "24",
@@ -1262,7 +1263,7 @@ public enum SourceType {
 }
 
 /**
- * Enumerates audio device usages.
+ * Enumerates audio device for usage.
  */
 @!APILevel[
     since: "24",

@@ -537,7 +537,7 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Listens for audio interrupt events. This method uses a callback to get interrupt events. The interrupt event is
-     * triggered when audio playback is interrupted.
+     * triggered when audio recording is interrupted.
      * @param { Callback1Argument<InterruptEvent> } callback - Callback used to listen for interrupt callback.
      * @throws { BusinessException } 6800301 - Unsupported state, Audio focus request failed, System error.
      */
@@ -573,7 +573,7 @@ public class AudioCapturer <: RemoteDataLite {
     }
 
     /**
-     * Subscribes audio renderer state change event callback.
+     * Subscribes audio state change event callback.
      * @param { Callback1Argument<AudioState> } callback - Callback invoked when state change.
      * @throws { BusinessException } 6800301 - Unsupported state, Audio focus request failed, System error.
      */
