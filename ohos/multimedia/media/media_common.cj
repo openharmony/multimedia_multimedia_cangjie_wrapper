@@ -278,7 +278,7 @@ public enum AVImageQueryOptions {
 ]
 public enum AudioSourceType {
     /**
-     * Default audio source type.
+     * Default audio input source.
      */
     @!APILevel[
         since: "24",
@@ -365,7 +365,9 @@ public enum AudioSourceType {
 }
 
 /**
- * The metadata of the current media.Used to set the properties of the current media file.
+ * Defines the audio and video metadata. Parameters that are not declared as read-only in
+ * AVRecorderConfig can be used as input parameters for recording of
+ * AVRecorder.
  */
 @!APILevel[
     since: "24",
@@ -373,8 +375,7 @@ public enum AudioSourceType {
 ]
 public class AVMetadata {
     /**
-     * The metadata to retrieve the information about the album title
-     * of the media source.
+     * Title of the album. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -382,8 +383,7 @@ public class AVMetadata {
     ]
     public var album: String
     /**
-     * The metadata to retrieve the information about the performer or
-     * artist associated with the media source.
+     * Artist of the album. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -391,8 +391,7 @@ public class AVMetadata {
     ]
     public var albumArtist: String
     /**
-     * The metadata to retrieve the information about the artist of
-     * the media source.
+     * Artist of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -400,8 +399,7 @@ public class AVMetadata {
     ]
     public var artist: String
     /**
-     * The metadata to retrieve the information about the author of
-     * the media source.
+     * Author of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -409,8 +407,7 @@ public class AVMetadata {
     ]
     public var author: String
     /**
-     * The metadata to retrieve the information about the created time of
-     * the media source.
+     * Time when the media asset is created. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -418,8 +415,8 @@ public class AVMetadata {
     ]
     public var dateTime: String
     /**
-     * The metadata to retrieve the information about the created or modified time
-     * with the specific date format of the media source.
+     * Time when the media asset is created. The value is in the YYYY-MM-DD HH:mm:ss format.
+     * This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -427,8 +424,7 @@ public class AVMetadata {
     ]
     public var dateTimeFormat: String
     /**
-     * The metadata to retrieve the information about the composer of
-     * the media source.
+     * Composer of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -436,7 +432,7 @@ public class AVMetadata {
     ]
     public var composer: String
     /**
-     * The metadata to retrieve the playback duration of the media source.
+     * Duration of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -444,8 +440,7 @@ public class AVMetadata {
     ]
     public var duration: String
     /**
-     * The metadata to retrieve the content type or genre of the data
-     * source.
+     * Type or genre of the media asset.
      */
     @!APILevel[
         since: "24",
@@ -453,7 +448,7 @@ public class AVMetadata {
     ]
     public var genre: String
     /**
-     * If this value exists the media contains audio content.
+     * Whether the media asset contains audio. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -461,7 +456,7 @@ public class AVMetadata {
     ]
     public var hasAudio: String
     /**
-     * If this value exists the media contains video content.
+     * Whether the media asset contains a video. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -469,8 +464,8 @@ public class AVMetadata {
     ]
     public var hasVideo: String
     /**
-     * The metadata to retrieve the mime type of the media source. Some
-     * example mime types include: "video/mp4", "audio/mp4", "audio/amr-wb".
+     * MIME type of the media asset. This parameter is read-only in the current version.
+     * Some example mime types include: "video/mp4", "audio/mp4", "audio/amr-wb".
      */
     @!APILevel[
         since: "24",
@@ -478,8 +473,7 @@ public class AVMetadata {
     ]
     public var mimeType: String
     /**
-     * The metadata to retrieve the number of tracks, such as audio, video,
-     * text, in the media source, such as a mp4 or 3gpp file.
+     * Number of tracks of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -487,7 +481,7 @@ public class AVMetadata {
     ]
     public var trackCount: String
     /**
-     * It is the audio sample rate, if available.
+     * Audio sampling rate, in Hz. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -495,7 +489,8 @@ public class AVMetadata {
     ]
     public var sampleRate: String
     /**
-     * The metadata to retrieve the media source title.
+     * Title of the media asset. This parameter is read-only in the current version.
+     * This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -508,7 +503,7 @@ public class AVMetadata {
     @!Hide
     internal var description: ?String  = Option<String>.None
     /**
-     * If the media contains video, this key retrieves its height.
+     * Video height, in px. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -516,7 +511,7 @@ public class AVMetadata {
     ]
     public var videoHeight: String
     /**
-     * If the media contains video, this key retrieves its width.
+     * Video width, in px. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -524,8 +519,7 @@ public class AVMetadata {
     ]
     public var videoWidth: String
     /**
-     * The metadata to retrieve the information about the video
-     * orientation.
+     * Video rotation direction, in degrees.
      */
     @!APILevel[
         since: "24",
@@ -533,7 +527,7 @@ public class AVMetadata {
     ]
     public var videoOrientation: String
     /**
-     * HDR type of the media asset.
+     * HDR type of the media asset. This parameter is read-only in the current version.
      */
     @!APILevel[
         since: "24",
@@ -622,7 +616,12 @@ public class AVMetadata {
 }
 
 /**
- * Provides the media recorder configuration definitions.
+ * Describes the audio and video recording parameters.
+ *
+ * The audioSourceType and videoSourceType parameters are used to distinguish audio-only recording,
+ * video-only recording, and audio and video recording. For audio-only recording, set only audioSourceType.
+ * For video-only recording, set only videoSourceType. For audio and video recording, set both audioSourceType
+ * and videoSourceType.
  */
 @!APILevel[
     since: "24",
@@ -638,8 +637,7 @@ public class AVRecorderConfig {
     ]
     public var profile: AVRecorderProfile
     /**
-     * File output uri, support a kind of uri now.
-     * format like: "fd://" + "context".
+     * Recording output URL: fd://xx (fd number). This parameter is mandatory.
      */
     @!APILevel[
         since: "24",
@@ -727,7 +725,8 @@ public class AVRecorderConfig {
 ]
 public class AVRecorderProfile {
     /**
-     * Indicates the output file format.
+     * Container format of a file. This parameter is mandatory. Currently, the MP4, M4A, MP3, WAV, and AMR container
+     * formats are supported. The AUDIO_MP3 encoding format cannot be used in the MP4 container format.
      */
     @!APILevel[
         since: "24",
@@ -735,7 +734,16 @@ public class AVRecorderProfile {
     ]
     public var fileFormat: ContainerFormatType
     /**
-     * Indicates the audio bitrate.
+     * Audio encoding bit rate. This parameter is mandatory for audio recording. Supported bit rate ranges:
+     * Range [32000 - 500000] for the AAC encoding format. Range [64000] for the G.711 μ-law encoding format.
+     * Range [8000, 16000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000,
+     * 224000, 256000, 320000] for the MP3 encoding format.<br>When the MP3 encoding format is used,
+     * the mapping between the sampling rate and bit rate is as follows: When the sampling rate is lower than
+     * 16 kHZ, the bit rate range is [8000 - 64000]. When the sampling rate ranges from 16 kHz to 32 kHz,
+     * the bit rate range is [8000 - 160000]. When the sampling rate is greater than 32 kHz, the bit rate range
+     * is [32000 - 320000]. Range [4750, 5150, 5900, 6700, 7400, 7950, 10200, 12200] for
+     * the AMR-NB encoding format. Range [6600, 8850, 12650, 14250, 15850, 18250, 19850, 23050, 23850] for the
+     * AMR-WB encoding format.
      */
     @!APILevel[
         since: "24",
@@ -743,7 +751,9 @@ public class AVRecorderProfile {
     ]
     public var audioBitrate: Int32
     /**
-     * Indicates the number of audio channels.
+     * Number of audio channels. This parameter is mandatory for audio recording. Range [1 - 8] for the
+     * AAC encoding format. Range [1] for the G.711 μ-law encoding format. Range [1 - 2] for the MP3 encoding
+     * format. Range [1] for the AMR-NB and AMR-WB encoding formats.
      */
     @!APILevel[
         since: "24",
