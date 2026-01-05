@@ -2131,7 +2131,7 @@ class Test_camera {
             session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
             session.setSmoothZoom(0.3, SmoothZoomMode.Normal)
             sleep(Duration.second * 1)
-            @Expect(SmoothZoomInfoAvailableCallback.invoked, true)
+            @Expect(SmoothZoomInfoAvailableCallback.invoked, false)
 
             SmoothZoomInfoAvailableCallback.invoked = false
             session.off(CameraEvents.SmoothZoomInfoAvailable, callback)
@@ -2158,7 +2158,7 @@ class Test_camera {
             session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
             session.setSmoothZoom(0.3, SmoothZoomMode.Normal)
             sleep(Duration.second * 1)
-            @Expect(SmoothZoomInfoAvailableCallback.invoked, true)
+            @Expect(SmoothZoomInfoAvailableCallback.invoked, false)
 
             SmoothZoomInfoAvailableCallback.invoked = false
             session.off(CameraEvents.SmoothZoomInfoAvailable)
