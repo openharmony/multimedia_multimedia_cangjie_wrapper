@@ -95,7 +95,7 @@ public class AVMetadataExtractor <: RemoteDataLite {
     public var fdSrc: AVFileDescriptor
 
     /**
-     * It will extract the resource to fetch media meta data info.
+     * Obtains media metadata.
      *
      * @returns { AVMetadata } Returns an instance used to return when fetchMetadata completed.
      * @throws { BusinessException } 5400102 - Operation not allowed.
@@ -119,7 +119,7 @@ public class AVMetadataExtractor <: RemoteDataLite {
     }
 
     /**
-     * Release resources used for AVMetadataExtractor.
+     * Releases this AVMetadataExtractor instance.
      *
      * @throws { BusinessException } 5400102 - Operation not allowed.
      */

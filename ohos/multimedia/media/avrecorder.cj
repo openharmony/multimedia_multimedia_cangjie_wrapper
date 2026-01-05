@@ -442,7 +442,9 @@ struct CAVRecorderConfig {
 /**
  * Creates an AVRecorder instance.
  *
- * @returns { AVRecorder } Returns an instance used to return AVRecorder instance if the operation is successful.
+ * @returns { AVRecorder } Returns an AVRecorder instance. If the operation is successful,
+ * an AVRecorder instance is returned; otherwise, null is returned.
+ * The instance can be used to record audio and video.
  * @throws { BusinessException } 5400101 - No memory.
  */
 @!APILevel[
@@ -530,8 +532,10 @@ public class AVRecorder <: RemoteDataLite {
     }
 
     /**
-     * Start AVRecorder, it will to started state.
+     * Starts recording.
      *
+     * For audio-only recording, this API can be called only after the prepare() API is called.
+     * For video-only recording, this API can be called only after the getInputSurface() API is called.
      * @throws { BusinessException } 5400102 - Operate not permit.
      * @throws { BusinessException } 5400103 - IO error.
      * @throws { BusinessException } 5400105 - Service died.
@@ -551,8 +555,13 @@ public class AVRecorder <: RemoteDataLite {
     }
 
     /**
-     * Stop AVRecorder, it will to stopped state.
+     * Stops recording.
      *
+     * This API can be called only after the start() or pause() API is called.
+     *
+     * For audio-only recording, you can call prepare() again for re-recording.
+     * For video-only recording or audio and video recording,
+     * you can call prepare() getInputSurface() again for re-recording.
      * @throws { BusinessException } 5400102 - Operate not permit.
      * @throws { BusinessException } 5400103 - IO error.
      * @throws { BusinessException } 5400105 - Service died.
