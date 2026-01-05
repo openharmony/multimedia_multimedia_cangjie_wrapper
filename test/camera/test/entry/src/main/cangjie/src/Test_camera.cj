@@ -1988,7 +1988,7 @@ class Test_camera {
             loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
             @Expect(false)
         } finally {
-            session.release() 
+            session.release()
         }
     }
 
