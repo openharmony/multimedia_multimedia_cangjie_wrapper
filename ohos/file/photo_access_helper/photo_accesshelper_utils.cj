@@ -1681,6 +1681,17 @@ public open class BaseSelectOptions {
 
     private var baseSelectOptionsImpl: BaseSelectOptionsImpl = BaseSelectOptionsImpl()
 
+    /**
+     * Create BaseSelectOptions instance.
+     *
+     * @param { PhotoViewMimeTypes } [ mimeType ] - The Type of the file in the picker window.
+     * @param { Int32 } [ maxSelectNumber ] - Maximum number of images for a single selection.
+     * @param { Bool } [ isPhotoTakingSupported ] - Support taking photos.
+     * @param { Bool } [ isSearchSupported ] - Support search.
+     * @param { RecommendationOptions } [ recommendationOptions ] - The recommendation options when use recommendation photo function.
+     * @param { Array<String> } [ preselectedUris ] - The uri for the preselected files.
+     * @param { Bool } [ isPreviewForSingleSelectionSupported ] - Support preview in single selection mode or not.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
@@ -1722,7 +1733,7 @@ public class PhotoSelectOptions <: BaseSelectOptions {
     public var isEditSupported: Bool
 
     /**
-     * Support select original photo or not
+     * Support select original photo or not.
      */
     @!APILevel[
         since: "24",
@@ -1731,7 +1742,7 @@ public class PhotoSelectOptions <: BaseSelectOptions {
     public var isOriginalSupported: Bool
 
     /**
-     * SubWindow name
+     * SubWindow name.
      */
     @!APILevel[
         since: "24",
@@ -1739,6 +1750,20 @@ public class PhotoSelectOptions <: BaseSelectOptions {
     ]
     public var subWindowName: ?String
 
+    /**
+     * Create PhotoSelectOptions instance.
+     *
+     * @param { PhotoViewMimeTypes } [ mimeType ] - The Type of the file in the picker window.
+     * @param { Int32 } [ maxSelectNumber ] - Maximum number of images for a single selection.
+     * @param { Bool } [ isPhotoTakingSupported ] - Support taking photos.
+     * @param { Bool } [ isSearchSupported ] - Support search.
+     * @param { RecommendationOptions } [ recommendationOptions ] - The recommendation options when use recommendation photo function.
+     * @param { Array<String> } [ preselectedUris ] - The uri for the preselected files.
+     * @param { Bool } [ isPreviewForSingleSelectionSupported ] - Support preview in single selection mode or not.
+     * @param { Bool } [ isEditSupported ] - Support editing photos.
+     * @param { Bool } [ isOriginalSupported ] - Support select original photo or not.
+     * @param { ?String } [ subWindowName ] - SubWindow name.
+     */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
