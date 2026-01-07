@@ -16,7 +16,12 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia") {
-  sources = [ "multimedia.cj" ]
+  
+  if (is_mingw || is_mac){
+    sources = ["../../mock/ohos.multimedia.cj"]
+  } else {
+    sources = [ "multimedia.cj" ]
+  }
 
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"

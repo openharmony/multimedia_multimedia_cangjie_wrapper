@@ -16,11 +16,16 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia.media") {
-  sources = [
-    "avimage_generator.cj",
-    "media_common.cj",
-    "media_ffi.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = ["../../../mock/ohos.multimedia.media.cj"]
+  } else {
+    sources = [
+      "avimage_generator.cj",
+      "media_common.cj",
+      "media_ffi.cj",
+    ]
+  }
 
   cj_deps = [
     "../../multimedia/image:ohos.multimedia.image"

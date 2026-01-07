@@ -16,17 +16,22 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia.image") {
-  sources = [
-    "cj_image_common.cj",
-    "cj_image_enum.cj",
-    "cj_image_log.cj",
-    "cj_image_utils.cj",
-    "image.cj",
-    "image_packer.cj",
-    "image_receiver.cj",
-    "image_source.cj",
-    "pixel_map.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = ["../../../mock/ohos.multimedia.image.cj"]
+  } else {
+    sources = [
+      "cj_image_common.cj",
+      "cj_image_enum.cj",
+      "cj_image_log.cj",
+      "cj_image_utils.cj",
+      "image.cj",
+      "image_packer.cj",
+      "image_receiver.cj",
+      "image_source.cj",
+      "pixel_map.cj",
+    ]
+  }
 
   cj_external_deps = [
     "cangjie_ark_interop:ohos.business_exception",

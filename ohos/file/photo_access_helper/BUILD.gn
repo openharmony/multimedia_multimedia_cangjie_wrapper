@@ -16,16 +16,21 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.file.photo_access_helper") {
-  sources = [
-    "album.cj",
-    "fetch_result.cj",
-    "media_album_change_request.cj",
-    "media_asset_change_request.cj",
-    "photo_accesshelper.cj",
-    "photo_accesshelper_ffi.cj",
-    "photo_accesshelper_utils.cj",
-    "photo_asset.cj"
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = ["../../../mock/ohos.file.photo_access_helper.cj"]
+  } else {
+    sources = [
+      "album.cj",
+      "fetch_result.cj",
+      "media_album_change_request.cj",
+      "media_asset_change_request.cj",
+      "photo_accesshelper.cj",
+      "photo_accesshelper_ffi.cj",
+      "photo_accesshelper_utils.cj",
+      "photo_asset.cj"
+    ]
+  }
 
   cj_deps = [
     "../../multimedia/image:ohos.multimedia.image"
