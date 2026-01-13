@@ -645,6 +645,12 @@ public class PixelMap <: RemoteDataLite {
  * unspecified.
  * 2.Incorrect parameter types. 3.Parameter verification failed.
  */
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.Multimedia.Image.Core",
+    throwexception: true,
+    workerthread: true
+]
 public unsafe func createPixelMap(colors: CPointer<UInt8>, colorLen: Int64, options: InitializationOptions): PixelMap {
     if (colorLen == 0) {
         throw BusinessException(ERR_PARAMETER_ERROR, "Invalid image parameter.")
