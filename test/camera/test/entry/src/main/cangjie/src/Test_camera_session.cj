@@ -62,25 +62,25 @@ class Test_camera_session {
 
     func getPhotoSession(index: Int64): PhotoSession {
         var cameraManager: Option<CameraManager> = None
-        cameraManager = getCameraManager(getAbilityContext()).getOrThrow()
-        let session: PhotoSession = (cameraManager
+        cameraManager = getCameraManager(getAbilityContext())
+        let session: PhotoSession = (cameraManager.getOrThrow()
             .createSession(SceneMode.NormalPhoto) as PhotoSession)
             .getOrThrow()
 
         // input
-        let device = cameraManager.getSupportedCameras()[index]
-        let input = cameraManager.createCameraInput(device)
+        let device = cameraManager.getOrThrow().getSupportedCameras()[index]
+        let input = cameraManager.getOrThrow().createCameraInput(device)
 
-        let ability = cameraManager.getSupportedOutputCapability(device, SceneMode.NormalPhoto)
+        let ability = cameraManager.getOrThrow().getSupportedOutputCapability(device, SceneMode.NormalPhoto)
 
         // preview output
         let size = ImageSize(8192, 8)
         let receiver = createImageReceiver(size, ImageFormat.Jpeg, 64)
         let receiverId = receiver.getReceivingSurfaceId()
-        let previewOutput = cameraManager.createPreviewOutput(ability.previewProfiles[0], receiverId)
+        let previewOutput = cameraManager.getOrThrow().createPreviewOutput(ability.previewProfiles[0], receiverId)
 
         // output
-        let output = cameraManager.createPhotoOutput(profile: ability.photoProfiles[0])
+        let output = cameraManager.getOrThrow().createPhotoOutput(profile: ability.photoProfiles[0])
 
         input.open()
         session.beginConfig()
@@ -94,20 +94,20 @@ class Test_camera_session {
 
     func getVideoSession(): VideoSession {
         var cameraManager: Option<CameraManager> = None
-        cameraManager = getCameraManager(getAbilityContext()).getOrThrow()
-        let session: VideoSession = (cameraManager
+        cameraManager = getCameraManager(getAbilityContext())
+        let session: VideoSession = (cameraManager.getOrThrow()
             .createSession(SceneMode.NormalVideo) as VideoSession)
             .getOrThrow();
 
-        let device = cameraManager.getSupportedCameras()[0]
-        let input = cameraManager.createCameraInput(device)
+        let device = cameraManager.getOrThrow().getSupportedCameras()[0]
+        let input = cameraManager.getOrThrow().createCameraInput(device)
 
-        let ability = cameraManager.getSupportedOutputCapability(device, SceneMode.NormalVideo)
+        let ability = cameraManager.getOrThrow().getSupportedOutputCapability(device, SceneMode.NormalVideo)
 
         let size = ImageSize(8192, 8)
         let receiver = createImageReceiver(size, ImageFormat.Jpeg, 64)
         let surfaceId: String = receiver.getReceivingSurfaceId()
-        let output = cameraManager.createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let output = cameraManager.getOrThrow().createPreviewOutput(ability.previewProfiles[0], surfaceId)
 
         input.open()
         session.beginConfig()
