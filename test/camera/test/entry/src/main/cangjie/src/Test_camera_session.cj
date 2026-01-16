@@ -62,7 +62,7 @@ class Test_camera_session {
 
     func getPhotoSession(index: Int64): PhotoSession {
         var cameraManager: Option<CameraManager> = None
-        cameraManager = getCameraManager(getAbilityContext).getOrThrow()
+        cameraManager = getCameraManager(getAbilityContext()).getOrThrow()
         let session: PhotoSession = (cameraManager
             .createSession(SceneMode.NormalPhoto) as PhotoSession)
             .getOrThrow()
@@ -94,7 +94,7 @@ class Test_camera_session {
 
     func getVideoSession(): VideoSession {
         var cameraManager: Option<CameraManager> = None
-        cameraManager = getCameraManager(getAbilityContext).getOrThrow()
+        cameraManager = getCameraManager(getAbilityContext()).getOrThrow()
         let session: VideoSession = (cameraManager
             .createSession(SceneMode.NormalVideo) as VideoSession)
             .getOrThrow();
