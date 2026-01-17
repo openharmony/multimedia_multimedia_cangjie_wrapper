@@ -982,56 +982,16 @@ protected struct CPackingOptionV2 {
     }
 }
 
-/**
- * Describes area information in an image.
- */
-@!APILevel[
-    since: "24",
-    syscap: "SystemCapability.Multimedia.Image.Core"
-]
-public class UnsafePositionArea {
+@C
+struct ErrorInfo {
+    ErrorInfo(
+        let code: UInt32,
+        let message: CString
+    ) {}
 
-    /**
-     * A pointer to a buffer from which image data will be read.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public let pixels: CPointer<UInt8>
-
-    /**
-     * The length of the source buffer in bytes.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public let pixelLen: Int64
-
-    /**
-     * Describes area information in an image.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public let area: PositionArea
-
-    /**
-     * UnsafePositionArea constructor.
-     *
-     * @param { CPointer<UInt8> } pixels - A pointer to a buffer from which image data will be read.
-     * @param { Int64 } pixelLen - The length of the source buffer in bytes.
-     * @param { PositionArea } area - Describes area information in an image.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Multimedia.Image.Core"
-    ]
-    public init(pixels: CPointer<UInt8>, pixelLen: Int64, area: PositionArea) {
-        this.pixels = pixels
-        this.pixelLen = pixelLen
-        this.area = area
+    func free(): Unit {
+        if (!message.isNull()) {
+            unsafe { LibC.free(this.message) }
+        }
     }
 }

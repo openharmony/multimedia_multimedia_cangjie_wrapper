@@ -418,12 +418,12 @@ public enum ComponentType {
  * Enumerates exchangeable image file format (Exif) information types of an image. This enumeration follows the EXIF
  * standard. Please refer to the EXIF specification for more details.
  */
-@Derive[Equatable, Hashable]
+@Derive[Equatable]
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Multimedia.Image.Core"
 ]
-public enum PropertyKey <: ToString {
+public enum PropertyKey <: ToString & Hashable{
     /**
      * The number of bits per image component. In this standard each component of the image is 8 bits, so the value for 
      * this tag is 8. In JPEG compressed data a JPEG marker is used instead of this tag.
@@ -2261,6 +2261,18 @@ public enum PropertyKey <: ToString {
             case WindSnapshotMode => "HwMnoteWindSnapshotMode"
             case _ => throw BusinessException(62980115, "Parameter error.")
         }
+    }
+
+    /**
+     * Returns a hash code value for this PropertyKey.
+     * @returns { Int64 } A hash code value for this PropertyKey.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.Core"
+    ]
+    public func hashCode(): Int64 {
+        return this.toString().hashCode()
     }
 }
 

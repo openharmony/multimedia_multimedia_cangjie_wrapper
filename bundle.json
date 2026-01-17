@@ -33,7 +33,8 @@
         "media_library",
         "camera_framework",
         "image_framework",
-        "player_framework"
+        "player_framework",
+        "ace_engine"
       ]
     },
     "build": {
