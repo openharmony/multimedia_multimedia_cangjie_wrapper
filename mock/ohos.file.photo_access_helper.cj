@@ -1587,11 +1587,13 @@ public enum MemberType {
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
+    StringValue(String)
     |
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
+    BoolValue(Bool)
     | ...
 }
 
