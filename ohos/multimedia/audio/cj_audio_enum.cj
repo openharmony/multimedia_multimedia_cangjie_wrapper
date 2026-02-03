@@ -28,6 +28,7 @@ import ohos.business_exception.{BusinessException}
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioChannel {
     /**
      * Channel 1.
@@ -184,6 +185,7 @@ public enum AudioChannel {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioChannelLayout {
     /**
      * Unknown Channel Layout
@@ -747,6 +749,7 @@ public enum AudioChannelLayout {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioEncodingType {
     /**
      * Invalid type.
@@ -792,6 +795,7 @@ public enum AudioEncodingType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioSampleFormat {
     /**
      * Invalid format.
@@ -877,6 +881,7 @@ public enum AudioSampleFormat {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioSamplingRate {
     /**
      * 8kHz sample rate.
@@ -1043,6 +1048,7 @@ public enum AudioSamplingRate {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum AudioState {
     /**
      * Invalid state.
@@ -1138,6 +1144,7 @@ public enum AudioState {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Device"
 ]
+@Derive[ToString, Equatable]
 public enum DeviceFlag {
     /**
      * Output devices.
@@ -1184,6 +1191,7 @@ public enum DeviceFlag {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Core"
 ]
+@Derive[ToString, Equatable]
 public enum SourceType {
     /**
      * Invalid source type.
@@ -1269,6 +1277,7 @@ public enum SourceType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Device"
 ]
+@Derive[ToString, Equatable]
 public enum DeviceUsage {
     /**
      * Media output devices.
@@ -1546,7 +1555,7 @@ protected enum DeviceType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Device"
 ]
-@Derive[ToString]
+@Derive[ToString, Equatable]
 public enum DeviceChangeType {
     /**
      * Device connection.
@@ -1592,6 +1601,7 @@ public enum DeviceChangeType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Renderer"
 ]
+@Derive[ToString, Equatable]
 public enum InterruptType {
     /**
      * Audio playback interruption started.
@@ -1637,6 +1647,7 @@ public enum InterruptType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Renderer"
 ]
+@Derive[ToString, Equatable]
 public enum InterruptForceType {
     /**
      * Forced action taken by system.
@@ -1682,6 +1693,7 @@ public enum InterruptForceType {
     since: "24",
     syscap: "SystemCapability.Multimedia.Audio.Renderer"
 ]
+@Derive[ToString, Equatable]
 public enum InterruptHint {
     /**
      * None.

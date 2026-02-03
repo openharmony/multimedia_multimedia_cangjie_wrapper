@@ -250,7 +250,6 @@ public class AudioCapturer <: RemoteDataLite {
 
     /**
      * Defines the current capture state.
-     * @throws { BusinessException } 6800301 - Parameter verification failed, Permission denied, System error.
      */
     @!APILevel[
         since: "24",
