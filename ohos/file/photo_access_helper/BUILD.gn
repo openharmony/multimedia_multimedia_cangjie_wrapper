@@ -45,7 +45,10 @@ ohos_cangjie_shared_library("ohos.file.photo_access_helper") {
     "cangjie_ark_interop:ohos.business_exception",
   ]
 
-  external_deps = [ "media_library:cj_photoaccesshelper_ffi" ]
+  external_deps = [
+    "media_library:cj_photoaccesshelper_ffi",
+    "ace_engine:cj_frontend_ohos"
+  ]
 
   subsystem_name = "multimedia"
   part_name = "multimedia_cangjie_wrapper"

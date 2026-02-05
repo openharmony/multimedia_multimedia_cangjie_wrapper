@@ -18,7 +18,7 @@ package ohos.file.photo_access_helper
 import ohos.labels.APILevel
 import ohos.ffi.SUCCESS_CODE
 import ohos.app.ability.ui_ability.UIAbilityContext
-import ohos.business_exception.{AsyncCallback, BusinessException}
+import ohos.business_exception.BusinessException
 
 /**
 * Provides APIs for the user to select images and videos.
@@ -29,19 +29,15 @@ import ohos.business_exception.{AsyncCallback, BusinessException}
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public class PhotoViewPicker {
-    let context: UIAbilityContext
 
     /**
      * A constructor used to create a PhotoViewPicker instance. This constructor is recommended.
-     * @param { UIAbilityContext } context - Context of the ability instance.
      */
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
     ]
-    public init(context: UIAbilityContext) {
-        this.context = context
-    }
+    public init() {}
 
     /**
      * Pull up the photo picker based on the selection mode.
@@ -62,7 +58,7 @@ public class PhotoViewPicker {
         var errCode = 0i32
         let cPhotoSelectOptions = CPhotoSelectOptions(option)
         let ret = unsafe {
-            FfiPhotoAccessHelperStartPhotoPicker(context.getID(), cPhotoSelectOptions, inout errCode)
+            FfiPhotoAccessHelperStartPhotoPickerV2(FfiOHOSAceFrameworkViewContextGetHostContext(), cPhotoSelectOptions, inout errCode)
         }
         cPhotoSelectOptions.free()
         if (errCode != SUCCESS_CODE) {

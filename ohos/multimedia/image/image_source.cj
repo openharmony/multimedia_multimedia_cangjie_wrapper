@@ -77,6 +77,8 @@ foreign {
     func FfiImageImageSourceImplModifyImageProperties(id: Int64, key: CArrString, value: CArrString): UInt32
 
     func FfiImageImageSourceImplGetImageProperties(id: Int64, key: CArrString, value: CPointer<CString>): UInt32
+
+    func FfiImageImageSourceImplGetImagePropertiesV2(id: Int64, key: CArrString, value: CPointer<CString>): ErrorInfo
 }
 
 /**
@@ -473,6 +475,54 @@ public class ImageSource <: RemoteDataLite {
     }
 
     /**
+     * Obtains the value of properties in an image.
+     *
+     * @param { Array<PropertyKey> } key - Name of the properties whose value is to be obtained.
+     * @returns { HashMap<PropertyKey, ?String> } Returns a hash map containing attribute values. If the operation fails, return none.
+     * @throws { BusinessException } 62980104 - Failed to initialize the internal object.
+     * @throws { BusinessException } 7700202 - Unsupported metadata. For example, the property key is not supported,
+     * or the property value is invalid.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Multimedia.Image.ImageSource",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func getImageProperties(key: Array<PropertyKey>): HashMap<PropertyKey, ?String> {
+        if (key.size == 0) {
+            return HashMap<PropertyKey, ?String>()
+        }
+        let keyPointer = unsafe { cjArr2CArr<String, CString>(Array<String>(key.size, {i => key[i].toString()}),
+            {str => LibC.mallocCString(str)}, {cstr => LibC.free(cstr)}) }
+        let cKey = CArrString(keyPointer, key.size)
+        let valuePointer = try {
+            safeMalloc<CString>(count: key.size)
+        } catch (e: Exception) {
+            cKey.free()
+            throw e
+        }
+        let errInfo = unsafe { FfiImageImageSourceImplGetImagePropertiesV2(getID(), cKey, valuePointer) }
+        cKey.free()
+        let cValue = CArrString(valuePointer, key.size)
+        let value = cValue.toStringArray()
+        cValue.free()
+        let newErrCode = convertErrCode(errInfo.code)
+        if (newErrCode != 0) {
+            let message = errInfo.message.toString()
+            let msg = if (let Some(errMsg) <- ERRCODE_MAP.get(newErrCode)) {
+                errMsg + message
+            } else {
+                "Unrecognized error code." + message
+            }
+            errInfo.free()
+            throw BusinessException(Int32(newErrCode), msg)
+        }
+        errInfo.free()
+        return HashMap<PropertyKey, ?String>(key.size, {i => (key[i], if(value[i] == ""){None}else{value[i]})})
+    }
+
+    /**
      * Modify the value of a property in an image with the specified key.
      *
      * @param { PropertyKey } key - Name of the property whose value is to be modified.
@@ -574,44 +624,5 @@ public class ImageSource <: RemoteDataLite {
                 return arr
             }
         }
-    }
-
-    /**
-     * Obtains the value of properties in an image.
-     *
-     * @param { Array<PropertyKey> } key - Name of the properties whose value is to be obtained.
-     * @returns { HashMap<PropertyKey, ?String> } Returns a hash map containing attribute values. If the operation fails, return null.
-     * @throws { BusinessException } 62980096 - The operation failed.
-     * @throws { BusinessException } 62980110 - The image source data is incorrect.
-     * @throws { BusinessException } 62980113 - Unknown image format.
-     * @throws { BusinessException } 62980115 - Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed;
-     * @throws { BusinessException } 62980116 - Failed to decode the image.
-     */
-    @!APILevel[
-        since: "24",
-        syscap: "SystemCapability.Multimedia.Image.ImageSource",
-        throwexception: true
-    ]
-    public func getImageProperties(key: Array<PropertyKey>): HashMap<PropertyKey, ?String> {
-        if (key.size == 0) {
-            return HashMap<PropertyKey, ?String>()
-        }
-
-        let keyPointer = unsafe { cjArr2CArr<String, CString>(Array<String>(key.size, {i => key[i].toString()}),
-            {str => LibC.mallocCString(str)}, {cstr => LibC.free(cstr)}) }
-        let cKey = CArrString(keyPointer, key.size)
-        let valuePointer = try {
-            safeMalloc<CString>(count: key.size)
-        } catch (e: Exception) {
-            cKey.free()
-            throw e
-        }
-        let errCode = unsafe { FfiImageImageSourceImplGetImageProperties(getID(), cKey, valuePointer) }
-        cKey.free()
-        checkAndThrow(errCode, handle: unsafe { {=> LibC.free(valuePointer)} })
-        let cValue = CArrString(valuePointer, key.size)
-        let value = cValue.toStringArray()
-        cValue.free()
-        return HashMap<PropertyKey, ?String>(key.size, {i => (key[i], Some(value[i]))})
     }
 }

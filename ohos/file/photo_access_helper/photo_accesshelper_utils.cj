@@ -1600,6 +1600,54 @@ public enum MemberType {
     }
 }
 
+/**
+* Enumeration type of single selection mode
+*/
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+]
+public enum SingleSelectionMode {
+    /**
+     * browser mode
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    BrowserMode
+    |
+    /**
+     * select directly mode
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    SelectMode
+    |
+    /**
+     * browser and select mode
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    BrowserAndSelectMode
+    |...
+
+    prop value: Int32 {
+        get() {
+            match (this) {
+                case BrowserMode => 0
+                case SelectMode => 1
+                case BrowserAndSelectMode => 2
+                case _ => throw BusinessException(13900020, "Parameter error.")
+            }
+        }
+    }
+}
+
 class BaseSelectOptionsImpl{}
 
 /**
@@ -1679,6 +1727,15 @@ public open class BaseSelectOptions {
     ]
     public var isPreviewForSingleSelectionSupported: Bool
 
+    /**
+     * The mode of single selection
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
+    ]
+    public var singleSelectionMode: SingleSelectionMode
+
     private var baseSelectOptionsImpl: BaseSelectOptionsImpl = BaseSelectOptionsImpl()
 
     /**
@@ -1691,6 +1748,7 @@ public open class BaseSelectOptions {
      * @param { RecommendationOptions } [ recommendationOptions ] - The recommendation options when use recommendation photo function.
      * @param { Array<String> } [ preselectedUris ] - The uri for the preselected files.
      * @param { Bool } [ isPreviewForSingleSelectionSupported ] - Support preview in single selection mode or not.
+     * @param { SingleSelectionMode } [ singleSelectionMode ] - The mode of single selection.
      */
     @!APILevel[
         since: "24",
@@ -1703,7 +1761,8 @@ public open class BaseSelectOptions {
         isSearchSupported!: Bool = true,
         recommendationOptions!: RecommendationOptions = RecommendationOptions(),
         preselectedUris!: Array<String> = Array<String>(),
-        isPreviewForSingleSelectionSupported!: Bool = true
+        isPreviewForSingleSelectionSupported!: Bool = true,
+        singleSelectionMode!: SingleSelectionMode = BrowserMode
     ) {
         this.mimeType = mimeType
         this.maxSelectNumber = maxSelectNumber
@@ -1712,6 +1771,7 @@ public open class BaseSelectOptions {
         this.recommendationOptions = recommendationOptions
         this.preselectedUris = preselectedUris
         this.isPreviewForSingleSelectionSupported = isPreviewForSingleSelectionSupported
+        this.singleSelectionMode = singleSelectionMode
     }
 }
 
@@ -1760,6 +1820,7 @@ public class PhotoSelectOptions <: BaseSelectOptions {
      * @param { RecommendationOptions } [ recommendationOptions ] - The recommendation options when use recommendation photo function.
      * @param { Array<String> } [ preselectedUris ] - The uri for the preselected files.
      * @param { Bool } [ isPreviewForSingleSelectionSupported ] - Support preview in single selection mode or not.
+     * @param { SingleSelectionMode } [ singleSelectionMode ] - The mode of single selection.
      * @param { Bool } [ isEditSupported ] - Support editing photos.
      * @param { Bool } [ isOriginalSupported ] - Support select original photo or not.
      * @param { ?String } [ subWindowName ] - SubWindow name.
@@ -1776,6 +1837,7 @@ public class PhotoSelectOptions <: BaseSelectOptions {
         recommendationOptions!: RecommendationOptions = RecommendationOptions(),
         preselectedUris!: Array<String> = Array<String>(),
         isPreviewForSingleSelectionSupported!: Bool = true,
+        singleSelectionMode!: SingleSelectionMode = BrowserMode,
         isEditSupported!: Bool = true,
         isOriginalSupported!: Bool = false,
         subWindowName!: ?String = None
@@ -1787,7 +1849,8 @@ public class PhotoSelectOptions <: BaseSelectOptions {
             isSearchSupported: isSearchSupported,
             recommendationOptions: recommendationOptions,
             preselectedUris: preselectedUris,
-            isPreviewForSingleSelectionSupported: isPreviewForSingleSelectionSupported
+            isPreviewForSingleSelectionSupported: isPreviewForSingleSelectionSupported,
+            singleSelectionMode: singleSelectionMode
         )
         this.isEditSupported = isEditSupported
         this.isOriginalSupported = isOriginalSupported

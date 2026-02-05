@@ -61,6 +61,8 @@ foreign {
 
     func FfiPhotoAccessHelperStartPhotoPicker(id: Int64, option: CPhotoSelectOptions, errCode: CPointer<Int32>): CPhotoSelectResult
 
+    func FfiPhotoAccessHelperStartPhotoPickerV2(context: Int64, option: CPhotoSelectOptions, errCode: CPointer<Int32>): CPhotoSelectResult
+
     // FetchResult
     func FfiFetchResultGetCount(id: Int64, errCode: CPointer<Int32>): Int32
 
@@ -174,6 +176,8 @@ foreign {
         errCode: CPointer<Int32>): Unit
 
     func FfiMovingPhotoRequestContentArrayBuffer(id: Int64, resourceType: Int32, errCode: CPointer<Int32>): CArrUI8
+
+    func FfiOHOSAceFrameworkViewContextGetHostContext(): Int64
 }
 
 @C
@@ -431,6 +435,7 @@ struct CPhotoSelectOptions {
         CTextContextInfo(CString(CPointer<UInt8>())))
     var preselectedUris: CArrString = CArrString(CPointer<CString>(), 0)
     var isPreviewForSingleSelectionSupported: Bool
+    var singleSelectionMode: Int32
     var isEditSupported: Bool
     var isOriginalSupported: Bool
     var subWindowName: CString = CString(CPointer<UInt8>())
@@ -442,6 +447,7 @@ struct CPhotoSelectOptions {
         this.isSearchSupported = option.isSearchSupported
         this.isPreviewForSingleSelectionSupported = option.isPreviewForSingleSelectionSupported
         this.isEditSupported = option.isEditSupported
+        this.singleSelectionMode = option.singleSelectionMode.value
         this.isOriginalSupported = option.isOriginalSupported
         if (let Some(v) <- option.recommendationOptions.recommendationType) {
             this.recommendationOptions.recommendationType = v.value
