@@ -40,6 +40,8 @@ foreign {
     func FfiOHOSReceiverRelease(id: Int64): Unit
 
     func FfiImageReceiverImplOn(id: Int64, name: CString, callbackId: Int64): UInt32
+
+    func FfiImageReceiverImplOff(id: Int64, name: CString): UInt32
 }
 
 /**
@@ -243,7 +245,11 @@ public class ImageReceiver <: RemoteDataLite {
         syscap: "SystemCapability.Multimedia.Image.ImageReceiver",
         workerthread: true
     ]
-    public func off(eventType: ReceiveType): Unit {}
+    public func off(eventType: ReceiveType): Unit {
+        try (ctype = unsafe { LibC.mallocCString(eventType.toString()).asResource() }) {
+            unsafe { FfiImageReceiverImplOff(getID(), ctype.value) }
+        }
+    }
 
     /**
      * Release image receiver instance.
