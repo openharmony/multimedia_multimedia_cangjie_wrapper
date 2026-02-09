@@ -957,7 +957,7 @@ public class ChangeData {
     @!Hide[isChecked: true]
     internal var sharedExtraPhotoAssets: Array<SharedPhotoAsset> = Array<SharedPhotoAsset>()
 
-    protected ChangeData(notifyType: NotifyType, uris: Array<String>, extraUris: Array<String>) {
+    protected init(notifyType: NotifyType, uris: Array<String>, extraUris: Array<String>) {
         this.notifyType = notifyType
         this.uris = uris
         this.extraUris = extraUris
