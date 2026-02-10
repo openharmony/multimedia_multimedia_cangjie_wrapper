@@ -346,12 +346,19 @@ struct CArrCCameraDevice {
         let size: Int64
     ) {}
 
+
+
     func toArray(): Array<CameraDevice> {
-        unsafe {
-            cArr2cjArr<CCameraDevice, CameraDevice>(size, head) {
-                item => item.toCameraDevice()
+        // to Avoid CAMERA_POSITION_FOLD_INNER Exception， CAMERA_POSITION_FOLD_INNER is the same as FRONT
+        let arr = ArrayList<CameraDevice>()
+        for (i in 0..size) {
+            let cameradevice = unsafe { head.read(i) }
+            if (cameradevice.cameraPosition == 3) {
+                continue
             }
+            arr.add(cameradevice.toCameraDevice())
         }
+        return arr.toArray()
     }
 
     func free(): Unit {
@@ -406,11 +413,16 @@ struct CArrCProfile {
     ) {}
 
     func toArray(): Array<Profile> {
-        unsafe {
-            cArr2cjArr<CProfile, Profile>(size, head) {
-                item => item.toProfile()
+        // to Avoid DNG_XDRAW Exception， DNG_XDRAW is a system api 
+        let arr = ArrayList<Profile>()
+        for (i in 0..size) {
+            let profile = unsafe { head.read(i) }
+            if (profile.format == 5) {
+                continue
             }
+            arr.add(profile.toProfile())
         }
+        return arr.toArray()
     }
 }
 
