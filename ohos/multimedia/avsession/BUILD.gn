@@ -16,14 +16,18 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia.avsession") {
-  sources = [
-    "av_metadata.cj",
-    "av_session_enum.cj",
-    "av_session_log.cj",
-    "avsession.cj",
-    "avsession_manager.cj",
-    "avsession_error_code.cj",
-  ]
+  if (is_mingw || is_mac){
+    sources = ["../../../mock/ohos.multimedia.avsession.cj"]
+  } else {
+    sources = [
+      "av_metadata.cj",
+      "av_session_enum.cj",
+      "av_session_log.cj",
+      "avsession.cj",
+      "avsession_manager.cj",
+      "avsession_error_code.cj",
+    ]
+  }
 
   cj_deps = [
     "../../multimedia/image:ohos.multimedia.image"

@@ -28,6 +28,7 @@ import std.collection.HashMap
 const LOG_CORE: UInt32 = 3
 const LOG_DOMAIN_PLAYER: UInt32 = 0xD002B2B
 const MEDIA_MEMORY_ERROR: Int32 = 5400101
+const MEDIA_OPERATION_ERROR: Int32 = 5400102
 const MSERR_INVALID_VAL: Int32 = 331350038
 const MSERR_UNKNOWN: Int32 = 331350528
 let AV_PLAYER_LOG = HilogChannel(LOG_CORE, LOG_DOMAIN_PLAYER, "CJ-AVPlayer")
@@ -66,12 +67,12 @@ func getErrorMsg(code: Int32): String {
 }
 
 func codeTransform(code: Int32): Int32 {
-    const MEDIA_OPERATION_ERROR: Int32 = 5400102
-    match (code) {
-        case MSERR_UNKNOWN => MEDIA_MEMORY_ERROR
-        case MSERR_INVALID_VAL => MEDIA_OPERATION_ERROR
-        case _ => code
+    if (code == MSERR_UNKNOWN) {
+        return MEDIA_MEMORY_ERROR
+    } else if (code == MSERR_INVALID_VAL) {
+        return MEDIA_OPERATION_ERROR
     }
+    return code
 }
 
 func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
@@ -82,15 +83,15 @@ func throwIfNotSuccess(code: Int32, className: String, funcName: String): Unit {
     }
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum PixelFormat {
-    @!Hide
+    @!Hide[isChecked: true]
     Rgb565
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Rgba8888
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Rgb888
     | ...
 }
@@ -185,10 +186,10 @@ public class PixelMapParams {
     ]
     public var height: Int32
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var colorFormat: PixelFormat = PixelFormat.Rgba8888
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var autoFlip: Bool = false
 
     /**
