@@ -174,7 +174,7 @@ public enum ExposureMode {
     ]
     ExposureModeContinuousAuto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExposureModeManual
     | ...
 

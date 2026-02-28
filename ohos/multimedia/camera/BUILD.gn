@@ -16,19 +16,24 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.multimedia.camera") {
-  sources = [
-    "camera.cj",
-    "camera_ability.cj",
-    "camera_common.cj",
-    "camera_ffi.cj",
-    "camera_input.cj",
-    "camera_manager.cj",
-    "camera_output.cj",
-    "camera_session.cj",
-    "photo_output.cj",
-    "preview_output.cj",
-    "video_output.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = ["../../../mock/ohos.multimedia.camera.cj"]
+  } else {
+    sources = [
+      "camera.cj",
+      "camera_ability.cj",
+      "camera_common.cj",
+      "camera_ffi.cj",
+      "camera_input.cj",
+      "camera_manager.cj",
+      "camera_output.cj",
+      "camera_session.cj",
+      "photo_output.cj",
+      "preview_output.cj",
+      "video_output.cj",
+    ]
+  }
 
   cj_external_deps = [
     "ability_cangjie_wrapper:ohos.app.ability.ui_ability",

@@ -19,4 +19,5 @@ let _ = testsuite()
 
 func testsuite(): Unit {
     registerTestSuite("Test_camera", {=> Test_camera()})
+    registerTestSuite("Test_camera_session", {=> Test_camera_session()})
 }

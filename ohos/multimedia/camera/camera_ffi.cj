@@ -18,6 +18,7 @@
 package ohos.multimedia.camera
 
 import ohos.ffi.{cArr2cjArr, CArrI32}
+import std.collection.ArrayList
 
 foreign {
     // CameraManager
@@ -352,11 +353,16 @@ struct CArrCCameraDevice {
     ) {}
 
     func toArray(): Array<CameraDevice> {
-        unsafe {
-            cArr2cjArr<CCameraDevice, CameraDevice>(size, head) {
-                item => item.toCameraDevice()
+        // to Avoid CAMERA_POSITION_FOLD_INNER Exception， CAMERA_POSITION_FOLD_INNER is the same as FRONT
+        let arr = ArrayList<CameraDevice>()
+        for (i in 0..size) {
+            let cameradevice = unsafe { head.read(i) }
+            if (cameradevice.cameraPosition == 3) {
+                continue
             }
+            arr.add(cameradevice.toCameraDevice())
         }
+        return arr.toArray()
     }
 
     func free(): Unit {
@@ -380,12 +386,16 @@ struct CCameraOutputCapability {
     ) {}
 
     func toCameraOutputCapability(): CameraOutputCapability {
-        let supportedMetadataObjectTypesArr = unsafe {
-            Array<MetadataObjectType>(supportedMetadataObjectTypes.size,
-                {i => MetadataObjectType.parse(supportedMetadataObjectTypes.head.read(i))})
+        let supportedMetadataObjectTypesArr = ArrayList<MetadataObjectType>()
+        for (i in 0..supportedMetadataObjectTypes.size) {
+            let supportedMetadataObjectType = unsafe { supportedMetadataObjectTypes.head.read(i) }
+            if (supportedMetadataObjectType == 1) {
+                continue
+            }
+            supportedMetadataObjectTypesArr.add(MetadataObjectType.parse(supportedMetadataObjectType))
         }
         let result = CameraOutputCapability(previewProfiles.toArray(), photoProfiles.toArray(), videoProfiles.toArray(),
-            supportedMetadataObjectTypesArr)
+            supportedMetadataObjectTypesArr.toArray())
         return result
     }
 
@@ -407,11 +417,16 @@ struct CArrCProfile {
     ) {}
 
     func toArray(): Array<Profile> {
-        unsafe {
-            cArr2cjArr<CProfile, Profile>(size, head) {
-                item => item.toProfile()
+        // to Avoid DNG_XDRAW Exception， DNG_XDRAW is a system api 
+        let arr = ArrayList<Profile>()
+        for (i in 0..size) {
+            let profile = unsafe { head.read(i) }
+            if (profile.format == 5) {
+                continue
             }
+            arr.add(profile.toProfile())
         }
+        return arr.toArray()
     }
 }
 

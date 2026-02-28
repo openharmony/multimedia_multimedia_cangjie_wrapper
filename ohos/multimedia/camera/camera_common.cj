@@ -75,18 +75,18 @@ func findCallbackObject(list: ArrayList<(CallbackObject, Int64)>, callback: Call
     return false
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal class DepthProfile {}
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum HostDeviceType {
-    @!Hide
+    @!Hide[isChecked: true]
     UnknownType
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Phone
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Tablet
     | ...
 }
@@ -539,22 +539,22 @@ public enum MetadataObjectType {
     ]
     HumanBody
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CatFace
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CatBody
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DogFace
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DogBody
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SalientDetection
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BarCodeDetection
     | ...
 
@@ -610,7 +610,7 @@ public class CameraOutputCapability {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let videoProfiles: Array<VideoProfile>
-    @!Hide
+    @!Hide[isChecked: true]
     internal let depthProfiles: Array<DepthProfile> = Array<DepthProfile>()
     /**
      * All the supported metadata Object Types.
@@ -791,10 +791,10 @@ public enum CameraFormat {
     ]
     CameraFormatRgba8888
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraFormatDng
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraFormatDngXdraw
     |
     /**
@@ -842,10 +842,10 @@ public enum CameraFormat {
     ]
     CameraFormatHeic
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraFormatDepth16
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraFormatDepth32
     | ...
 
@@ -917,9 +917,9 @@ public class CameraDevice {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let connectionType: ConnectionType
-    @!Hide
+    @!Hide[isChecked: true]
     internal let hostDeviceName: String = ""
-    @!Hide
+    @!Hide[isChecked: true]
     internal let hostDeviceType: HostDeviceType = HostDeviceType.UnknownType
     /**
      * The camera mounting angle, which does not change with screen rotation, takes values from 0° to 360° in degrees.
@@ -929,9 +929,9 @@ public class CameraDevice {
         syscap: "SystemCapability.Multimedia.Camera.Core"
     ]
     public let cameraOrientation: UInt32
-    @!Hide
+    @!Hide[isChecked: true]
     internal let isRetractable: ?Bool = Option<Bool>.None
-    @!Hide
+    @!Hide[isChecked: true]
     internal let lensEquivalentFocalLength: ?Array<Int32> = Option<Array<Int32>>.None
 
     init(cameraId: String, cameraPosition: CameraPosition, cameraType: CameraType, connectionType: ConnectionType,
@@ -1186,7 +1186,7 @@ public enum CameraPosition {
     ]
     CameraPositionFront
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraPositionFoldInner
     | ...
 
@@ -1198,6 +1198,8 @@ public enum CameraPosition {
             case 0 => CameraPositionUnspecified
             case 1 => CameraPositionBack
             case 2 => CameraPositionFront
+            // CameraPositionFoldInner is same as Front
+            case 3 => CameraPositionFront
             case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
@@ -1320,31 +1322,31 @@ public enum SceneMode {
     ]
     NormalVideo
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PortraitPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     NightPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ProfessionalPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ProfessionalVideo
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SlowMotionVideo
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MacroPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MacroVideo
     |
-    @!Hide
+    @!Hide[isChecked: true]
     LightPaintingPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     HighResolutionPhoto
     |
     /**
@@ -1356,19 +1358,19 @@ public enum SceneMode {
     ]
     SecurePhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     QuickShotPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ApertureVideo
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PanoramaPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     TimeLapsePhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     FluorescencePhoto
     | ...
 

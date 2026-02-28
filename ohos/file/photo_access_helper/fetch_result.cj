@@ -28,7 +28,7 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
     syscap: "SystemCapability.FileManagement.PhotoAccessHelper.Core"
 ]
 public open class FetchResult <: RemoteDataLite {
-    protected init(id: Int64) {
+    internal init(id: Int64) {
         super(id)
     }
 

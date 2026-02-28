@@ -144,33 +144,33 @@ func checkRet(errCode: Int32, funcName: String) {
     }
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum SourceMode {
-    @!Hide
+    @!Hide[isChecked: true]
     OriginalMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     EditedMode
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal enum CompatibleMode {
-    @!Hide
+    @!Hide[isChecked: true]
     OriginalFormatMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CompatibleFormatMode
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 internal class SharedPhotoAsset {}
 
-@!Hide
+@!Hide[isChecked: true]
 internal class SharedAlbumAsset {}
 
-@!Hide
+@!Hide[isChecked: true]
 internal class MediaAssetProgressHandler {}
 
 /**
@@ -209,16 +209,16 @@ public enum AlbumSubtype {
     ]
     Video
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Hidden
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Trash
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Screenshot
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Camera
     |
     /**
@@ -230,34 +230,34 @@ public enum AlbumSubtype {
     ]
     Image
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CloudEnhancement
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SourceGeneric
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Classify
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GeographyLocation
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GeographyCity
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ShootingMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Portrait
     |
-    @!Hide
+    @!Hide[isChecked: true]
     GroupPhoto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Highlight
     |
-    @!Hide
+    @!Hide[isChecked: true]
     HighlightSuggestions
     |
     /**
@@ -325,10 +325,10 @@ public enum AlbumType {
     ]
     System
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Source
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Smart
     | ...
 
@@ -421,7 +421,7 @@ public enum PhotoSubtype {
     ]
     Default
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Screenshot
     |
     /**
@@ -442,7 +442,7 @@ public enum PhotoSubtype {
     ]
     Burst
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Spatial3dgs
     | ...
 
@@ -665,7 +665,7 @@ public enum RecommendationType {
     ]
     FeaturedSinglePortrait
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ColorStylePhoto
     | ...
 
@@ -744,13 +744,13 @@ public enum ResourceType {
     ]
     VideoResource
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PhotoProxy
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PrivateMovingPhotoResource
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PrivateMovingPhotoMetadata
     | ...
 
@@ -953,16 +953,16 @@ public class ChangeData {
     ]
     public var extraUris: Array<String>
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var sharedPhotoAssets: Array<SharedPhotoAsset> = Array<SharedPhotoAsset>()
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var sharedAlbumAssets: Array<SharedAlbumAsset> = Array<SharedAlbumAsset>()
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var sharedExtraPhotoAssets: Array<SharedPhotoAsset> = Array<SharedPhotoAsset>()
 
-    protected ChangeData(notifyType: NotifyType, uris: Array<String>, extraUris: Array<String>) {
+    protected init(notifyType: NotifyType, uris: Array<String>, extraUris: Array<String>) {
         this.notifyType = notifyType
         this.uris = uris
         this.extraUris = extraUris
@@ -1028,13 +1028,13 @@ public class RequestOptions {
     ]
     public var deliveryMode: DeliveryMode
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var sourceMode: ?SourceMode = Option<SourceMode>.None
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var compatibleMode: CompatibleMode = CompatibleMode.OriginalFormatMode
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var mediaAssetProgressHandler: ?MediaAssetProgressHandler = Option<MediaAssetProgressHandler>.None
 
     init(deliveryMode: DeliveryMode) {
@@ -1172,31 +1172,31 @@ public enum PhotoKeys <: ToString {
     ]
     Title
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Position
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateTrashed
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Hidden
     |
-    @!Hide
+    @!Hide[isChecked: true]
     UserComment
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CameraShotKey
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateYear
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateMonth
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateDay
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Pending
     |
     /**
@@ -1217,7 +1217,7 @@ public enum PhotoKeys <: ToString {
     ]
     DateModifiedMs
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateTrashedMs
     |
     /**
@@ -1229,7 +1229,7 @@ public enum PhotoKeys <: ToString {
     ]
     PhotoSubtype
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MovingPhotoEffectMode
     |
     /**
@@ -1259,7 +1259,7 @@ public enum PhotoKeys <: ToString {
     ]
     BurstKey
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ThumbnailReady
     |
     /**
@@ -1280,52 +1280,52 @@ public enum PhotoKeys <: ToString {
     ]
     ThumbnailSize
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DetailTime
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateTakenMs
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CeAvailable
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SupportedWatermarkType
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ThumbnailVisible
     |
-    @!Hide
+    @!Hide[isChecked: true]
     IsCeAuto
     |
-    @!Hide
+    @!Hide[isChecked: true]
     OwnerAlbumId
     |
-    @!Hide
+    @!Hide[isChecked: true]
     IsRecentShow
     |
-    @!Hide
+    @!Hide[isChecked: true]
     MediaSuffix
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SumSize
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExifRotate
     |
-    @!Hide
+    @!Hide[isChecked: true]
     HasApplink
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Applink
     |
-    @!Hide
+    @!Hide[isChecked: true]
     HdrMode
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CloudId
     |
-    @!Hide
+    @!Hide[isChecked: true]
     ExistCompatibleDuplicate
     | ...
 
@@ -1392,7 +1392,7 @@ public enum DefaultChangeUri <: ToString {
     ]
     DefaultAlbumUri
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DefaultHiddenAlbumUri
     | ...
 
@@ -1441,19 +1441,19 @@ public enum AlbumKeys <: ToString {
     ]
     AlbumName
     |
-    @!Hide
+    @!Hide[isChecked: true]
     AlbumLpath
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BundleName
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DateModified
     |
-    @!Hide
+    @!Hide[isChecked: true]
     CoverUriSource
     |
-    @!Hide
+    @!Hide[isChecked: true]
     UploadStatus
     | ...
 
