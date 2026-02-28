@@ -251,7 +251,7 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
         var errCode = 0i32
         let fd = unsafe { FfiMediaAssetChangeRequestImplGetWriteCacheHandler(getID(), inout errCode) }
         if (errCode == -1) {
-            errcode = SYSTEM_INNER_FAIL
+            errCode = SYSTEM_INNER_FAIL
         }
         checkRet(errCode, "getWriteCacheHandler")
         return fd
