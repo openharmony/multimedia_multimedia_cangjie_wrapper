@@ -22,6 +22,8 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData,CArrI64, toArrayCString, CArrUI8
 import ohos.app.ability.ui_ability.UIAbilityContext
 import ohos.business_exception.BusinessException
 
+const SYSTEM_INNER_FAIL: Int32 = 14000011
+
 /**
  * Defines the interface of media change request.
  */
@@ -248,6 +250,9 @@ public class MediaAssetChangeRequest <: RemoteDataLite & MediaChangeRequest {
     public func getWriteCacheHandler(): Int32 {
         var errCode = 0i32
         let fd = unsafe { FfiMediaAssetChangeRequestImplGetWriteCacheHandler(getID(), inout errCode) }
+        if (errCode == -1) {
+            errcode = SYSTEM_INNER_FAIL
+        }
         checkRet(errCode, "getWriteCacheHandler")
         return fd
     }
