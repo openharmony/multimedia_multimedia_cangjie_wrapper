@@ -51,7 +51,7 @@
         "//foundation/multimedia/multimedia_cangjie_wrapper/kit/ImageKit:kit.ImageKit",
         "//foundation/multimedia/multimedia_cangjie_wrapper/kit/MediaKit:kit.MediaKit",
         "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:kit.CameraKit",
-        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/CameraKit:kit.AudioKit"
+        "//foundation/multimedia/multimedia_cangjie_wrapper/kit/AudioKit:kit.AudioKit"
       ],
       "inner_kits": [
         {
