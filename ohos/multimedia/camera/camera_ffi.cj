@@ -41,7 +41,11 @@ foreign {
 
     func FfiCameraManagerCreatePreviewOutput(profile: CProfile, surfaceId: CString, errCode: CPointer<Int32>): Int64
 
+    func FfiCameraManagerCreatePreviewOutputMsg(profile: CProfile, surfaceId: CString): RetInt64
+
     func FfiCameraManagerCreatePreviewOutputWithoutProfile(surfaceId: CString, errCode: CPointer<Int32>): Int64
+
+    func FfiCameraManagerCreatePreviewOutputWithoutProfileMsg(surfaceId: CString): RetInt64
 
     func FfiCameraManagerCreatePhotoOutput(errCode: CPointer<Int32>): Int64
 
@@ -289,6 +293,17 @@ foreign {
     func FfiCameraOffSmoothZoomInfoAvailable(id: Int64, callback: Int64, errCode: CPointer<Int32>): Unit
 
     func FfiCameraOffAllSmoothZoomInfoAvailable(id: Int64, errCode: CPointer<Int32>): Unit
+
+    func FfiCameraFree(p: CPointer<Unit>): Unit
+}
+
+@C
+struct RetInt64 {
+    RetInt64(
+        let result: Int64,
+        let errCode: Int32,
+        let errMessage: CString
+    ) {}
 }
 
 @C
