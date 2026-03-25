@@ -20,7 +20,7 @@ package ohos.multimedia.camera
 import ohos.labels.APILevel
 import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
 import ohos.callback_invoke.{Callback1Argument, CallbackObject}
-import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback1Param}
+import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback1Param, SUCCESS_CODE}
 import std.collection.ArrayList
 import std.sync.Mutex
 
@@ -209,15 +209,19 @@ public class CameraManager <: RemoteDataLite {
         throwexception: true
     ]
     public func createPreviewOutput(profile: Profile, surfaceId: String): PreviewOutput {
+        var id: Int64 = 0
         unsafe {
-            var id: Int64 = 0
             try (cSurfaceId = LibC.mallocCString(surfaceId).asResource()) {
-                var errCode: Int32 = 0
-                id = FfiCameraManagerCreatePreviewOutput(CProfile(profile), cSurfaceId.value, inout errCode)
-                successOrThrow(errCode)
+                let res = FfiCameraManagerCreatePreviewOutputMsg(CProfile(profile), cSurfaceId.value)
+                let msg = res.errMessage.toString()
+                FfiCameraFree(CPointer<Unit>(res.errMessage.getChars()))
+                if (res.errCode != SUCCESS_CODE) {
+                    throw BusinessException(res.errCode, msg)
+                }
+                id = res.result
             }
-            return PreviewOutput(id)
         }
+        return PreviewOutput(id)
     }
 
     /**
@@ -236,15 +240,19 @@ public class CameraManager <: RemoteDataLite {
         throwexception: true
     ]
     public func createPreviewOutput(surfaceId: String): PreviewOutput {
+        var id: Int64 = 0
         unsafe {
-            var id: Int64 = 0
             try (cSurfaceId = LibC.mallocCString(surfaceId).asResource()) {
-                var errCode: Int32 = 0
-                id = FfiCameraManagerCreatePreviewOutputWithoutProfile(cSurfaceId.value, inout errCode)
-                successOrThrow(errCode)
+                let res = FfiCameraManagerCreatePreviewOutputWithoutProfileMsg(cSurfaceId.value)
+                let msg = res.errMessage.toString()
+                FfiCameraFree(CPointer<Unit>(res.errMessage.getChars()))
+                if (res.errCode != SUCCESS_CODE) {
+                    throw BusinessException(res.errCode, msg)
+                }
+                id = res.result
             }
-            return PreviewOutput(id)
         }
+        return PreviewOutput(id)
     }
 
     /**
