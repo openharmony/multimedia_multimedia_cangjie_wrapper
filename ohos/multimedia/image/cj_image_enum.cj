@@ -178,6 +178,7 @@ public enum PixelMapFormat {
     static func parse(val: Int32) {
         match (val) {
             case 0 => Unknown
+            case 1 => Unknown
             case 2 => Rgb565
             case 3 => Rgba8888
             case 4 => Bgra8888
@@ -189,7 +190,9 @@ public enum PixelMapFormat {
             case 10 => Rgba1010102
             case 11 => YcbcrP010
             case 12 => YcrcbP010
-            case _ => throw BusinessException(62980113, "Parameter error.")
+            case _ =>
+                IMAGE_LOG.error("PixelMapFormat unsupported format: ${val}")
+                Unknown
         }
     }
 }

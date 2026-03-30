@@ -694,7 +694,9 @@ class Test_photoAccesshelper {
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
         let fetchResult = photoAccessHelper.getAssets(fetchOptions)
+        loggerInfo("test_asset_change_request_deleteAssets_asset:fetchResult.getCount: ${fetchResult.getCount()}")
         let photoAssetList = fetchResult.getAllObjects()
+        loggerInfo("test_asset_change_request_deleteAssets_asset:photoAssetList.size: ${photoAssetList.size}")
         MediaAssetChangeRequest.deleteAssets(getAbilityContext(), photoAssetList)
     }
 
@@ -705,7 +707,9 @@ class Test_photoAccesshelper {
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
         let fetchResult = photoAccessHelper.getAssets(fetchOptions)
+        loggerInfo("test_asset_change_request_deleteAssets_uri:fetchResult.getCount: ${fetchResult.getCount()}")
         let asset = fetchResult.getFirstObject()
+        loggerInfo("test_asset_change_request_deleteAssets_uri: asset.displayName: ${asset.displayName}")
         MediaAssetChangeRequest.deleteAssets(getAbilityContext(),
             "file://media/Photo/46/IMG_1731494171_034/IMG_20241113_183431.jpg")
     }

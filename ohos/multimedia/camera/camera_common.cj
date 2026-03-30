@@ -1167,6 +1167,8 @@ public enum CameraPosition {
             case 0 => CameraPositionUnspecified
             case 1 => CameraPositionBack
             case 2 => CameraPositionFront
+            // CameraPositionFoldInner is same as Front
+            case 3 => CameraPositionFront
             case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }

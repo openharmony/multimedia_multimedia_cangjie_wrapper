@@ -41,7 +41,11 @@ foreign {
 
     func FfiCameraManagerCreatePreviewOutput(profile: CProfile, surfaceId: CString, errCode: CPointer<Int32>): Int64
 
+    func FfiCameraManagerCreatePreviewOutputMsg(profile: CProfile, surfaceId: CString): RetInt64
+
     func FfiCameraManagerCreatePreviewOutputWithoutProfile(surfaceId: CString, errCode: CPointer<Int32>): Int64
+
+    func FfiCameraManagerCreatePreviewOutputWithoutProfileMsg(surfaceId: CString): RetInt64
 
     func FfiCameraManagerCreatePhotoOutput(errCode: CPointer<Int32>): Int64
 
@@ -289,6 +293,17 @@ foreign {
     func FfiCameraOffSmoothZoomInfoAvailable(id: Int64, callback: Int64, errCode: CPointer<Int32>): Unit
 
     func FfiCameraOffAllSmoothZoomInfoAvailable(id: Int64, errCode: CPointer<Int32>): Unit
+
+    func FfiCameraFree(p: CPointer<Unit>): Unit
+}
+
+@C
+struct RetInt64 {
+    RetInt64(
+        let result: Int64,
+        let errCode: Int32,
+        let errMessage: CString
+    ) {}
 }
 
 @C
@@ -347,11 +362,16 @@ struct CArrCCameraDevice {
     ) {}
 
     func toArray(): Array<CameraDevice> {
-        unsafe {
-            cArr2cjArr<CCameraDevice, CameraDevice>(size, head) {
-                item => item.toCameraDevice()
+        // to Avoid CAMERA_POSITION_FOLD_INNER Exception， CAMERA_POSITION_FOLD_INNER is the same as FRONT
+        let arr = ArrayList<CameraDevice>()
+        for (i in 0..size) {
+            let cameradevice = unsafe { head.read(i) }
+            if (cameradevice.cameraPosition == 3) {
+                continue
             }
+            arr.add(cameradevice.toCameraDevice())
         }
+        return arr.toArray()
     }
 
     func free(): Unit {
@@ -406,11 +426,16 @@ struct CArrCProfile {
     ) {}
 
     func toArray(): Array<Profile> {
-        unsafe {
-            cArr2cjArr<CProfile, Profile>(size, head) {
-                item => item.toProfile()
+        // to Avoid DNG_XDRAW Exception， DNG_XDRAW is a system api 
+        let arr = ArrayList<Profile>()
+        for (i in 0..size) {
+            let profile = unsafe { head.read(i) }
+            if (profile.format == 5) {
+                continue
             }
+            arr.add(profile.toProfile())
         }
+        return arr.toArray()
     }
 }
 

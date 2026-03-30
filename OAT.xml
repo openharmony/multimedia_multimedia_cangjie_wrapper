@@ -8,6 +8,9 @@
         <filefilterlist>
             <filefilter name="defaultFilter" desc="File not to check">
                 <filteritem type="filename" name="*.png | *.jpg" desc="代码架构图片文件"/>
+                <filteritem type="filename" name="*.gif" desc="用例使用到的动图文件"/>
+                <filteritem type="filename" name="*.mp3 | *.mp4" desc="用例使用到的音频文件"/>
+                <filteritem type="filename" name="*.srt" desc="用例使用到的srt文件"/>
             </filefilter>
         </filefilterlist>
         <licensematcherlist>
