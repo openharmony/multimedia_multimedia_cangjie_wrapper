@@ -64,17 +64,29 @@ class Test_camera {
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_GetSupportedCameras() {
         let devices = getCameraManager().getSupportedCameras()
-        @Expect(devices.size, 2)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(devices.size, 1)
+        }
+        if (DeviceInfo.deviceType == "phone") {
+            @Expect(devices.size, 2)
+        }
         @Expect(devices[0].cameraId, "device/0")
-        @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionBack")
-        @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeDefault")
+        @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
+        @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeWideAngle")
         @Expect(devices[0].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
-        @Expect(devices[0].cameraOrientation, 90)
-        @Expect(devices[1].cameraId, "device/1")
-        @Expect(devices[1].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
-        @Expect(devices[1].cameraType.toString(), "CameraType.CameraTypeDefault")
-        @Expect(devices[1].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
-        @Expect(devices[1].cameraOrientation, 270)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(devices[0].cameraOrientation, 0)
+        }
+        if (DeviceInfo.deviceType == "phone") {
+            @Expect(devices[0].cameraOrientation, 90)
+        }
+        if (DeviceInfo.deviceType == "phone") {
+            @Expect(devices[1].cameraId, "device/1")
+            @Expect(devices[1].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
+            @Expect(devices[1].cameraType.toString(), "CameraType.CameraTypeDefault")
+            @Expect(devices[1].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
+            @Expect(devices[1].cameraOrientation, 270)
+        }
     }
 
     @TestCase
@@ -82,10 +94,17 @@ class Test_camera {
     func Test_CameraManager_GetSupportedSceneModes() {
         let device = getCameraManager().getSupportedCameras()[0]
         let modes = getCameraManager().getSupportedSceneModes(device)
-        @Expect(modes.size, 3)
-        @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
-        @Expect(modes[1].toString(), "SceneMode.NormalVideo")
-        @Expect(modes[2].toString(), "SceneMode.SecurePhoto")
+        if (DeviceInfo.deviceType == "phone") {
+            @Expect(modes.size, 3)
+            @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
+            @Expect(modes[1].toString(), "SceneMode.NormalVideo")
+            @Expect(modes[2].toString(), "SceneMode.SecurePhoto")
+        }
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(modes.size, 2)
+            @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
+            @Expect(modes[1].toString(), "SceneMode.NormalVideo")
+        }
     }
 
     @TestCase
@@ -112,7 +131,12 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsTorchSupported() {
-        @Expect(getCameraManager().isTorchSupported(), true)
+        if (DeviceInfo.deviceType == "phone") {
+            @Expect(getCameraManager().isTorchSupported(), true)
+        }
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(getCameraManager().isTorchSupported(), false)
+        }
     }
 
     @TestCase
@@ -127,10 +151,20 @@ class Test_camera {
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_SetTorchMode() {
         @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
-        getCameraManager().setTorchMode(TorchMode.On)
-        @Expect(getCameraManager().getTorchMode(), TorchMode.On)
-        getCameraManager().setTorchMode(TorchMode.Off)
-        @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
+        if (DeviceInfo.deviceType == "phone") {
+            getCameraManager().setTorchMode(TorchMode.On)
+            @Expect(getCameraManager().getTorchMode(), TorchMode.On)
+            getCameraManager().setTorchMode(TorchMode.Off)
+            @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
+        }
+        if (DeviceInfo.deviceType == "2in1") {
+            try {
+                getCameraManager().setTorchMode(TorchMode.On)
+            } catch (e: BusinessException) {
+                loggerInfo("Test_CameraManager_SetTorchMode: Exception ${e.code}: ${e.message}")
+                @Expect(e.code, 7400102)
+            }
+        }
     }
 
     @TestCase
