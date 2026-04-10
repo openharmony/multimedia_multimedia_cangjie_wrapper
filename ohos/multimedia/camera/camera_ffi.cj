@@ -430,7 +430,10 @@ struct CArrCProfile {
         let arr = ArrayList<Profile>()
         for (i in 0..size) {
             let profile = unsafe { head.read(i) }
-            if (profile.format == 5) {
+            try {
+                CameraFormat.parse(profile.format)
+            } catch(e: Exception) {
+                CAMERA_LOG.error("The CameraFormat parse failed.")
                 continue
             }
             arr.add(profile.toProfile())
@@ -480,11 +483,18 @@ struct CArrCVideoProfile {
     ) {}
 
     func toArray(): Array<VideoProfile> {
-        unsafe {
-            cArr2cjArr<CVideoProfile, VideoProfile>(size, head) {
-                item => item.toVideoProfile()
+        let arr = ArrayList<VideoProfile>()
+        for (i in 0..size) {
+            let videoProfile = unsafe { head.read(i) }
+            try {
+                CameraFormat.parse(videoProfile.format)
+            } catch(e: Exception) {
+                CAMERA_LOG.error("The CameraFormat parse failed.")
+                continue
             }
+            arr.add(videoProfile.toVideoProfile())
         }
+        return arr.toArray()
     }
 }
 

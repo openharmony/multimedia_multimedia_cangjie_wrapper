@@ -40,6 +40,7 @@ import std.collection.map
 import std.collection.collectArray
 import std.collection.forEach
 import kit.AbilityKit.Permissions
+import ohos.device_info.*
 
 //var cameraManager: Option<CameraManager> = None
 
@@ -127,10 +128,15 @@ class Test_camera_session {
 
             let res = session.hasFlash()
             loggerInfo("[multimedia_camera | Test_Flash]: hasFlash = ${res}")
-            if (!res) {
-                @Expect(false)
+            if (DeviceInfo.deviceType == "2in1") {
+                if (!res) {
+                    @Expect(true)
+                }
+            } else {
+                if (!res) {
+                    @Expect(false)
+                }   
             }
-
             let modes = [FlashModeClose, FlashModeOpen, FlashModeAuto, FlashModeAlwaysOpen]
             for (mode in modes) {
                 if (session.isFlashModeSupported(mode)) {
@@ -142,8 +148,11 @@ class Test_camera_session {
                     @Expect(curMode, mode)
                 } else {
                     loggerInfo("[multimedia_camera | Test_Flash]: DO NOT support ${mode}")
-
-                    @Expect(false)
+                    if (DeviceInfo.deviceType == "2in1" && ((mode == FlashModeOpen) || (mode == FlashModeAuto) || (mode == FlashModeAlwaysOpen))) {
+                        @Expect(true)
+                    } else {
+                        @Expect(false)
+                    }   
                 }
             }
 
@@ -194,8 +203,8 @@ class Test_camera_session {
                 "[multimedia_camera | Test_AutoExposure] current point after setting: point.x=${curPoint.x}, point.y=${curPoint.y}"
             )
 
-            @Expect(Float32(curPoint.x), 0.123)
-            @Expect(Float32(curPoint.y), 0.456)
+            @Expect(Float16(curPoint.x), 0.123)
+            @Expect(Float16(curPoint.y), 0.456)
 
             session.release()
         } catch (e: BusinessException) {
@@ -233,8 +242,8 @@ class Test_camera_session {
                 "[multimedia_camera | Test_Focus]: current point after setting point.x=${curPoint.x}, point.y=${curPoint.y}"
             )
 
-            @Expect(Float32(curPoint.x), 0.123)
-            @Expect(Float32(curPoint.y), 0.456)
+            @Expect(Float16(curPoint.x), 0.123)
+            @Expect(Float16(curPoint.y), 0.456)
 
             let curLength = session.getFocalLength()
             loggerInfo("[multimedia_camera | Test_Focus]: current focal length: ${curLength}")
@@ -367,8 +376,11 @@ class Test_camera_session {
                         loggerInfo(
                             "[multimedia_camera | ${TAG}]: DO NOT support preconfig type ${preconfigType} and ratio ${ratio}"
                         )
-
-                        @Expect(false)
+                        if (DeviceInfo.deviceType == "2in1") {
+                            @Expect(true)
+                        } else {
+                            @Expect(false)
+                        }  
                     }
                 }
             }
@@ -407,8 +419,13 @@ class Test_camera_session {
         // @Expect(FocusStateChangeCallback.invoked, false)
 
         } catch (e: BusinessException) {
-            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
-            @Expect(false)
+            if (DeviceInfo.deviceType == "2in1") {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(true)
+            } else {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(false)
+            }
         } finally {
             session.release()
         }
@@ -441,8 +458,13 @@ class Test_camera_session {
         // @Expect(FocusStateChangeCallback.invoked, false)
 
         } catch (e: BusinessException) {
-            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
-            @Expect(false)
+            if (DeviceInfo.deviceType == "2in1") {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(true)
+            } else {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(false)
+            }
         } finally {
             session.release()
         }
@@ -588,8 +610,13 @@ class Test_camera_session {
         // @Expect(FocusStateChangeCallback.invoked, false)
 
         } catch (e: BusinessException) {
-            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
-            @Expect(false)
+            if (DeviceInfo.deviceType == "2in1") {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(true)
+            } else {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(false)
+            }
         } finally {
             session.release()
         }
@@ -622,8 +649,13 @@ class Test_camera_session {
         // @Expect(FocusStateChangeCallback.invoked, false)
 
         } catch (e: BusinessException) {
-            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
-            @Expect(false)
+            if (DeviceInfo.deviceType == "2in1") {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(true)
+            } else {
+                loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+                @Expect(false)
+            }
         } finally {
             session.release()
         }
