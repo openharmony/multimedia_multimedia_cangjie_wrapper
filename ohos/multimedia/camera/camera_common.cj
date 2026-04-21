@@ -37,6 +37,9 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
     [
         (7400101, "Parameter missing or parameter type incorrect."),
         (7400102, "Operation not allowed."),
+        (74001021, "Operation not allowed: Session not ready."),
+        (74001022, "Operation not allowed: Feature or mode unsupported."),
+        (74001023, "Operation not allowed: Device unavailable."),
         (7400103, "Session not config."),
         (7400104, "Session not running."),
         (7400105, "Session config locked."),
@@ -45,9 +48,34 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
         (7400108, "Camera disabled cause of security reason."),
         (7400109, "Can not use camera cause of preempted."),
         (7400110, "Unresolved conflicts with current configurations."),
-        (7400201, "Camera service fatal error.")
+        (7400201, "Camera service fatal error."),
+        (74002011, "Camera service fatal error: Unsupported resolution configuration."),
+        (74002012, "Camera service fatal error: Alloc failed."),
+        (74002013, "Camera service fatal error: Invalid Session Configuration.")
     ]
 )
+
+let ERROR_CODE_TO_CJ_ERROR_CODE_MAP = HashMap<Int32, Int32>(
+    [
+        (7400102, 7400102),
+        (74001021, 7400102),
+        (74001022, 7400102),
+        (74001023, 7400102),
+        (7400103, 7400103),
+        (7400201, 7400201),
+        (74002011, 7400201),
+        (74002012, 7400201),
+        (74002013, 7400201)
+    ]
+)
+
+func getErrorCode(code: Int32): Int32 {
+    if (ERROR_CODE_TO_CJ_ERROR_CODE_MAP.contains(code)) {
+        return ERROR_CODE_TO_CJ_ERROR_CODE_MAP[code]
+    } else {
+        return code
+    }
+}
 
 func getErrorMsg(code: Int32): String {
     if (let Some(v) <- getUniversalErrorMsg(code)) {
@@ -61,7 +89,7 @@ func getErrorMsg(code: Int32): String {
 
 func successOrThrow(errCode: Int32): Unit {
     if (errCode != SUCCESS_CODE) {
-        throw BusinessException(errCode, getErrorMsg(errCode))
+        throw BusinessException(getErrorCode(errCode), getErrorMsg(errCode))
     }
 }
 
