@@ -40,6 +40,7 @@ import std.collection.map
 import std.collection.collectArray
 import std.collection.forEach
 import kit.AbilityKit.Permissions
+import ohos.device_info.*
 
 var cameraManager: Option<CameraManager> = None
 
@@ -64,17 +65,26 @@ class Test_camera {
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_GetSupportedCameras() {
         let devices = getCameraManager().getSupportedCameras()
-        @Expect(devices.size, 2)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(devices.size, 1)
+            @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
+            @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeWideAngle")
+            @Expect(devices[0].cameraOrientation, 0)
+        } else {
+            @Expect(devices.size, 2)
+            @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionBack")
+            @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeDefault")
+            @Expect(devices[0].cameraOrientation, 90)
+        }
         @Expect(devices[0].cameraId, "device/0")
-        @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionBack")
-        @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeDefault")
         @Expect(devices[0].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
-        @Expect(devices[0].cameraOrientation, 90)
-        @Expect(devices[1].cameraId, "device/1")
-        @Expect(devices[1].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
-        @Expect(devices[1].cameraType.toString(), "CameraType.CameraTypeDefault")
-        @Expect(devices[1].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
-        @Expect(devices[1].cameraOrientation, 270)
+        if (DeviceInfo.deviceType != "2in1") {
+            @Expect(devices[1].cameraId, "device/1")
+            @Expect(devices[1].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
+            @Expect(devices[1].cameraType.toString(), "CameraType.CameraTypeDefault")
+            @Expect(devices[1].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
+            @Expect(devices[1].cameraOrientation, 270)
+        }
     }
 
     @TestCase
@@ -82,10 +92,16 @@ class Test_camera {
     func Test_CameraManager_GetSupportedSceneModes() {
         let device = getCameraManager().getSupportedCameras()[0]
         let modes = getCameraManager().getSupportedSceneModes(device)
-        @Expect(modes.size, 3)
-        @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
-        @Expect(modes[1].toString(), "SceneMode.NormalVideo")
-        @Expect(modes[2].toString(), "SceneMode.SecurePhoto")
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(modes.size, 2)
+            @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
+            @Expect(modes[1].toString(), "SceneMode.NormalVideo")
+        } else {
+            @Expect(modes.size, 3)
+            @Expect(modes[0].toString(), "SceneMode.NormalPhoto")
+            @Expect(modes[1].toString(), "SceneMode.NormalVideo")
+            @Expect(modes[2].toString(), "SceneMode.SecurePhoto")
+        }
     }
 
     @TestCase
@@ -112,7 +128,11 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsTorchSupported() {
-        @Expect(getCameraManager().isTorchSupported(), true)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(getCameraManager().isTorchSupported(), false)
+        } else {
+            @Expect(getCameraManager().isTorchSupported(), true)
+        }
     }
 
     @TestCase
@@ -127,10 +147,19 @@ class Test_camera {
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_SetTorchMode() {
         @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
-        getCameraManager().setTorchMode(TorchMode.On)
-        @Expect(getCameraManager().getTorchMode(), TorchMode.On)
-        getCameraManager().setTorchMode(TorchMode.Off)
-        @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
+        if (DeviceInfo.deviceType == "2in1") {
+            try {
+                getCameraManager().setTorchMode(TorchMode.On)
+            } catch (e: BusinessException) {
+                loggerInfo("Test_CameraManager_SetTorchMode: Exception ${e.code}: ${e.message}")
+                @Expect(e.code, 7400102)
+            }
+        } else {
+            getCameraManager().setTorchMode(TorchMode.On)
+            @Expect(getCameraManager().getTorchMode(), TorchMode.On)
+            getCameraManager().setTorchMode(TorchMode.Off)
+            @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
+        }
     }
 
     @TestCase
@@ -508,9 +537,15 @@ class Test_camera {
         photoSession.addInput(input)
         photoSession.addOutput(previewOutput)
         let supportedFrameRates = previewOutput.getSupportedFrameRates()
-        @Expect(supportedFrameRates.size, 1)
-        @Expect(supportedFrameRates[0].min, 12)
-        @Expect(supportedFrameRates[0].max, 30)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(supportedFrameRates.size, 2)
+            @Expect(supportedFrameRates[0].min, 1)
+            @Expect(supportedFrameRates[0].max, 30)
+        } else {
+            @Expect(supportedFrameRates.size, 1)
+            @Expect(supportedFrameRates[0].min, 12)
+            @Expect(supportedFrameRates[0].max, 30)
+        }
         previewOutput.release()
         photoSession.release()
         input.close()
@@ -561,7 +596,11 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
+        } else {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        }
         previewOutput.setPreviewRotation(ImageRotation.Rotation0, isDisplayLocked: true)
         //        @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
         previewOutput.release()
@@ -586,7 +625,11 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
+        } else {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        }
         previewOutput.setPreviewRotation(ImageRotation.Rotation180, isDisplayLocked: true)
         previewOutput.release()
         photoSession.release()
@@ -610,7 +653,11 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
+        } else {
+            @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
+        }
         previewOutput.setPreviewRotation(ImageRotation.Rotation270, isDisplayLocked: true)
         previewOutput.release()
         photoSession.release()
@@ -930,8 +977,21 @@ class Test_camera {
         photoSession.addOutput(photoOutput)
         photoSession.commitConfig()
         photoSession.start()
-        @Expect(photoOutput.isMovingPhotoSupported(), true)
-        photoOutput.enableMovingPhoto(false)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(photoOutput.isMovingPhotoSupported(), false)
+        } else {
+            @Expect(photoOutput.isMovingPhotoSupported(), true)
+        }
+        try {
+            photoOutput.enableMovingPhoto(false)
+        } catch (e:BusinessException) {
+            if (DeviceInfo.deviceType == "2in1") {
+                @Expect(e.code, 7400201)
+            } else {
+                @Expect(false)
+            }
+        }
+        
         //        @Expect(photoOutput.isMovingPhotoSupported(), false)
 
         photoSession.release()
@@ -989,8 +1049,20 @@ class Test_camera {
         photoSession.addOutput(photoOutput)
         photoSession.commitConfig()
         photoSession.start()
-        @Expect(photoOutput.isMirrorSupported(), false)
-        photoOutput.enableMirror(true)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(photoOutput.isMirrorSupported(), true)
+        } else {
+            @Expect(photoOutput.isMirrorSupported(), false)
+        }
+        try {
+            photoOutput.enableMirror(true)
+        } catch (e:BusinessException) {
+            if (DeviceInfo.deviceType == "2in1") {
+                @Expect(e.code, 7400201)
+            } else {
+                @Expect(false)
+            }
+        }
         //        @Expect(photoOutput.isMirrorSupported(), true)
 
         photoSession.release()
@@ -1096,37 +1168,14 @@ class Test_camera {
         photoSession.commitConfig()
         photoSession.start()
         let rotation = photoOutput.getPhotoRotation(0)
-        @Expect(rotation, ImageRotation.Rotation90)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(rotation, ImageRotation.Rotation0)
+        } else {
+            @Expect(rotation, ImageRotation.Rotation90)
+        }
 
         photoSession.release()
         photoOutput.release()
-        input.close()
-    }
-
-    @TestCase
-    @Tag[APILevel22, TestLevel0]
-    func Test_VideoOutput() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
-        let input = getCameraManager().createCameraInput(device)
-        input.open()
-        let videoSession = (getCameraManager().createSession(SceneMode.NormalVideo) as VideoSession).getOrThrow()
-        videoSession.beginConfig()
-        videoSession.addInput(input)
-        videoSession.addOutput(videoOutput)
-        videoSession.commitConfig()
-
-        videoOutput.start()
-        sleep(Duration.second * 2)
-        videoOutput.stop()
-
-        videoSession.release()
-        videoOutput.release()
         input.close()
     }
 
@@ -1391,7 +1440,11 @@ class Test_camera {
         videoSession.addOutput(videoOutput)
         videoSession.commitConfig()
 
-        @Expect(videoOutput.getVideoRotation(0), ImageRotation.Rotation90)
+        if (DeviceInfo.deviceType == "2in1") {
+            @Expect(videoOutput.getVideoRotation(0), ImageRotation.Rotation0)
+        } else {
+            @Expect(videoOutput.getVideoRotation(0), ImageRotation.Rotation90)
+        }
 
         videoSession.release()
         videoOutput.release()
@@ -2366,6 +2419,33 @@ class Test_camera {
             @Expect(arr1[i].toString() == arrStr[i])
         }
      }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoOutput() {
+        let device = getCameraManager().getSupportedCameras()[0]
+        let mode = getCameraManager().getSupportedSceneModes(device)[1]
+        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+        let size = ImageSize(8192, 8)
+        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
+        let surfaceId: String = receiver.getReceivingSurfaceId()
+        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let input = getCameraManager().createCameraInput(device)
+        input.open()
+        let videoSession = (getCameraManager().createSession(SceneMode.NormalVideo) as VideoSession).getOrThrow()
+        videoSession.beginConfig()
+        videoSession.addInput(input)
+        videoSession.addOutput(videoOutput)
+        videoSession.commitConfig()
+
+        videoOutput.start()
+        sleep(Duration.second * 2)
+        videoOutput.stop()
+
+        videoSession.release()
+        videoOutput.release()
+        input.close()
+    }
 }
 
 class TestCallbackBusinessException <: Callback1Argument<BusinessException> {
