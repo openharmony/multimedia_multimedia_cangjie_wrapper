@@ -284,7 +284,7 @@ class Test_image {
             let imgSource = createImageSource("data/storage/el1/base/EXIF.jpg", sourceOption)
         } catch (e: BusinessException) {
             //logger.info("${e}")
-            if (DeviceInfo.deviceType == "2in1") {
+            if (DeviceInfo.deviceType == "car") {
  	            @Expect(e.code, 62980110)
  	        } else {
  	            @Expect(false)
