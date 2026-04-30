@@ -38,6 +38,7 @@ import ohos.business_exception.*
 import kit.CoreFileKit.*
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.*
+import kit.BasicServicesKit.*
 
 let colors: Array<UInt8> = Array<UInt8>(96, repeat: 0)
 let pixelMap = createPixelMap(colors,
@@ -284,7 +285,7 @@ class Test_image {
             let imgSource = createImageSource("data/storage/el1/base/EXIF.jpg", sourceOption)
         } catch (e: BusinessException) {
             //logger.info("${e}")
-            if (DeviceInfo.deviceType == "2in1") {
+            if (DeviceInfo.deviceType == "car") {
  	            @Expect(e.code, 62980110)
  	        } else {
  	            @Expect(false)
