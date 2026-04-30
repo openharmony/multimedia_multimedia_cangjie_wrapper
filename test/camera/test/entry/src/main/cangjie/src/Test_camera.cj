@@ -70,6 +70,11 @@ class Test_camera {
             @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
             @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeWideAngle")
             @Expect(devices[0].cameraOrientation, 0)
+        } else if (DeviceInfo.deviceType == "tv") {
+            @Expect(devices.size, 1)
+            @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionBack")
+            @Expect(devices[0].cameraType.toString(), "CameraType.CameraTypeWideAngle")
+            @Expect(devices[0].cameraOrientation, 0)
         } else {
             @Expect(devices.size, 2)
             @Expect(devices[0].cameraPosition.toString(), "CameraPosition.CameraPositionBack")
@@ -78,7 +83,7 @@ class Test_camera {
         }
         @Expect(devices[0].cameraId, "device/0")
         @Expect(devices[0].connectionType.toString(), "ConnectionType.CameraConnectionBuiltIn")
-        if (DeviceInfo.deviceType != "2in1") {
+        if (DeviceInfo.deviceType != "2in1" && DeviceInfo.deviceType != "tv") {
             @Expect(devices[1].cameraId, "device/1")
             @Expect(devices[1].cameraPosition.toString(), "CameraPosition.CameraPositionFront")
             @Expect(devices[1].cameraType.toString(), "CameraType.CameraTypeDefault")
@@ -128,7 +133,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_IsTorchSupported() {
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(getCameraManager().isTorchSupported(), false)
         } else {
             @Expect(getCameraManager().isTorchSupported(), true)
@@ -147,7 +152,7 @@ class Test_camera {
     @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_SetTorchMode() {
         @Expect(getCameraManager().getTorchMode(), TorchMode.Off)
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             try {
                 getCameraManager().setTorchMode(TorchMode.On)
             } catch (e: BusinessException) {
@@ -596,7 +601,7 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
         } else {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
@@ -625,7 +630,7 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
         } else {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
@@ -653,7 +658,7 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.commitConfig()
         photoSession.start()
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation0)
         } else {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
@@ -977,7 +982,7 @@ class Test_camera {
         photoSession.addOutput(photoOutput)
         photoSession.commitConfig()
         photoSession.start()
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(photoOutput.isMovingPhotoSupported(), false)
         } else {
             @Expect(photoOutput.isMovingPhotoSupported(), true)
@@ -985,7 +990,7 @@ class Test_camera {
         try {
             photoOutput.enableMovingPhoto(false)
         } catch (e:BusinessException) {
-            if (DeviceInfo.deviceType == "2in1") {
+            if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
                 @Expect(e.code, 7400201)
             } else {
                 @Expect(false)
@@ -1049,7 +1054,7 @@ class Test_camera {
         photoSession.addOutput(photoOutput)
         photoSession.commitConfig()
         photoSession.start()
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(photoOutput.isMirrorSupported(), true)
         } else {
             @Expect(photoOutput.isMirrorSupported(), false)
@@ -1057,7 +1062,7 @@ class Test_camera {
         try {
             photoOutput.enableMirror(true)
         } catch (e:BusinessException) {
-            if (DeviceInfo.deviceType == "2in1") {
+            if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
                 @Expect(e.code, 7400201)
             } else {
                 @Expect(false)
@@ -1168,7 +1173,7 @@ class Test_camera {
         photoSession.commitConfig()
         photoSession.start()
         let rotation = photoOutput.getPhotoRotation(0)
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(rotation, ImageRotation.Rotation0)
         } else {
             @Expect(rotation, ImageRotation.Rotation90)
@@ -1440,7 +1445,7 @@ class Test_camera {
         videoSession.addOutput(videoOutput)
         videoSession.commitConfig()
 
-        if (DeviceInfo.deviceType == "2in1") {
+        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
             @Expect(videoOutput.getVideoRotation(0), ImageRotation.Rotation0)
         } else {
             @Expect(videoOutput.getVideoRotation(0), ImageRotation.Rotation90)

@@ -376,7 +376,7 @@ class Test_camera_session {
                         loggerInfo(
                             "[multimedia_camera | ${TAG}]: DO NOT support preconfig type ${preconfigType} and ratio ${ratio}"
                         )
-                        if (DeviceInfo.deviceType == "2in1") {
+                        if (DeviceInfo.deviceType == "2in1" || DeviceInfo.deviceType == "tv") {
                             @Expect(true)
                         } else {
                             @Expect(false)
