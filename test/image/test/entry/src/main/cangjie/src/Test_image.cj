@@ -38,7 +38,7 @@ import ohos.business_exception.*
 import kit.CoreFileKit.*
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.*
-import kit.BasicServiceKit.*
+import kit.BasicServicesKit.*
 
 let colors: Array<UInt8> = Array<UInt8>(96, repeat: 0)
 let pixelMap = createPixelMap(colors,
