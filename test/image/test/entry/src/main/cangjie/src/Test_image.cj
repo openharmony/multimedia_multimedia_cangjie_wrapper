@@ -58,7 +58,11 @@ class Test_image {
     func test_Packer_01(): Unit {
         let imagePacker = createImagePacker()
         let supportedFormats = imagePacker.supportedFormats
-        @Expect(supportedFormats.toString(), "[image/gif, image/heic, image/jpeg, image/png, image/tiff, image/webp]")
+        if (DeviceInfo.deviceType == "car") {
+            @Expect(supportedFormats.toString(), "[image/gif, image/heic, image/jpeg, image/png, image/webp]")
+        } else {
+            @Expect(supportedFormats.toString(), "[image/gif, image/heic, image/jpeg, image/png, image/tiff, image/webp]")
+        }
         unsafe {
             let format = "image/jpeg"
             let packingOption = PackingOption(format, 98)
