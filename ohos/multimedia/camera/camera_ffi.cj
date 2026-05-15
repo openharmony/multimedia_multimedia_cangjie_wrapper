@@ -398,7 +398,7 @@ struct CCameraOutputCapability {
         let supportedMetadataObjectTypesArr = ArrayList<MetadataObjectType>()
         for (i in 0..supportedMetadataObjectTypes.size) {
             let supportedMetadataObjectType = unsafe { supportedMetadataObjectTypes.head.read(i) }
-            if (supportedMetadataObjectType == 1) {
+            if (supportedMetadataObjectType >= 1 && supportedMetadataObjectType <= 8) {
                 continue
             }
             supportedMetadataObjectTypesArr.add(MetadataObjectType.parse(supportedMetadataObjectType))

@@ -555,6 +555,9 @@ public enum MetadataObjectType {
     |
     @!Hide[isChecked: true]
     BarCodeDetection
+    |
+    @!Hide[isChecked: true]
+    BasicFaceDetection
     | ...
 
     func getValue(): Int32 {
