@@ -56,7 +56,11 @@ class Test_camera {
             try {
                 sleepFor(3.second)
                 click(at: Screen.getTheOnlyUiComponentWhoseTextEqualsTo("允许").centerPoint)
-            } catch (e: Exception) {}
+            } catch (e: Exception) {
+                try {
+                    click(at: Screen.getTheOnlyUiComponentWhoseTextEqualsTo("本次使用允许").centerPoint)
+                } catch (e: Exception) {}
+            }
         }
         cameraManager = getCameraManager(getAbilityContext())
     }
