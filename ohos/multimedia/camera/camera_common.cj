@@ -560,13 +560,6 @@ public enum MetadataObjectType {
     BasicFaceDetection
     | ...
 
-    func getValue(): Int32 {
-        match (this) {
-            case MetadataObjectType.FaceDetection => 0
-            case _ => throw BusinessException(7400101, "Parameter error.")
-        }
-    }
-
     /*
      * @throws { BusinessException } 7401001 - Parameter error.
      */
@@ -1122,32 +1115,6 @@ public enum CameraEvents {
     ]
     SmoothZoomInfoAvailable
     | ...
-
-    /**
-     * Obtaining the string value of CameraEvents.
-     *
-     * @throws { BusinessException } 7400101 - The type is not supported.
-     */
-    func toString(): String {
-        return match (this) {
-            case CameraError => "error"
-            case CameraStatus => "cameraStatus"
-            case FoldStatusChange => "foldStatusChange"
-            case TorchStatusChange => "torchStatusChange"
-            case FrameStart => "frameStart"
-            case FrameEnd => "frameEnd"
-            case CaptureStartWithInfo => "captureStartWithInfo"
-            case FrameShutter => "frameShutter"
-            case CaptureEnd => "captureEnd"
-            case FrameShutterEnd => "frameShutterEnd"
-            case CaptureReady => "captureReady"
-            case EstimatedCaptureDuration => "estimatedCaptureDuration"
-            case MetadataObjectsAvailable => "metadataObjectsAvailable"
-            case FocusStateChange => "focusStateChange"
-            case SmoothZoomInfoAvailable => "smoothZoomInfoAvailable"
-            case _ => throw BusinessException(7400101, "Parameter error.")
-        }
-    }
 }
 
 /**
@@ -1492,10 +1459,6 @@ public class Location {
         this.longitude = longitude
         this.altitude = altitude
     }
-
-    func toExternal(): CLocation {
-        return CLocation(latitude, longitude, altitude)
-    }
 }
 
 /**
@@ -1776,19 +1739,6 @@ public enum PreconfigType {
             }
         }
     }
-
-    /*
-     * @throws { BusinessException } 7401001 - Parameter error.
-     */
-    static func parse(value: Int32): PreconfigType {
-        return match (value) {
-            case 0 => Preconfig720p
-            case 1 => Preconfig1080p
-            case 2 => Preconfig4k
-            case 3 => PreconfigHighQuality
-            case _ => throw BusinessException(7400101, "Parameter error.")
-        }
-    }
 }
 
 /**
@@ -1836,18 +1786,6 @@ public enum PreconfigRatio {
                 case PreconfigRatio_16_9 => 2
                 case _ => throw BusinessException(7400101, "Parameter error.")
             }
-        }
-    }
-
-    /*
-     * @throws { BusinessException } 7401001 - Parameter error.
-     */
-    static func parse(value: Int32): PreconfigRatio {
-        return match (value) {
-            case 0 => PreconfigRatio_1_1
-            case 1 => PreconfigRatio_4_3
-            case 2 => PreconfigRatio_16_9
-            case _ => throw BusinessException(7400101, "Parameter error.")
         }
     }
 }

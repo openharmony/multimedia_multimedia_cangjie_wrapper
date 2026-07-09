@@ -519,10 +519,6 @@ struct CLocation {
         this.longitude = location.longitude
         this.altitude = location.altitude
     }
-
-    func toLocation(): Location {
-        return Location(latitude, longitude, altitude)
-    }
 }
 
 @C
@@ -616,35 +612,4 @@ struct CCaptureEndInfo {
     func toCaptureEndInfo() {
         return CaptureEndInfo(captureId, frameCount)
     }
-}
-
-@C
-struct CRect {
-    CRect(
-        let topLeftX: Float64,
-        let topLeftY: Float64,
-        let width: Float64,
-        let height: Float64
-    ) {}
-
-    func toRect(): Rect {
-        return Rect(topLeftX, topLeftY, width, height)
-    }
-}
-
-@C
-struct CMetadataObject {
-    CMetadataObject(
-        let objType: Int32,
-        let timestamp: Int32,
-        let boundingBox: CRect
-    ) {}
-}
-
-@C
-struct CArrCMetadataObject {
-    CArrCMetadataObject(
-        let head: CPointer<CMetadataObject>,
-        let size: Int64
-    ) {}
 }

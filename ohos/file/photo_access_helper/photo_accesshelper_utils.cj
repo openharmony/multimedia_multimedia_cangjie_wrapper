@@ -1035,10 +1035,6 @@ public class RequestOptions {
     init(deliveryMode: DeliveryMode) {
         this.deliveryMode = deliveryMode
     }
-
-    func toCRequestOptions(): CRequestOptions {
-        return CRequestOptions(deliveryMode.value)
-    }
 }
 
 /**
@@ -1469,8 +1465,6 @@ public enum AlbumKeys <: ToString {
     }
 }
 
-class BaseSelectOptionsImpl {}
-
 /**
  * Enumerates media file types.
  */
@@ -1556,25 +1550,6 @@ public enum MemberType {
     ]
     BoolValue(Bool)
     | ...
-
-    func getType(): String {
-        match (this) {
-            case Int64Value(v) => "getNumber()"
-            case StringValue(v) => "getString()"
-            case BoolValue(v) => "getBool()"
-            case _ => throw BusinessException(13900020, "Parameter error.")
-        }
-    }
-
-    /*
-     * @throws { BusinessException } 13900020 - Parameter error.
-     */
-    func getNumber(): Int64 {
-        match (this) {
-            case Int64Value(v) => v
-            case _ => throw BusinessException(13900020, "Parameter error.")
-        }
-    }
 
     /*
      * @throws { BusinessException } 13900020 - Parameter error.
