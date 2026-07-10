@@ -369,15 +369,4 @@ struct HashMapArray {
         this.keyValue = keyValue
         this.size = size
     }
-
-    func toHashMap(): HashMap<String, String> {
-        if (size == 0) {
-            return HashMap<String, String>()
-        }
-        let map = HashMap<String, String>(size)
-        for (i in 0..size) {
-            unsafe { map.add(keyValue.read(i).key.toString(), keyValue.read(i).value.toString()) }
-        }
-        return map
-    }
 }

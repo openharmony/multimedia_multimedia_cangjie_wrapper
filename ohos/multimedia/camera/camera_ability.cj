@@ -691,17 +691,6 @@ public enum FocusState {
     FocusStateUnfocused
     | ...
 
-    prop value: Int32 {
-        get() {
-            match (this) {
-                case FocusStateScan => 0
-                case FocusStateFocused => 1
-                case FocusStateUnfocused => 2
-                case _ => throw BusinessException(7400101, "Parameter error.")
-            }
-        }
-    }
-
     /*
      * @throws { BusinessException } 7401001 - Parameter error.
      */
