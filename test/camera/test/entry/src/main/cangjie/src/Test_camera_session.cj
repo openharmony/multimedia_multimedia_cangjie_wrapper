@@ -139,7 +139,7 @@ class Test_camera_session {
             } else {
                 if (!res) {
                     @Expect(false)
-                }   
+                }
             }
             let modes = [FlashModeClose, FlashModeOpen, FlashModeAuto, FlashModeAlwaysOpen]
             for (mode in modes) {
@@ -555,6 +555,54 @@ class Test_camera_session {
 
     @TestCase
     @Tag[APILevel22, TestLevel0]
+    func Test_PhotoSession_On_Error_Exception() {
+        let TAG = "Test_PhotoSession_On_Error_Exception"
+        let session = getPhotoSession(0)
+        let callback = FocusStateChangeCallback()
+        try {
+            session.on(CameraEvents.CameraError, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoSession_On_FocusStateChange_Exception() {
+        let TAG = "Test_PhotoSession_On_FocusStateChange_Exception"
+        let session = getPhotoSession(0)
+        let callback = SmoothZoomInfoAvailableCallback()
+        try {
+            session.on(CameraEvents.FocusStateChange, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoSession_On_SmoothZoomInfoAvailable_Exception() {
+        let TAG = "Test_PhotoSession_On_SmoothZoomInfoAvailable_Exception"
+        let session = getPhotoSession(0)
+        let callback = ErrorCallback()
+        try {
+            session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
     func Test_VideoSession() {
         let TAG = "TEST_VideoSession"
         let session: VideoSession = getVideoSession()
@@ -728,6 +776,7 @@ class Test_camera_session {
             let callback = ErrorCallback()
 
             session.on(CameraEvents.CameraError, callback)
+            session.on(CameraEvents.CameraError, callback)
             session.off(CameraEvents.CameraError, callback)
 
             session.on(CameraEvents.CameraError, callback)
@@ -739,7 +788,68 @@ class Test_camera_session {
             session.release()
         }
     }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoSession_Off_Exception_With_Unregistered() {
+        let TAG = "Test_VideoSession_Off_Exception_With_Unregistered"
+        let session = getVideoSession()
+        try {
+            let callback = ErrorCallback()
+            session.off(CameraEvents.CameraError, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(false)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoSession_On_Error_Exception() {
+        let TAG = "Test_VideoSession_On_Error_Exception"
+        let session = getVideoSession()
+        let callback = FocusStateChangeCallback()
+        try {
+            session.on(CameraEvents.CameraError, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoSession_On_FocusStateChange_Exception() {
+        let TAG = "Test_VideoSession_On_FocusStateChange_Exception"
+        let session = getVideoSession()
+        let callback = SmoothZoomInfoAvailableCallback()
+        try {
+            session.on(CameraEvents.FocusStateChange, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoSession_On_SmoothZoomInfoAvailable_Exception() {
+        let TAG = "Test_VideoSession_On_SmoothZoomInfoAvailable_Exception"
+        let session = getVideoSession()
+        let callback = ErrorCallback()
+        try {
+            session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
+        } catch (e: BusinessException) {
+            loggerInfo("[multimedia_camera | ${TAG}]: Exception ${e.code}: ${e.message}")
+            @Expect(e.code, 401)
+        } finally {
+            session.release()
+        }
+    }
 }
-
-
-    

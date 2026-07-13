@@ -43,10 +43,6 @@ public class CameraManager <: RemoteDataLite {
         super(unsafe { FfiCameraManagerConstructor() })
     }
 
-    init(id: Int64) {
-        super(id)
-    }
-
     ~init() {
         releaseFFIData(myDataId)
     }

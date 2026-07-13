@@ -1132,16 +1132,6 @@ public enum SmoothZoomMode {
             }
         }
     }
-
-    /*
-     * @throws { BusinessException } 7401001 - Parameter error.
-     */
-    static func parse(value: Int32): SmoothZoomMode {
-        return match (value) {
-            case 0 => Normal
-            case _ => throw BusinessException(7400101, "Parameter error.")
-        }
-    }
 }
 
 /**

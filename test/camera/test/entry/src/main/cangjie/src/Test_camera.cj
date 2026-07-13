@@ -209,6 +209,45 @@ class Test_camera {
 
     @TestCase
     @Tag[APILevel22, TestLevel0]
+    func Test_CameraManager_On_CameraStatus_Exception() {
+        let callback = TestCallbackFoldStatusChange()
+        try {
+            getCameraManager().on(CameraEvents.CameraStatus, callback)
+            @Expect(false)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_CameraManager_On_FoldStatusChange_Exception() {
+        let callback = TestCallbackTorchStatusChange()
+        try {
+            getCameraManager().on(CameraEvents.FoldStatusChange, callback)
+            @Expect(false)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_CameraManager_On_TorchStatusChange_Exception() {
+        let callback = TestCallbackCameraStatus()
+        try {
+            getCameraManager().on(CameraEvents.TorchStatusChange, callback)
+            @Expect(false)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraManager_CreateCameraInput_Error() {
         let device = getCameraManager().getSupportedCameras()[0]
         try {
@@ -315,6 +354,21 @@ class Test_camera {
 
     @TestCase
     @Tag[APILevel22, TestLevel0]
+    func Test_CameraInput_OnException() {
+        let device = getCameraManager().getSupportedCameras()[0]
+        let input = getCameraManager().createCameraInput(device)
+        let testCallbackError = TestCallbackError()
+        try {
+            input.on(CameraEvents.CameraStatus, device, testCallbackError)
+            @Expect(false)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
     func Test_CameraInput_Open() {
         let device = getCameraManager().getSupportedCameras()[0]
         let input = getCameraManager().createCameraInput(device)
@@ -390,13 +444,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_SetFrameRate_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         try {
             previewOutput.setFrameRate(15, 20)
         } catch (e: BusinessException) {
@@ -411,13 +459,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_GetPreviewRotation_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         try {
             previewOutput.getPreviewRotation(0)
         } catch (e: BusinessException) {
@@ -432,13 +474,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_GetActiveProfile() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         try {
             previewOutput.getActiveProfile()
         } catch (e: BusinessException) {
@@ -451,13 +487,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_SetPreviewRotation_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         try {
             previewOutput.setPreviewRotation(ImageRotation.Rotation0)
         } catch (e: BusinessException) {
@@ -472,13 +502,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_FrameStart() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         let testCallbackFrameStart = TestCallbackFrameStart()
         previewOutput.on(CameraEvents.FrameStart, testCallbackFrameStart)
         previewOutput.on(CameraEvents.FrameStart, testCallbackFrameStart)
@@ -492,13 +516,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_FrameEnd() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         let testCallbackFrameEnd = TestCallbackFrameEnd()
         previewOutput.on(CameraEvents.FrameEnd, testCallbackFrameEnd)
         previewOutput.on(CameraEvents.FrameEnd, testCallbackFrameEnd)
@@ -512,13 +530,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PreviewOutput_Onoff_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let previewOutput = getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+        let previewOutput = createPreviewOutput()
         let testCallbackError = TestCallbackError()
         previewOutput.on(CameraEvents.CameraError, testCallbackError)
         previewOutput.on(CameraEvents.CameraError, testCallbackError)
@@ -527,6 +539,21 @@ class Test_camera {
         previewOutput.on(CameraEvents.CameraError, testCallbackError)
         previewOutput.off(CameraEvents.CameraError)
         previewOutput.release()
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PreviewOutput_On_Exception() {
+        let previewOutput = createPreviewOutput()
+        let testCallbackError = TestCallbackError()
+        try {
+            previewOutput.on(CameraEvents.EstimatedCaptureDuration, testCallbackError)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            previewOutput.release()
+        }
     }
 
     @TestCase
@@ -639,6 +666,7 @@ class Test_camera {
         } else {
             @Expect(previewOutput.getPreviewRotation(0), ImageRotation.Rotation90)
         }
+        previewOutput.setPreviewRotation(ImageRotation.Rotation90, isDisplayLocked: true)
         previewOutput.setPreviewRotation(ImageRotation.Rotation180, isDisplayLocked: true)
         previewOutput.release()
         photoSession.release()
@@ -734,7 +762,7 @@ class Test_camera {
         photoSession.addOutput(previewOutput)
         photoSession.addOutput(photoOutput)
         photoSession.commitConfig()
-        photoOutput.capture(PhotoCaptureSetting(location: Location(1.0, 2.0, 3.0)))
+        photoOutput.capture(PhotoCaptureSetting(quality: QualityLevelMedium, location: Location(1.0, 2.0, 3.0)))
         photoSession.start()
         sleep(Duration.second * 2)
         photoSession.stop()
@@ -806,10 +834,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Capture_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
         try {
             photoOutput.capture()
         } catch (e: BusinessException) {
@@ -829,10 +854,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_EnableMirror_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
         let photoSession = (getCameraManager().createSession(SceneMode.NormalPhoto) as PhotoSession).getOrThrow()
         try {
             photoOutput.enableMirror(true)
@@ -848,10 +870,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_GetPhotoRotation_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
         let photoSession = (getCameraManager().createSession(SceneMode.NormalPhoto) as PhotoSession).getOrThrow()
         try {
             photoOutput.getPhotoRotation(0)
@@ -867,10 +886,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureStartWithInfo() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackCaptureStartWithInfo = TestCallbackCaptureStartWithInfo()
         photoOutput.on(CameraEvents.CaptureStartWithInfo, testCallbackCaptureStartWithInfo)
@@ -886,10 +902,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureEnd() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackCaptureEnd = TestCallbackCaptureEnd()
         photoOutput.on(CameraEvents.CaptureEnd, testCallbackCaptureEnd)
@@ -905,10 +918,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_FrameShutter() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackFrameShutter = TestCallbackFrameShutter()
         photoOutput.on(CameraEvents.FrameShutter, testCallbackFrameShutter)
@@ -923,10 +933,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_FrameShutterEnd() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackFrameShutterEnd = TestCallbackFrameShutterEnd()
         photoOutput.on(CameraEvents.FrameShutterEnd, testCallbackFrameShutterEnd)
@@ -942,10 +949,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_CaptureReady() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackCaptureReady = TestCallbackCaptureReady()
         photoOutput.on(CameraEvents.CaptureReady, testCallbackCaptureReady)
@@ -961,10 +965,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_EstimatedCaptureDuration() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackEstimatedCaptureDuration = TestCallbackEstimatedCaptureDuration()
         photoOutput.on(CameraEvents.EstimatedCaptureDuration, testCallbackEstimatedCaptureDuration)
@@ -980,10 +981,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_Onoff_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
 
         let testCallbackError = TestCallbackError()
         photoOutput.on(CameraEvents.CameraError, testCallbackError)
@@ -994,6 +992,96 @@ class Test_camera {
         photoOutput.off(CameraEvents.CameraError)
 
         photoOutput.release()
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_EstimatedCaptureDuration_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackCaptureStartWithInfo()
+        try {
+            photoOutput.on(CameraEvents.EstimatedCaptureDuration, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_CaptureStartWithInfo_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackFrameShutter()
+        try {
+            photoOutput.on(CameraEvents.CaptureStartWithInfo, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_FrameShutter_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackFrameShutterEnd()
+        try {
+            photoOutput.on(CameraEvents.FrameShutter, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_FrameShutterEnd_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackCaptureEnd()
+        try {
+            photoOutput.on(CameraEvents.FrameShutterEnd, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_CaptureEnd_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackCaptureReady()
+        try {
+            photoOutput.on(CameraEvents.CaptureEnd, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_PhotoOutput_On_CaptureReady_Exception() {
+        let photoOutput = createPhotoOutput()
+        let callback = TestCallbackEstimatedCaptureDuration()
+        try {
+            photoOutput.on(CameraEvents.CaptureReady, callback)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            photoOutput.release()
+        }
     }
 
     @TestCase // enableMovingPhoto修改无效
@@ -1042,10 +1130,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_IsMovingPhotoSupported_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
         try {
             photoOutput.isMovingPhotoSupported()
         } catch (e: BusinessException) {
@@ -1060,10 +1145,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_PhotoOutput_EnableMovingPhoto_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[0]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let photoOutput = getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+        let photoOutput = createPhotoOutput()
         try {
             photoOutput.enableMovingPhoto(false)
         } catch (e: BusinessException) {
@@ -1257,13 +1339,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Start_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
         try {
             videoOutput.start()
         } catch (e: BusinessException) {
@@ -1278,13 +1354,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Stop_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
         try {
             videoOutput.stop()
         } catch (e: BusinessException) {
@@ -1299,13 +1369,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_GetVideoRotation_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
         try {
             videoOutput.getVideoRotation(0)
         } catch (e: BusinessException) {
@@ -1320,13 +1384,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_FrameStart() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
 
         let testCallbackFrameStart = TestCallbackFrameStart()
         videoOutput.on(CameraEvents.FrameStart, testCallbackFrameStart)
@@ -1342,13 +1400,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_FrameEnd() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
 
         let testCallbackFrameEnd = TestCallbackFrameEnd()
         videoOutput.on(CameraEvents.FrameEnd, testCallbackFrameEnd)
@@ -1364,13 +1416,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_Onoff_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
 
         let testCallbackError = TestCallbackError()
         videoOutput.on(CameraEvents.CameraError, testCallbackError)
@@ -1381,6 +1427,21 @@ class Test_camera {
         videoOutput.off(CameraEvents.CameraError)
 
         videoOutput.release()
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_VideoOutput_On_Exception() {
+        let videoOutput = createVideoOutput()
+        let testCallbackError = TestCallbackError()
+        try {
+            videoOutput.on(CameraEvents.EstimatedCaptureDuration, testCallbackError)
+        } catch (e: BusinessException) {
+            loggerInfo(e.toString())
+            @Expect(e.code, 401)
+        } finally {
+            videoOutput.release()
+        }
     }
 
     @TestCase
@@ -1442,13 +1503,7 @@ class Test_camera {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func Test_VideoOutput_SetFrameRate_Error() {
-        let device = getCameraManager().getSupportedCameras()[0]
-        let mode = getCameraManager().getSupportedSceneModes(device)[1]
-        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
-        let size = ImageSize(8192, 8)
-        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-        let surfaceId: String = receiver.getReceivingSurfaceId()
-        let videoOutput = getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+        let videoOutput = createVideoOutput()
         try {
             videoOutput.setFrameRate(15, 20)
         } catch (e: BusinessException) {
@@ -2521,8 +2576,70 @@ class Test_camera {
         videoOutput.release()
         input.close()
     }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_getSupportedOutputCapability_With_different_SceneMode() {
+        let device = getCameraManager().getSupportedCameras()[0]
+        let modes = getCameraManager().getSupportedSceneModes(device)
+        for (mode in modes) {
+            loggerInfo("mode: ${mode}")
+            getCameraManager().getSupportedOutputCapability(device, mode)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_createVideoOutput_With_different_CameraFormat() {
+        let device = getCameraManager().getSupportedCameras()[0]
+        let mode = getCameraManager().getSupportedSceneModes(device)[1]
+        let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+        let size = ImageSize(8192, 8)
+        let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
+        let surfaceId: String = receiver.getReceivingSurfaceId()
+        for (videoProfile in ability.videoProfiles) {
+            let videoOutput = getCameraManager().createVideoOutput(videoProfile, surfaceId)
+            videoOutput.release()
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func Test_createCameraInput_With_different_CameraPosition() {
+        let positions = [CameraPosition.CameraPositionUnspecified, CameraPosition.CameraPositionBack,
+            CameraPosition.CameraPositionFront]
+        for (position in positions) {
+            getCameraManager().createCameraInput(position, CameraType.CameraTypeTelephoto)
+        }
+    }
 }
 
+func createPhotoOutput(): PhotoOutput {
+    let device = getCameraManager().getSupportedCameras()[0]
+    let mode = getCameraManager().getSupportedSceneModes(device)[0]
+    let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+    getCameraManager().createPhotoOutput(profile: ability.photoProfiles[0])
+}
+
+func createPreviewOutput(): PreviewOutput {
+    let device = getCameraManager().getSupportedCameras()[0]
+    let mode = getCameraManager().getSupportedSceneModes(device)[0]
+    let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+    let size = ImageSize(8192, 8)
+    let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
+    let surfaceId: String = receiver.getReceivingSurfaceId()
+    getCameraManager().createPreviewOutput(ability.previewProfiles[0], surfaceId)
+}
+
+func createVideoOutput(): VideoOutput {
+    let device = getCameraManager().getSupportedCameras()[0]
+    let mode = getCameraManager().getSupportedSceneModes(device)[1]
+    let ability = getCameraManager().getSupportedOutputCapability(device, mode)
+    let size = ImageSize(8192, 8)
+    let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
+    let surfaceId: String = receiver.getReceivingSurfaceId()
+    getCameraManager().createVideoOutput(ability.videoProfiles[0], surfaceId)
+}
 class TestCallbackBusinessException <: Callback1Argument<BusinessException> {
     public func invoke(err: ?BusinessException, val: BusinessException): Unit {
         loggerInfo("Call back.")
