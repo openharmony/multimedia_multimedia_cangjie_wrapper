@@ -355,18 +355,3 @@ struct CChangeData {
 struct CRequestOptions {
     CRequestOptions(let deliveryMode: Int32) {}
 }
-
-@C
-struct KeyValue {
-    KeyValue(let key: CString, var value: CString) {}
-}
-
-@C
-struct HashMapArray {
-    let keyValue: CPointer<KeyValue>
-    let size: Int64
-    HashMapArray(keyValue: CPointer<KeyValue>, size: Int64) {
-        this.keyValue = keyValue
-        this.size = size
-    }
-}

@@ -65,4 +65,27 @@ class Test_AVImageGenerator {
             }
         }
     }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func testFetchFrameByTimeAllOptions() {
+        let timeUs = 0
+        let options: Array<AVImageQueryOptions> = [
+            AvImageQueryNextSync,
+            AvImageQueryPreviousSync,
+            AvImageQueryClosestSync,
+            AvImageQueryClosest
+        ]
+        let param = PixelMapParams(width: 300, height: 300)
+        let generator = createAVImageGenerator()
+        let rawFd = getAbilityContext().resourceManager.getRawFd("trailer.mp4")
+        generator.fdSrc = AVFileDescriptor(rawFd.fd, offset: rawFd.offset, length: rawFd.length)
+        for (option in options) {
+            let pic = generator.fetchFrameByTime(timeUs, option, param)
+            let info = pic.getImageInfo()
+            Hilog.info(0, "CangjieTest", "option ${option} h ${info.size.height} w ${info.size.width}")
+        }
+        generator.release()
+        @Expect(true)
+    }
 }

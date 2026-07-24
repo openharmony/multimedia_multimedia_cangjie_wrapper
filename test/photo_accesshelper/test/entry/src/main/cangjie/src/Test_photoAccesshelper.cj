@@ -82,14 +82,24 @@ class Test_photoAccesshelper {
         photoAccessHelper.release()
     }
 
+    func createPhotoAssets(count: Int64): Unit {
+        for (_ in 0..count) {
+            let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), PhotoType.Image,
+                "jpg")
+            let buffer = Array<Byte>(2048, repeat: 0)
+            assetChangeRequest.addResource(ImageResource, buffer)
+            photoAccessHelper.applyChanges(assetChangeRequest)
+        }
+    }
+
     /**
      * 测试：photoAccessHelper.getAssets 正常功能
-     * 预置条件1：图库中存在不少于3张照片
+     * 预置条件1：图库中存在不少于3张照片（通过 createPhotoAssets 预置）
      */
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_FetchResult_PhotoAsset() {
+        createPhotoAssets(3)
         try {
             let predicates = DataSharePredicates()
             let fetchOptions: FetchOptions = FetchOptions([], predicates)
@@ -126,8 +136,8 @@ class Test_photoAccesshelper {
      */
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_PhotoAsset() {
+        createPhotoAssets(1)
         try {
             let predicates = DataSharePredicates()
             loggerInfo("DataSharePredicates init success!")
@@ -405,7 +415,6 @@ class Test_photoAccesshelper {
      */
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_SYSTEM_AlbumModify() {
         try {
             let predicates = DataSharePredicates()
@@ -429,8 +438,12 @@ class Test_photoAccesshelper {
      */
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_registerChange() {
+        createPhotoAssets(1)
+        let videoRequest = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), PhotoType.Video, "mp4")
+        let videoBuffer = Array<Byte>(2048, repeat: 0)
+        videoRequest.addResource(VideoResource, videoBuffer)
+        photoAccessHelper.applyChanges(videoRequest)
         try {
             let predicates = DataSharePredicates()
             loggerInfo("DataSharePredicates init success!")
@@ -599,8 +612,8 @@ class Test_photoAccesshelper {
     // 获取图片，改名
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_asset_change_request_constructor(): Unit {
+        createPhotoAssets(1)
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
         let fetchResult = photoAccessHelper.getAssets(fetchOptions)
@@ -660,17 +673,19 @@ class Test_photoAccesshelper {
     }
 
     // 根据路径创建图片
-    // 预置条件: 在/data/app/el2/100/base/com.example.myapplication/haps/entry/files/下有test.jpg文件
+    // 预置条件: 通过 filesDir 创建 test.jpg 文件
     @TestCase
     @Tag[APILevel22, TestLevel0]
-    @Skip
     func test_asset_change_request_createAssetRequest_uri() {
+        let pathDir = getAbilityContext().filesDir
+        let filePath = pathDir + "/test.jpg"
+        FileIo.createRandomAccessFile(filePath, mode: OpenMode.CREATE)
+        let fileUri = getUriFromPath(filePath)
         let photoType = PhotoType.Image
         let extension = "jpg"
         let options = CreateOptions(title: "testPhoto")
         let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), photoType, extension,
             options: options)
-        let fileUri = "/data/storage/el2/base/haps/entry/files/test.jpg"
         assetChangeRequest.addResource(ImageResource, fileUri)
         photoAccessHelper.applyChanges(assetChangeRequest)
     }
