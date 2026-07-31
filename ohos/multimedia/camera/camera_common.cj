@@ -40,6 +40,8 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
         (74001021, "Operation not allowed: Session not ready."),
         (74001022, "Operation not allowed: Feature or mode unsupported."),
         (74001023, "Operation not allowed: Device unavailable."),
+        (74001024, "Operation not allowed: Device conflict."),
+        (74001025, "Operation not allowed: Previous Capture Task Not Completed."),
         (7400103, "Session not config."),
         (7400104, "Session not running."),
         (7400105, "Session config locked."),
@@ -51,7 +53,10 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
         (7400201, "Camera service fatal error."),
         (74002011, "Camera service fatal error: Unsupported resolution configuration."),
         (74002012, "Camera service fatal error: Alloc failed."),
-        (74002013, "Camera service fatal error: Invalid Session Configuration.")
+        (74002013, "Camera service fatal error: Invalid Session Configuration."),
+        (74002014, "Camera service fatal error: Invalid Input Device."),
+        (74002015, "Camera service fatal error: Camera Service is Null."),
+        (74002016, "Camera service fatal error: Stop Without Start.")
     ]
 )
 
@@ -61,11 +66,16 @@ let ERROR_CODE_TO_CJ_ERROR_CODE_MAP = HashMap<Int32, Int32>(
         (74001021, 7400102),
         (74001022, 7400102),
         (74001023, 7400102),
+        (74001024, 7400102),
+        (74001025, 7400102),
         (7400103, 7400103),
         (7400201, 7400201),
         (74002011, 7400201),
         (74002012, 7400201),
-        (74002013, 7400201)
+        (74002013, 7400201),
+        (74002014, 7400201),
+        (74002015, 7400201),
+        (74002016, 7400201)
     ]
 )
 
