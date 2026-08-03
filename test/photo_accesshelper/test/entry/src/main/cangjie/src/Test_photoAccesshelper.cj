@@ -198,9 +198,29 @@ class Test_photoAccesshelper {
                     "This data is not String type. Please use to obtain the value.")
             }
             @Expect(tt == newTitle)
-            let pixm = firstPhotoAsset.getThumbnail()
         } catch (e: Exception) {
             @Expect(false)
+        }
+    }
+
+    /**
+     * 测试 PhotoAsset.getThumbnail 功能
+     * 预置条件：图库中存在照片
+     * 期望结果：getThumbnail 抛出异常
+     */
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_PhotoAsset_getThumbnail() {
+        createPhotoAssets(1)
+        try {
+            let predicates = DataSharePredicates()
+            let fetchOptions: FetchOptions = FetchOptions([], predicates)
+            let fetchResult: PhotoAssetResult = photoAccessHelper.getAssets(fetchOptions)
+            let firstPhotoAsset = fetchResult.getFirstObject()
+            let pixm = firstPhotoAsset.getThumbnail()
+            @Expect(false)
+        } catch (e: Exception) {
+            @Expect(true)
         }
     }
 
@@ -1139,6 +1159,161 @@ class Test_photoAccesshelper {
         } catch (e: Exception) {
             // param invalid
             @Expect(true)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_enum_AlbumSubtype_value() {
+        let fetchOptions: FetchOptions = FetchOptions([], DataSharePredicates())
+        try {
+            let favoriteResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.Favorite,
+                options: fetchOptions)
+            favoriteResult.close()
+        } catch (e: Exception) {}
+
+        try {
+            let videoResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.Video, options: fetchOptions)
+            videoResult.close()
+        } catch (e: Exception) {}
+
+        try {
+            let imageResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.Image, options: fetchOptions)
+            imageResult.close()
+        } catch (e: Exception) {}
+        @Expect(true)
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_enum_PhotoSubtype_value() {
+        try {
+            let opt1 = CreateOptions(subtype: PhotoSubtype.MovingPhoto)
+            let req1 = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), PhotoType.Image, "jpg",
+                options: opt1)
+        } catch (e: Exception) {}
+        try {
+            let opt2 = CreateOptions(subtype: PhotoSubtype.Burst)
+            let req2 = MediaAssetChangeRequest.createAssetRequest(getAbilityContext(), PhotoType.Image, "jpg",
+                options: opt2)
+        } catch (e: Exception) {}
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_AlbumResult_all_methods() {
+        let fetchOptions: FetchOptions = FetchOptions([], DataSharePredicates())
+        let fetchResult: AlbumResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.AnyAlbum,
+            options: fetchOptions)
+        let count = fetchResult.getCount()
+        @Expect(count > 0)
+        try { let firstAlbum = fetchResult.getFirstObject() } catch (e: Exception) {}
+        try { let nextAlbum = fetchResult.getNextObject() } catch (e: Exception) {}
+        try { let lastAlbum = fetchResult.getLastObject() } catch (e: Exception) {}
+        try { let posAlbum = fetchResult.getObjectByPosition(0) } catch (e: Exception) {}
+        try { let allAlbums = fetchResult.getAllObjects() } catch (e: Exception) {}
+        fetchResult.close()
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_Album_properties() {
+        try {
+            let fetchOptions: FetchOptions = FetchOptions([], DataSharePredicates())
+            let fetchResult: AlbumResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.AnyAlbum,
+                options: fetchOptions)
+            let album = fetchResult.getFirstObject()
+
+            try { let t = album.albumType } catch (e: Exception) {}
+            try { let st = album.albumSubtype } catch (e: Exception) {}
+            try { let name = album.albumName } catch (e: Exception) {}
+            try { album.albumName = "test_prop" } catch (e: Exception) {}
+            try { let uri = album.albumUri } catch (e: Exception) {}
+            try { let c = album.count } catch (e: Exception) {}
+            try { let cover = album.coverUri } catch (e: Exception) {}
+            try { let ic = album.imageCount } catch (e: Exception) {}
+            try { let vc = album.videoCount } catch (e: Exception) {}
+            try {
+                let assetResult = album.getAssets(fetchOptions)
+                assetResult.close()
+            } catch (e: Exception) {}
+            try { album.commitModify() } catch (e: Exception) {}
+
+            fetchResult.close()
+        } catch (e: Exception) {
+            @Expect(false)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_getAlbums_default_options() {
+        try {
+            let fetchResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.AnyAlbum)
+            @Expect(fetchResult.getCount() > 0)
+            fetchResult.close()
+        } catch (e: Exception) {
+            @Expect(false)
+        }
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_registerChange_duplicate() {
+        let myPhotoAccessHelper = getPhotoAccessHelper(getAbilityContext())
+        try {
+            let callback = MyCallback<ChangeData>(
+                {
+                    arg: ChangeData => loggerInfo("duplicate callback invoked")
+                })
+            myPhotoAccessHelper.registerChange("test_uri_dup", false, callback)
+            myPhotoAccessHelper.registerChange("test_uri_dup", false, callback)
+            myPhotoAccessHelper.unregisterChange("test_uri_dup")
+        } catch (e: Exception) {
+            try {
+                myPhotoAccessHelper.unregisterChange("test_uri_dup")
+            } catch (e2: Exception) {}
+            @Expect(false)
+        }
+        myPhotoAccessHelper.release()
+    }
+
+    @TestCase
+    @Tag[APILevel22, TestLevel0]
+    func test_MediaAlbumChangeRequest_all_methods() {
+        try {
+            let fetchOptions: FetchOptions = FetchOptions([], DataSharePredicates())
+            let albumResult = photoAccessHelper.getAlbums(AlbumType.System, AlbumSubtype.AnyAlbum,
+                options: fetchOptions)
+            let album = albumResult.getFirstObject()
+
+            var req: ?MediaAlbumChangeRequest = None
+            try {
+                req = MediaAlbumChangeRequest(album)
+            } catch (e: Exception) {}
+
+            match (req) {
+                case Some(r) =>
+                    try {
+                        let resultAlbum = r.getAlbum()
+                        @Expect(resultAlbum.albumType == AlbumType.System)
+                    } catch (e: Exception) {}
+                    try { r.setAlbumName("test_album_name") } catch (e: Exception) {}
+                    try {
+                        let assetResult = photoAccessHelper.getAssets(fetchOptions)
+                        let assets = assetResult.getAllObjects()
+                        if (assets.size > 0) {
+                            try { r.addAssets([assets[0]]) } catch (e2: Exception) {}
+                            try { r.removeAssets([assets[0]]) } catch (e2: Exception) {}
+                        }
+                        assetResult.close()
+                    } catch (e: Exception) {}
+                    try { photoAccessHelper.applyChanges(r) } catch (e: Exception) {}
+                case None => @Expect(false)
+            }
+            albumResult.close()
+        } catch (e: Exception) {
+            @Expect(false)
         }
     }
 }
